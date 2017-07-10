@@ -235,7 +235,7 @@
 	\newpage
 	\thispagestyle{empty}
 	\vspace*{\fill}
-	\scshape \noindent \small \copyright \small 2014\hspace{3pt}-- \theauthor \\
+	\scshape \noindent \small \copyright \small 2017\hspace{3pt}-- \theauthor \\
 	\noindent all rights reserved.
 	\vspace*{\fill}
 	\newpage
@@ -293,7 +293,8 @@
 
 \renewcommand{\backmatter}{
     \begin{appendices}
-        \include{chapters/appendixA}
+        \include{chapters/teljet}
+        \include{chapters/mmt}
     \end{appendices}
     \input{endmatter/personalize}
     \clearpage

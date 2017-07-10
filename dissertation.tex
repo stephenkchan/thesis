@@ -24,8 +24,13 @@
 % include each chapter...
 \setcounter{chapter}{-1}  % start chapter numbering at 0
 \include{chapters/introduction}
-\include{chapters/chapter1}
-%\include{chapters/chapter2}
+\include{chapters/theory}
+\include{chapters/lhc-atlas}
+\include{chapters/obj-reco}
+\include{chapters/modeling}
+\include{chapters/syst}
+\include{chapters/mva}
+\include{chapters/fit}
 %\include{chapters/chapter3}
 \include{chapters/conclusion}
 
@@ -34,11 +39,13 @@
 % the back matter
 \backmatter
 
-% \clearpage
-% \bibliography{references}
-% \addcontentsline{toc}{chapter}{References}
-% \bibliographystyle{apalike2}
+\begin{comment}
+ \clearpage
+ \bibliography{references}
+ \addcontentsline{toc}{chapter}{References}
+ \bibliographystyle{apalike2}
 
-% \include{endmatter/colophon}
+ \include{endmatter/colophon}
+\end{comment}
 
 \end{document}
