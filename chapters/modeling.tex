@@ -4,12 +4,285 @@ If it's stupid but it works, it isn't stupid.
 \qauthor{Conventional Wisdom}
 \end{savequote}
 
-\chapter{Characterization of Signal and Bacgkround Processes}
-ATL-COM-PHYS-2016-1724 section 4
+\chapter{Signal and Bacgkround Modeling}
+\newthought{This chapter} summarizes the modeling of the dominant signal and background processes in this analysis, including corrections and systematic uncertainties (set in \texttt{this} font) related to each process.  
 
-Main reference: ATL-COM-PHYS-2016-1747.pdf \cite{modelingnote}
+ATL-COM-PHYS-2016-1724 section 4  and Main reference: ATL-COM-PHYS-2016-1747.pdf \cite{modelingnote} (we use the latter as a scaffold for this, basically plucking out stuff section by section)
 
-\newthought{Much has been said} about the so-called Standard Model of particle physics
+Most of these studies (unless noted) are truth-level studies (particle level) done in Rivet \cite{rivetmanual} (F.4 for Rivet/reco comparison....not there)
 
+\section{Signal Processes}
+The dominant process is Higgstrahlung; ggF is $\sim$14\%  
+
+$q\bar{q}$ Powheg with MiNLO (multiscale improved NLO generator Ref 1) applied as generator, Pythia 8 + AZNLO tune (Ref 3) + NNPDF3.0 PDF (Ref 4) set; $gg\to ZH$ Powheg + Pythia 8 (Ref 2)
+
+Alternate samples: MadGraph 5(ref 26)\_aMC@NLO+Pythia 8 
+
+Cross section: this is done NNLO in QCD and NLO in EW except for ggZH NLO+NNL (QCD).  WH normalized to values in the table; ZH: total as 0.88, ggZH as 0.12, and then qqZH as total - ggZH (refs 15-18)
+
+\begin{table}[!htbp]
+\label{higgsxsec}
+\begin{center}
+\small
+\begin{tabular}{c|c} \hline\hline
+ Process & $\sigma$ (pb) \\ \hline
+$WH$ & $1.37 \pm 0.04$\\
+ \hline\
+$W^+H$ & 0.84\\
+$W^-H$ & 0.53\\
+\hline
+$ZH$ & $0.88^{+0.04}_{-0.03}$\\
+ \hline\
+$gg\to ZH$ & 0.12\\
+$qq\to ZH$ & 0.76\\
+\hline\hline
+\end{tabular}
+\caption{Summary of inclusive cross sections for signal processes.}
+\end{center}
+\end{table}
+
+NLO EWK correction: same as Run 1; they use HAWK to calculate a differential cross section as a function of pTV (take their Figure 3) for a correction factor of $k_{EW}^{NLO}\left(p_T^V\right)=1+\delta_{EW}$; qqVH only.
+
+N(N)LO EWK systematic: $\Delta_{EW}=\max\{1\%,\delta^2_{EW},\Delta_{\gamma}\}$, $\delta_{EW}$ from above correction, $\Delta_{\gamma}$ is $\gamma$ induced cross section uncertainty to the total [WZ]H xsec
+
+Overall signal acceptance uncertainties: cross section and branching ratio (LHC Higgs WG; \cite{modeling19}, \cite{modeling20})
+\begin{itemize}
+\item ATLAS\_BR\_bb (1.7\%)
+\item ATLAS\_QCDscale\_(VH|ggZH) (0.7\%, 27\%) vary $\mu_{R,F}$ for renorm/factorization scale by 1/3 to 3 of original value
+  \begin{itemize}
+  \item to get ggZH; assume QCD scale $\sigma$ same for qq[WZ]H,; assume ref 20 inclusive ZH production and take diff in quadrature of inc. and qqZH
+  \end{itemize}
+\item ATLAS\_pdf\_Higgs\_(V[WZ]H|ggZH) (1.9\%, 1.6\%, 5.0\%) (also $\alpha_s$, 68\%CL on PDF4LHC15\_nnlo\_mc PDF set)
+  \begin{itemize}
+  \item qqWH is bigger here than ZH; get ggZH from 19, qqZH from 20 assuming ggZH small, so overall ZH is qqVH
+  \end{itemize}
+\end{itemize}
+
+Analysis specific: analysis category acceptances; pTV, mBB shape
+
+\begin{itemize}
+\item PS/UE (Table 4)
+  \begin{itemize}
+  \item MadGraph vs. A14 varied (tunes); nominal Powheg/Minlo/Pythia8 vs Powheg+minlo+Herwig7 (PS)
+  \item Now vary up and down in each nLep x nJet bin and save as a ratio wrt nominal
+  \item $\sum_{tunes}\max_{tune}\left(\left|R_{up}-R_{down}\right|\right)\oplus\sigma_{PS}$ (ATLAS\_UEPS\_VH\_hbb)
+  \item Now add a 2/3 jet ratio systematic (i.e. (2/3 acceptane ratio nominal)/(2/3 ratio alternative)) (ATLAS\_UEPS\_VH\_hbb\_32JR); combine in same way
+  \item pTV (mBB) shape: linear (quadratic); fit up and down for each variation; 2/3jet separate for mBB; use histogran with largest deviation as shape (ATLAS\_UEPS\_VH\_hbb\_(VPT|MBB))
+  \begin{itemize}
+    \item shape only, except for L2 pTV (shape+norm)
+  \end{itemize}
+  \item ggZH same as qqZH and correlated 
+  \end{itemize}
+\item Scale variations (Table 5)
+  \begin{itemize}
+    \item Vary $\mu_R$, $\mu_F$ (probably the 1/2 to 2 scheme in steps with no more than blah blah)
+      \begin{itemize}
+      \item Stewart Tackmann for nJet bins (QCDscale\_VH\_ANA\_hbb\_J[23]; both for 2jet)
+      \item JVeto for L[01] (3 jet exclusive)
+      \end{itemize}
+    \item Same pTV, mBB NP scheme for nLep/nJet as for UEPS
+    \item ggZH same as qqZH and de-correlated (Run 1 says they're difference)
+  \end{itemize}
+\item PDF+$\alpha_s$
+  \begin{itemize}
+  \item Powheg/Minlo/Pythia8 v. PDF4LHC15\_30 PDF set; reco-level distributions (all others use Rivet, which doesn't like a lot of weight variations)
+  \item PDF: quad sum of variations of PDF uncertainties (go through the set? no probably the same way as above)
+  \item $\alpha_s$: average of variations from altering $\alpha_s$ 
+  \item pdf\_HIGGS\_VH\_ANA\_hbb, pdf\_VH\_ANA\_hbb\_(VPT|MBB)
+  \item Same pTV, mBB NP scheme for nLep/nJet as for UEPS
+  \end{itemize}
+\end{itemize}
+
+\section{Background}
+Main backgrounds are V+jet, ttbar, VV, single top (, and multijet in 1lep)
+
+\subsection{V+jet}
+cf. \cite{modeling21} for details of MC generation
+\begin{itemize}
+\item Sherpa 2.2.1@NLO \cite{modeling23} for matrix element (ME) and PS tuning (Tables 7--10)
+  \begin{itemize}
+  \item ME's for up to 2 (3--4) partons at NLO (LO); for more, use showering (Sherpa's own UEPS)
+  \item ``The merging of different parton multiplicities is achieved through a matching scheme based on the CKKW-L [24] [25] merging technique using a merging scale of Qcut = 20 GeV'' \cite{modeling24}\cite{modeling25}
+  \item 5 quark flavors mass(less) quarks in the shower (ME)
+  \item $\max\left(H_T,P_T^V\right)$ slices: [0–70, 70–140, 140–280, 280–500, 500–1000, >1000] GeV
+  \item Slices in [CB](Veto|Filter) for flavors
+    \begin{itemize}
+    \item BFilter: at least 1 b-hadron with $\left|\eta\right|<4, p_T >0$ GeV
+    \item CFilterBVeto: at least 1 c-hadron with $\left|\eta\right|<3, p_T >4$ GeV; veto events which pass the BFilter
+    \item CVetoBVeto veto events which pass the BFilter or the CFilterBVeto
+    \end{itemize}
+  \item Variations of $\mu_{R,F}$ at 0.5, 2; PDF variation for MMHT2014nnlo68cl and CT14nnlo
+  \item Sherpa 2.1 for resummation scale at 0.5, 2; CKKW 15, 20 GeV
+  \end{itemize}
+\item Alternate samples use MadGraph5+Pythia8 (UEPS)
+  \begin{itemize}
+  \item LO QCD ME's, merging parton multiplicities up to 4 (for more, use PS), NNPDF2.3 LO PDFs; A14 tune (ATLAS)
+  \item CKKW-L scheme with a merging scale of Qcut = 30 GeV.
+  \item 5 flavor scheme
+  \end{itemize}
+\item Cross section $k$-factors: our generators are NLO, but V production is known to NNLO---add factors to rescale
+  \begin{itemize}
+  \item Take total events, average over lepton flavors for filter efficiencies, and compare to NNLO (ref 27)
+  \item For L2, there's a 40 GeV generator mLL cut, but the NNLO calcu is done in (66,116) GeV, so another scale
+  \item For L0, take L2 (since NNLO not calc) and correct for $BR\left(Z\to\nu\nu\right)/BR\left(Z\to\ell\ell\right)$, consider with no mass cuts, remove ``$Z/\gamma^*$ interference''
+  \item Differences between nominal and alternative MC's can be explained to higher order BR's and  EW schemes w.r.t. PDG recommendations 
+  \end{itemize}
+\end{itemize}
+
+Anyway, V+jet is broken up into V+hf (V+b*, V+cc), V+cl, V+l(ight)
+\begin{itemize}
+\item Relative acceptance between regions 
+  \begin{itemize}
+  \item Understand correlation between/among regions (you can float these normalizaitons in the fit to fix your understanding of things using more ifnrmation)
+  \item 2jet vs 3(p)jet for L[01](2), L0 vs. L2 (Z+hf), L0 vs. L1 (W+hf), WCR vs. SR for L1 (W+hf)
+  \item These norm's are RooGaussian's with priors from MC studies (Rivet, Appendix A\cite{modelingnote})
+  \item Their uncertainties are double ratios between regions and then MC's with components\ldots 
+    \begin{itemize}
+    \item Envelope of varying $\mu_R$, $\mu_F$ in Sherpa 
+    \item $0.5 \sum_{\oplus}$ (up-down on CKKW, merging scale variation; weird because done with Sherpa 2.1, so no central value comparison)
+    \item max variation between nominal/alt PDF reweighting
+    \item diff btw Sherpa/MadGraph
+    \end{itemize}
+  \end{itemize}
+\item pTV, mBB shape uncertainties: data driven and MC techniques---you normalize distributions to the same area, compare, then do functional fits, then pick the biggest one and symmetrize
+\item W+jets
+  \begin{itemize}
+  \item Normalization/acceptance systs (Table 13): \texttt{Sys(Wcl|Wl)Norm} (one for all regions is fine since $b-$tagging suppresses), a floating \texttt{norm\_Wbb}, \texttt{SysWbbNorm\_(J3|DWhfCR\_L1|L0)}; J3 is 3-to-2 jet; DWhfCR\_L1 is CR-SR; L0 is L0-L1
+  \item Flavor composition (Tables 14, 15): W+hf breakdown; \texttt{Sys(Wbc|Wbl|Wcc)WbbRatio}
+  \item pTV: a linear \texttt{SysWPtV}, which happens to be  Serpa 2.2.1 v. MadGraph in all regions (largest variation)
+  \item mBB: a linear \texttt{SysWMbb}, which happens to be  Serpa 2.2.1 v. MadGraph in all regions (largest variation) (not a typo; it's the same as pTV)
+  \end{itemize}
+\item Z+jets: L[02] SR only (topemucr is pretty pure; not really in L1)
+  \begin{itemize}
+  \item Normalization/acceptance (Table 16):  \texttt{Sys(Zcl|Zl)Norm} (one for all regions is fine since $b-$tagging suppresses; less than 1\% here), a floating \texttt{norm\_Zbb}, \texttt{SysWbbNorm\_(L2\_J3|J3|0L))}; L2\_J3, J3 is 3-to-2 jet (L2 correlates lo/hi pTV; L0 is separate because of selection differences); 0L is 0 to 2 lepton (hi pTV only)
+  \item Flavor composition (Tables 17): Z+hf breakdown; \texttt{Sys(Zbc|Zbl|Zcc)ZbbRatio}---norm uncertainties with diff priors in L0, L2-2jet, L2-3pjet; Sherpa 2.2.1 v MG main diff
+  \item L2 CR: METHT < 3.5, [012]-tag, 2 and 3pjet, no mJJ in (110,140) GeV for 2tag, pTV regions; subtract off non Z+jet and then scale MC to data 
+  \item pTV: shape+norm, fit to data in L2 CR; $\pm0.2\log_{10}\left(p_T^V/500\,\text{GeV}\right)$
+  \item mBB: shape only, fit to data in L2 CR; $\pm0.0005\log_{10}\left(m_{jj}-100\,\text{GeV}\right)$
+  \end{itemize}
+\end{itemize}
+
+\subsection{Top-Pair Production}
+MC production---$h_{damp}$ is transverse momentum scale at which Sudakov resummation becomes unimportant: smaller damp means higher suppression (cf. Table 20)
+\begin{itemize}
+\item Powheg+Pythia8
+  \begin{itemize}
+  \item Powheg: NNPDF3.0 (NLO) for ME (Powheg); $h_{damp}=1.5m_{top}$ (resummation damping factor for ME/PS matching; controls high pT rad)
+  \item Pythia: PS,UE,had; v 8.210, A14 PDF set, NNPDF2.3 LO for PS; pTdef=2, pThard=0 control Powheg/Pythia8 merging thorugh shower vetoing
+  \item $\sigma_{t\bar{t}}\left(m_{top}=172.5\,\text{GeV}\right)=831.76_{-46}^{+40}$ pb: NNLO QCD; NNLL soft gluon terms; 
+    \begin{itemize}
+    \item QCD scale variations: $_{-29.20}^{+19.77}$ pb; PDF: $\pm 35.06$ pb: ``The e PDF and $\alpha_s$ uncertainties were calculated using the PDF4LHC prescription [8] with the MSTW2008 68% CL NNLO [40, 41], CT10 NNLO [42, 43] and NNPDF2.3 5f FFN [5] PDF sets, added in quadrature to the scale uncertainty.''
+    \item 3.3 times higher than 8 TeV
+    \end{itemize}
+  \end{itemize}
+\item Powheg+Herwig7: different PS. UE. had, MPI; H7UE tune
+\item MadGraph 5\_aMC@NLO+Pythia 8.2: different hard scatter (i.e. ME)
+\item Powheg+Pythia8 low radiation sample (double $\mu_{R,F}$; $h_{damp}$, pTdef, pThard same; A14 tune Var3c Down variation used)
+\item Powheg+Pythia8 high radiation sample (halve $\mu_{R,F}$; pTdef, pThard same; $h_{damp}=3m_{top}$ (doubled) A14 tune Var3c Up variation used)
+\end{itemize}
+
+Systematics---Rivet
+\begin{itemize}
+\item Powheg+Pythia8
+  \begin{itemize}
+  \item
+\end{itemize}
+\end{itemize}
+
+\section{Notes}
+Notes from Kevin's thesis:
+Signal:
+\begin{itemize}
+\item \textit{pTV NLOEWK} The signal processes have some pTV dependence at next to leading order (NLO) due to electroweak corrections
+\item \textit{TheoryQCDScale, TheoryPDF} for renormalization/scale uncertainties, PDF uncertainties 
+\item \textit{TheoryAcc\_J[23]} Stewart-Tackmann stuff
+\item \textit{TheoryAccPDF} do acceptance calculations with different PDF's
+\item \textit{TheoryVPtQCD} this is one of those functional things---probably different in Run2; linear of pTV
+\end{itemize}
+
+Background
+\begin{itemize}
+\item \textit{ZDPhi} $\Delta\phi\left(b_1,b_2\right)$ mismodeling; shape---another linear of dphi; a correction and the correction is a systematic for each event
+\item \textit{ZPtV} $\Delta\phi\left(b_1,b_2\right)$ mismodeling; const+log and half the correction is a systematic for each event
+\item \textit{Z+jet Normalizations} broken down by flavor region; both Norm's and Ratio between regions
+\item \textit{ZMbb} const(mbb e-3 -c const); systematic
+\item \textit{ttbar} pT, (2/3 jet ratio across generators), mBB
+\item \textit{VV} NLO xsec, $\alph_s$/PDF's, mJJ
+\end{itemize}
+
+\subsection{Stewart-Tackmann}
+A way to calculate uncertainties on processes in different nJet bins \cite{stewarttackmann}.  Generically:
+\begin{equation}
+\label{eqn:stewtack1}
+\sigma_{\ge N}=\sigma_N+\sigma_{\ge N+1}
+\end{equation}
+
+There's some quantity that you make a cutoff in an integral that defines the border between jet regions.  
+\begin{equation}
+\label{eqn:stewtack2}
+\sigma_{\ge N}=\int_0^{p_{cut}}\frac{d\sigma_N}{dp}+\int_{p_{cut}}\frac{d\sigma_{\ge N+1}}{dp}
+\end{equation}
+
+So for some fucking reason, inclusive cross sections are easier to calculate, so you can just vary $\alpha_S$ in the usual way for those and treat the two inclusive cross sections.  Anywho, we assume the inclusive uncertainties are uncorrelated, for a covariance matrix for $\left\{\sigma_{\ge N},\sigma_N,\sigma_{\ge N+1}\right\}$ of:
+\begin{equation}
+\label{stewtackcov}
+\Sigma=\left(\begin{array}{ccc} \Delta^2_{\ge N} & \Delta^2_{\ge N} &0\\ \Delta^2_{\ge N}& \Delta^2_{\ge N}+\Delta^2_{\ge N+1}& -\Delta^2_{\ge N+1}\\ 0& -\Delta^2_{\ge N+1} & \Delta^2_{\ge N+1} \end{array}\right)
+\end{equation}
+
+The main idea is that you have Sudakov double logs of $p/Q$, where $Q=m_H$ or whatever scale your hard process occurs at, and $p_{cut}$ is usually something like a $p_T$ cutoff.  Now, the $N+1$ term in that matrix is actually some uncertainty associated with your cutoff, but your double logs will dominate your higher order terms\ldots the paper has this reasoning:
+
+``In the limit $\alpha_sL^2 \approx 1$, the fixed-order perturbative expansion breaks down and the logarithmic terms must be resummed to all orders in $\alpha_s$ to obtain a meaningful result.  For typical experimental values of pcut fixed-order perturbation theory can still be considered, but the logarithms cause large corrections at each order and dominate the series.  This means varying the scale in $\alpha_s$ in Eq. (9) directly tracks the size of the large logarithms and therefore allows one to get some estimate of the size of missing higher-order terms caused by $p_{cut}$, that correspond to $\Delta_{cut}$.  Therefore, we can approximate $\Delta_{cut}$ = $\Delta_{\ge 1}$, where $\Delta_{\ge 1}$ is obtained from the scale variation for $\sigma_{\ge 1}$.''
+
+They use the example of ggF Higgs production with $\left\{\sigma_{total},\sigma_0,\sigma_{\ge 1}\right\}$ and say this works to all $N$ for all processes, provided one picks $\mu\approx Q$ so you can use perturbative expansions.
+
+Anyway, the upshot is this: we've got 2 and 3 jet bins.  For 2 jet TheoryAcc\_J2 and TheoryAcc\_J3; 3 jet has TheoryAcc\_J3, which is anti-correlated with the 2 jet J3 term
+
+\subsection{CKKW-L}
+
+When you're looking to generate MC events, there are two main event generators.  There are the parton shower event generators (PSEG), like Pythia, and the matrix element generators (MEG) like MadGraph or Powheg, both of which have nice and not-so-nice features.  If we follow \cite{modeling25}, section 2, we get a nice illustration.  Sherpa does both and stitches things together for you.
+
+So PSEG's have the nice feature that you don't get nasty infinities.  You start with some primary hard scatter (say $e^+e^-\to q\bar{q}$) and then let your incoming and outgoing partons cascade via iterative $1\to2$ branching.  You order the emissions by some ``evolution scale $\rho$,'' starting at $\rho_0$ and descreasing unitl you reach some pre-determined cutoff $\rho_c$ (usually to match some model) to generate $0,1\ldots n$ extra partons, there are exlusive cross sections involving well-ordered, intermediate scales $\rho_i$, some phase space variables (like momentum fractions $z_i$) denoted $\Omega_i$, probabilities of non-emission between scales in the form of Sudakov form factors $\Delta_{S_i}\left(\rho_i,\rho_{i+1}\right)$, coefficients $c_{nn}^{PS}$ associated with splitting functions that depend on $\rho_i,\Omega_i$ and sum over flavors, blah blah.
+
+The $\Delta$'s looke like:
+\begin{equation}
+\label{eqn:psdelta}
+\Delta_S\left(\rho_i,\rho_{i+1}\right)=\exp\left(-\int_{\rho_{i+1}}^{\rho_i}\frac{d\rho}{\rho}\alpha_s\left(\rho\right)\int dz\,P\left(z\right)\right)
+\end{equation}
+and these can be written as a perturbative series in $\alpha_s$ (``duh'')
+\begin{eqnarray}
+\label{eqn:pssigma}
+\sigma_{+0}&=&\sigma_0\Delta_{S_0}\left(\rho_0,\rho_c\right)\\
+\sigma_{+n}&=&\sigma_0c_{nn}^{PS}\Delta_{S_n}\left(\rho_0,\rho_c\right)\prod_{i=1}^n\alpha_s(\rho_i\right)\Delta_{S_i-1}\left(\rho_{i-1},\rho_i\right)d\rho_id\Omega_i\\
+\sigma_{+n}&=&\sigma_0c_{nn}^{PS}\left(1+c_{n,n+1}^{PS}\alpha_s+c_{n,n+2}^{PS}\alpha_s^2+\ldots\right)\prod_{i=1}^n d\rho_id\Omega_i
+\end{eqnarray}
+Now, these $c^{PS}_{ij}$ blow up in the soft/collinear limit of $\rho_c\to0$, but a resummation in all order for the $\Delta$'s gives a finite result for each cross section.  Moreover, $\sum_0^{\infty}\sigma_{+i}=\sigma_0$.  \textit{The problem is that for several hard partons, this description only makes sense for strict ordering (the intermediate states) of hard partons because of the splitting funciton dependent coefficients.}
+
+For MEG's, the picture is simpler because we use tree-level matrix elements for each parton final state.  However, the cross-sections are \textit{inclusive} (so each of these is {at least \it} $n$ jets), and these all blow up in the soft/collinear regime, where the resummation gets nasty.  The authors note that you can make PSEG's look like the MEG for the first emission ($c_{11}^{PS}\to c_{11}^{ME}$).
+\begin{eqnarray}
+\label{eqn:mesigma}
+\sigma_{+0}&=&\sigma_0 \\
+\sigma_{+n}&=&\sigma_0\alpha_s^nc_{nn}^{ME}\prod_{i=1}^n d\mathbf{\Omega}_i
+\end{eqnarray}
+
+So what to do?  ``...the solution should be obvious.''  Just use the MEG to generate your partons over some $Q_{cut}$, reweight the generated states with the Sudakov form factors, and use the PSEG to make parton showers for these final state objects so that the showers make everything under $Q_{cut}$.  But those Sudakov scales need an ordered set of emission scales since all the diagrams are added together.
+
+How does one set up an ordered set of scales?  You can use the $k_{\perp}-$algorithm (takes pairs based on something like $p_T$ (??)); use those scales as arguments to $\alpha_s$; use $k_{\perp}-$algorithm resolution as a cutoff.  This approach is good to NLL but has some discontinuities.  Anyway, $k_{\perp}$ is basically the same thing as $k_t$ clustering for jets\cite{kperp}.
+Actually, it \emph{is} the same exact thing for lepton colliders, so they use the angle between particles times a minimum square energy instead of $\Delta R$ and define beam jets\ldots they also don't have the minimum distance built in, so there's a $d_{cut}$, which can be the square energy or some other thing; you can define it by the resolution in $y$ you want by $y_{cut}=Q_0/d_{cut}$).  Remember, $k_t$ starts with your softest stuff and clusters upwards from there.  For the resolution variable, remember that you have some characteristic distance after which things.  Blah blah, so you pre-cluster (their topocluster type stuff for hadronic deposits based on the $\min\left{E_{T,i}^2,E_{T,j}^2\right}\theta_{ij}^2$ metric) until all distances remaining are bigger than $d_{cut}$.  Now define $y_{cut}=Q_0^2/d_{cut}$ and use $y_{kl}=d_{kl}/d_{cut}$ and cluster until all bigger than $y_{cut}$.  \emph{The important thing from this mess is just that $y_{cut}$ is the resolution mentioned above; you don't have this mess with our usual algorithms because distances come in with $\Delta R^2/R_{alg}^2$, so if distances remaining are bigger, the plain ``beam distance'' keeps things unclustered.}
+
+
+\subsubsection{Dipole Cascade Model}
+You can also use the dipole cascade model ($2\to3$ where the 2 partons are a color dipole).  The dipoles mean you don't have to do an angular ordering for the partons?  Your $\rho$ is $p_{\perp}^2=\frac{s_{12}s_{23}}{s_{123}}$ where $s$'s are invariant masses of the combinations.  There's also a rapidity associated with the $p_{\perp}$'s: $y=\frac{1}{2}\ln\left(\frac{s_{12}}{s_{23}}$.  The emission probability depends on splitting functions, which in turn depend on the parton pair type (parton 2 is the emitted one in this convention), where $x_i=2E_i/\sqrt{s_{123}}$:
+\begin{eqnarray}
+\label{eqn:dsplit}
+D_{q\bar{q}}\left(p_{\perp}^2,y\right)=\frac{2}{3\pi}\frac{x_1^2+x_3^2}{\left(1-x_1\right)\left(1-x_3\right)}\\
+D_{qg}\left(p_{\perp}^2,y\right)=\frac{3}{4\pi}\frac{x_1^2+x_3^3}{\left(1-x_1\right)\left(1-x_3\right)}\\
+D_{gg}\left(p_{\perp}^2,y\right)=\frac{3}{4\pi}\frac{x_1^3+x_3^3}{\left(1-x_1\right)\left(1-x_3\right)}\\
+\end{eqnarray}
+Finally, we get the probability:
+\begin{equation}
+\label{eqn:dpcascade}
+dP\left(p_{\perp}^2,y\right) = \alpha_s(p_{\perp}^2 )D_{ij}\left(p_{\perp}^2,y\right) \exp\left( -\int_{p_{\perp}^2} \frac{p'_{\perp}^2}{p'_{\perp}^2}\int dy'\alpha_s\left(p'_{\perp}^2\right)D_{ij}\left(p'_{\perp}^2,y'\right)\right)\frac{dp_{\perp}^2}{p_{\perp}^2} dy
+\end{equation}
+(notice your old exp friend, the Sudakov).  Also, hey, look, your intermediate partons are on shell, unlike in a $1\to2$ cascade sicne your dipole asorbs recoil, and your inverse cascade is a well-behaved ``jet clustering'' algorithm.  But $g\to q\bar{q}$ has to be done by hand.  Basically, you use this cascade/shower on your MEG partons to get scales that you reweight by $\prod_i \alpha_s\left(p_{\perp i}\right)/\alpha_s\left(p_{\perp c}\right)^n$ for some n.
 
 % For an example of a full page figure, see Fig.~\ref{fig:myFullPageFigure}.
