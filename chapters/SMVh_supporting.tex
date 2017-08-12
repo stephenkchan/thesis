@@ -1,0 +1,400 @@
+%-------------------------------------------------------------------------------
+% This file provides a skeleton ATLAS document.
+%-------------------------------------------------------------------------------
+% Specify where ATLAS LaTeX style files can be found.
+\newcommand*{\ATLASLATEXPATH}{latex/}
+% Use this variant if the files are in a central location, e.g. $HOME/texmf.
+% \newcommand*{\ATLASLATEXPATH}{}
+%-------------------------------------------------------------------------------
+\documentclass[UKenglish,texlive=2013]{\ATLASLATEXPATH atlasdoc}
+% The following command is needed by arXiv to ensure use of pdflatex.
+% It should be included in the first 5 lines of the preamble.
+% \pdfoutput=1
+% The language of the document must be set: usually UKenglish or USenglish.
+% british and american also work!
+% Commonly used options:
+%  texlive=YYYY          Specify TeX Live version (2013 is default).
+%  atlasstyle=true|false Use ATLAS style for document (default).
+%  coverpage             Create ATLAS draft cover page for collaboration circulation.
+%                        See atlas-draft-cover.tex for a list of variables that should be defined.
+%  cernpreprint          Create front page for a CERN preprint.
+%                        See atlas-preprint-cover.tex for a list of variables that should be defined.
+%  PAPER                 The document is an ATLAS paper (draft).
+%  CONF                  The document is a CONF note (draft).
+%  PUB                   The document is a PUB note (draft).
+%  txfonts=true|false    Use txfonts rather than the default newtx - needed for arXiv submission.
+%  paper=a4|letter       Set paper size to A4 (default) or letter.
+
+%-------------------------------------------------------------------------------
+% Extra packages:
+\usepackage[subfigure=true]{\ATLASLATEXPATH atlaspackage}
+\usepackage{\ATLASLATEXPATH atlaspackage}
+\usepackage{multirow}
+\usepackage{verbatim} % for begin/end comment commands
+\usepackage{amsfonts}
+\usepackage{lipsum}
+\usepackage{lscape}
+% Commonly used options:
+%  biblatex=true|false   Use biblatex (default) or bibtex for the bibliography.
+%  backend=biber         Use the biber backend rather than bibtex.
+%  subfigure|subfig|subcaption  to use one of these packages for figures in figures.
+%  minimal               Minimal set of packages.
+%  default               Standard set of packages.
+%  full                  Full set of packages.
+%-------------------------------------------------------------------------------
+% Style file with biblatex options for ATLAS documents.
+\usepackage{\ATLASLATEXPATH atlasbiblatex}
+
+% Package for creating list of authors and contributors to the analysis.
+\usepackage[xtab]{\ATLASLATEXPATH atlascontribute}
+
+% Useful macros
+\usepackage{\ATLASLATEXPATH atlasphysics}
+% See doc/atlas-physics.pdf for a list of the defined symbols.
+% Default options are:
+%   true:  journal, misc, particle, unit, xref
+%   false: BSM, hion, math, process, other, texmf
+% See the package for details on the options.
+
+% Files with references for use with biblatex.
+% Note that biber gives an error if it finds empty bib files.
+\addbibresource{SMVh_supporting.bib}
+\addbibresource{bibtex/bib/ATLAS.bib}
+
+% Paths for figures - do not forget the / at the end of the directory name.
+\graphicspath{{logos/}{figures/}}
+
+% Add you own definitions here (file SMVh_supporting-defs.sty).
+\usepackage{SMVh_supporting-defs}
+
+%-------------------------------------------------------------------------------
+% Generic document information
+%-------------------------------------------------------------------------------
+
+% Title, abstract and document 
+\input{SMVh_supporting-metadata}
+% Author and title for the PDF file
+%\hypersetup{pdftitle={Search for a Standard Model Higgs boson produced in association with a vector boson and decaying to a pair of $b$-quarks},pdfauthor={add the list of names here}}
+
+%-------------------------------------------------------------------------------
+% Content
+%-------------------------------------------------------------------------------
+\begin{document}
+\maketitle
+\clearpage
+
+\tableofcontents
+%\listoffigures
+%\listoftables
+
+% List of contributors - print here or after the Bibliography.
+%\PrintAtlasContribute{0.30}
+\clearpage
+
+%-------------------------------------------------------------------------------
+%\section{Updates expected during circulation}
+%\label{sec:missingitems}
+%\input{MissingItems.tex}
+%-------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------
+\section{Preface}
+\label{sec:preface}
+\input{Preface.tex}
+%-------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
+\section{Introduction}
+\label{sec:intro}
+\input{Introduction.tex}
+%-------------------------------------------------------------------------------
+
+
+%-------------------------------------------------------------------------------
+%\section{ATLAS detector}
+%\label{sec:detector}
+%-------------------------------------------------------------------------------
+%The ATLAS detector~\cite{PERF-2007-01} ...
+% \input{atlas-detector}
+
+%-------------------------------------------------------------------------------
+\section{Data and Simulated Samples}
+\label{sec:samples}
+\input{DataMC.tex}
+%-------------------------------------------------------------------------------
+
+\newpage
+\clearpage
+
+%-------------------------------------------------------------------------------
+\section{Event Reconstruction and Selection}
+\label{sec:evtsel}
+\input{Selection.tex}
+%-------------------------------------------------------------------------------
+% should contain at least
+% - object definition
+% - MVA preselection
+% - cut-based analysis additional selection
+
+%-------------------------------------------------------------------------------
+\section{Signal and Background Modeling}
+\label{sec:sigbkgmodel}
+\input{Modeling.tex}
+%-------------------------------------------------------------------------------
+% maybe split in 2? signal / background
+% for the background part, should contain:
+% - backgrounds overview
+% - multi-jet estimate(s)
+% - prefit plots
+
+%-------------------------------------------------------------------------------
+\section{Multi-Variate Analysis}
+\label{sec:mva}
+\input{MVA.tex}
+
+%-------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------
+\section{Experimental Systematic Uncertainties}
+\label{sec:sys}
+\input{Systematics.tex}
+%-------------------------------------------------------------------------------
+
+\newpage
+
+%-------------------------------------------------------------------------------
+\section{Statistical Treatment}
+\label{sec:fit}
+\input{Fit.tex}
+%-------------------------------------------------------------------------------
+
+\clearpage
+\newpage
+
+%-------------------------------------------------------------------------------
+\section{Run 2 Results}
+\label{sec:result}
+\input{Results_tmp.tex}
+%-------------------------------------------------------------------------------
+
+\clearpage
+\newpage
+
+%-------------------------------------------------------------------------------
+\section{Combination of Run 1 and Run 2 results}
+\label{sec:comb}
+\input{Combination.tex}
+%-------------------------------------------------------------------------------
+
+
+% should contain, if available
+% - nominal results
+% - cross-checks: diboson fit, cut-based analysis results
+
+%-------------------------------------------------------------------------------
+\clearpage
+\newpage
+
+\section{Conclusions}
+\label{sec:conclusion}
+\input{Conclusion.tex}
+%-------------------------------------------------------------------------------
+
+
+%%-------------------------------------------------------------------------------
+%\section*{Acknowledgements}
+%%-------------------------------------------------------------------------------
+%
+%%\input{acknowledgements/Acknowledgements}
+%
+%The \texttt{atlaslatex} package contains the acknowledgements that were valid 
+%at the time of the release you are using.
+%These can be found in the \texttt{acknowledgements} subdirectory.
+%When your ATLAS paper or PUB/CONF note is ready to be published,
+%download the latest set of acknowledgements from:\\
+%\url{https://twiki.cern.ch/twiki/bin/view/AtlasProtected/PubComAcknowledgements}
+%
+%The supporting notes for the analysis should also contain a list of contributors.
+%This information should usually be included in \texttt{mydocument-metadata.tex}.
+%The list should be printed either here or before the table of contents.
+
+
+%-------------------------------------------------------------------------------
+\clearpage
+\newpage
+\appendix
+\part*{Appendices}
+\addcontentsline{toc}{part}{Appendices}
+%-------------------------------------------------------------------------------
+
+%A number of cross-checks and additional plots are provided in the Appendices. Moreover, additional cross-checks, not fully documented here, can also be found in \url{https://twiki.cern.ch/twiki/bin/view/AtlasProtected/HSG5VHbbICHEPCheckList}.
+
+\clearpage
+\section{0 Lepton Multijet distributions}
+\label{app:0lepQCDDistributions}
+\input{App_Multijet0Lep.tex}
+
+\clearpage
+\section{2 Lepton Multijet studies}
+\label{app:2lepMJstudy}
+\input{App_Multijet2Lep.tex}
+
+\clearpage
+\section{Data-driven top background estimation}
+\label{app:topDD}
+\input{App_emuCRDD.tex}
+
+\clearpage
+\section{Kinematic Fitter Performance Study and Bias check}
+\label{app:KF}
+\input{AppKF.tex}
+
+\clearpage
+\section{Prefit data-MC comparisons}
+\label{app:prefitplots}
+\input{AppPrefitPlots.tex}
+
+\clearpage
+
+%\section{data-MC comparisons including background scale factors}
+%\label{app:prefitplots_scaled}
+%\input{AppPrefitPlots_scaled.tex}
+
+\clearpage
+\section{Effect of MC stat uncertainties on the fit}
+\label{app:statBias}
+\input{statBias.tex}
+
+\clearpage
+\section{Truth Tagging Closure}
+\label{app:TRFClosure}
+\input{TRFClosure.tex}
+
+\clearpage
+\section{Continuous Tagging}
+\label{app:ContTag}
+\input{AppContinuousTag.tex}
+%
+
+\clearpage
+
+\section{BDT optimization studies}
+\label{app:BDToptimization}
+\input{AppMVAopt.tex}
+
+\clearpage
+
+\section{Fit performances in each leptonic channel}
+\label{app:AppFit}
+\input{AppFit.tex}
+%
+%\clearpage 
+%
+%\section{Fit performances in 1-lepton channel, separated for $e$ and $\mu$ modes}
+%\label{app:AppFit_1lep_separate}
+%\input{AppFit_1lep_separate.tex}
+%
+%\clearpage
+%
+%\section{Study on decorrelation of jet flavor composition NPs among samples}
+%\label{app:JetFlavor_decorrealtion}
+%\input{AppJetFlav_corr}
+%
+%\clearpage
+%
+%\section{Comparison of JES systematics, 19NPs and 3NPs scheme}
+%\label{app:JESNPs}
+%\input{AppJESNPs.tex}
+%
+%\clearpage
+%
+%\section{Correlation amongst \ptv\ and \mbb}
+%\label{app:ttbar_shape_uncertainties}
+%\input{App_pTVmBB.tex}
+%
+%\clearpage
+%
+%\section{$b$-tagging systematic correlation/decorrelation study}
+%\label{app:bagsyscorreation}
+%\input{App_btagsyscorr.tex}
+%
+%\clearpage
+%
+%\section{Fit results from first ($5.8~\text{fb}^{-1}$) and second ($7.4~\text{fb}^{-1}$) data periods}
+%\label{app:dataperiod}
+%\input{App_dataperiod.tex}
+%
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% additional post-fit distributions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\section{Post-fit BDT input Distributions}
+\label{app:BDTPostfit}
+\input{AppAddPostFit.tex}
+%
+\clearpage
+
+\section{Cross-check: Standard Model Diboson ($VZ\rightarrow b\bar{b}$) measurement}
+\label{app:dbcheck}
+\input{AppDBmeasurement.tex}
+%
+\clearpage
+%
+\section{Cross-check: dijet mass analysis}
+\label{app:cutbased}
+\input{AppCutBased.tex}
+%
+\clearpage
+
+\section{Detailed Studies on the combination of Run 1 and Run 2}
+\label{app:comb}
+\input{AppCombination.tex}
+
+
+
+%\clearpage
+%%% This is now replaced by the Preface
+%-------------------------------------------------------------------------------
+%\section{Major changes from the previous version}
+%\label{sec:changelog}
+%\input{ChangeLog.tex}
+%-------------------------------------------------------------------------------
+
+
+\clearpage
+
+%-------------------------------------------------------------------------------
+% If you use biblatex and either biber or bibtex to process the bibliography
+% just say \printbibliography here
+\printbibliography
+% If you want to use the traditional BibTeX you need to use the syntax below.
+%\bibliographystyle{bibtex/bst/atlasBibStyleWoTitle}
+%\bibliography{SMVh_supporting,bibtex/bib/ATLAS}
+%-------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------
+% Print the list of contributors to the analysis
+% The argument gives the fraction of the text width used for the names
+%-------------------------------------------------------------------------------
+\clearpage
+\PrintAtlasContribute{0.30}
+
+%%-------------------------------------------------------------------------------
+%\clearpage
+%\appendix
+%\part*{Auxiliary material}
+%\addcontentsline{toc}{part}{Auxiliary material}
+%%-------------------------------------------------------------------------------
+%
+%In an ATLAS paper, auxiliary plots and tables that are supposed to be made public 
+%should be collected in an appendix that has the title \enquote{Auxiliary material}.
+%This appendix should be printed after the Bibliography.
+%At the end of the paper approval procedure, this information can be split into a separate document
+%-- see \texttt{atlas-auxmat.tex}.
+%
+%In an ATLAS note, use the appendices to include all the technical details of your work
+%that are relevant for the ATLAS Collaboration only (e.g.\ dataset details, software release used).
+%This information should be printed after the Bibliography.
+
+\end{document}

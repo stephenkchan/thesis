@@ -1,0 +1,70 @@
+The Run1 ($\sqrt{s}=$7 TeV with 4.7 fb$^{-1}$ of data, and $\sqrt{s}=$8 TeV with 20.3 fb$^{-1}$ of data) and Run2 workspaces are combined according to the correlation scheme in Table~\ref{tableComb1}.  The impact of correlating experimental and modelling nuisance parameters (NP's) was checked and found to have neglible impact on fit results (details may be found in Appendix~\ref{app:comb}).  Hence, only signal NP's and the $b$-jet energy scale are correlated.   
+
+\begin{table}[!htbp]
+\center\small
+\begin{tabular}{lll} \hline\hline
+ \textbf{7 TeV NP} & \textbf{8 TeV NP} &  \textbf{13 TeV NP}\\ \hline
+\multicolumn{2}{c}{ATLAS\_BR\_bb} & SysTheoryBRbb\\
+\multicolumn{2}{c}{SysTheoryQCDscale\_ggZH} & SysTheoryQCDscale\_ggZH\\
+\multicolumn{2}{c}{SysTheoryQCDscale\_qqVH} & SysTheoryQCDscale\_qqVH\\
+--- & SysTheoryPDF\_ggZH\_8TeV & SysTheoryPDF\_ggZH\\
+--- & SysTheoryPDF\_qqVH\_8TeV & SysTheoryPDF\_qqVH\\
+--- & SysTheoryVHPt\_8TeV & SysVHNLOEWK\\
+SysJetFlavB\_ 7TeV & SysJetFlavB\_ 8TeV & SysJET\_21NP\_JET\_BJES\_Response\\
+ \hline\hline
+\end{tabular}
+\caption{A summary of correlated nuisance parameters among the 7, 8, and 13 TeV datasets.}
+\label{tableComb1}
+\end{table}
+
+The combined results yields an observed (expected) significance of 3.57 (4.00) and an observed (expected) limit of 1.37 ($0.510^{+0.200}_{-0.143}$), with a signal strength of $\hat{\mu}=0.898^{+0.278}_{-0.261}$.
+\begin{figure}[tbh]
+  \centering
+  \includegraphics[width=0.45\linewidth]{figures/fit/CombRun12/r1_combData-r2_obsData-jes_partial-eps02_rank_job100of100_Run1Run2Comb_r1_combData-r2_obsData-jes_partial-eps02_pulls_125.pdf}
+  \caption{Ranked nuisance parameters for the Run1+Run2 combination.}
+  \label{fig:combranks}
+\end{figure}
+
+Two (34.2\% compatibility with single parameter of interest fit) and three (1.49\% compatibility with single parameter of interest fit) parameter of interest fits were also conducted, and summaries of $\hat{\mu}$ for these fits and for 7, 8, and 13 TeV may be found in Figures~\ref{fig:combmushat1}-\ref{fig:combmushat3}.  The main results for Run 1, Run 2, and the combination may be found in Table~\ref{tableCombresykts}.
+
+\begin{table}[!htbp]
+\begin{center}
+\begin{tabular}{lccc} \hline\hline
+Dataset & $\hat{\mu}$ & Total Error in $\hat{\mu}$ & Obs. (Exp.) Significance \\
+\hline
+Run 1 & 0.51 & +0.40 / -0.37 & 1.4 (2.6)\\
+Run 2 & 1.20 & +0.42 / -0.36 & 3.54 (3.03)\\
+Combined & 0.90 & +0.28 / -0.26 & 3.57 (4.00)\\
+\hline\hline
+\end{tabular}
+\caption{A summary of main results for the Run 1, Run 2, and combined fits.}
+\label{tableCombresykts}
+\end{center}
+\end{table}
+
+
+\begin{figure}[tbh]
+  \begin{center}
+  \includegraphics[width=0.75\linewidth]{figures/fit/CombRun12/Plot_mu_eps02_WHZH.pdf}
+  \caption{$\hat{\mu}$ summary plot for a two parameter of interest fit.}
+  \label{fig:combmushat1}
+  \end{center}
+\end{figure}
+\begin{figure}[tbh]
+  \begin{center}
+  \includegraphics[width=0.75\linewidth]{figures/fit/CombRun12/Plot_mu_eps02_channels.pdf}
+  \caption{$\hat{\mu}$ summary plot for a three parameter of interest fit.}
+  \label{fig:combmushat2}
+  \end{center}
+\end{figure}
+\begin{figure}[tbh]
+  \begin{center}
+  \includegraphics[width=0.75\linewidth]{figures/fit/CombRun12/Plot_mu_eps02_7813.pdf}
+  \caption{$\hat{\mu}$ summary plot for different $\sqrt{s}$ values.}
+  \label{fig:combmushat3}
+  \end{center}
+\end{figure}
+
+
+
+

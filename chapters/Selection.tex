@@ -1,0 +1,115 @@
+%!TEX root = ../dissertation.tex
+\begin{savequote}[75mm]
+If it's stupid but it works, it isn't stupid.
+\qauthor{Conventional Wisdom}
+\end{savequote}
+
+\chapter{Object Definitions and Event Selection}
+
+\newthought{Much has been said} 
+\section{Object Definitions}
+Detailed descriptions of object definitions may be found in \cite{objectnote}.  Tables \ref{tbl:elecsel}, \ref{tbl:muonsel}, and \ref{JetReqs} are reproduced from \cite{supportnote} and summarize electron, muon, and jet definitions, respectively.
+
+ 
+
+\section{Event Selection and Analysis Regions}
+This analysis focuses specifically on the 2-lepton channel of the fiducial analysis, with the event selection and analysis region definitions being identical.  Common to all lepton channels in the fiducial analysis is the set of requirements on the jets in a given event.  There must be at least two central jets and exactly two signal jets that have been ``$b$-tagged'' according to the MV2c10 algorithm \cite{btag}, with at least one of these $b$-jets having a $p_T>45$ \GeV.  For MVA training and certain background samples, a process known as ``truth-tagging'' is applied instead of the standard $b$-tagging to boost sample statistics and stabilize training/fits (cf. \cite{supportnote} Section 4.2 for details).  After event selection, the \emph{muon-in-jet} and \emph{PtReco} corrections, described in \cite{objectnote} 6.3.3-4, are applied to the $b$-jets, and, taking advantage of the fact that the 2-lepton final state is closed, a kinematic fitter is applied (cf. \cite{run1note,epsJetRes}); these objects are only used for MVA training/fit inputs.  
+
+In addition to the common selections, there are 2-lepton specific selections.  All events are required to pass an un-prescaled single lepton trigger, a full list of which may be found in Tables 5,6 of \cite{objectnote} with the requirement that one of the two selected leptons in the event must have fired the trigger.  There must be 2 VH-loose leptons, and at least one of these must be a ZH-signal lepton.  This lepton pair must have an invariant mass between 81 and 101 \GeV.  In order to increase analysis sensitivity, the analysis is split into orthogonal regions based on the number of jets and the transverse momentum of the $Z$ candidate (the vectoral sum of the lepton pair): 2 and $\ge3$ jets; $p_T^V$ in $\left[75,150\right),\left[150,\infty\right)$ \GeV.  In addition to the signal regions where the leptons are required to be the same flavor ($e$ or $\mu$), there are top $e-\mu$ control regions used to constrain the top backgrounds.
+
+\begin{table}[!htbp]
+  \begin{center}\begin{tabular}{cc}
+      \hline\hline
+      Category & Requirement\\
+      \hline
+      Trigger & un-prescaled, single lepton\\
+      Jets & $\ge2$ central jets; 2 $b$-tagged signal jets, harder jet with $p_T>45$ \GeV\\
+      Leptons & 2 VH-loose leptons ($\ge1$ ZH-signal lepton); same (opp) flavor for SR (CR)\\
+      \mll & $\mll\in\left(81,101\right)$ GeV\\
+      \ptv regions (\GeV) & $\left[75,150\right),\left[150,\infty\right)$\\
+      \hline\hline
+    \end{tabular}
+    \caption{Event selectrion requirements}
+  \end{center}
+  \label{tab:evsel}
+\end{table}
+
+
+
+%\begin{table}[b]
+%  \centering
+%  \begin{tabular}{|c|c|}
+%    \hline
+%    0 lep & 2 lep \\
+%    \hline
+%    \texttt{HLT\_xe70} & \texttt{HLT\_mu20\_iloose\_L1MU15} \\
+%                & OR \texttt{HLT\_mu50} \\
+%                & \\
+%                & \texttt{HLT\_e24\_lhmedium\_L1EM20VH} (data) \\
+%                & OR \texttt{HLT\_e24\_lhmedium\_L1EM18VH} (MC) \\
+%                & OR \texttt{HLT\_e60\_lhmedium} \\
+%                & OR \texttt{HLT\_e120\_lhloose} \\
+%    \hline
+%  \end{tabular}
+%  \caption{Summary table of triggers used.}
+%  \label{tab:trigs}
+%\end{table}
+
+\begin{table}[tbph]
+\begin{center}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{ccccccc} \hline \hline
+Electron Selection & \pt & \eta & ID & $d_{0}^{sig}$ &  $|\Delta{z_{0}^{BL}}\sin\theta|$ & Isolation \\ \hline
+$\VHloose$ & $>$7~GeV & $|\eta|< 2.47$ & LH Loose + B-layer cut& $ <5$ & $<0.5$ mm & LooseTrackOnly \\
+%$\ZHsignal$ & $>$25~GeV & $|\eta|< 2.47$ & LH Loose + B-layer cut&$ <5$ &$<0.5$ mm & LooseTrackOnly \\
+$\ZHsignal$ & $>$27~GeV & $|\eta|< 2.47$ & LH Loose + B-layer cut&$ <5$ &$<0.5$ mm & LooseTrackOnly \\
+$\WHsignal$ & $>$27~GeV & $|\eta|< 2.47$ & LH Tight &$ <5$ &$<0.5$ mm & FixedCutHighPtCaloOnly \\
+%$\WHsignal$ & $>$27~GeV & $|\eta|< 2.47$ & LH Tight &$ <5$ &$<0.5$ mm & FixedCutTight \\
+\hline\hline
+\end{tabular}
+}
+\caption{Electron selection requirements.}
+\label{tbl:elecsel}
+\end{center}
+\end{table}
+
+\begin{table}[tbph]
+\begin{center}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{ccccccc} \hline \hline
+Muon Selection & \pt & \eta & ID & $d_{0}^{\textrm{sig}}$ & $|\Delta{z_{0}^{\textrm{BL}}}\sin\theta|$ & Isolation \\ \hline
+$\VHloose$ & $>$7 GeV & $|\eta|< 2.7$ & Loose quality & $ <3$ & $<0.5$ mm & LooseTrackOnly \\
+%ZH-Signal & $>$25 GeV & $|\eta| < 2.5$ & Loose quality & $ <3$ & $<0.5$ mm & LooseTrackOnly \\
+$\ZHsignal$ & $>$27 GeV & $|\eta| < 2.5$ & Loose quality & $ <3$ & $<0.5$ mm & LooseTrackOnly \\
+$\WHsignal$ & $>$25 GeV & $|\eta| < 2.5$ & Medium quality & $ <3$ & $<0.5$ mm & FixedCutHighPtTrackOnly \\
+\hline\hline
+\end{tabular}
+}
+\caption{Muon selection requirements.}
+\label{tbl:muonsel}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{l c  c  c}
+    \hline
+    \hline
+    \multicolumn{1}{c}{Jet Category} &
+    \multicolumn{3}{c}{Selection Requirements} \\
+    \hline
+    \multirow{3}{*}{Forward Jets} & \multicolumn{3}{c}{jet cleaning} \\
+    & \multicolumn{3}{c}{$p_{\mathrm{T}} > 30\,\mathrm{GeV}$} \\
+    & \multicolumn{3}{c}{$2.5 \leq \left|\eta\right| < 4.5$} \\ [2ex]
+    %\hdashline \\[1ex]
+    \hline
+    \multirow{3}{*}{Signal Jets} & \multicolumn{3}{c}{$p_{\mathrm{T}} > 20\,\mathrm{GeV}$ and $\left|\eta\right| < 2.5$}\\
+    & \multicolumn{3}{c}{jet cleaning} \\
+    & \multicolumn{3}{c}{JVT$\,\geq 0.59$ if ($p_{\mathrm{T}} < 60\,\mathrm{GeV}$ and $\left|\eta\right| < 2.4$)}\\
+    \hline
+    \hline
+  \end{tabular}
+  \caption[Table caption text]{\texttt{AntiKt4EMTopoJets} selection requirements. The jet 
+cleaning is applied via the JetCleaningTool, that removes events in regions corresponding to hot calorimeter cells. }
+  \label{JetReqs}
+\end{table}

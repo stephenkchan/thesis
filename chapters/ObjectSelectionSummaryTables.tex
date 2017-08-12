@@ -1,0 +1,77 @@
+%\begin{table}[b]
+%  \centering
+%  \begin{tabular}{|c|c|}
+%    \hline
+%    0 lep & 2 lep \\
+%    \hline
+%    \texttt{HLT\_xe70} & \texttt{HLT\_mu20\_iloose\_L1MU15} \\
+%                & OR \texttt{HLT\_mu50} \\
+%                & \\
+%                & \texttt{HLT\_e24\_lhmedium\_L1EM20VH} (data) \\
+%                & OR \texttt{HLT\_e24\_lhmedium\_L1EM18VH} (MC) \\
+%                & OR \texttt{HLT\_e60\_lhmedium} \\
+%                & OR \texttt{HLT\_e120\_lhloose} \\
+%    \hline
+%  \end{tabular}
+%  \caption{Summary table of triggers used.}
+%  \label{tab:trigs}
+%\end{table}
+
+\begin{table}[tbph]
+\begin{center}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{ccccccc} \hline \hline
+Electron Selection & \pt & \eta & ID & $d_{0}^{sig}$ &  $|\Delta{z_{0}^{BL}}\sin\theta|$ & Isolation \\ \hline
+$\VHloose$ & $>$7~GeV & $|\eta|< 2.47$ & LH Loose + B-layer cut& $ <5$ & $<0.5$ mm & LooseTrackOnly \\
+%$\ZHsignal$ & $>$25~GeV & $|\eta|< 2.47$ & LH Loose + B-layer cut&$ <5$ &$<0.5$ mm & LooseTrackOnly \\
+$\ZHsignal$ & $>$27~GeV & $|\eta|< 2.47$ & LH Loose + B-layer cut&$ <5$ &$<0.5$ mm & LooseTrackOnly \\
+$\WHsignal$ & $>$27~GeV & $|\eta|< 2.47$ & LH Tight &$ <5$ &$<0.5$ mm & FixedCutHighPtCaloOnly \\
+%$\WHsignal$ & $>$27~GeV & $|\eta|< 2.47$ & LH Tight &$ <5$ &$<0.5$ mm & FixedCutTight \\
+\hline\hline
+\end{tabular}
+}
+\caption{Electron selection requirements.}
+\label{tbl:elecsel}
+\end{center}
+\end{table}
+
+\begin{table}[tbph]
+\begin{center}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{ccccccc} \hline \hline
+Muon Selection & \pt & \eta & ID & $d_{0}^{\textrm{sig}}$ & $|\Delta{z_{0}^{\textrm{BL}}}\sin\theta|$ & Isolation \\ \hline
+$\VHloose$ & $>$7 GeV & $|\eta|< 2.7$ & Loose quality & $ <3$ & $<0.5$ mm & LooseTrackOnly \\
+%ZH-Signal & $>$25 GeV & $|\eta| < 2.5$ & Loose quality & $ <3$ & $<0.5$ mm & LooseTrackOnly \\
+$\ZHsignal$ & $>$27 GeV & $|\eta| < 2.5$ & Loose quality & $ <3$ & $<0.5$ mm & LooseTrackOnly \\
+$\WHsignal$ & $>$25 GeV & $|\eta| < 2.5$ & Medium quality & $ <3$ & $<0.5$ mm & FixedCutHighPtTrackOnly \\
+\hline\hline
+\end{tabular}
+}
+\caption{Muon selection requirements.}
+\label{tbl:muonsel}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{l c  c  c}
+    \hline
+    \hline
+    \multicolumn{1}{c}{Jet Category} &
+    \multicolumn{3}{c}{Selection Requirements} \\
+    \hline
+    \multirow{3}{*}{Forward Jets} & \multicolumn{3}{c}{jet cleaning} \\
+    & \multicolumn{3}{c}{$p_{\mathrm{T}} > 30\,\mathrm{GeV}$} \\
+    & \multicolumn{3}{c}{$2.5 \leq \left|\eta\right| < 4.5$} \\ [2ex]
+    %\hdashline \\[1ex]
+    \hline
+    \multirow{3}{*}{Signal Jets} & \multicolumn{3}{c}{$p_{\mathrm{T}} > 20\,\mathrm{GeV}$ and $\left|\eta\right| < 2.5$}\\
+    & \multicolumn{3}{c}{jet cleaning} \\
+    & \multicolumn{3}{c}{JVT$\,\geq 0.59$ if ($p_{\mathrm{T}} < 60\,\mathrm{GeV}$ and $\left|\eta\right| < 2.4$)}\\
+    \hline
+    \hline
+  \end{tabular}
+  \caption[Table caption text]{\texttt{AntiKt4EMTopoJets} selection requirements. The jet 
+cleaning is applied via the JetCleaningTool, that removes events in regions corresponding to hot calorimeter cells. }
+  \label{JetReqs}
+\end{table}

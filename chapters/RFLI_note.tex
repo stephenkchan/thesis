@@ -1,0 +1,236 @@
+%-------------------------------------------------------------------------------
+% This file provides a skeleton ATLAS document.
+%-------------------------------------------------------------------------------
+% Specify where ATLAS LaTeX style files can be found.
+\newcommand*{\ATLASLATEXPATH}{latex/}
+% Use this variant if the files are in a central location, e.g. $HOME/texmf.
+% \newcommand*{\ATLASLATEXPATH}{}
+%-------------------------------------------------------------------------------
+\documentclass[UKenglish,texlive=2013]{\ATLASLATEXPATH atlasdoc}
+% The following command is needed by arXiv to ensure use of pdflatex.
+% It should be included in the first 5 lines of the preamble.
+% \pdfoutput=1
+% The language of the document must be set: usually UKenglish or USenglish.
+% british and american also work!
+% Commonly used options:
+%  texlive=YYYY          Specify TeX Live version (2013 is default).
+%  atlasstyle=true|false Use ATLAS style for document (default).
+%  coverpage             Create ATLAS draft cover page for collaboration circulation.
+%                        See atlas-draft-cover.tex for a list of variables that should be defined.
+%  cernpreprint          Create front page for a CERN preprint.
+%                        See atlas-preprint-cover.tex for a list of variables that should be defined.
+%  PAPER                 The document is an ATLAS paper (draft).
+%  CONF                  The document is a CONF note (draft).
+%  PUB                   The document is a PUB note (draft).
+%  txfonts=true|false    Use txfonts rather than the default newtx - needed for arXiv submission.
+%  paper=a4|letter       Set paper size to A4 (default) or letter.
+
+%-------------------------------------------------------------------------------
+% Extra packages:
+\usepackage[subfigure=true]{\ATLASLATEXPATH atlaspackage}
+\usepackage{\ATLASLATEXPATH atlaspackage}
+\usepackage{multirow}
+\usepackage{verbatim} % for begin/end comment commands
+\usepackage{amsfonts}
+\usepackage{lipsum}
+\usepackage{lscape}
+% Commonly used options:
+%  biblatex=true|false   Use biblatex (default) or bibtex for the bibliography.
+%  backend=biber         Use the biber backend rather than bibtex.
+%  subfigure|subfig|subcaption  to use one of these packages for figures in figures.
+%  minimal               Minimal set of packages.
+%  default               Standard set of packages.
+%  full                  Full set of packages.
+%-------------------------------------------------------------------------------
+% Style file with biblatex options for ATLAS documents.
+\usepackage{\ATLASLATEXPATH atlasbiblatex}
+
+% Package for creating list of authors and contributors to the analysis.
+%\usepackage[xtab]{\ATLASLATEXPATH atlascontribute}
+
+% Useful macros
+\usepackage{\ATLASLATEXPATH atlasphysics}
+% See doc/atlas-physics.pdf for a list of the defined symbols.
+% Default options are:
+%   true:  journal, misc, particle, unit, xref
+%   false: BSM, hion, math, process, other, texmf
+% See the package for details on the options.
+
+% Files with references for use with biblatex.
+% Note that biber gives an error if it finds empty bib files.
+\addbibresource{RFLI_note.bib}
+\addbibresource{bibtex/bib/ATLAS.bib}
+
+% Paths for figures - do not forget the / at the end of the directory name.
+\graphicspath{{logos/}{figures/}}
+
+% Add you own definitions here (file RFLI_note-defs.sty).
+\usepackage{RFLI_note-defs}
+
+%-------------------------------------------------------------------------------
+% Generic document information
+%-------------------------------------------------------------------------------
+
+% Title, abstract and document 
+\input{RFLI_note-metadata}
+% Author and title for the PDF file
+%\hypersetup{pdftitle={Search for a Standard Model Higgs boson produced in association with a vector boson and decaying to a pair of $b$-quarks},pdfauthor={add the list of names here}}
+
+%-------------------------------------------------------------------------------
+% Content
+%-------------------------------------------------------------------------------
+\begin{document}
+\maketitle
+
+%\tableofcontents
+%\listoffigures
+%\listoftables
+
+% List of contributors - print here or after the Bibliography.
+%\PrintAtlasContribute{0.30}
+
+%-------------------------------------------------------------------------------
+%\section{Updates expected during circulation}
+%\label{sec:missingitems}
+%\input{MissingItems.tex}
+%-------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
+\section{Introduction}
+\label{sec:intro}
+\input{Introduction.tex}
+%-------------------------------------------------------------------------------
+
+
+%-------------------------------------------------------------------------------
+%\section{ATLAS detector}
+%\label{sec:detector}
+%-------------------------------------------------------------------------------
+%The ATLAS detector~\cite{PERF-2007-01} ...
+% \input{atlas-detector}
+
+%-------------------------------------------------------------------------------
+\section{Data and Simulated Samples}
+\label{sec:samples}
+\input{DataMC.tex}
+%-------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------
+\section{Event Reconstruction and Selection}
+\label{sec:evtsel}
+\input{Selection.tex}
+%-------------------------------------------------------------------------------
+% should contain at least
+% - object definition
+% - MVA preselection
+% - cut-based analysis additional selection
+
+%-------------------------------------------------------------------------------
+\section{Multi-Variate Analysis}
+\label{sec:mva}
+\input{MVA.tex}
+
+%-------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------
+\section{Systematic Uncertainties and Statistical Treatment}
+\label{sec:sys}
+\input{Fit.tex}
+%-------------------------------------------------------------------------------
+
+\clearpage
+\newpage
+%-------------------------------------------------------------------------------
+\section{Fit Results}
+\label{sec:result}
+\input{Results.tex}
+%-------------------------------------------------------------------------------
+
+
+% should contain, if available
+% - nominal results
+% - cross-checks: diboson fit, cut-based analysis results
+
+%-------------------------------------------------------------------------------
+
+\section{Conclusions}
+\label{sec:conclusion}
+\input{Conclusion.tex}
+%-------------------------------------------------------------------------------
+
+
+%%-------------------------------------------------------------------------------
+%\section*{Acknowledgements}
+%%-------------------------------------------------------------------------------
+%
+%%\input{acknowledgements/Acknowledgements}
+%
+%The \texttt{atlaslatex} package contains the acknowledgements that were valid 
+%at the time of the release you are using.
+%These can be found in the \texttt{acknowledgements} subdirectory.
+%When your ATLAS paper or PUB/CONF note is ready to be published,
+%download the latest set of acknowledgements from:\\
+%\url{https://twiki.cern.ch/twiki/bin/view/AtlasProtected/PubComAcknowledgements}
+%
+%The supporting notes for the analysis should also contain a list of contributors.
+%This information should usually be included in \texttt{mydocument-metadata.tex}.
+%The list should be printed either here or before the table of contents.
+
+
+%-------------------------------------------------------------------------------
+\clearpage
+\newpage
+\appendix
+\part*{Appendices}
+\addcontentsline{toc}{part}{Appendices}
+%-------------------------------------------------------------------------------
+
+%A number of cross-checks and additional plots are provided in the Appendices. Moreover, additional cross-checks, not fully documented here, can also be found in \url{https://twiki.cern.ch/twiki/bin/view/AtlasProtected/HSG5VHbbICHEPCheckList}.
+\section{Full MVA Plots}
+\label{app:mvaplots}
+\input{AppPlots.tex}
+
+\clearpage
+\section{Fit Validation and  Postfit Plots}
+\label{app:postfit}
+\input{AppPostfit.tex}
+
+
+
+
+%\section{data-MC comparisons including background scale factors}
+%\label{app:prefitplots_scaled}
+%\input{AppPrefitPlots_scaled.tex}
+
+\clearpage
+
+%-------------------------------------------------------------------------------
+% If you use biblatex and either biber or bibtex to process the bibliography
+% just say \printbibliography here
+\printbibliography
+% If you want to use the traditional BibTeX you need to use the syntax below.
+%\bibliographystyle{bibtex/bst/atlasBibStyleWoTitle}
+%\bibliography{SMVh_supporting,bibtex/bib/ATLAS}
+%-------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------
+% Print the list of contributors to the analysis
+% The argument gives the fraction of the text width used for the names
+%-------------------------------------------------------------------------------
+%%-------------------------------------------------------------------------------
+%\clearpage
+%\appendix
+%\part*{Auxiliary material}
+%\addcontentsline{toc}{part}{Auxiliary material}
+%%-------------------------------------------------------------------------------
+%
+%In an ATLAS paper, auxiliary plots and tables that are supposed to be made public 
+%should be collected in an appendix that has the title \enquote{Auxiliary material}.
+%This appendix should be printed after the Bibliography.
+%At the end of the paper approval procedure, this information can be split into a separate document
+%-- see \texttt{atlas-auxmat.tex}.
+%
+%In an ATLAS note, use the appendices to include all the technical details of your work
+%that are relevant for the ATLAS Collaboration only (e.g.\ dataset details, software release used).
+%This information should be printed after the Bibliography.
+
+\end{document}

@@ -1,0 +1,124 @@
+\AtlasTitle{Variations on MVA Variables in the SM $ZH\to \ell\ell b\bar{b}$ Search}
+
+%\author{Hbb group}
+%{\scriptsize
+\input{ListOfContribution}
+%}
+% Authors and list of contributors to the analysis
+% \AtlasAuthorContributor also adds the name to the author list
+% Include package latex/atlascontribute to use this
+% Use authblk package if there are multiple authors, which is included by latex/atlascontribute
+%\usepackage{authblk}
+%\renewcommand\Authands{, } % avoid ``. and'' for last author
+%\renewcommand\Affilfont{\itshape\small} % affiliation formatting
+% \AtlasAuthorContributor{First AtlasAuthorContributor}{a}{Author's contribution.}
+% \AtlasAuthorContributor{Second AtlasAuthorContributor}{b}{Author's contribution.}
+% \AtlasAuthorContributor{Third AtlasAuthorContributor}{a}{Author's contribution.}
+% \AtlasContributor{Fourth AtlasContributor}{Contribution to the analysis.}
+%\author[a]{Stephen Chan}
+%\author[a]{John Huth}
+% \author[b]{Third Author}
+%\affil[a]{Harvard University}
+% \affil[b]{Another Institution}
+%\AtlasAuthorContributor{Stephen Chan}{a}{Analysis}
+%\AtlasAuthorContributor{John Huth}{a}{Supervision}
+% \AtlasAuthorContributor{Second AtlasAuthorContributor}{b}{Author's contribution.}
+%\affil[a]{Harvard University}
+
+% If a special author list should be indicated via a link use the following code:
+% Include the two lines below if you do not use atlasstyle:
+% \usepackage[marginal,hang]{footmisc}
+% \setlength{\footnotemargin}{0.5em}
+% Use the following lines in all cases:
+% \usepackage{authblk}
+% \author{The ATLAS Collaboration%
+% \thanks{The full author list can be found at:\newline
+%   \url{https://atlas.web.cern.ch/Atlas/PUBNOTES/ATL-PHYS-PUB-2014-007/authorlist.pdf}}
+% }
+
+% Date: if not given, uses current date
+%\date{\today}
+
+% Draft version:
+% Should be 1.0 for the first circulation, and 2.0 for the second circulation.
+% If given, adds draft version on front page, a 'DRAFT' box on top of each other page, 
+% and line numbers.
+% Comment or remove in final version.
+\AtlasVersion{1.5}
+
+% ATLAS reference code, to help ATLAS members to locate the paper
+%\AtlasRefCode{ATL-COM-PHYS-2016-XX}
+
+% ATLAS note number. Can be an COM, INT, PUB or CONF note
+% \AtlasNote{ATLAS-CONF-2014-XXX}
+% \AtlasNote{ATL-PHYS-PUB-2014-XXX}
+%\AtlasNote{ATL-COM-PHYS-2016-1724}
+
+% CERN preprint number
+% \PreprintIdNumber{CERN-PH-2014-XX}
+
+% ATLAS date - arXiv submission; to be filled in by the Physics Office
+% \AtlasDate{\today}
+
+% arXiv identifier
+% \arXivId{14XX.YYYY}
+
+% HepData record
+% \HepDataRecord{ZZZZZZZZ}
+
+% Submission journal and final reference
+% \AtlasJournal{Phys.\ Lett.\ B.}
+% \AtlasJournalRef{\PLB 789 (2014) 123}
+% \AtlasDOI{}
+
+% Abstract - % directly after { is important for correct indentation
+% same $pp$ collision data collected in 2015 and 2016 LHC Run-2 at $\sqrt{s}=13$~TeV, corresponding to an integrated luminosity of $\approx$ \LUMI. 
+\AtlasAbstract{ %
+This note describes variations on the two lepton channel of the Run-2 search for the SM Higgs boson produced in association with a vector boson using different variable sets for MVA training.  
+The three variable sets in question are the set of variables from the fiducial analysis (utilizing the results of the kinematic fitter for the invariant masses of the $b$-jet pair and the lepton pair), a set based on the Lorentz Invariants (LI) concept, and a set based on a combination of masses and decay angles derived using the RestFrames (RF) package.
+%The motivation for both the LI and RF variable schemes is a more complete description of a collision event in a more orthogonal basis of variablwes to both increase sensitivity and to reduce the overall impact of systematic uncertainties on fit quantities.
+Aside from the variable sets used for MVA training and discirminant distributions, the analysis is otherwise identical to the fiducial anlaysis. %, employing the same simulation samples and collision data, object and event selection, signal and background modeling, sysematic uncertainties, and statistical treatment to extract the signal strength and other quantities of interest.
+Both the LI and RF variable sets provide improvements with respect to the standard variable set, with the LI set showing an 11\% (17\%) improvement in expected (observed) significance on Run-2 data, and the RF set showing a 19\% (8\%) improvement in expected (observed) significance.
+The error on the observed $\hat{\mu}$ signal strength from systematic uncertainties is similarly reduced in the LI and RF schemes, with the LI and RF sets showing a 11\% and 21\% reduction in systematic uncertainty on $\hat{\mu}$, respectively.
+}
+
+%-------------------------------------------------------------------------------
+% The following information is needed for the cover page. The commands are only defined
+% if you use the coverpage option in atlasdoc or use the atlascover package
+%-------------------------------------------------------------------------------
+
+% List of supporting notes  (leave as null \AtlasCoverSupportingNote{} if you want to skip this option)
+% \AtlasCoverSupportingNote{Short title note 1}{https://cds.cern.ch/record/XXXXXXX}
+% \AtlasCoverSupportingNote{Short title note 2}{https://cds.cern.ch/record/YYYYYYY}
+%
+% OR (the 2nd option is deprecated, especially for CONF and PUB notes)
+%
+% Supporting material TWiki page  (leave as null \AtlasCoverTwikiURL{} if you want to skip this option)
+% \AtlasCoverTwikiURL{https://twiki.cern.ch/twiki/bin/view/Atlas/WebHome}
+
+% Comment deadline
+% \AtlasCoverCommentsDeadline{DD Month 2014}
+
+% Analysis team members - contact editors should no longer be specified
+% as there is a generic email list name for the editors
+% \AtlasCoverAnalysisTeam{Peter Analyser, Susan Editor1, Jenny Editor2, Alphonse Physicien}
+
+% Editorial Board Members - indicate the Chair by a (chair) after his/her name
+% Give either all members at once (then they appear on one line), or separately
+% \AtlasCoverEdBoardMember{EdBoard~Chair~(chair), EB~Member~1, EB~Member~2, EB~Member~3}
+% \AtlasCoverEdBoardMember{EdBoard~Chair~(chair)}
+% \AtlasCoverEdBoardMember{EB~Member~1}
+% \AtlasCoverEdBoardMember{EB~Member~2}
+% \AtlasCoverEdBoardMember{EB~Member~3}
+
+% A PUB note has readers and not an EdBoard -- give their names here (one line or several entries)
+% \AtlasCoverReaderMember{Reader~1, Reader~2}
+% \AtlasCoverReaderMember{Reader~1}
+% \AtlasCoverEdBoardMember{Reader~2}
+
+% Editors egroup
+% \AtlasCoverEgroupEditors{atlas-GROUP-2014-XX-editors@cern.ch}
+
+% EdBoard egroup
+% \AtlasCoverEgroupEdBoard{atlas-GROUP-2014-XX-editorial-board@cern.ch}
+
