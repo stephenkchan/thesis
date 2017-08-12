@@ -5,13 +5,261 @@ If it's stupid but it works, it isn't stupid.
 \end{savequote}
 
 \chapter{Multivariate Analysis}
-ATL-COM-PHYS-2016-1724 section 5
 
-\section{Input Variable Sets}
-\section{Setup and Training}
-\section{BDT Transformation}
+\newthought{Much has been said} 
+\section{Training Samples and Variables}
+A subset of samples described in \ref{sec:samples} was used for multivariate analysis (MVA) training, with $qqZH\to\ell\ell b\bar{b}$ and $ggZH\to\ell\ell b\bar{b}$ used as signal samples and $Z+$jets, $t\bar{t}$, and $VV$ used as background samples.  Truth tagging {TRF} is used on all samples to improve training statistics and stability.
 
-\newthought{Much has been said} about the so-called Standard Model of particle physics
+The standard set of variables taken as a baseline is the same as used in the fiducial analysis.  The variables fall into several main categories: energy/momentum scales of composite objects ($m_{bb}$, $m_{bbj}$, $p_T^V$, \mll), angles ($\Delta R\left(b_1,b_2\right)$, $\Delta\phi\left(\ell_1+\ell_2,b_1+b_2\right)$, $\Delta\eta\left(\ell_1+\ell_2,b_1+b_2\right)$), transverse momenta of the jets in the event ($p_T^{b_1}$, $p_T^{b_2}$, $p_T^{j_3}$), and $E_T^{miss}$.  The kinematic fitter is used to derive the invariant masses of both the $b$-quark and lepton pairs ($m_{bb}$, $m_{\ell\ell}$).\footnote{All other quantities use their \texttt{CxAODFramework} defaults.}
+
+In addition to the standard set of variables used for MVA training, two additional sets of variables were used: the Lorentz Invariants (LI) and RestFrames (RF) inspired variable sets.  These will be discussed below.
+
+\section{Lorentz Invariants}
+  The LI variables, first put forth by S. Hagebock and others, are based upon the fact that the four-vectors of an event are determined, all of the information in an event are encoded into 16 quantities: the ten inner products of the four vectors, the three Euler angles, and the three parameters specifying the boost of the $ZH$ system.  The masses of the four final state objects are not considered very useful and so can be removed to leave six meaningful inner products (the $_4C_2$ combinations between distinct final state four vectors).  Since these inner products can have an ill-defined physical interpretation and in order to help MVA training, each inner product is scaled by:
+\begin{equation}
+\label{eqn:liip}
+x\to\frac{x}{x+c}
+\end{equation}
+where $c$ is the mean of the distribution in the signal MC distribution.  These are denoted \texttt{xi\_yj}, where \texttt{x} and \texttt{y} are either \texttt{j} (for jet) or \texttt{l} (for lepton) and the indices are either 0 (1) for the leading (subleading) object by $p_T$ in the event.
+
+  The number of useful angles can be reduced by recognizing some symmetries inherent in the final state.  The symmetry around the beam axis eliminates one angle, while the boost being mostly in the beam direction ($z$) marginalizes the utility of the boost angles.  This leaves the boost in the $z$ direction, denoted \texttt{gamma\_ZHz}, and two angles chosen to be the angle between the $b\bar{b}$ system and the beam (\texttt{angle\_bb\_z}) and the angle between $\left(b_1+b_2\right)\times\hat{z}$ and $\left(b_1+b_2\right)\times\left(l_1+l_2\right)$ (\texttt{angle\_bbz\_bbll}).
+
+An important advantage of the LI variable set is that all of the variables are in it are orthogonal in the signal case by construction.  A drawback of this framework in a completely closed final state is that there is no way to treat $E_T^{miss}$ in a Lorentz invariant way.  In practice, however, it is found that the $E_T^{miss}$ has correlations comparable to other correlations between variables (cf. Figure \ref{fig:2jet-hiptv-correlations} (b) and (e)).  There is also no prescription for any additional jets in the event beyond the two $b$-tagged jets.  They are simply ignored in these variable calculations.
 
 
-% For an example of a full page figure, see Fig.~\ref{fig:myFullPageFigure}.
+\section{RestFrames Variables}
+The RestFrames variables \cite{rjr}, calculated using the software package of the same name, is based upon the concept that the most natural frame in which to analyze objects of the signal decay tree is in their individual production (rest) frames.  The signal decay tree for Higgs production in association with a $Z$ boson is show in Figure \ref{fig:rftree}.
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=0.300000\linewidth]{figures/RF_tree}
+  \caption{The \ZH\, decay tree.}
+  \label{fig:rftree}
+\end{figure}
+Generally, one does not typically have enough information to determine exactly each of the object production frames and the boosts between the frames\footnote{There are ways to do this for generic decay trees, though, and this is the focus of much of \cite{rjr} and the functionality of the RestFrames package.}, but in a completely closed final state like \ZH, this can be done in the usual way by adding the four vectors of the final state objects and solving the usual equations.  
+
+Each frame has associated with it the boost from its immediate parent and a mass scale; that mass and the angles between the Euclidean three vector associated with boost and the axis of the decay products provide useful variables.  In general, the polar angle (typically given as a cosine) is considered more useful than the azimuthal angle (typically just a $\Delta\phi$), though there are exceptions.  The $Z$ frame, for example, has \texttt{MZ}, which is just the usual $m_{\ell\ell}$, \texttt{cosZ}, the cosine of the polar angle between the lepton momentum direction in their production frame and the boost from the $ZH$ center of mass (CM) frame, and the angle \texttt{dphiCMZ}.
+
+In addition to the variables attached to individual object rest frames, energy scales associated with the CM frame can be used to contextualize other event level quantities.  In particular, one can use the mass of the CM frame as a natural scale to evaluate the momentum of the CM frame, and the $p_T$ of the CM frame as a natural scale for the event's $E_T^{miss}$, yielding the variables:
+\begin{equation}
+\label{eqn:Rrjr}
+R_{p_T} = \frac{p_{T,CM}}{p_{T,CM}+M_{CM}},\;R_{p_z} = \frac{p_{z,CM}}{p_{z,CM}+M_{CM}},\;R_{met} = \frac{E_T^{miss}}{E_T^{miss}+p_{T,CM}}
+\end{equation}
+denoted \texttt{Rpt}, \texttt{Rpz}, and \texttt{Rmet}.
+
+For this analysis, the RF variables were chosen to be \texttt{MCM}, \texttt{MH}, \texttt{MZ}, \texttt{cosCM}, \texttt{cosH}, \texttt{cosZ}, \texttt{dphiCMH}, \texttt{Rpt}, \texttt{Rpz}, and \texttt{Rmet}.
+
+\section{Correlations}
+The variable sets used in these studies are summarized in Table \ref{tab:variables}, while figure \ref{fig:2jet-hiptv-correlations} shows the correlations for the signal and background samples for the standard, LI, and RF variable sets in the most significant analysis signal region, the 2 jet, $p_T^V>150$ \GeV\, bin (matrices, as well as input distributions, for all regions made be found in Appendix \ref{app:mvaplots}).  As can be seen in the correlation matrices, variable correlations tend to be much lower, particularly for the signal hypothesis, for the LI and RF variables than for the standard set.  Notable exceptions are jet/lepton inner products in the LI set and \texttt{Rmet} and \texttt{Rpt} in the RF case (not surprising given variable definitions).  While this feature is not 
+
+\begin{table}[!htbp]
+  \begin{center}\begin{tabular}{l|p{4.5in}}
+      \hline\hline
+      Variable Set & Variables\\
+      \hline
+      Standard & \texttt{mBB,\- mLL, (mBBJ),\- pTV,\- pTB1,\- pTB2,\- (pTJ3),\- dRBB,\- dPhiVBB,\- dEtaVBB,\- MET}\\
+      Lorentz Invariants &  \texttt{j0\_j1,\- j0\_l1,\- l0\_l1,\- j1\_l1,\- j0\_l0,\- j1\_l0,\- gamma\_ZHz,\- angle\_bbz\_bbll\- angle\_bb\_z,\- MET}\\
+      RestFrames & \texttt{MH,\- MCM,\- MZ,\- cosH,\- cosCM,\- cosZ,\- Rpz,\- Rpt,\- dphiCMH,\- Rmet}\\
+      \hline\hline
+    \end{tabular}
+    \caption{Variables used in MVA training.  Variables in parentheses are only used in the $\ge 3$ jet regions.}
+  \end{center}
+  \label{tab:variables}
+\end{table}
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+\begin{subfigure}[t]{0.300000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//std-kf-2tag2jet-150ptv_0of2/CorrelationMatrixS}}\caption{Standard (S)}\end{subfigure}
+\begin{subfigure}[t]{0.300000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//li-met-2tag2jet-150ptv_0of2/CorrelationMatrixS}}\caption{LI (S)}\end{subfigure}
+\begin{subfigure}[t]{0.300000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//rf-sel-2tag2jet-150ptv_0of2/CorrelationMatrixS}}\caption{RF (S)}\end{subfigure}
+\begin{subfigure}[t]{0.300000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//std-kf-2tag2jet-150ptv_0of2/CorrelationMatrixB}}\caption{Standard (B)}\end{subfigure}
+\begin{subfigure}[t]{0.300000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//li-met-2tag2jet-150ptv_0of2/CorrelationMatrixB}}\caption{LI (B)}\end{subfigure}
+\begin{subfigure}[t]{0.300000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//rf-sel-2tag2jet-150ptv_0of2/CorrelationMatrixB}}\caption{RF (B)}\end{subfigure}
+  \caption{Signal and background variable correlations for the three variable sets in the 2 jet, $p_T^V>150$ \GeV.}
+  \label{fig:2jet-hiptv-correlations}
+\end{figure}
+
+
+\section{MVA Training}
+MVA training and hyperparameter optimization (in this case, just the order in which variables are fed into the BDT) is conducted using the ``holdout'' method {LOOK at roger's thesis for a reference}.  In this scheme, events are divided into three equal portions (in this case using \texttt{EventNumber\%3}), with the first third (the ``training'' set) being used for the initial training, the second third (the ``validation'' set) being used for hyperparameter optimizaiton, and the final third (the ``testing'' set) used to evaluate the performanace of the final discriminants in each analysis region.
+
+The MVA discriminant used is a boosted descision tree (BDT).  Training is done in TMVA using the training settings of the fiducial analysis \cite{supportnote}\footnote{Namely, \texttt{!H:\-!V:\-BoostType=\-AdaBoost:\-AdaBoostBeta=0.15:\-SeparationType=\-GiniIndex:\-PruneMethod=\-NoPruning:\-NTrees=\-200:\-MaxDepth=4:\-nCuts=100:\-nEventsMin=5\%}}.  For the purposes of hyperparameterization and testing, transformation D with $z_s=z_b=10$ is applied to the BDT distributions, and the sum in quadrature of the significance $S/\sqrt{S+B}$ in each bin is calculated for each pair of distributions.  
+
+Variable ranking is done iteratively in each analysis region.  In each set, the validation significance of a BDT using an initial subset of variables is calculated (dRBB and mBB for the standard set; j0\_j1 for the LI set; and MH for the RF set).  Each of the remaining unranked variables are then added separately, one at a time, to the BDT.  The variable yielding the highest validation significance is then added to the set list of ranked variables and removed from the list of unranked variables.  This process is repeated until no variables remain.  A plot of the ranking for the LI set in the 3+ jet, low $p_T^V$ region can be seen in Figure \ref{fig:rankingexample}.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=0.75\linewidth]{./figures/diag/training-li-met-2tag2jet-150ptv_tD}
+  \caption{An example of a variable ranking to determine variable order in the BDT discriminant.  The ranking for the 2 jet, $p_T^V>150$ \GeV region for the LI set is shown.}
+  \label{fig:rankingexample}
+\end{figure}
+
+Once variables have been ranked, the BDT may be used both to evaluate performance in a simplified anlaysis scenario in the absence of systematic uncertainties (described below in Section \ref{subsec:statonlyperf}) and to create xml files for the production of inputs for an analysis including systematics.  Following the approach taken in the fiducial analysis, BDT discriminants using two ``k-folds'' are produced to prevent overtraining, since the samples used for training are the same as those used to produce inputs for the full profile likelihood fit.  In this scheme, a BDT trained on events with an even (odd) \texttt{EventNumber} are used to evaluate events with an odd (even) \texttt{EventNumber}.
+
+\section{Statistics Only BDT Performance}
+\label{subsec:statonlyperf}
+As described above, cumulative significances can be extracted from signal and background BDT output distributions of the testing set of events can be constructed using the discriminant with the optimal variable ranking.  An example of such an output is shown in Figure \ref{fig:testingexample}, with the training BDT distributions in points and the testing distributions after transformation D as block histograms.  For better comparison of the distributions, all histograms have been scaled to have the same normalization.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=0.75\linewidth]{./figures/diag/bdt_dist-test-li-met-2tag2jet-150ptv_tD-all}
+  \caption{Training (points) and testing (block histogram) MVA distributions used for stat only testing for the 2 jet, $p_T^V>150$ \GeV region for the LI set is shown.}
+  \label{fig:testingexample}
+\end{figure}
+
+As can be seen in the summary of cumulative significances for each of these analysis regions and variable sets in \ref{fig:statonlysob}, the performance of each of the variable sets is quite similar.  The standard set performs best, with the LI (RF) set having a cumulative significance that is 7.9\% (6.9\%) lower.  That these figures are all so high ($\sim4.5$) relative to numbers one typically sees in an analysis including systematics is in part due to the fact that many of the most significant bins occur at high values of the BDT output, which, as can be seen in Figure \ref{fig:testingexample}, contain a small fraction of background events.  
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=0.66\linewidth]{figures/diag/rfli_sig_mtrx_tD}
+  \caption{Results of testing significances sorted by analysis region and variable set.}
+  \label{fig:statonlysob}
+\end{figure}
+
+A full set of ranking and testing plots, as well as correlation matrices and input variable distributions, may be found in Appendix \ref{app:mvaplots}.
+
+Correlation, ranking, and input variable plots for the standard, Lorentz Invariant, and RestFrames variable sets.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag/std-kf-2tag2jet-75_150ptv_0of2/CorrelationMatrixS}}\caption{2 jet, low pTV (S)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//std-kf-2tag2jet-75_150ptv_0of2/CorrelationMatrixB}}\caption{2 jet, low pTV (B)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//std-kf-2tag3jet-75_150ptv_0of2/CorrelationMatrixS}}\caption{3+ jet, low pTV (S)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//std-kf-2tag3jet-75_150ptv_0of2/CorrelationMatrixB}}\caption{3+ jet, low pTV (B)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//std-kf-2tag2jet-150ptv_0of2/CorrelationMatrixS}}\caption{2 jet, high pTV (S)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//std-kf-2tag2jet-150ptv_0of2/CorrelationMatrixB}}\caption{2 jet, high pTV (B)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//std-kf-2tag3jet-150ptv_0of2/CorrelationMatrixS}}\caption{3+ jet, high pTV (S)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//std-kf-2tag3jet-150ptv_0of2/CorrelationMatrixB}}\caption{3+ jet, high pTV (B)}\end{subfigure}
+  \caption{Signal and background variable correlations for the standard variable set.}
+  \label{fig:std-kf-Correlations}
+\end{figure}
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//training-std-kf-2tag2jet-75_150ptv_tD}}\caption{2 jet, low pTV}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//training-std-kf-2tag3jet-75_150ptv_tD}}\caption{3+ jet, low pTV}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//training-std-kf-2tag2jet-150ptv_tD}}\caption{2 jet, high pTV}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//training-std-kf-2tag3jet-150ptv_tD}}\caption{3+ jet, high pTV}\end{subfigure}
+  \caption{Signal and background variable correlations for the standard variable set.}
+  \label{fig:std-kf-Ranking}
+\end{figure}
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag/bdt_dist-test-std-kf-2tag2jet-75_150ptv_tD-all}}\caption{2 jet, low pTV}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag/bdt_dist-test-std-kf-2tag3jet-75_150ptv_tD-all}}\caption{3+ jet, low pTV}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag/bdt_dist-test-std-kf-2tag2jet-150ptv_tD-all}}\caption{2 jet, high pTV}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag/bdt_dist-test-std-kf-2tag3jet-150ptv_tD-all}}\caption{3+ jet, high pTV}\end{subfigure}
+  \caption{Training (points) and testing (block histogram) MVA distributions used for stat only testing for the standard variable set.}
+  \label{fig:std-kf-testing}
+\end{figure}
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//std-kf-2tag2jet-75_150ptv_0of2/variables_id_c1}}\caption{2 jet, low pTV (1/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//std-kf-2tag2jet-75_150ptv_0of2/variables_id_c2}}\caption{2 jet, low pTV (2/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//std-kf-2tag3jet-75_150ptv_0of2/variables_id_c1}}\caption{3+ jet, low pTV (1/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//std-kf-2tag3jet-75_150ptv_0of2/variables_id_c2}}\caption{3+ jet, low pTV (2/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//std-kf-2tag2jet-150ptv_0of2/variables_id_c1}}\caption{2 jet, high pTV (1/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//std-kf-2tag2jet-150ptv_0of2/variables_id_c2}}\caption{2 jet, high pTV (2/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//std-kf-2tag3jet-150ptv_0of2/variables_id_c1}}\caption{3+ jet, high pTV (1/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//std-kf-2tag3jet-150ptv_0of2/variables_id_c2}}\caption{3+ jet, high pTV (2/2)}\end{subfigure}
+  \caption{Input variables for the standard variable set.}
+  \label{fig:std-kf-inputs}
+\end{figure}
+
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag/li-met-2tag2jet-75_150ptv_0of2/CorrelationMatrixS}}\caption{2 jet, low pTV (S)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//li-met-2tag2jet-75_150ptv_0of2/CorrelationMatrixB}}\caption{2 jet, low pTV (B)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//li-met-2tag3jet-75_150ptv_0of2/CorrelationMatrixS}}\caption{3+ jet, low pTV (S)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//li-met-2tag3jet-75_150ptv_0of2/CorrelationMatrixB}}\caption{3+ jet, low pTV (B)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//li-met-2tag2jet-150ptv_0of2/CorrelationMatrixS}}\caption{2 jet, high pTV (S)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//li-met-2tag2jet-150ptv_0of2/CorrelationMatrixB}}\caption{2 jet, high pTV (B)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//li-met-2tag3jet-150ptv_0of2/CorrelationMatrixS}}\caption{3+ jet, high pTV (S)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//li-met-2tag3jet-150ptv_0of2/CorrelationMatrixB}}\caption{3+ jet, high pTV (B)}\end{subfigure}
+  \caption{Signal and background variable correlations for the LI variable set.}
+  \label{fig:li-met-Correlations}
+\end{figure}
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//training-li-met-2tag2jet-75_150ptv_tD}}\caption{2 jet, low pTV}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//training-li-met-2tag3jet-75_150ptv_tD}}\caption{3+ jet, low pTV}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//training-li-met-2tag2jet-150ptv_tD}}\caption{2 jet, high pTV}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//training-li-met-2tag3jet-150ptv_tD}}\caption{3+ jet, high pTV}\end{subfigure}
+  \caption{Signal and background variable correlations for the LI variable set.}
+  \label{fig:li-met-Ranking}
+\end{figure}
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag/bdt_dist-test-li-met-2tag2jet-75_150ptv_tD-all}}\caption{2 jet, low pTV}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag/bdt_dist-test-li-met-2tag3jet-75_150ptv_tD-all}}\caption{3+ jet, low pTV}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag/bdt_dist-test-li-met-2tag2jet-150ptv_tD-all}}\caption{2 jet, high pTV}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag/bdt_dist-test-li-met-2tag3jet-150ptv_tD-all}}\caption{3+ jet, high pTV}\end{subfigure}
+  \caption{Training (points) and testing (block histogram) MVA distributions used for stat only testing for the LI variable set.}
+  \label{fig:li-met-testing}
+\end{figure}
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//li-met-2tag2jet-75_150ptv_0of2/variables_id_c1}}\caption{2 jet, low pTV (1/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//li-met-2tag2jet-75_150ptv_0of2/variables_id_c2}}\caption{2 jet, low pTV (2/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//li-met-2tag3jet-75_150ptv_0of2/variables_id_c1}}\caption{3+ jet, low pTV (1/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//li-met-2tag3jet-75_150ptv_0of2/variables_id_c2}}\caption{3+ jet, low pTV (2/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//li-met-2tag2jet-150ptv_0of2/variables_id_c1}}\caption{2 jet, high pTV (1/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//li-met-2tag2jet-150ptv_0of2/variables_id_c2}}\caption{2 jet, high pTV (2/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//li-met-2tag3jet-150ptv_0of2/variables_id_c1}}\caption{3+ jet, high pTV (1/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//li-met-2tag3jet-150ptv_0of2/variables_id_c2}}\caption{3+ jet, high pTV (2/2)}\end{subfigure}
+  \caption{Input variables for the LI variable set.}
+  \label{fig:li-met-inputs}
+\end{figure}
+
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag/rf-sel-2tag2jet-75_150ptv_0of2/CorrelationMatrixS}}\caption{2 jet, low pTV (S)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//rf-sel-2tag2jet-75_150ptv_0of2/CorrelationMatrixB}}\caption{2 jet, low pTV (B)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//rf-sel-2tag3jet-75_150ptv_0of2/CorrelationMatrixS}}\caption{3+ jet, low pTV (S)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//rf-sel-2tag3jet-75_150ptv_0of2/CorrelationMatrixB}}\caption{3+ jet, low pTV (B)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//rf-sel-2tag2jet-150ptv_0of2/CorrelationMatrixS}}\caption{2 jet, high pTV (S)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//rf-sel-2tag2jet-150ptv_0of2/CorrelationMatrixB}}\caption{2 jet, high pTV (B)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//rf-sel-2tag3jet-150ptv_0of2/CorrelationMatrixS}}\caption{3+ jet, high pTV (S)}\end{subfigure}
+\begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//rf-sel-2tag3jet-150ptv_0of2/CorrelationMatrixB}}\caption{3+ jet, high pTV (B)}\end{subfigure}
+  \caption{Signal and background variable correlations for the RF variable set.}
+  \label{fig:rf-sel-Correlations}
+\end{figure}
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//training-rf-sel-2tag2jet-75_150ptv_tD}}\caption{2 jet, low pTV}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//training-rf-sel-2tag3jet-75_150ptv_tD}}\caption{3+ jet, low pTV}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//training-rf-sel-2tag2jet-150ptv_tD}}\caption{2 jet, high pTV}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//training-rf-sel-2tag3jet-150ptv_tD}}\caption{3+ jet, high pTV}\end{subfigure}
+  \caption{Signal and background variable correlations for the RF variable set.}
+  \label{fig:rf-sel-Ranking}
+\end{figure}
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag/bdt_dist-test-rf-sel-2tag2jet-75_150ptv_tD-all}}\caption{2 jet, low pTV}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag/bdt_dist-test-rf-sel-2tag3jet-75_150ptv_tD-all}}\caption{3+ jet, low pTV}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag/bdt_dist-test-rf-sel-2tag2jet-150ptv_tD-all}}\caption{2 jet, high pTV}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag/bdt_dist-test-rf-sel-2tag3jet-150ptv_tD-all}}\caption{3+ jet, high pTV}\end{subfigure}
+  \caption{Training (points) and testing (block histogram) MVA distributions used for stat only testing for the RF variable set.}
+  \label{fig:rf-sel-testing}
+\end{figure}
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//rf-sel-2tag2jet-75_150ptv_0of2/variables_id_c1}}\caption{2 jet, low pTV (1/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//rf-sel-2tag2jet-75_150ptv_0of2/variables_id_c2}}\caption{2 jet, low pTV (2/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//rf-sel-2tag3jet-75_150ptv_0of2/variables_id_c1}}\caption{3+ jet, low pTV (1/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//rf-sel-2tag3jet-75_150ptv_0of2/variables_id_c2}}\caption{3+ jet, low pTV (2/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//rf-sel-2tag2jet-150ptv_0of2/variables_id_c1}}\caption{2 jet, high pTV (1/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//rf-sel-2tag2jet-150ptv_0of2/variables_id_c2}}\caption{2 jet, high pTV (2/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//rf-sel-2tag3jet-150ptv_0of2/variables_id_c1}}\caption{3+ jet, high pTV (1/2)}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag//rf-sel-2tag3jet-150ptv_0of2/variables_id_c2}}\caption{3+ jet, high pTV (2/2)}\end{subfigure}
+  \caption{Input variables for the RF variable set.}
+  \label{fig:rf-sel-inputs}
+\end{figure}

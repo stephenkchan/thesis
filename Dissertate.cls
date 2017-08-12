@@ -8,7 +8,7 @@
 %     supported       = "Send email to suchow@post.harvard.edu.",
 %     docstring       = "Class for a dissertation."
 % --------------------------------------------------------------------
-
+%\usepackage{RFLI_note-defs}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{Dissertate}[2014/03/25 v2.0 Dissertate Class]
 \LoadClass[12pt, oneside, letterpaper]{book}
@@ -17,6 +17,18 @@
 % Options
 %
 \RequirePackage{etoolbox}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{cancel}
+\usepackage{pdflscape}
+\usepackage{multirow}
+\usepackage{verbatim}
+\usepackage{amssymb,amsmath,amsfonts,mathrsfs}
+\usepackage[font=tiny]{caption}
+\usepackage[font+=scriptsize]{subcaption}
+\usepackage{textpos}
+\usepackage{xcolor}
 
 % Line spacing: dsingle/ddouble
 %   Whether to use single- or doublespacing.
@@ -305,3 +317,33 @@
         \include{endmatter/colophon}
     \end{spacing}
 }
+
+\def\LUMI{36.1 fb\ensuremath{^{-1}}}
+
+\def\vecmet {\ensuremath{\vec{E}^{\mathrm{miss}}_{\mathrm{T}}}}
+\def\vecmpt {\ensuremath{\vec{p}_{\mathrm{T}}^{\mathrm{\ miss}}}}
+\def\Et{\ensuremath{E_{\mathrm{T}}}}
+\def\mpt {\ensuremath{p_{\mathrm{T}}^{\mathrm{\ miss}}}}
+\def\ptv {\ensuremath{p_{\mathrm{T}}^{\mathrm{V}}}}
+\def\mbb{\ensuremath{m_{bb}}}
+\def\mh{\ensuremath{m_{h}}}
+\def\mH{\ensuremath{m_{H}}}
+\def\mA{\ensuremath{m_{A}}}
+\def\tt{\ensuremath{t\bar{t}}}
+\def\mll{\ensuremath{m_{\ell\ell}}}
+\def\mT{\ensuremath{m_{T}}}
+\def\mTW{\ensuremath{m_{\text{T}}^{W}}}
+\def\meff{\ensuremath{m_{\textrm{eff}}}}
+\def\Vh{\ensuremath{Vh}}
+\def\Zh{\ensuremath{Zh}}
+\def\ZH{\ensuremath{ZH\to\ell\ell b\bar{b}}}
+\def\Wh{\ensuremath{Wh}}
+\def\mVh{\ensuremath{m_{\Vh}}}
+\newcommand{\ptx}[1]{\ensuremath{p_{\text{T}}^{\text{#1}}}\ }
+\def\VHloose{VH-loose} % should be Vh?
+\def\ZHsignal{ZH-signal} % should be Vh?
+\def\WHsignal{WH-signal} % should be Vh?
+\def\ptmiss{\ensuremath{E^{\mathrm{miss}}_\textrm{T, trk}}}
+\def\sumpt{\ensuremath{S_\textrm{T}}}
+\def\to{\ensuremath{\rightarrow}}
+\def\mindphi{\ensuremath{|\text{min}\Delta\phi(\met,\text{jet})|}}
