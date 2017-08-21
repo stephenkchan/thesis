@@ -1,5 +1,643 @@
 %!TEX root = ../dissertation.tex
-\chapter{Micromegas Trigger Misalignment}
-\label{mmt}
+\begin{savequote}[75mm]
+If it's stupid but it works, it isn't stupid.
+\qauthor{Conventional Wisdom}
+\end{savequote}
 
-Regurgitate \cite{misalnote} and also mention \cite{blcnote}
+\chapter{Micromegas Trigger Processor Simulation}
+
+\newthought{In order to preserve} key physics functionality by maintaining the ability to trigger on low $p_T$ muons, the Phase I Upgrade to ATLAS includes a New Small Wheel (NSW) that will supply muon track segments to the Level 1 trigger.  These NSW trigger segments will combine segments from the sTGC and Micromegas (MM) trigger processors (TP).  This note will focus in particular on the algorithm for the MMTP, described in detail with initial studies in \cite{blcnote}.  The goal of this note is to describe the MMTP algorithm performance under a variety of algorithm settings with both nominal and misaligned chamber positions, as well as addressing a number of performance issues.
+
+This note is organized as follows: the algorithm and its outputs are briefly described in Section \ref{sec:algovr}; Monte Carlo samples used are in Section \ref{sec:mc}; nominal algorithm performance and certain quantities of interest are described in Section \ref{sec:nom}; algorithm performance under misalignment, misalignment corrections, and corrected performance are shown in Section \ref{sec:mal}; and conclusions are presented in Section \ref{sec:conclusion}.
+
+\section{Algorithm Overview}
+\label{sec:algovr}
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[page=4,trim=2.5cm 8cm 2.25cm 4cm,clip]{./figures/blc_note}
+  \caption{\label{fig:flowchart}A flow chart describing the algorithm steps, taken from \cite{blcnote}.}
+\end{figure}
+The MMTP algorithm is shown schematically in Figure \ref{fig:flowchart}, taken from \cite{blcnote}, where a more detailed description may be found.  The algorithm begins by reading in hits, which are converted to slopes.  These slopes are calculated under the assumption that the hit originates from the IP; slopes calculated under this assumption are denoted by a superscript $g$ for global in order to distinguish them from local slopes calculated using only hits in the wedge.  In the algorithm simulation, events are screened at truth level to make sure they pass certain requirements.  The track's truth-level coordinates must place it with the wedge since some generated tracks do not reach the wedge.  These hits are stored in a buffer two bunch crossings (BCs) in time deep that separates the wedge into so-called ``slope-roads.''  If any given slope-road has sufficient hits to pass what is known as a coincidence threshold, a fit proceeds.  A coincidence threshold is a requirement for an event expressed as $a$X+$b$UV, which means that an slope-road must have at least $a$ hits in horizontal (X) planes and at least $b$ hits in stereo (U or V (corresponding to positive and negative stereo rotations)) planes.  For coincidence thresholds with a 2X hit requirement there is the extra requirement that, in the case of only 2X hits, one be on each quadruplet in order to ensure an adequate lever arm for the $\Delta\theta$ calculation.  Note that less stringent (lower hit) coincidence thresholds are inclusive; i.e. a slope-road passing a 4X+4UV cut automatically passes 2X+1UV.  The coincidence threshold, size of the slope-roads (denoted $h$), and the number of slope-roads into which each horizontal and stereo hits get written centered upon their nominal value are configurable parameters of the algorithm.
+
+  An individual hit's slope is calculated as shown in Equation \ref{eqn:indslope}, where $y_{base}$ is the local $y$ coordinate (orthogonal to the beamline and direction of the horizontal strips) of a station's base, $w_{str}$ is the strip pitch, $n_{str}$ is the hit's strip number, and $z_{plane}$ is the location of the hit's plane along the beamline.
+\begin{equation}
+\label{eqn:indslope}
+M_{hit}=\frac{y}{z}=\frac{y_{base}}{z_{plane}}+\frac{w_{str}}{z_{plane}}\times n_{str}
+\end{equation}
+  In the fit, individual hit slopes in a slope-road are used to calculate global slopes associated with each plane type, which are averages (e.g. $M_X^g$ for the average slope of horizontal planes).  These in turn are used to calculate the three composite slopes: slopes associated with the horizontal ($m_x$) and vertical coordinates ($m_y$) and the local slope of hits in the horizontal planes ($M_X^{l}$), all of which are shown in Equation \ref{eqn:compslopes}.  Note that the expression for $M_X^{l}$ differs but is equivalent to the expression given in \cite{blcnote}.  This is due to a procedural change in the algorithm.  The local X slope is expressed  in \cite{blcnote} as:
+\begin{equation}
+M_X^{local}=A_k\sum_iy_iz_i-B_k\sum_iy_i,\;B_k=\frac{1}{n}\sum_iz_i A_k=\bar{z}A_k
+\end{equation}
+Procedurally, this entails doing the sums over $y_i$ and $y_iz_i$, multiplying the sums by $A_k$, $B_k$, and then subtracting both of these numbers, $\mathcal{O}\left(10^3\right)$, to get local slopes, $\mathcal{O}\left(10^{-1}\right)$, while requiring precision on these numbers on the order of  $\mathcal{O}\left(10^{-3}\right)$.  This requires precision in the sums $\mathcal{O}\left(10^{-7}\right)$, and with 32 bit fixed point numbers, there are deviations with respect to the floating point calculations at the level of $\mathcal{O}\left(10^{-5}\right)$, which is enough to introduce a significant bias in the $\Delta\theta$ calculation.
+
+In order to prevent these errors, we do the subtraction first
+\begin{equation}
+M_X^{local}=A_k\sum_iy_iz_i-B_k\sum_iy_i=A_k\sum_i\left(y_iz_i-y_i\bar{z}\right)=B_k\sum_iy_i\left(\frac{z_i}{\bar{z}}-1\right)
+\end{equation}
+Thus, we change the order of operations and store $1/\bar{z}$ instead of $A_k$ in addition to $B_k$.  We also change the units of $y_i$ and $z_i$ in the calculation by dividing the millimeter lengths by 8192.\footnote{Chosen since it is a perfect power of 2 and of order the length scale of $z$ in millimeters}  With these changes, a 32 bit fixed point based algorithm has essentially identical performance to that of an algorithm based on the usual C++ 32 floating point numbers.  Future work includes converting the 32 bit fixed point arithmetic to 16 bit where possible in the algorithm.  While introducing 16 bit numbers uniformly might seem preferable, since simple 16-bit operations in the firmware can be done in a single clock tick, and a larger number of bits increases the algorithm latency, some numbers in the algorithm will require a larger number of bits, in particular in the local slope calculation, which is the single calculation in the algorithm requiring the largest numeric range.
+
+  In Equation \ref{eqn:compslopes}, $\theta_{st}$ is the stereo angle of 1.5 degrees; the sums are over relevant planes; $\bar{z}$ is the average position in $z$ of the horizontal planes; and $y_i$ and $z_i$ in the local slope expression refer to the $y$ and $z$ coordinates of hits in X planes.
+\begin{equation}
+\label{eqn:compslopes}
+m_x=\frac{1}{2}\cot\theta_{st}\left(M_U^{g}-M_V^{g}\right),\;m_y=M_X^{g},\;M_X^{l}=\frac{\bar{z}}{\sum_i z_i^2-1/n\left(\sum_iz_i\right)^2}\sum_iy_i\left(\frac{z_i}{\bar{z}}-1\right)
+\end{equation}
+From these composite slopes, the familiar expressions for the fit quantities $\theta$ (the zenith), $\phi$ (the azimuth\footnote{Defined with respect to the center ($y$) axis and \emph{not} the axis of the strips ($x$) as is sometimes typical, so a hit along the center of the wedge has $\phi=0$}), and $\Delta\theta$ (the difference in $\theta$ between the direction of the segment extrapolated back to the interaction point and its direction when entering the detector region; the following is an approximation) may be calculated, as noted in \cite{blcnote}:
+\begin{equation}
+\label{eqn:big3}
+\theta=\arctan\left(\sqrt{m_x^2+m_y^2}\right),\;\phi=\arctan\left(\frac{m_x}{m_y}\right),\;\Delta\theta=\frac{M_X^{l}-M_X^{g}}{1+M_X^{l}M_X^{g}}
+\end{equation}
+
+Looking at Equations \ref{eqn:compslopes} and \ref{eqn:big3}, the dependence of fit quantities on input hit information becomes clear.  $\Delta\theta$ relies exclusively on information from the horizontal (X) planes.  Both $\theta$ and $\phi$ rely on both horizontal and stereo slope information.  However, the sum in quadrature of $m_x$ and $m_y$ in the arctangent for $\theta$ means that $\theta$ is less sensitive to errors in stereo hit information than $\phi$.  Given that $\theta_{st}$ is small, $\cot\theta_{st}$ is large ($\sim38$), so $m_x$ multiplies small differences in $M_U$ and $M_V$, where $m_y$ is simply an average over slopes.  This means that while errors in horizontal hit information will affect all three fit quantities, comparable errors in stereo hits will have a proportionately larger effect on $\theta$ and particularly on $\phi$.  The $\Delta\theta$ cut after step J in Figure \ref{fig:flowchart} has been implemented, requiring all fits to have $\left|\Delta\theta\right|<16$ mrad.  This requirement ensures good quality fits but also slightly reduces algorithm efficiency.
+
+\section{Monte Carlo Samples}
+\label{sec:mc}
+The Monte Carlo (MC) samples used for these studies were generated in Athena release 20.1.0.2 using simulation layout ATLAS-R2-2015-01-01-00 with muon GeoModel override version MuonSpectrometer-R.07.00-NSW and modifications to have two modules per multiplet and xxuvuvxx geometry with a stereo angle of 1.5 degrees.  Muons of a single $p_T$ were generated around the nominal IP with a smearing of 50 mm along the beam line and 0.015 mm orthogonal to it; these muons were pointed toward a single, large sector of the NSW.  Each event consists of one muon fired towards the single NSW wedge separated by effectively infinite time from other events.
+
+\section{Nominal Performance}
+\label{sec:nom}
+In order to evaluate algorithm performance, a number of quantities are evaluated, including the fit quantities $\theta$, $\phi$, and $\Delta\theta$ as well as algorithm efficiency.  Unless otherwise stated, that algorithm is run with a 4X+4UV coincidence threshold, slope-road size of 0.0009, an X tolerance of two slope-roads (i.e. hits in horizontal planes are written into the two slope-roads closest to the hits' value), a UV tolerance of four slope-roads\footnote{The larger tolerance on stereo hits takes into account the particulars of the $m_x$ calculation mentioned in Section \ref{sec:algovr}.}, and a charge threshold requirement on hits of 1 (measured in units of electron charge) for a sample of 30 000 events with a muon $p_T$ of 100 \GeV.  Samples were also generated for $p_T$ values of 10 \GeV, 20 \GeV, 30 \GeV, 50 \GeV, and 200 \GeV, which were used in some of the following studies.
+
+\section{Fit Quantities}
+In order to evaluate the performance of the algorithm's fit quantities $\theta$, $\phi$, and $\Delta\theta$, fit values are compared to truth-level MC values.  The residual of the three fit quantities, $\theta_{fit}-\theta_{tru}$, $\phi_{fit}-\phi_{tru}$, and $\Delta\theta_{fit}-\Delta\theta_{tru}$, are recorded for every fitted track.  The distributions of these quantities, in particular their biases and standard deviations, are then used to evaluate performance.  In most cases, following \cite{blcnote}, the mean and standard deviation of a 3$\sigma$ Gaussian fit are quoted, as they capture the main features of the algorithm and generally behave like the raw mean and rms.  Nevertheless, discussion of the raw quantities will be included when their behavior deviates markedly from that of the 3$\sigma$ fit quantities.
+
+The truth-level quantities used in residual distribution are taken from information in the MC.  These come directly from the MC for $\theta$, $\phi$, and $\Delta\theta$.  These quantities, along with the geometry of the (large) wedge, are then in turn used to calculate truth-level values for any intermediate quantities used in the algorithm.  $m_{x,tru}$, for instance, is given by $\tan\theta_{tru}\sin\phi_{tru}$.
+
+Residual distributions for fit quantities under the previously described default settings of the algorithm are shown in Figure \ref{fig:nomperf}.  Both the $\theta_{fit}-\theta_{tru}$ and $\Delta\theta_{fit}-\Delta\theta_{tru}$ distributions feature a mostly Gaussian shape with more pronounced tails.  The mean bias for these distributions is negligible at under one tenth of a milliradian, and the fitted (raw) rms values are 0.349 (0.614) mrad for $\theta$ and 1.03 (2.55) mrad for $\Delta\theta$.  The case of the $\phi_{fit}-\phi_{tru}$ distribution is less straightforward, with both the shape and bias arising from the xxuvuvxx geometry and relatively large extent of one of the two $\eta$-stations, as explained in Appendix B of \cite{misalnote}.  The fitted (raw) rms for the $\phi$ distribution is 8.67 (16.6) mrad.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \begin{center}
+  \begin{subfigure}{0.3\textwidth}\includegraphics[width=\textwidth]{figures/nominal/mmt_h00009_ctx3_ctuv3_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_NOM_Pt100GeVdigintuple_20151111_res_theta_etaall}\end{subfigure}
+  \begin{subfigure}{0.3\textwidth}\includegraphics[width=\textwidth]{figures/nominal/mmt_h00009_ctx3_ctuv3_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_NOM_Pt100GeVdigintuple_20151111_res_phi_etaall}\end{subfigure}
+  \begin{subfigure}{0.3\textwidth}\includegraphics[width=\textwidth]{figures/nominal/mmt_h00009_ctx3_ctuv3_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_NOM_Pt100GeVdigintuple_20151111_res_dtheta_etaall}\end{subfigure}
+  \caption{\label{fig:nomperf}Nominal residual plots; $\theta$, $\phi$, $\Delta\theta$ for $p_T=100$ \GeV muons}
+  \end{center}
+\end{figure}
+
+Both increasing muon $p_T$ and increasing muon $\eta$ for a fixed $p_T$ imply increasing muon energy.  As muons become more energetic, two effects compete in affecting the quality of fit.  On the one hand, higher energy muons are deflected less by the ATLAS magnetic field, which should tend to improve the quality of the fit, since the fitted $\theta$ (upon which $\Delta\theta$ also relies) and $\phi$ values are calculated under the infinite momentum muon (straight track) assumption.  However, as muon energy increases, the likelihood that the muon will create additional secondaries increases, which creates extra hits that degrade the quality of the fit.  While the geometry of the multiplet is such that there is very good resolution in the direction orthogonal to the horizontal strip direction, the shallow stereo angle of 1.5 degrees means that early hits caused by secondaries can have an outsize impact on $m_x$.  $\Delta\theta$, which does not rely upon stereo information should feel the effect of secondaries the least and benefit from straighter tracks the most and hence benefit from higher muon energies; $\phi$, relying upon stereo information the most, would be most susceptible to secondaries and benefit the least from straighter tracks and hence least likely to benefit from higher muon energy; $\theta$ relies upon both horizontal and vertical slope information, though small errors are less likely to seriously affect the calculation, so the two effects are most likely to be in conflict for this fit quantity.  
+
+The interplay of these effects on the residual standard deviations can be seen in their dependencies on  $\eta$ (Figure \ref{fig:nomresveta}; note that the final point in each of these plots is the rms of the distribution overall $\eta$) and $p_T$ (Figure \ref{fig:nomresvpt}).  For $p_T=100$ \GeV muons, $\Delta\theta$ performance increases with $\eta$ (energy), and $\phi$ performance decreases, as expected;\footnote{The much worse overall performance for $\phi$ is due to the $\eta$ dependent bias and other effects} for $\theta$, the two effects appear to compete, with performance first increasing with $\eta$ until the effects of secondaries begins to dominate.  Integrated over all $\eta$, the effects are less clearly delineated.  Both $\Delta\theta$ and $\theta$ performance increases with increasing $p_T$, suggesting straighter tracks with increasing energy are the dominant effect for these quantities, while $\phi$ performance appears to improve and then deteriorate (the slight improvement at high $p_T$ is due to the addition of the $\Delta\theta$ cut into the algorithm, which filters out very poor quality fits).
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \begin{center}
+    \begin{subfigure}{0.3\textwidth}\caption{$\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}$ v. $\eta$}\includegraphics[width=\textwidth]{./figures/nominal/sigma_res_dtheta_tfit_eta_pt100GeV_dts0_no_corr_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+    \begin{subfigure}{0.3\textwidth}\caption{$\sigma_{\phi_{fit}-\phi_{tru}}$ v. $\eta$}\includegraphics[width=\textwidth]{./figures/nominal/sigma_res_phi_tfit_eta_pt100GeV_dts0_no_corr_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+    \begin{subfigure}{0.3\textwidth}\caption{$\sigma_{\theta_{fit}-\theta_{tru}}$ v. $\eta$}\includegraphics[width=\textwidth]{./figures/nominal/sigma_res_theta_tfit_eta_pt100GeV_dts0_no_corr_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+    \caption{\label{fig:nomresveta} The rms distributions of $\Delta\theta$, $\phi$, and $\theta$ as a function of $\eta$ for $p_T=100$ \GeV; the final point in each plot is the rms obtained from a fit obtained from a fit to the fill distribution including all $\eta$ bins.}
+  \end{center}
+\end{figure}
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \begin{center}
+  \begin{subfigure}{0.3\textwidth}\caption{$\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}$ v. $p_T$}\includegraphics[width=\textwidth]{./figures/nominal/sigma_res_dtheta_tfit_pt_dts0_no_corr_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+  \begin{subfigure}{0.3\textwidth}\caption{$\sigma_{\phi_{fit}-\phi_{tru}}$ v. $p_T$}\includegraphics[width=\textwidth]{./figures/nominal/sigma_res_phi_tfit_pt_dts0_no_corr_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+  \begin{subfigure}{0.3\textwidth}\caption{$\sigma_{\theta_{fit}-\theta_{tru}}$ v. $p_T$}\includegraphics[width=\textwidth]{./figures/nominal/sigma_res_theta_tfit_pt_dts0_no_corr_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+  \caption{\label{fig:nomresvpt} The rms distributions of $\Delta\theta$, $\phi$, and $\theta$ as a function of $p_T$.}
+  \end{center}
+\end{figure}
+
+The rms of the three benchmark quantities as a function of algorithm set (i.e. slope-road) coincidence threshold are shown in Figure \ref{fig:nomresvCTfit} using Gaussian fits and in Figure \ref{fig:nomresvCTraw} for the raw quantities.  The fitted $\sigma$'s for $\theta$ and $\phi$ are fairly stable across coincidence threshold.  $\Delta\theta$, on the other hand, performs better particularly for the most stringent coincidence threshold; this is a result of the fact that additional information for more hits greatly improves the quality of the local slope fit calculation.  The raw rms is a different story.  Na\"ively, one would expect the performance to get better with more stringent coincidence threshold, but this is not the case in Figure \ref{fig:nomresvCTraw}.  As the coincidence threshold gets more stringent, fewer and fewer tracks are allowed to be fit.  When moving from 2X hits to 3X hits, the tracks that get vetoed populate the tails of the distribution outside the 3$\sigma$ fit range but are not in the very extremes of the distribution.  While tracks with 2X hits are of lower quality than those with 3 and 4 X hits, tracks with the very worst fit values pass even the most stringent coincidence threshold requirements (e.g. as a result of many hits arising from a shower of secondaries).  This is best illustrated when comparing the 2X+1UV $\Delta\theta$ residual distribution with the 4X+4UV distribution in Figure \ref{fig:nomperf2x1uv}.  As both the overlayed normalized curves and ratio distribution show, while the most central regions are fairly similar, the 2X+1UV distribution is much more prominent in the tails but not the extreme tails, which means that, though the overall 2X+1UV raw rms goes down, the overall quality of algorithm fits is worse.
+
+%  As might be expected, a greater number of hits in the coincidence threshold, i.e. requiring more information for a fit, leads to improved performance for all three fit quantities.  The fit rms values do decrease with increasingly stringent coincidence thresholds for all, but these values are relatively stable with varying coincidence threshold.  The effect of coincidence threshold is clearer when the raw quantities are examined, at least in the $\theta$ and $\phi$ cases, where the more stringent coincidence threshold has the effect of screening tracks for which the fit value is very far from the truth-level value.  The overall effect of coi as can be seen, for example, in Figure \ref{fig:nomperf2x1uv} comparing the $\Delta\theta$ residual distributions for coincidence threshold settings of 2X+1UV and 4X+4UV.  The $\Delta\theta$ case is less obvious since, while the fitted standard deviation values do decrease with increasingingly stringent coincidence threshold---and have a more pronounced dependence on coincidence threshold than either the fitted $\theta$ or $\phi$ rms values---the raw rms increases at higher coincidence threshold.  The reason for this is a more stringent coincidence threshold has the effect of rejecting tracks that get fitted with bad $\Delta\theta$ ($\left|\Delta\theta_{fit}-\Delta\theta_{tru}\right|\sim 2$ mrad) but not very bad ($\left|\Delta\theta_{fit}-\Delta\theta_{tru}\right|> 5$ mrad) values\footnote{It seems that regardless of what requirements are placed on the algorithm, there are always some collections of 4X+4UV hits that do get fit but with very poor values.}; that the very bad $\Delta\theta$ tracks pass are not filtered out by the coincidence threshold is not surprising given the much (more than 40 times) smaller lever arm available for the $\Delta\theta$ calculation.  Hence, more stringent coincidence thresholds have the effect of increasing the standard deviation of the 3$\sigma$ Gaussian fit of $\Delta\theta_{fit}-\Delta\theta_{tru}$ while lowering the overall distribution rms.
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \begin{center}
+  \begin{subfigure}{0.3\textwidth}\caption{$\sigma_{\theta_{fit}-\theta_{tru}}$ v. CT}\includegraphics[width=\textwidth]{./figures/nominal/sigma_res_theta_tfit_ct_pt100GeV_dts0_no_corr_etaall_qt1_bg0_setxxuvuvxx_ql1_qdlm1_abs_hwrapper_20151111}\end{subfigure}
+  \begin{subfigure}{0.3\textwidth}\caption{$\sigma_{\phi_{fit}-\phi_{tru}}$ v. CT}\includegraphics[width=\textwidth]{./figures/nominal/sigma_res_phi_tfit_ct_pt100GeV_dts0_no_corr_etaall_qt1_bg0_setxxuvuvxx_ql1_qdlm1_abs_hwrapper_20151111}\end{subfigure}
+  \begin{subfigure}{0.3\textwidth}\caption{$\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}$ v. CT}\includegraphics[width=\textwidth]{./figures/nominal/sigma_res_dtheta_tfit_ct_pt100GeV_dts0_no_corr_etaall_qt1_bg0_setxxuvuvxx_ql1_qdlm1_abs_hwrapper_20151111}\end{subfigure}
+  \caption{\label{fig:nomresvCTfit} The fitted rms of residual distributions for $\theta$, $\phi$, and $\Delta\theta$ as a function of coincidence threshold for $p_T=100$ \GeV.}
+  \end{center}
+\end{figure}
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \begin{center}
+  \begin{subfigure}{0.3\textwidth}\caption{$\sigma_{\theta_{fit}-\theta_{tru}}$ v. CT}\includegraphics[width=\textwidth]{./figures/nominal/sigma_res_theta_raw_ct_pt100GeV_dts0_no_corr_etaall_qt1_bg0_setxxuvuvxx_ql1_qdlm1_abs_hwrapper_20151111}\end{subfigure}
+  \begin{subfigure}{0.3\textwidth}\caption{$\sigma_{\phi_{fit}-\phi_{tru}}$ v. CT}\includegraphics[width=\textwidth]{./figures/nominal/sigma_res_phi_raw_ct_pt100GeV_dts0_no_corr_etaall_qt1_bg0_setxxuvuvxx_ql1_qdlm1_abs_hwrapper_20151111}\end{subfigure}
+  \begin{subfigure}{0.3\textwidth}\caption{$\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}$ v. CT}\includegraphics[width=\textwidth]{./figures/nominal/sigma_res_dtheta_raw_ct_pt100GeV_dts0_no_corr_etaall_qt1_bg0_setxxuvuvxx_ql1_qdlm1_abs_hwrapper_20151111}\end{subfigure}
+  \caption{\label{fig:nomresvCTraw} The raw rms of residual distributions for $\theta$, $\phi$, and $\Delta\theta$ as a function of coincidence threshold for $p_T=100$ \GeV.}
+  \end{center}
+\end{figure}
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \begin{center}
+    %\begin{subfigure}{0.32\textwidth}\caption{$\theta$}\includegraphics[width=\textwidth]{figures/nominal/res_theta_etaallct2x_1uv_div_res_theta_etaallct4x_4uv20151111}\end{subfigure}
+  %\begin{subfigure}{0.32\textwidth}\caption{$\phi$}\includegraphics[width=\textwidth]{figures/nominal/res_phi_etaallct2x_1uv_div_res_phi_etaallct4x_4uv20151111}\end{subfigure}
+  \includegraphics[width=0.6\textwidth]{figures/nominal/res_dtheta_etaallct2x_1uv_div_res_dtheta_etaallct4x_4uv20151111}
+  \caption{\label{fig:nomperf2x1uv}Nominal $\Delta\theta$ residual distribution for $p_T=100$ \GeV muons with coincidence thresholds 2X+1UV and 4X+4UV normalized to the same area and plotted together (top) as well as the ratio of the 2X+1UV distribution and the 4X+4UV per bin.}
+  \end{center}
+\end{figure}
+\clearpage
+\section{Efficiencies}
+Two general efficiencies have been formulated to study the performance of the MMTP algorithm.  The first, denoted $\varepsilon_{alg}$, is the fraction of tracks that pass some (slope-road) coincidence threshold configuration that are successfully fit.  An event that passes a slope-road coincidence but does not fit fails because some of the hits included are of sufficiently poor quality to throw off the fit.  This efficiency answers the question of how often the algorithm performs fits when technically possible, giving a measure of overall algorithm performance for a given configuration.  For example, $\varepsilon=95$\% for 3X+2UV means that 95\% of tracks that produce at least 3X hits and 2UV hits in at least one slope-road will be successfully fitted 95\% of the time.  The performance of this efficiency as a function of coincidence threshold, $\eta$ (with the final point once again being the efficiency integrated over all $\eta$), and $p_T$ is shown in Figure \ref{fig:nomeffalg}.  $\varepsilon_{alg}$ is fairly constant in $\eta$ and decreases with increased $p_T$, which can be attributed to the increased likelihood of secondaries introducing lower quality hits that cause the fit to fail.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \begin{center}
+    \begin{subfigure}{0.3\textwidth}\caption{$\varepsilon_{alg}$ v. CT}\includegraphics[width=\textwidth]{./figures/nominal/eff_std_ct_pt100GeV_dts0_no_corr_etaall_qt1_bg0_setxxuvuvxx_ql1_qdlm1_abs_hwrapper_20151111}\end{subfigure}
+    \begin{subfigure}{0.3\textwidth}\caption{$\varepsilon_{alg}$ v. $\eta$}\includegraphics[width=\textwidth]{./figures/nominal/eff_std_eta_pt100GeV_dts0_no_corr_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+    \begin{subfigure}{0.3\textwidth}\caption{$\varepsilon_{alg}$ v. $p_T$}\includegraphics[width=\textwidth]{./figures/nominal/eff_std_pt_dts0_no_corr_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+  \caption{\label{fig:nomeffalg} $\varepsilon_{alg}$ and as a function of coincidence threshold, $\eta$ (final point is $\varepsilon_{alg}$ integrated over all $\eta$), and $p_T$.}
+  \end{center}
+\end{figure}
+
+The second efficiency type, denoted $\varepsilon_{fit}$, is the fraction of tracks that enter the wedge whose fits (if any) satisfy a given coincidence threshold.  This efficiency can be used to help establish an optimal coincidence threshold setting in the algorithm, balancing the improved overall fit quality of higher thresholds with the greater number of fits for lower thresholds.  Hence, an $\varepsilon_{fit}$ of 95\% at 3X+2UV means that 95\% of tracks entering the wedge are fit and that these fits include at least 3X and 2UV hits.  $\varepsilon_{fit}$ as a function of coincidence threshold is shown in Figure \ref{fig:nomefffit} (a), which shows that the majority of fits having at most 3X+3UV hits.  That there is a marked drop to 4X+4UV is not surprising, as there is a substantial population outside the 4X+4UV bin in Figure \ref{fig:ctrecodist}.  The behavior of $\varepsilon_{fit}$ with $\eta$ in Figure \ref{fig:nomefffit} (b) (with the final point once again being the efficiency integrated over all $\eta$) is much more varied, with geometric effects of detector acceptance coming into play.  The performance of $\varepsilon_{fit}$ as a function of $p_T$, shown in Figure \ref{fig:nomefffit} (c), is similar to that of $\varepsilon_{alg}$ coincidence threshold, again consistent with the effects of secondaries at higher energies.  
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \begin{center}
+    \begin{subfigure}{0.3\textwidth}\caption{$\varepsilon_{fit}$ v. CT}\includegraphics[width=\textwidth]{./figures/nominal/eff_fit_ct_pt100GeV_dts0_no_corr_etaall_qt1_bg0_setxxuvuvxx_ql1_qdlm1_abs_hwrapper_20151111}\end{subfigure}
+    \begin{subfigure}{0.3\textwidth}\caption{$\varepsilon_{fit}$ v. $\eta$}\includegraphics[width=\textwidth]{./figures/nominal/eff_fit_eta_pt100GeV_dts0_no_corr_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+    \begin{subfigure}{0.3\textwidth}\caption{$\varepsilon_{fit}$ v. $p_T$}\includegraphics[width=\textwidth]{./figures/nominal/eff_fit_pt_dts0_no_corr_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+  \caption{\label{fig:nomefffit} $\varepsilon_{fit}$ and as a function of coincidence threshold, $\eta$ (final point is $\varepsilon_{fit}$ integrated over all $\eta$), and $p_T$.}
+  \end{center}
+\end{figure}
+
+In order to better understand efficiency behavior with coincidence threshold, the distribution of highest slope-road coincidence thresholds in events is shown in Figure \ref{fig:ctrecodist}, with the 0,0 bin containing events that did not meet requirements for the minimum 2X+1UV coincidence threshold for a fit to occur.  That the efficiency is lower at higher coincidence threshold suggests that most of the fits that fail have high hit multiplicity (i.e. a similar number fails in each of the coincidence threshold bins in Figure \ref{fig:nomeffalg} (a)), which is consistent with the interpretation that the primary source of fit failures is bad hits originating from secondaries created by higher energy muons.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=0.5\textwidth]{../figures/nominal/mmt_h00009_ctx2_ctuv1_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_NOM_Pt100GeVdigintuple_20151111_nev_rec_xuv_xy_etaall}
+  \caption{\label{fig:ctrecodist} The distribution of highest slope-road coinicidence thresholds in events; the 0,0 bin is the number of events passing selection requirements that fail to form the minimum 2X+1UV coincidence threshold necessary for a fit.}
+\end{figure}
+
+%  Overall, however, both $\varepsilon_{alg}$ and $\varepsilon_{tot}$ behave similarly.  The secondary scattering effects that affect higher energy muons account for the drop in efficiency at higher $p_T$ and $\eta$ values.  The initial increase of efficiency with number of hits in coincidence threshold is due to the fact that tracks with more hits are of generally higher quality and more likely to fit (moving to higher coincidence thresholds cuts out lower quality tracks), while the dip at the highest coincidence threshold is due to the fact that the tolerance in slope-roads on horizontal hits is fairly stringent (the presence of hits in four X planes does not guarantee that all four will also register in the same slope-road, a prerequisite for a fit to take place).
+
+\clearpage
+\section{Incoherent Background}
+The default slope-road size and tolerances associated with horizontal and stereo hits used in the above studies were configured to optimize algorithm performance, similar to studies in \cite{blcnote}.  In order to evaluate algorithm performance under conditions with more limited resources, as might be expected at run-time, additional studies were conducted with the slope-road size and hit tolerances set equivalent to the sensitive area of a single VMM chip\footnote{One VMM is assumed to cover 64 MM strips at 0.445 mm each.} both with and without generation of incoherent background.  
+
+Incoherent background is generated based on the assumption that the intensity only varies as a function of the distance from a point to the beamline, $r$.  The number of hits per unit area per unit time as a function of $r$ is given in Equation \ref{eqn:intensity} and taken from \cite{blcnote}.
+\begin{equation}
+\label{eqn:intensity}
+I=I_0\left(r/r_0\right)^{-2.125}
+\end{equation}
+where $r_0=1000$ mm and $I_0=0.141$ kHz/mm$^2$
+
+Background generation happens per event as follows:
+\begin{enumerate}
+\item Determine the total number of hits to be generated in this event according to a Poisson distribution
+\item Assign a time to hits uniformly in $\left[t_{start}-t_{VMM},t_{end}\right]$ where start and end are for the event clock and $t_{VMM}$ is the VMM chip deadtime (100 ns)
+\item Assign a plane to hits uniformly
+\item Assign a $\phi$ value to hits uniformly
+\item Assign an $r$ to hits according to Equation \ref{eqn:intensity}
+\item Calculate hit information according to these values.
+\end{enumerate}
+
+The expectation value for the Poisson distribution is determined by integrating Equation \ref{eqn:intensity} over the surface area of the wedge to get the total hit rate for the wedge, $\Gamma$, and then multiplying this by the length of the time window over which hits may be generated.  With $H=982$ mm, $h_1=3665$ mm, and $\theta_w=33\pi/180$, we find\footnote{Using Mathematica and the extra factor of $r$ from the volume element}:
+\begin{equation}
+\Gamma=2I_0r_0^{2.125}\int_0^{\theta_w/2}d\phi\int_{H\sec\phi}^{\left(H+h_1\right)\sec\phi}r\,dr\,r^{-2.125}=98.6657\,\text{MHz}
+\end{equation}
+In this case, we have taken the nominal values of the MM sector geometry for $H$ (wedge base), $h_1$ (the wedge height), and $\theta_w$ (the wedge opening angle).
+
+
+  The effects of incoherent background and larger slope road size are summarized in Figure \ref{fig:effbg} for efficiencies and in Figure \ref{fig:statbg} and Table \ref{tab:resbgfat} for residual of fit quantities.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \begin{center}
+    \begin{subfigure}{0.450\textwidth}\caption{$\varepsilon_{alg}$ v. CT}\includegraphics[width=\textwidth]{./figures/bg_inco/eff_std_ct_stk-bgc_pt100GeV_dts0_no_corr_etaall_qt1_setxxuvuvxx_ql1_qdlm1_abs_hwrapper_20151111}\end{subfigure}
+    \begin{subfigure}{0.450\textwidth}\caption{$\varepsilon_{fit}$ v. CT}\includegraphics[width=\textwidth]{./figures/bg_inco/eff_fit_ct_stk-bgc_pt100GeV_dts0_no_corr_etaall_qt1_setxxuvuvxx_ql1_qdlm1_abs_hwrapper_20151111}\end{subfigure}
+    \caption{\label{fig:effbg} The algorithm and total efficiencies as a function of coincidence threshold for different background settings and slope-road sizes (standard and wide (one slope road as 1 VMM chip)).}
+  \end{center}
+\end{figure}
+
+Figure \ref{fig:effbg} show the effect of both wider slope-roads and the introduction of background on efficiencies.  The introduction of wider slope-roads increases the chance that an early errant hit (either from secondaries/ionization or background) will be introduced into the fit, and the presence of incoherent background greatly increases the number of such errant hits.  Both wider slope-roads and background drive down the number of fits (numerator) in both efficiencies, and background can artificially inflate the denominator of $\varepsilon_{alg}$, a reco-level, slope-road coincidence threshold.  The shape of the $\varepsilon_{fit}$ versus coincidence threshold distributions remains fairly constant with each complicating factor (standard, wider slope-roads, background, both wider slope-roads and background), suggesting many muons will simply not be fit with any number of hits; $\varepsilon_{fit}$ does not take into account the coincidence threshold of tracks that are not fit, so the effect appears uniform across coincidence threshold.  The effects seen for $\varepsilon_{alg}$, which are not uniform across coincidence threshold can be better understood when examining the distribution of event highest coincidence thresholds, shown for wide slope-roads both without and with background in Figure \ref{fig:ctrecobgwide}.  Take, for example the 2X+1UV case.  The 2X+1UV bin in particular has a marked increase when background is introduced.  No new, good tracks are introduced between the no backgrond and backround cases, so the increase is entirely due to bad, background hits; hence, these events do not (and should not) fit, causing the particularly pronounced drop in this bin between these two cases in Figure \ref{fig:effbg}.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \begin{subfigure}{0.450\textwidth}\caption{without BG, wide}\includegraphics[width=\textwidth]{../figures/bg_inco/mmt_h0003756_ctx2_ctuv1_uverr0003756_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_NOM_Pt100GeVdigintuple_20151111_nev_rec_xuv_xy_etaall}\end{subfigure}
+    \begin{subfigure}{0.450\textwidth}\caption{with BG, wide}\includegraphics[width=\textwidth]{../figures/bg_inco/mmt_h0003756_ctx2_ctuv1_uverr0003756_setxxuvuvxx_ql1_qdlm1_qbg1_qt1_NOM_NOM_Pt100GeVdigintuple_20151111_nev_rec_xuv_xy_etaall}\end{subfigure}
+  \caption{\label{fig:ctrecobgwide} The distribution of highest slope-road coinicidence thresholds in events for the algorithm with wide slope-roads (width of 1 VMM) both without (a) and with (b) incoherent background; the 0,0 bin is the number of events passing selection requirements that fail to form the minimum 2X+1UV coincidence threshold necessary for a fit.}
+\end{figure}
+
+
+The effect of increasing slope-road size and incoherent background on fit quantity residual rms values as a function of $p_T$ is shown in Figure \ref{fig:statbg}.  As the figure shows, the fitted rms values are fairly robust against increased slope-road size and background.  This does not hold for all of the raw rms values, however, as shown in Table \ref{tab:resbgfat}.  Just as with the efficiencies, the introduction of background has a larger effect than that of increased slope-road size, which does not seem to have an overly large impact on any of the fit quantities on its own.  While $\Delta\theta$ remains robust to both increased slope-road size and background (likely due to the $\Delta\theta$ cut of 16 mrad built into the algorithm),  $\theta$ shows some degradation in performance, and the $\phi$ residual raw rms shows a very large increase upon the introduction of background.  Nevertheless, the contrasting behavior of the fitted and raw rms values suggests that tracks that drive up the raw rms values already had very poor fit quality even before the introduction of background, so the impact on fit quantities should remain fairly limited.
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \begin{center}
+    \begin{subfigure}{0.320\textwidth}\caption{$\theta$}\includegraphics[width=\textwidth]{./figures/bg_inco/sigma_res_theta_tfit_pt_stk-bgc_dts0_no_corr_etaall_qt1_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+    \begin{subfigure}{0.320\textwidth}\caption{$\phi$}\includegraphics[width=\textwidth]{./figures/bg_inco/sigma_res_phi_tfit_pt_stk-bgc_dts0_no_corr_etaall_qt1_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+    \begin{subfigure}{0.320\textwidth}\caption{$\Delta\theta$}\includegraphics[width=\textwidth]{./figures/bg_inco/sigma_res_dtheta_tfit_pt_stk-bgc_dts0_no_corr_etaall_qt1_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+  \caption{\label{fig:statbg} The three fit quantity residual rms values as a function of $p_T$ for different background settings and slope-road sizes (standard and wide (one slope road as 1 VMM chip)).}
+  \end{center}
+\end{figure}
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+               & No BG, std    & No BG, wide   & BG, std       & BG, wide\\
+\hline
+$\theta$       & 0.364 (0.604) & 0.363 (0.542) & 0.379 (0.886) & 0.380 (1.07)  \\
+$\phi$         & 8.12 (15.0)   & 7.93 (13.2)   & 8.20 (24.6)   & 7.63 (24.8)\\
+$\Delta\theta$ & 1.47 (2.69)   & 1.40 (2.66)   & 1.50 (2.89)   & 1.43 (2.90)\\
+\hline
+\end{tabular}
+\caption{\label{tab:resbgfat} The fitted (absolute) $\sigma$ of fit quantity residuals in mrad under different algorithm settings.}
+\end{center}
+\end{table}
+
+As Table \ref{tab:resbgfat} shows, rms values appear to be robust to an increase in slope-road size.  Nevertheless, though the fitted $\sigma$ residual values are also fairly robust to the introduction of background, the raw rms values are not.  While the raw $\Delta\theta$ rms stays stable, both $\theta$ and $\phi$ suffer noticeable degradation, which suggests that the introduction of background has a detrimental effect on horizontal slope residual (i.e. on stereo strips in particular).  This level of degradation is likely acceptable for $\theta$, though further steps may need to be taken to address $\phi$.  %The combination of stable fitted rms values and less stable raw rms values suggests that most of the degradation occurs on fits that are already very bad.
+
+\subsection{BCID}
+A fitted track's BCID is determined by the most common BCID associated with its hits.  Concerns were raised that this might cause incorrect BCID association for fitted tracks.  In order to address this, the rate of successful BCID association for fitted tracks was recorded.  Figure \ref{fig:bcideff} shows the dependence of this success rate as a function of $p_T$ and coincidence threshold in the different background and resource conditions used in the previous section.  The successful BCID identification rate is always over 99.5\%, demonstrating that this issue is not a concern with the state-of-the-art detector simulation.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  %\begin{subfigure}{0.225\textwidth}\caption{Performance at $p_T=100$ \GeV}\includegraphics[width=\textwidth]{./figures/nominal/mmt_h00009_ctx4_ctuv4_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_NOM_Pt100GeVdigintuple_20151013_bcid_ct_v_eff_etaall}\end{subfigure}
+  \begin{subfigure}{0.45\textwidth}\caption{$p_T$ Dependence}\includegraphics[width=\textwidth]{./figures/bg_inco/eff_bcid_pass_pt_stk-bgc_dts0_no_corr_etaall_qt1_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+%  \begin{subfigure}{0.32\textwidth}\caption{$\eta$ Dependence}\includegraphics[width=\textwidth]{./figures/nominal/eff_bcid_pass_eta_stk-bgc_pt100GeV_dts0_no_corr_qt1_ctx4_ctuv4_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+  \begin{subfigure}{0.45\textwidth}\caption{CT Dependence}\includegraphics[width=\textwidth]{./figures/bg_inco/eff_bcid_pass_ct_stk-bgc_pt100GeV_dts0_no_corr_etaall_qt1_setxxuvuvxx_ql1_qdlm1_abs_hwrapper_20151111}\end{subfigure}
+  \caption{\label{fig:bcideff} The rate of good BCID association based majority hit BCID as a function of $p_T$ and coincidence threshold.}
+\end{figure}
+
+\section{Charge Threshold}
+\label{subsec:qt}
+The MMTP uses the first hits registered passing a charge threshold requirement given in units of electron charge.  In principle, it would be beneficial to be able to use any hits that are registered regardless of deposited charge, but in the high rate environment envisioned for the NSW, this requirement might need to be raised.  Nominal algorithm settings have this charge threshold requirement set to 1, and studies were conducted on algorithm performance for charge threshold values of 0, 1, and 2.  Efficiencies as a function of coincidence threshold for different charge thresholds are shown in Figure \ref{fig:effqt}.  Increasing the charge threshold lowers both efficiencies, particularly at high coincidence threshold, which suggests that energetic muons with secondaries create both very many hits and hits with higher charge.  While the shapes of the fit quantity distributions as a function of $p_T$ in Figure \ref{fig:resqt} are fairly constant across charge threshold, performance is not.  $\theta$ and $\Delta\theta$ show some improvement with higher charge threshold, particularly at low $p_T$, suggesting that resolution improves in the vertical direction, but $\phi$ shows degradation at higher charge threshold, which is a symptom of more highly charged particles experiencing greater bending in the ATLAS magnetic field in the $\phi$ direction.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \begin{center}
+    \begin{subfigure}{0.45\textwidth}\caption{$\varepsilon_{alg}$}\includegraphics[width=\textwidth]{./figures/charge/eff_alg_ct_stk-qt_pt100GeV_dts0_no_corr_etaall_bg0_setxxuvuvxx_ql1_qdlm1_abs_hwrapper_20151111}\end{subfigure}
+    \begin{subfigure}{0.45\textwidth}\caption{$\varepsilon_{fit}$}\includegraphics[width=\textwidth]{./figures/charge/eff_fit_ct_stk-qt_pt100GeV_dts0_no_corr_etaall_bg0_setxxuvuvxx_ql1_qdlm1_abs_hwrapper_20151111}\end{subfigure}
+  \caption{\label{fig:effqt} The efficiencies as a function of coincidence threshold for charge thresholds of 0, 1, and 2.}
+  \end{center}
+\end{figure}
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \begin{center}
+    \begin{subfigure}{0.32\textwidth}\caption{$\sigma_{\theta_{fit}-\theta_{tru}}$}\includegraphics[width=\textwidth]{./figures/charge/sigma_res_theta_tfit_pt_stk-qt_dts0_no_corr_etaall_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+    \begin{subfigure}{0.32\textwidth}\caption{$\sigma_{\phi_{fit}-\phi_{tru}}$}\includegraphics[width=\textwidth]{./figures/charge/sigma_res_phi_tfit_pt_stk-qt_dts0_no_corr_etaall_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+    \begin{subfigure}{0.32\textwidth}\caption{$\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}$}\includegraphics[width=\textwidth]{./figures/charge/sigma_res_dtheta_tfit_pt_stk-qt_dts0_no_corr_etaall_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+  \caption{\label{fig:resqt} The fit quantity residual rms values as a function of $p_T$ for charge thresholds of 0, 1, and 2.}
+  \end{center}
+\end{figure}
+\clearpage
+\section{Misalignments and Corrections}
+The performance of the trigger algorithm under misalignment has been studied for each of the six alignment quantities (three translations and three rotations all along the principal axes) described in \cite{Chevalier:684070} and \cite{Chevalier:684070}, whose convention we will follow here.  For the simulated wedge studied here the local coordinates described in \cite{Chevalier:684070} are taken to be centered at the center of the base of the wedge\footnote{Not, as is sometimes the case, the centroid position for simplicity's sake, as the agreed upon geometry of the detector changed several times while studies were in progress; any  transformation in a centroid-origin coordinate system can of course be formed by a combination of the six transformations examined.}, the local $t$ axis corresponds to the axis of the beam line, the local $z$ axis corresponds to the direction orthogonal to both the beam line and the horizontal strips, and the local $s$ axis completes the right-handed coordinate system.  The rotation angles $\alpha$, $\beta$, and $\gamma$ correspond to rotations around the local $t$, $z$, and $s$ axes, respectively.  Note that the local $s$, $z$, and $-t$, axes correspond to the usual global $x$, $y$, and $z$ axes.  Misalignments were studied in twenty evenly spaced increments from nominal positions to misalignments of 1.5 mrad for the rotations (-1.5 mrad to +1.5 mrad for the $\gamma$ case), and of 5 mm (a roughly corresponding linear shift) for the translations.  In all cases, the front quadruplet is misaligned while the rear quadruplet remains in its nominal position.  While only the front quadruplet of a single wedge is misaligned, the framework for misalignment presented below could be used to study generic local and global misalignments.  The six misalignments are schematically represented in Figure \ref{fig:misalscheme}.  
+\label{sec:mal}
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \begin{subfigure}{0.32\textwidth}\includegraphics[width=\textwidth,keepaspectratio,trim=5cm 2cm 5cm 2cm,clip]{./figures/dts}\end{subfigure}
+  \begin{subfigure}{0.32\textwidth}\includegraphics[width=\textwidth,keepaspectratio,trim=5cm 2cm 5cm 2cm,clip]{./figures/dtz}\end{subfigure}
+  \begin{subfigure}{0.32\textwidth}\includegraphics[width=\textwidth,keepaspectratio,trim=5cm 2cm 5cm 2cm,clip]{./figures/dtt}\end{subfigure}
+  \begin{subfigure}{0.32\textwidth}\includegraphics[width=\textwidth,keepaspectratio,trim=5cm 2cm 5cm 2cm,clip]{./figures/drs}\end{subfigure}
+  \begin{subfigure}{0.32\textwidth}\includegraphics[width=\textwidth,keepaspectratio,trim=5cm 2cm 5cm 2cm,clip]{./figures/drz}\end{subfigure}
+  \begin{subfigure}{0.32\textwidth}\includegraphics[width=\textwidth,keepaspectratio,trim=5cm 2cm 5cm 2cm,clip]{./figures/drt}\end{subfigure}
+  \caption{\label{fig:misalscheme}The different misalignment cases as defined in the AMDB manual.}
+\end{figure}
+
+Chamber misalignments manifest themselves as altered strips in algorithm input.  In order to simulate the effects of misalignment, the change in the local $y$ coordinate---the distance from the bottom wedge center in the direction perpendicular to both the beamline and the strip direction---is calculated for a track coming straight from the interaction point defined by the truth-level $\theta$ and $\phi$ angles for generic misalignment.  This displacement in $y$ is then added to input hit information and the algorithm is then run normally.
+
+To understand how this is displacement is calculated, some notation first needs to be described.
+
+\begin{table}[htbp]
+\caption{A summary of notation used in this section: note that non-AMDB notation is used in this section.
+\label{tab:misnotation}}
+\begin{center}
+\begin{tabular}{|l|p{13 cm}|}
+\hline
+Symbol & Definition\\
+\hline
+$s_x,s_y,s_z,\vec{s}$ & Position of the muon hit in ATLAS global coordinates; the infinite momentum muon track\\
+\hline
+$\hat{n}$ & Vector normal to the plane; taken to be $\hat{z}$ (the beamline) in the nominal case\\
+\hline
+$\mathscr{O}_{IP}^{g,l}$ & Position of the interaction point in ATLAS global ($g$) or wedge local ($l$) coordinates\\
+\hline
+$\mathscr{O}_{base}^{g,l}$ & Position of the plane base in ATLAS global ($g$) or wedge local ($l$) coordinates; $\left(0,y_{base},z_{pl}\right)$ ($\left(0,0,0\right)$) for the nominal case in global (local) coordinates\\
+\hline
+$\vec{\zeta}$ & $\vec{s}-\vec{\mathscr{O}}_{base}$\\
+\hline
+primed quant. & quantities after misalignment\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Generically speaking, a hit is the intersection of a line (the muon track) with a plane (the individual plane in the multiplet).  We assume the muon moves in a straight line defined by the origin and the truth-level $\theta_{pos}$ and $\phi_{pos}$ (i.e. the infinite momentum limit) and that the MM plane is rigid and defined by a point, which we take to be the center of the bottom edge of the plane, and a normal vector, which we take to the $z$ axis in the nominal case.
+
+The coordinate axes $x,y,z$ axes used here correspond to the usual AMDB $s,z,-t$ axes.  Since the direction does not really matter when studying misalignment or corrections thereof, the major difference is the choice of origin.
+
+The muon track we denote\footnote{Recall $\phi_{pos}$ is defined with respect to the $y$ axis instead of the $x$ axis, as might otherwise be typical.} $\vec{s}$, the bottom point of the plane $\vec{\mathscr{O}}_{base}$, and the normal vector $\hat{n}$.  The muon track will always be given as (the wedge gets moved, not the muon):
+\begin{eqnarray}
+\vec{s}&=&\mathscr{O}_{IP}+k\hat{s}\\
+\hat{s}&=&\sin\theta_{pos}\sin\phi_{pos}\hat{x}+\sin\theta_{pos}\cos\phi_{pos}\hat{y}+\cos\theta_{pos}\hat{z}\\
+\vec{s}^g&=&k\hat{s}=\frac{z_{pl}}{\cos\theta_{pos}}\hat{s}=z_{pl}\left(\tan\theta\sin\phi\hat{x}+\tan\theta\cos\phi\hat{y}+1\right)
+\end{eqnarray}
+where $k\in\mathbb{R}$, along with the unit vector $\hat{s}$, defines the point where the track intersects the wedge.
+
+%For the nominal case, $s_{z,int}^g=z_{pl}$.  %However, when working with rotations in the local coordinates (as misalignments are defined), it is much easier to work in the local coordinates, where the general transform is $\vec{v}^g\to\vec{v}^g-\mathscr{O}^g_{base}=\vec{v}^l$.
+%\begin{eqnarray}
+%&\to&\vec{s}_{int}^g=\frac{z_{pl}}{\cos\theta_{pos}}\hat{s}=z_{pl}\left(\tan\theta\sin\phi\hat{x}+\tan\theta\cos\phi\hat{y}+1\right)%\\
+%&\to&\vec{s}_{int}^g=\frac{z_{pl}}{\cos\theta_{pos}}\hat{s}=z_{pl}\tan\theta\sin\phi\hat{x}+\left(z_{pl}\tan\theta\cos\phi-y_{base}\right)\hat{y}=s_x\hat{x}+\left(s_y-y_{base}\right)\hat{y}
+%\end{eqnarray}
+
+Rotations are done before translations, according to the order prescribed in the AMDB guide for chamber alignment, so the axes the principal axes of the plane are rotated according to the following matrix (where $s$, $c$, and $t$ are the obvious trigonometric substitutions)
+\begin{equation}
+\begin{split}
+\left(\begin{array}{ccc} 1&0&0\\ 0& c\gamma& -s\gamma\\ 0&s\gamma&c\gamma\end{array}\right)&
+\left(\begin{array}{ccc} c\beta&0& s\beta\\0&1&0 \\ -s\beta&0&c\beta\end{array}\right)
+\left(\begin{array}{ccc} c\alpha&-s\alpha&0\\s\alpha&c\alpha&0 \\ 0&0&1\end{array}\right)=
+\left(\begin{array}{ccc} 1&0&0\\ 0& c\gamma& -s\gamma\\ 0&s\gamma&c\gamma\end{array}\right)
+\left(\begin{array}{ccc} c\alpha c\beta&-s\alpha c\beta&s\beta\\ s\alpha& c\alpha& 0\\ -c\alpha s\beta& s\alpha s\beta& c\beta \end{array}\right)\\
+&=\boxed{\left(\begin{array}{ccc} c\alpha c\beta& -s\alpha c\beta& s\beta\\s\alpha c\gamma+c\alpha s\beta s\gamma& c\alpha c\gamma-s\alpha s\beta s\gamma& -c\beta s\gamma\\s\alpha s\gamma-c\alpha s\beta c\gamma& c\alpha s\gamma+s\alpha s\beta c\gamma& c\beta c\gamma\end{array}\right)}=A
+\end{split}
+\end{equation}
+
+The thing that matters is what the new strip hit is---i.e. what the new $y$ value is since this, along with a plane number, is all that is fed into the algorithm.  To find this, we must solve for the new point of intersection with the rotated plane and then apply the effects of translations.  The path connecting the base of the wedge with the intersection of the muon track will always be orthogonal to the normal vector of the plane.  Our quantities after misalignment, denoted by primed quantities, will look like
+\begin{equation}
+\mathscr{O}_{base}\to\mathscr{O}_{base}+ ds\hat{x}+dz\hat{y}+dt\hat{z}=\mathscr{O}_{base}',\;\hat{n}\to A\hat{n}=A\hat{z}=\hat{z}',\;\vec{s}\to k'\hat{s}+\mathscr{O}_{IP}=\vec{s}'
+\end{equation}
+so, moving to explicit, global coordinates in the last line so we can do the computation (relying on the fact that any vector in the wedge, namely $\vec{\zeta}=\vec{s}-\mathscr{O}$ the local coordinates of the interaction point, is necessarily orthogonal to $\hat{n}$):
+\begin{eqnarray}
+0&=&\hat{n}\cdot\left(\vec{\mathscr{O}}_{base}-\vec{s}\right)\to 0=A\hat{z}'\cdot\left(\vec{\mathscr{O}}'_{base}-\left(k'\hat{s}+\vec{\mathscr{O}}_{IP}\right)\right)\\
+ &\to& k'=\frac{s\beta \mathscr{O}'_{base-IP,x}-c\beta s\gamma \mathscr{O}'_{base-IP,y}+c\beta c\gamma \mathscr{O}'_{base-IP,z}}{\hat{s}\cdot\hat{z}'}\\
+&=&\frac{s\beta ds-c\beta s\gamma \left(y_{base}+dz\right)+c\beta c\gamma \left(z_{pl}+dt\right)}{s\beta s\theta s\phi-c\beta s\gamma s\theta c\phi+c\beta c\gamma c\theta}
+\end{eqnarray}
+
+To find our new $y$ coordinate, we need to evaluate $s'_y=\hat{y}'\cdot k'\vec{s}$ to find the final correction of:
+\begin{equation}
+\label{eqn:finaldymis}
+\Delta y=\vec{\zeta}'\cdot\hat{y}'-\vec{\zeta}\cdot\hat{y}=\left(k'\hat{s}-\vec{\mathscr{O}}'_{base}\right)\cdot\hat{y}'-\left(s_y-y_{base}\right)
+\end{equation}
+
+The correction will be plane dependent since (denoting the stereo angle $\omega$):
+\begin{equation}
+\hat{y}_X&=&\hat{y}\to\hat{y}'_X=-s\alpha c\beta\hat{x}+\left(c\alpha c\gamma-s\alpha s\beta s\gamma\right)\hat{y}+\left(c\alpha s\gamma+s\alpha s\beta c\gamma\right)\hat{z}\\
+\end{equation}
+and
+\begin{equation}
+\begin{split}
+\hat{y}_{U,V}=&\pm s\omega\hat{x}'+c\omega\hat{y}'_{U,V}=\left[\pm c\alpha c\beta s\omega-s\alpha c\beta c\omega\right]\hat{x}+\left[\pm\left(s\alpha c\gamma+c \alpha s\beta s\gamma\right)s\omega\right.\\
+&+\left.\left(c\alpha c\gamma-s\alpha s\beta s\gamma\right)c\omega\right]\hat{y}+\left[\pm\left(s\alpha s\gamma-c \alpha s\beta c\gamma\right)s\omega+\left(c\alpha s\gamma+s\alpha s\beta c\gamma\right) c\omega\right]\hat{z}
+\end{split}
+\end{quation}
+
+\subsection{Individual Cases}
+Currently we only study the cases where one misalignment parameter is not zero.  We examine these in detail below, calculating the most pertinent quantities in the misalignment calculation, $k'/k$ and the new horizontal and stereo $y$ axes.  Before setting out, we simplify the expressions for the transformed $\hat{y}'$'s, removing any terms with the product of two sines of misalignment angles, which will be zero.\footnote{If only one misalignment parameter is non-zero, then two or more sines will contain at least one term will contain $\sin\,0=0$.}
+\begin{eqnarray}
+\hat{y}'_X&=&-s\alpha c\beta\hat{x}+c\alpha c\gamma\hat{y}+c\alpha s\gamma\hat{z}\\
+\hat{y}'_{U,V}&=&\left[\pm c\alpha c\beta s\omega-s\alpha c\beta c\omega\right]\hat{x}+\left[\pm s\alpha c\gamma s\omega+c\alpha c\gamma c\omega\right]\hat{y}+\left[\mp c\alpha s\beta c\gamma s\omega+c\alpha s\gamma c\omega\right]\hat{z}
+\end{eqnarray}
+
+If the translations are zero,
+\begin{equation}
+k'=\frac{-c\beta s\gamma y_{base}+c\beta c\gamma z_{pl}}{s\beta s\theta s\phi-c\beta s\gamma s\theta c\phi+c\beta c\gamma c\theta},\;
+k'/k=\frac{-c\beta s\gamma y_{base}/z_{pl}+c\beta c\gamma}{s\beta t\theta s\phi-c\beta s\gamma t\theta c\phi+c\beta c\gamma}
+\end{equation}
+
+\subsection{$ds\neq0$}
+$k'/k=1$ (the point of intersection does not move closer or further from the IP), and only the stereo planes are affected.  Note that only relevant term in Equation \ref{eqn:finaldymis}, for the stereo strip $\hat{y}$ for $\vec{\mathscr{O}}'_{base}=ds\hat{x}$ is:
+\begin{equation}
+\pm\sin\omega ds\approx\pm0.0261ds
+\end{equation}
+meaning that a displacement in $x$ of 17 mm, more than three times the range of misalignments studied, would be necessary for a shift in the stereo planes corresponding to one strip width.
+
+\subsection{$dz\neq0$}
+$k'/k=1$  (the point of intersection does not move closer or further from the IP).  This case is the trivial one (cf. Equation \ref{eqn:finaldymis} with $\vec{\mathscr{O}}'_{base}=dz\hat{y}$). $y$ just gets moved in the opposite direction as the wedge.  Correction is an additive constant.
+
+\subsection{$dt\neq0$}
+$k'/k=\left(z_{pl}+dt\right)/z_{pl}$.  $y$ gets modified by a simple scale factor.  Correct by storing changing definitions of plane positions in algorithm to match the misaligned values.
+
+\subsection{$\alpha\neq0$}
+$k'/k=1$ and
+\begin{eqnarray}
+\hat{y}'_X&=&-s\alpha\hat{x}+c\alpha\hat{y}\\
+\hat{y}'_{U,V}&=&\left[\pm c\alpha s\omega-s\alpha c\omega\right]\hat{x}+\left[\pm s\alpha s\omega+ c\omega\right]\hat{y}
+\end{eqnarray}
+
+\subsection{$\beta\neq0$}
+We have $k'/k=\left(1+\tan\beta\tan\theta\sin\phi\right)^{-1}$, and % (assuming $\beta$ is small, which is valid for our misalignments, $\theta_{max}\approx 0.550,\phi_{max}\approx0.288$)
+\begin{eqnarray}
+\hat{y}'_X&=&\hat{y}\\
+\hat{y}'_{U,V}&=&\hat{y}\pm \left(c\beta\hat{x}-s\beta\hat{z}\right)s\omega
+\end{eqnarray}
+
+
+\subsection{$\gamma\neq0$}
+
+\begin{eqnarray}
+k'/k&=&\frac{1-\tan\gamma \frac{y_{base}}{z_{pl}}}{1-\tan\gamma\tan\theta\cos\phi}\\
+\hat{y}'_X&=& c\gamma\hat{y}+ s\gamma\hat{z}\\
+\hat{y}'_{U,V}&=&\pm s\omega\hat{x}+c\omega\hat{y}-s\gamma c\omega\hat{z}
+\end{eqnarray}
+
+
+In order to evaluate algorithm performance under misalignment and corrections for misalignment, the absolute means and relative resolutions of the fit quantities $\theta$, $\phi$, and $\Delta\theta$ are measured as a function of misalignment.  In the following, results will only be shown for which the effects of misalignment are significant.  ``Significant,'' for misalignments of 1 mm (0.3 mrad) for translations (rotations) means more than a 5\% degradation in rms and/or bias shifts in $\theta$, $\phi$, and $\Delta\theta$ of 0.01 mrad, 1 mrad, and 0.1 mrad, respectively.  
+
+While corrections are typically done on a case-by-base basis, they fall under two general categories, {\bf analytic} and {\bf simulation} based.  Analytic corrections rely upon specific knowledge of the misalignment, with each case being handled separately; as such, the additional resources required, both extra constants and operations, if any, vary accordingly.  Simulation based corrections are all done in the same manner.  The algorithm is run over a training MC sample (same setup but with $p_T=200$ \GeV instead of the normal 100 \GeV sample so as not to overtrain the corrections), and the mean biases for $\theta$, $\phi$, and $\Delta\theta$ are saved for different, equally spaced regions in the $\eta-\phi$ plane over the wedge based on the fitted $\theta$ and $\phi$ values.  Currently, these values are saved for 10 $\eta$ and 10 $\phi$ bins (100 $\eta,\phi$ bins total), with the number of bins in each direction being a configurable parameter.  When the algorithm runs with simulation based correction, this table of constant corrections is saved in a LUT before runtime, and corrections are added to final fit quantities based on the (uncorrected) $\theta$ and $\phi$ fit values.  With the settings mentioned, this is 300 extra constants (10$\eta-$bins$\times$10$-\phi$bins$\times$3 fit quantities) and two extra operations (a lookup and addition for each quantity done in parallel).  The simulation correction can, in principle, also be applied to the algorithm in nominal conditions with non-trivial improvements, as detailed below in Section \ref{subsec:simnom}.  Depending on the misalignment case in question, different approaches work better.  A summary of correction methods, including resources necessary for the individual analytic cases, is shown in Table \ref{tab:corrsum}.
+
+\begin{table}
+  \caption{A summary of corrections with additional constants/operations (written as $n_{const}$c/$n_{ops}$op; $n_X$ is the number of X hits in a fit) necessary for analytic corrections.  Yes means a correction exists but might not entirely remove misalignment effects, while yes+ means a  quality of correction is only limited by knowledge of misalignment and memory\label{tab:corrsum}}
+  \begin{center}
+    \begin{tabular}{|l|p{1.8cm}|p{1.8cm}|p{1.8cm}|p{1.8cm}|p{1.8cm}|p{1.8cm}|}
+      \hline
+      & $\Delta s$ &$\Delta z$ &$\Delta t$ &$\gamma_s$ &$\beta_z$ &$\alpha_t$ \\
+      \hline
+      Analytic   & yes+      & yes+     & yes+     & yes      & no       & yes \\
+      Resources & 11c/2op    & 0c/0op    & 0c/0op    & 56c/1op   & ---      & 400c/$2n_X$op, 32c/$12n_X$op\\
+      \hline
+      Simulation & yes+       & no        &no         &  no       & yes+     & yes+ \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+\clearpage
+\section{Simulation Correction of the Algorithm Under Nominal Conditions}
+\label{subsec:simnom}
+In addition to using simulation based correction to counter the effects of several classes of misalignment, the correction can be applied at to the algorithm under nominal conditions.  The main effect of this correction is to mitigate the effects of the bias in stereo strips.  As such, the correction has a larger effect on quantities that rely on the aggregate slope $m_y$, as can be seen in in Figure \ref{fig:simperf}, improving $\sigma_{\theta_{fit}-\theta_{tru}}$ resolution by about 25\%, and reducing $\sigma_{\phi_{fit}-\phi_{tru}}$ by over 50\% and restoring a largely Gaussian shape.  The slight, apparent degradation in $\Delta\theta$ is due to a more mild version of the effect seen in Figure \ref{fig:nomperf2x1uv}.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \begin{center}
+  \begin{subfigure}{0.3\textwidth}\caption{$\theta$, std}\includegraphics[width=\textwidth]{figures/nominal/mmt_h00009_ctx3_ctuv3_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_NOM_Pt100GeVdigintuple_20151111_res_theta_etaall}\end{subfigure}
+  \begin{subfigure}{0.3\textwidth}\caption{$\phi$, std}\includegraphics[width=\textwidth]{figures/nominal/mmt_h00009_ctx3_ctuv3_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_NOM_Pt100GeVdigintuple_20151111_res_phi_etaall}\end{subfigure}
+  \begin{subfigure}{0.3\textwidth}\caption{$\Delta\theta$, std}\includegraphics[width=\textwidth]{figures/nominal/mmt_h00009_ctx3_ctuv3_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_NOM_Pt100GeVdigintuple_20151111_res_dtheta_etaall}\end{subfigure}
+  \begin{subfigure}{0.3\textwidth}\caption{$\theta$, sim corr}\includegraphics[width=\textwidth]{figures/nominal/mmt_h00009_ctx3_ctuv3_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_3CR_Pt100GeVdigintuple_20151111_res_theta_etaall}\end{subfigure}
+  \begin{subfigure}{0.3\textwidth}\caption{$\phi$, sim corr}\includegraphics[width=\textwidth]{figures/nominal/mmt_h00009_ctx3_ctuv3_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_3CR_Pt100GeVdigintuple_20151111_res_phi_etaall}\end{subfigure}
+  \begin{subfigure}{0.3\textwidth}\caption{$\Delta\theta$, sim corr}\includegraphics[width=\textwidth]{figures/nominal/mmt_h00009_ctx3_ctuv3_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_3CR_Pt100GeVdigintuple_20151111_res_dtheta_etaall}\end{subfigure}
+  \caption{\label{fig:simperf}Nominal residual plots for both uncorrected and simulation corrected cases; $\theta$, $\phi$, $\Delta\theta$ for $p_T=100$ \GeV muons}
+  \end{center}
+\end{figure}
+As can be seen in Figure \ref{fig:simperfveta}, the simulation based correction also removes the $\eta$ dependence to fit quantity resolution distributions, as expected.  One consequence of this is that simulation-based corrections applied to the misalignment cases below will restore performance to the ``sim'' and not the ``std'' distriubtions of Figure \ref{fig:simperf}.  Hence, when making comparisons between simulation corrected curves and the nominal performance point, simulation-corrected distributions of benchmark quantities versus misalignment will often look generally better.
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \begin{center}
+  \begin{subfigure}{0.3\textwidth}\caption{$\theta$ v. $\eta$, std}\includegraphics[width=\textwidth]{figures/nominal/mmt_h00009_ctx3_ctuv3_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_NOM_Pt100GeVdigintuple_20151111_theta_res_v_eta_fit}\end{subfigure}
+  \begin{subfigure}{0.3\textwidth}\caption{$\phi$ v. $\eta$, std}\includegraphics[width=\textwidth]{figures/nominal/mmt_h00009_ctx3_ctuv3_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_NOM_Pt100GeVdigintuple_20151111_phi_res_v_eta_fit}\end{subfigure}
+  \begin{subfigure}{0.3\textwidth}\caption{$\Delta\theta$ v. $\eta$, std}\includegraphics[width=\textwidth]{figures/nominal/mmt_h00009_ctx3_ctuv3_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_NOM_Pt100GeVdigintuple_20151111_dtheta_res_v_eta_fit}\end{subfigure}
+  \begin{subfigure}{0.3\textwidth}\caption{$\theta$ v. $\eta$, sim corr}\includegraphics[width=\textwidth]{figures/nominal/mmt_h00009_ctx3_ctuv3_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_3CR_Pt100GeVdigintuple_20151111_theta_res_v_eta_fit}\end{subfigure}
+  \begin{subfigure}{0.3\textwidth}\caption{$\phi$ v. $\eta$, sim corr}\includegraphics[width=\textwidth]{figures/nominal/mmt_h00009_ctx3_ctuv3_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_3CR_Pt100GeVdigintuple_20151111_phi_res_v_eta_fit}\end{subfigure}
+  \begin{subfigure}{0.3\textwidth}\caption{$\Delta\theta$ v. $\eta$, sim corr}\includegraphics[width=\textwidth]{figures/nominal/mmt_h00009_ctx3_ctuv3_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_3CR_Pt100GeVdigintuple_20151111_dtheta_res_v_eta_fit}\end{subfigure}
+  \caption{\label{fig:simperfveta}Nominal residual plots as a function of $\eta$ with points as means and error bars as rms values in each $\eta$ bin for the angles $\theta$, $\phi$, $\Delta\theta$ for $p_T=100$ \GeV muons in the uncorrected and simulation corrected cases.}
+  \end{center}
+\end{figure}
+
+That the improvements from a simulation-based correction improve performance of the algorithm in nominal conditions most for the quantities that depend most on stereo information ($\phi$ and $\theta$) and remove the $\eta$ dependence of fit quantity resolutions suggests that there could, in principle, be analytic corrections that could be applied to the nominal algorithm.  One possible solution is to introduce an additional set of constants, having the $y_{base}$ depend on the strip number, similar to the $\gamma_{s}$ correction for $z_{plane}$ described in Section \ref{subsec:drs}, which would add a lookup per hit and 8$\times n_{bins,y}$ extra constants that would be optimized as the $\gamma_{s}$ correction was.
+\begin{equation}
+\label{eqn:indslopesimcor}
+M_{hit}=\frac{y}{z}=\frac{y_{base}}{z_{plane}}\left(n_{str}\right)+\frac{w_{str}}{z_{plane}}n_{str}
+\end{equation}
+The simulation correction residual rms values suggest a limit on the quality of an such correction and could perhaps be implemented generically on their own regardless of misalignment for rms values on fit quantities of 0.291 mrad for $\theta$, 3.19 mrad for $\phi$, and 1.54 for $\Delta\theta$, which represent a 20\% improvement for $\theta$, a 62\% improvement for $\phi$, and a slight degradation in $\Delta\theta$ of 4.7\%, again owing to an effect similar to the one in \ref{fig:nomperf2x1uv}.
+\clearpage
+\section{Translation Misalignments Along the Horizontal Strip Direction ($\Delta s$)}
+A translation in $s$ (i.e. along the direction of a horizontal strip) only affects the stereo strips, and, since the stereo angle is small, a very large misalignment is necessary for effects to be noticeable (a misalignment of roughly 17 mm corresponds to one strip's misalignment in the stereo planes).  The only quantity to show any meaningful deviation with misalignments with translations in $s$ is the $\phi$ residual bias (a change of 0.4 mrad at $\Delta s=1$ mm), as can be seen in the uncorrected curve of Figure \ref{fig:dtsphi}.  
+
+A translation in $s$ induces a constant shift in the calculated horizontal slope, $m_x$ in Equation \ref{eqn:compslopes}.  This constant shift should only depend on which stereo planes included in a fit are misaligned and how misaligned they are.  Hence, the correction to $m_x$, for a sum over misaligned stereo planes $i$, with their individual misalignments in $s$ and plane positions in $z$ is:
+\begin{equation}
+\label{eqn:dtsmxcor}
+\Delta m_x=\frac{1}{N_{stereo}}\sum_{i,misal\,stereo}\frac{\Delta s_i}{z_{i,plane}}
+\end{equation}
+Given prior knowledge of misalignment, these corrections to $m_x$ can be performed ahead of time and saved in a lookup table (LUT), similar to the LUT used for constants in the X local slope ($M_X^l$) calculation.  The added overhead of this analytic correction is hence eleven constants in memory, a lookup, and one addition.  The correction perfectly corrects the effects of misalignment, as can be seen in Figure \ref{fig:dtsphi}.  The simulation based correction described above can also be used to correct for $\Delta s$ misalignments, with the results of that correction also shown in Figure \ref{fig:dtsphi}.  The apparent discrepancy between the simulated and analytic correction is a natural consequence of the fact that the simulation correction, as previously mentioned, restores the $\phi$ residual distribution to an overall more Gaussian shape.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=0.5\textwidth]{./figures/misal/mean_res_phi_tfit_misal_dts_stk-qcor_pt100GeV_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}
+  \caption{\label{fig:dtsphi} The mean of the $\phi$ residual as a function of misalignment for the uncorrected case and the analytic and simulation correction cases.}
+\end{figure}
+\clearpage
+\section{Translation Misalignments Orthogonal to the Beamline and Horizontal Strip Direction ($\Delta z$)}
+A translation in AMDB $z$, the direction orthogonal to both the beamline and the horizontal strip direction, corresponds to a translation in the $y$ of Equation \ref{eqn:indslope}, affecting all slope calculations.  This has a large impact on the $\theta$ residual bias and both the bias and rms of $\Delta\theta$ residual, as can be seen in Figures \ref{fig:dtz} (a)--(c).  The marked degradation and non-linear behavior in performance at very high levels of misalignments is a result of low statistics; there are fewer fits at high level of misalignments since for $\Delta z\gtrsim 3$ mm, most fits will fail the $\Delta\theta$ cut\footnote{Since $\Delta\theta=\frac{M_X^l-M_X^g}{1+M_X^lM_X^g}$ and $M_X^l=B_k\sum y_i\left(z/\bar{z}-1\right)$, a shift $\Delta y$ translates (with typical slope values of $\sim 0.3$) to $5 B_k\left(z_1+z_2\right)/\bar{z}$ (with $B_k$ in units of inverse mm); set equal to 16 mrad ($\Delta\theta$ is centered at zero), this corresponds to $\Delta y=2.7$ mm}.  The $\theta$ bias shifts by about 0.075 mrad at $\Delta z=1$ mm, and $\Delta\theta$ shifts by about 5 mrad for the same level of misalignment.  While the fitted rms of the $\Delta\theta$ residual remains fairly stable for $\Delta z <1$ mm or so, between $\Delta z=2$ mm and $\Delta z=3$ mm, the rms increases by 15\% before the $\Delta\theta$ cut issue mentioned above intervenes.
+
+Fortunately, these misalignments are straightforward to correct with knowledge of the misalignment.  The only modification necessary for this correction is to change the definitions of $y_{base}$ in Equation \ref{eqn:indslope} for the individual hit slope addressing.  This is done before runtime and adds no overhead to the algorithm, and the correction quality is only limited by knowledge of the misalignment.  The results of this correction are also shown in Figures \ref{fig:dtz} (a)--(c) and restore nominal performance.
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \begin{subfigure}{0.320000\textwidth}\caption{$\theta$ mean}\includegraphics[width=\textwidth]{./figures/misal/mean_res_theta_tfit_misal_dtz_stk-qcor_pt100GeV_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+  \begin{subfigure}{0.320000\textwidth}\caption{$\Delta\theta$ mean}\includegraphics[width=\textwidth]{./figures/misal/mean_res_dtheta_tfit_misal_dtz_stk-qcor_pt100GeV_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+  \begin{subfigure}{0.320000\textwidth}\caption{$\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}/\sigma_{nominal}$}\includegraphics[width=\textwidth]{./figures/misal/sigma_res_dtheta_tfit_misal_dtz_stk-qcor_pt100GeV_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_rel_20151111}\end{subfigure}
+  \caption{\label{fig:dtz} The affected quantities of $\Delta z$ misalignments: $\theta$ bias, $\Delta\theta$ bias, and $\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}/\sigma_{nominal}$ for both the misaligned and corrected cases.}
+\end{figure}
+
+\clearpage
+\section{Translation Misalignments Parallel to the Beamline ($\Delta t$)}
+The effects of misalignment due to translations in $t$ are very similar to those due to translations in $z$ without the complication of the $\Delta\theta$ cut, affecting the $z$ instead of the $y$ coordinate that enters into hit slope calculations.  Again, $\theta$ bias, $\Delta\theta$ bias, and $\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}$ are the primarily affected quantities.  For $\Delta t=1$ mm, $\theta$ bias shifts by about 0.02 mrad, $\Delta\theta$ bias shifts by just under 2 mrad, and $\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}$ degrades by about 20\%.  The correction for this misalignment once again costs no overhead and consists of changing stored constants in the algorithm, in this case the positions along the beamline of the misaligned planes, with results similarly limited by knowledge of the misalignment.  The slight improvement with correction to $\Delta\theta$ rms is due to the real effect of a larger lever arm.  Both the misaligned and corrected distributions of affected quantities of interest are shown in Figure \ref{fig:dtt}.
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \begin{subfigure}{0.320000\textwidth}\caption{$\theta$ mean}\includegraphics[width=\textwidth]{./figures/misal/mean_res_theta_tfit_misal_dtt_stk-qcor_pt100GeV_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+  \begin{subfigure}{0.320000\textwidth}\caption{$\Delta\theta$ mean}\includegraphics[width=\textwidth]{./figures/misal/mean_res_dtheta_tfit_misal_dtt_stk-qcor_pt100GeV_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+  \begin{subfigure}{0.320000\textwidth}\caption{$\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}/\sigma_{nominal}$}\includegraphics[width=\textwidth]{./figures/misal/sigma_res_dtheta_tfit_misal_dtt_stk-qcor_pt100GeV_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_rel_20151111}\end{subfigure}
+  \caption{\label{fig:dtt} The affected quantities of $\Delta t$ misalignments: $\theta$ bias, $\Delta\theta$ bias, and $\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}/\sigma_{nominal}$ for both the misaligned and corrected cases.}
+\end{figure}
+
+\clearpage
+\section{Chamber Tilts Towards and Away from the IP ($\gamma_s$ Rotation)}
+\label{subsec:drs}
+Chamber misalignment due to rotations around the $s$ axis act effectively like a translation in $t$ that depends on strip number.  These rotations tilt misaligned chambers away from (towards) the IP for positive (negative) values of $\gamma_s$.  Since, unlike for the other two rotation cases that will be studied, positive and negative rotation values are not symmetric, this misalignment is studied for both positive and negative $\gamma_s$ values.  The divergent effect at the tails is a result of a large population of fits not having fit quantities within the cores, and so not appearing in the fit rms.  Once again, affected quantities of interest $\theta$ bias, $\Delta\theta$ bias, and $\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}$.  The effects of misalignment can be seen in Figures \ref{fig:drs} (a)--(c).  The relationship between biases and $\gamma_s$ is roughly linear with $\Delta\gamma_s=0.3$ mrad (the angular scale corresponding to linear shifts of $\sim1$ mm) corresponding to 0.005 mrad (0.12 mrad) for $\theta$ ($\Delta\theta$).  For $\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}$, degradation is not symmetric.  For negative (positive) $\gamma_s$, with the quadruplet tilted towards (away from) the IP, slope-roads are artificially expanded (shrunk), decreasing (increasing) the granularity of the trigger, explaining the asymmetry in Figure \ref{fig:drs} (c), with the degradation being a 10\% (25\%) effect for $\gamma_s$ of +(-)0.3 mrad.
+
+Corrections are less simple in this case.  In principle, corrections of the same accuracy of the translations could be calculated per strip, but the overhead of one correction per strip (many thousands of constants) is prohibitive.  Instead, each plane was divided into eight equal segments with a $t$ value ($z$ in the slope calculation) assigned to strips in each region to correct for the misalignment.  This amounts to 56 extra constants and a 2D instead of a 1D LUT for $z$ positions while the algorithm runs.  The corrected distributions can also be seen in Figures \ref{fig:drs} (a)--(c).  The corrections, while not as effective as for the simple translation cases, are still very effective with the quoted misalignment values for  bias shifts down to 0.001 mrad (0.25 mrad) for $\theta$ ($\Delta\theta$) and no more than a 2\% degradation in $\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}$ for $\left|\gamma_s\right|=0.3$ mrad.
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \begin{subfigure}{0.320000\textwidth}\caption{$\theta$ mean}\includegraphics[width=\textwidth]{./figures/misal/mean_res_theta_tfit_misal_drs_stk-qcor_pt100GeV_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+  \begin{subfigure}{0.320000\textwidth}\caption{$\Delta\theta$ mean}\includegraphics[width=\textwidth]{./figures/misal/mean_res_dtheta_tfit_misal_drs_stk-qcor_pt100GeV_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+  \begin{subfigure}{0.320000\textwidth}\caption{$\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}/\sigma_{nominal}$}\includegraphics[width=\textwidth]{./figures/misal/sigma_res_dtheta_tfit_misal_drs_stk-qcor_pt100GeV_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_rel_20151111}\end{subfigure}
+  \caption{\label{fig:drs} The noticeable effects of rotations in the $s$ axis and the behavior of these quantities ($\theta$ and $\Delta\theta$ bias shifts and $\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}/\sigma_{nominal}$) with and without misalignment correction.}
+\end{figure}
+
+
+\clearpage
+\label{subsec:drz}
+\section{Rotation Misalignments Around the Wedge Vertical Axis ($\beta_z$)}
+While misalignments coming from rotations around the $z$ axis (the direction orthogonal to both the beamline and the horizontal strip direction) foreshorten the strips as seen from the IP and add a deviation in $t$, the long lever arm largely washes out any effects of this misalignment.  Only the $\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}$ is noticeably affected, though only at severe misalignments, with only about a 1\% degradation in performance at $\beta_z=0.3$ mrad (corresponding to a linear shift of $\sim1$ mm).  A simulation based correction works well to cancel out the effects of this misalignment, and the $\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}$ as a function of misalignment with and without corrections are shown in Figure \ref{fig:drz}.  The apparent 2\% effect in the simulation corrected curve is a result of a more mild version of the effect shown in Figure \ref{fig:nomperf2x1uv}.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=0.5\textwidth]{./figures/misal/sigma_res_dtheta_tfit_misal_drz_stk-qcor_pt100GeV_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_rel_20151111}
+  \caption{\label{fig:drz} The effects of rotations in the $z$ axis on $\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}/\sigma_{nominal}$ a function of $\beta_z$ both with and without misalignment corrections.}
+\end{figure}
+
+\clearpage
+\section{Rotation Misalignments Around the Axis Parallel to the Beamline ($\alpha_t$)}
+Misalignments arising from rotations around the $t$ axis (parallel to the beamline at the center of the base of the wedge) are essentially rotations in the $\phi$ direction.  The quantities of interest most affected are the $\phi$ bias and $\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}$, as shown in Figures \ref{fig:drt} (a) and (b), respectively, and correspond to a shift in $\phi$ bias of 0.2 mrad and a 10\% degradation in $\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}$ for $\alpha_t=0.3$ mrad (corresponding to a linear shift of $\sim1$ mm).  The raw instead of fitted mean $\phi$ biases is used in Figure \ref{fig:drt} (a) to better illustrate the effect of misalignment.
+
+Since the effect of misalignment is dependent on horizontal (along the strip direction, $\hat{s}$) in addition to vertical information, corrections cannot be applied before a fit takes place.  The $\phi$ bias shift is uniform over the entire wedge, so a constant additive correction to $\phi$ based on the level of misalignment can be applied to all fits depending on how many misaligned stereo planes enter in the fit.  $\Delta\theta$ is less straightforward, but corrections to the $y$ and $z$ information used in the local slope calculation in Equation \ref{eqn:compslopes} can be applied once $\theta_{fit}$ and $\phi_{fit}$ are known.  These corrections are calculated ahead of time in bins of uniform $\eta$ and $\phi$ as with the simulation corrections using the same framework as the misalignment calculation.  The results of both types of  correction can be seen in Figure \ref{fig:dtt}.  The apparent discrepancy between the simulation and analytic corrections in the $\phi$ bias happens for the same reason as in the $\Delta s$ misalignment correction cases, as simulation correction restores a more Gaussian shape to the $\phi$ residual distribution opposed to the uncorrected nominal case, as discussed in Section \ref{subsec:simnom}.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \begin{subfigure}{0.450000\textwidth}\caption{$\phi$ mean}\includegraphics[width=\textwidth]{./figures/misal/mean_res_phi_raw_misal_drt_stk-qcor_pt100GeV_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\end{subfigure}
+  \begin{subfigure}{0.450000\textwidth}\caption{$\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}/\sigma_{nominal}$}\includegraphics[width=\textwidth]{./figures/misal/sigma_res_dtheta_tfit_misal_drt_stk-qcor_pt100GeV_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_rel_20151111}\end{subfigure}
+  \caption{\label{fig:drt} The effects of rotation misalignments around the $t$ axis for $\phi$ bias and $\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}/\sigma_{nominal}$ as a function of misalignment.  The uncorrected and both the analytic and simulation correction cases are shown.}
+\end{figure}
+
+%-------------------------------------------------------------------------------
+\clearpage
+\section{Conclusion}
+\label{sec:conclusion}
+%-------------------------------------------------------------------------------
+
+The algorithm for Micromegas detectors in the NSW Trigger Processor performs well in a variety of conditions and has proven robust to a number of effects to deliver measurements on muon tracks of the three angles $\theta$, $\phi$, $\Delta\theta$.  Under nominal conditions, the rms values for the residuals of these quantities are 0.364 mrad for $\theta$, 8.12 mrad for $\phi$, and 1.47 mrad for $\Delta\theta$.  Algorithm performance was found to be largely independent of the charge threshold setting, and a hit majority BCID association was found to provide proper timing information over 99.7\% even in the most relaxed settings (2X+1UV coincidence threshold requirement+wide slope-road+background).  The introduction of wide slope-roads to better mimic potentially limited algorithm resources at run time and the introduction of incoherent background was found to have a manageable effect on fit quantity residual rms values and on total algorithm efficiency for sufficiently stringent coincidence threshold.  The effects of the three translation and three rotation misalignments specified by AMDB convention were studied, and correction methods for each of the six cases was developed.  Simulation-based corrections were found to improve nominal algorithm performance to residual rms value of 0.291 mrad for $\theta$, 3.19 mrad for $\phi$, and 1.54 for $\Delta\theta$, which represent improvements of 20\%, 62\%, and -4.7\%, respectively.  Misalignment corrections were found to restore nominal performance for all but the rotation around the $s$ axis, and a summary of tolerances may be found in Table \ref{tab:tolsum}.
+
+\begin{table}[!htbp]
+  \caption{\label{tab:tolsum}A summary of levels of misalignment corresponding to a 10\% degradation in any residual rms or, for biases shifts of, 0.01 mrad for $\theta$, 1 mrad for $\phi$, and 0.25 mrad for $\Delta\theta$ for both the uncorrected and corrected cases; $>5$ mm and $>1.5$ mrad mean that such a degradation does not occur for the range of misalignment studied.  Most affected quantity in parentheses.}
+  \begin{center}
+    \begin{tabular}{|l|c|c|}
+      \hline
+                 & No Correction                   & Correction\\
+      \hline
+      $\Delta s$ & 4 mm ($\phi$ bias)              & $>5$ mm \\
+      \hline
+      $\Delta z$ & 0.25 mm ($\Delta\theta$)        & $>5$ mm \\
+      \hline
+      $\Delta t$ & 0.25 mm ($\Delta\theta$)        & $>5$ mm \\
+      \hline
+      $\gamma_s$ &0.15 mrad ($\Delta\theta$ bias)  & 0.75 mrad \\
+      \hline
+      $\beta_z$  & 0.9 mrad ($\Delta\theta$ rms)   & $>1.5$ mrad\\
+      \hline
+      $\alpha_t$ & 0.375 mrad ($\Delta\theta$ rms) & $>1.5$ mrad\\      
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+\begin{comment}
+
+
+\section{Addressing MM Chamber Deformations Due to Gravity}
+Preliminary studies by the Saclay group have indicated that the Micromegas chambers will undergo continuous deformations at the scale of approximately half a millimeter due to the 0.7 degree tilt of the LHC ring combined with gravity.  We have modeled the deformation as a combination of a twist $\beta_z$ around the vertical axis orthogonal to the beamline and horizontal strip direction and a tilt $\gamma_s$ around the horizontal axis in the strip direction at the chamber base, using the above misalignment and correction studies as a benchmark in each case.  In addition to the two angular displacements, concerns have been raised over the effect of the non-planarity of the chambers, as misalignment studies were done under the assumption that chambers are rigid planes.  One of the large sectors with the most severe deformations can be seen in Figure \ref{fig:saclaydeform} taken from \cite{saclay}.
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \begin{center}
+    \includegraphics[width=0.6\textwidth]{figures/Deformation.png}
+  \caption{\label{fig:saclaydeform} Large sector deformations}
+  \end{center}
+\end{figure}
+
+Before giving estimates of the impact of deformation on performance, it should be noted that in all of the cases examined, the quantity most affected is $\Delta\theta$ through the local slope calculation.  Misalignment studies had one quadruplet in its nominal position and the other misaligned.  This means that the bias in the local slope calculation has as non-trivial dependence on track $\theta,\phi$, which induces a larger total rms when integrated over an entire sector.  If all planes (i.e. both quadruplets) experience the same misalignment/deformation, such systematic, position dependent bias is largely mitigated (though an overall average bias may not be).  Since the recently reported deformations appear to have both quadruplets in a given chamber affected in the same way, we likely find ourselves in the latter, less severe case for $\Delta\theta$ rms, so the numbers quoted for degradation should be considered a conservative upper limit.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \begin{subfigure}{0.49\textwidth}\caption{The effect of $\beta_z$ on $\Delta\theta$ rms}\includegraphics[width=\textwidth]{./figures/misal/sigma_res_dtheta_tfit_misal_drz_stk-qcor_pt100GeV_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_rel_20151111}\end{subfigure}
+  \begin{subfigure}{0.49\textwidth}\caption{The effect of $\gamma_s$ on $\Delta\theta$ rms}\includegraphics[width=\textwidth]{./figures/misal/sigma_res_dtheta_tfit_misal_drs_stk-qcor_pt100GeV_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_rel_20151111}\end{subfigure}
+  \caption{\label{fig:drz2} The effects of rotations in the $z$ and ($s$) axes on $\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}/\sigma_{nominal}$ a function of $\beta_z$ ($\gamma_s$) in (a) ((b)) both with and without misalignment corrections.}
+\end{figure}
+
+\section{The twist $\beta_z$}
+ This effect, while the most dramatic in the pictures, probably does not have any noticeable effect on performance, as a 10\% degradation in performance corresponds to $\beta_z=1$ mrad, equivalent to a more than 3 mm linear translation, much greater than scales currently under consideration.  At the maximal 1 mm levels quoted, this is a $\lessim1$\% effect, as can be seen in Figure \ref{fig:drz2} (a), reproduced from Section \ref{subsec:drz}.
+
+\section{The tilt $\gamma_s$}
+The tilt is the deformation that is the most concerning, as detailed in \ref{subsec:drs}.  The 1 mm level of maximal deformation corresponds to $\gamma_s=0.3$ mrad, while the intermediate deformation value of 0.5 mm corresponds to $\gamma_s=0.15$ mrad.  In the misalignment studies, this could correspond to a 20\% ($\lessim10$\%) degradation in $\Delta\theta$ resolution for 1 mm  (0.5 mm) level deformations, as seen in Figure \ref{fig:drz2} (b).  While the two quadruplets having equivalent deformations should mitigate this effect somewhat, corrections might be necessary here.  These corrections, also outlined in Section \ref{subsec:drs}, consist of dividing up each plane into eight equal segments in $y$ (AMDB $z$) for a total of 64 constants (56 extra).  While 64 total constants was more than sufficient for the studies in this note, if the deformations were severe and localized to one half of the chamber, then additional constants (na\"ively twice as many) would probably be necessary to ensure the same level of performance.  As Figure \ref{fig:drz2} (b) also, shows, these corrections make this deformation/misalignment a $<5$\% effect.
+
+\section{Non-planarity}
+Studies by Saclay have non-planarity effects inducing a 0.25 mm RMS to using the na\"ive rigid plane assumption.  Misalignments of this order have the largest effect in the directions orthogonal to the horizontal strip direction ($\Delta z$ and $\Delta t$), for which there was a 10\% effect.  Again, this figure is most certainly very conservative, as the effect of a general smearing would not be as deleterious as systematic shift of only one quadruplet.  A summary of studies of these effects can be found in \cite{saclay}.
+
+%\section{Corrections}
+%The misalignments that potentially need to be addressed are $\gamma_s$, $\Delta z$, and $\Delta t$.  While implementation is different in the simulation for the tilt than for the translations because of the athena convention for defining strip number, all three misalignments can be handled in the firmware by correcting the definitions of constants for the zeroth strip of each VMM chip (or possibly group of VMM chips, but there should be more constants than were used in our studies), allowing for corrections at least as good as those in the note (i.e. a $<5$\% effect).\footnote{While a correction for $\beta_z$ at this point seems unnecessary, for completeness, we remind the reader that this correction is done via a lookup table that maps $\theta_{fit},\phi_{fit}$ to additive corrections to all three fit quantities.  This could in principle be done for a more complicated twist, provided adequate information about the deformations is available.}
+
+\section{Estimate of Upper Limit of Overall Effect}
+In order to estimate the total effect of the deformations, we assume that only $\gamma_s$ contributes.  We take the $\gamma_s$ corresponding to the peak to peak deformation value to affect half of each chamber.  We also take the worse case for the sign of $\gamma_s$.  Both of these assumptions are conservative, and so the figure presented here should be considered an {\bf upper limit}.
+\begin{table}[htbp]
+\caption{A summary of the deformation upper limit effect calculation.  Even though both the positive and negative $\gamma_s$ numbers are given, only the more severe (negative) numbers are used in the calculation.}
+\label{tab:defsum}}
+\begin{center}
+\begin{tabular}{|l|c|p{6 cm}|}
+\hline
+$\gamma_s\left(l_{pk-to-pk}\right)$ & - (+) $\gamma_s$ \% $\Delta\theta$ degradation & $n_{chambers}$ \\
+\hline
+0.1 mrad (0.33 mm)                  & 5 (0)\%                                        & 5 (EISC06, 08, 10, 12)\\
+\hline
+0.15 mrad (0.5--0.6 mm)             & 8 (0)\%                                        & 6 (EISC02, 14, 15; EILC07, 09)\\
+\hline
+0.3 mrad (0.8--1.0 mm)              & 20 (6)\%                                       & 3 (EILC01, 03, 15)\\
+\hline
+0.375 mrad (1.25 mm)                & 28 (15)\%                                      & 2 (EISC05, 13)\\
+\hline
+{\it TOTAL} & \multicolumn{2}{|c|}{$\left(25+48+60+56\right)\%\times\frac{1}{2}\times\frac{1}{16}=6$\%}\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\section{Conclusions}
+If nothing is done to correct for the deformations in the MM chambers, the above calculation shows that we can expect the effect to be at most 6\% assuming the worst conditions from misalignment studies.  Hence, the statement that this will be no more than a 10\% effect seems more than reasonable.  Nevertheless, corrections for the deformations presented do seem possible using the formalism and techniques presented in the note, and the case of most concern, the $\gamma_s$ correction, can be addressed with the addition of 56 constants and two operations.
+
+\end{comment}

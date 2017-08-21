@@ -305,8 +305,8 @@
 
 \renewcommand{\backmatter}{
     \begin{appendices}
-        \include{chapters/teljet}
         \include{chapters/mmt}
+        \include{chapters/teljet2}
     \end{appendices}
     \input{endmatter/personalize}
     \clearpage
@@ -314,7 +314,7 @@
         \bibliography{references}
         \addcontentsline{toc}{chapter}{References}
         \bibliographystyle{apalike2}
-        \include{endmatter/colophon}
+        %\include{endmatter/colophon}
     \end{spacing}
 }
 
@@ -347,3 +347,18 @@
 \def\sumpt{\ensuremath{S_\textrm{T}}}
 \def\to{\ensuremath{\rightarrow}}
 \def\mindphi{\ensuremath{|\text{min}\Delta\phi(\met,\text{jet})|}}
+\def\TeV{\ifmmode {\mathrm{\ Te\kern -0.1em V}}\else
+                   \textrm{Te\kern -0.1em V}\fi}%
+\def\GeV{\ifmmode {\mathrm{\ Ge\kern -0.1em V}}\else
+                   \textrm{Ge\kern -0.1em V}\fi}%
+\def\MeV{\ifmmode {\mathrm{\ Me\kern -0.1em V}}\else
+                   \textrm{Me\kern -0.1em V}\fi}%
+\def\keV{\ifmmode {\mathrm{\ ke\kern -0.1em V}}\else
+                   \textrm{ke\kern -0.1em V}\fi}%
+\def\eV{\ifmmode  {\mathrm{\ e\kern -0.1em V}}\else
+                   \textrm{e\kern -0.1em V}\fi}%
+\let\tev=\TeV
+\let\gev=\GeV
+\let\mev=\MeV
+\let\kev=\keV
+\let\ev=\eV

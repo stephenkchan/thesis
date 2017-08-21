@@ -4,7 +4,8 @@ If it's stupid but it works, it isn't stupid.
 \qauthor{Conventional Wisdom}
 \end{savequote}
 
-\chapter{Object Definitions and Event Selection}
+\chapter{Object Definitions, Event Selection, and Associated Systematic Uncertainties}
+\label{ch:evsel}
 
 \newthought{Much has been said} 
 \section{Object Definitions}
@@ -13,9 +14,13 @@ Detailed descriptions of object definitions may be found in \cite{objectnote}.  
  
 
 \section{Event Selection and Analysis Regions}
-This analysis focuses specifically on the 2-lepton channel of the fiducial analysis, with the event selection and analysis region definitions being identical.  Common to all lepton channels in the fiducial analysis is the set of requirements on the jets in a given event.  There must be at least two central jets and exactly two signal jets that have been ``$b$-tagged'' according to the MV2c10 algorithm \cite{btag}, with at least one of these $b$-jets having a $p_T>45$ \GeV.  For MVA training and certain background samples, a process known as ``truth-tagging'' is applied instead of the standard $b$-tagging to boost sample statistics and stabilize training/fits (cf. \cite{supportnote} Section 4.2 for details).  After event selection, the \emph{muon-in-jet} and \emph{PtReco} corrections, described in \cite{objectnote} 6.3.3-4, are applied to the $b$-jets, and, taking advantage of the fact that the 2-lepton final state is closed, a kinematic fitter is applied (cf. \cite{run1note,epsJetRes}); these objects are only used for MVA training/fit inputs.  
+This analysis focuses specifically on the 2-lepton channel of the fiducial analysis, with the event selection and analysis region definitions being identical.  Common to all lepton channels in the fiducial analysis is the set of requirements on the jets in a given event.  There must be at least two central jets and exactly two signal jets that have been ``$b$-tagged'' according to the MV2c10 algorithm \cite{btag}, with at least one of these $b$-jets having $p_T>45$ \GeV.  For MVA training and certain background samples, a process known as ``truth-tagging'' is applied instead of the standard $b$-tagging to boost sample statistics and stabilize training/fits (cf. \cite{supportnote} Section 4.2 for details).  After event selection, the \emph{muon-in-jet} and \emph{PtReco} corrections, described in \cite{objectnote} 6.3.3-4, are applied to the $b$-jets.
 
-In addition to the common selections, there are 2-lepton specific selections.  All events are required to pass an un-prescaled single lepton trigger, a full list of which may be found in Tables 5,6 of \cite{objectnote} with the requirement that one of the two selected leptons in the event must have fired the trigger.  There must be 2 VH-loose leptons, and at least one of these must be a ZH-signal lepton.  This lepton pair must have an invariant mass between 81 and 101 \GeV.  In order to increase analysis sensitivity, the analysis is split into orthogonal regions based on the number of jets and the transverse momentum of the $Z$ candidate (the vectoral sum of the lepton pair): 2 and $\ge3$ jets; $p_T^V$ in $\left[75,150\right),\left[150,\infty\right)$ \GeV.  In addition to the signal regions where the leptons are required to be the same flavor ($e$ or $\mu$), there are top $e-\mu$ control regions used to constrain the top backgrounds.
+In addition to the common selections, there are 2-lepton specific selections.  All events are required to pass an un-prescaled single lepton trigger, a full list of which may be found in Tables 5 and 6 of \cite{objectnote} with the requirement that one of the two selected leptons in the event must have fired the trigger.  There must be 2 VH-loose leptons, and at least one of these must be a ZH-signal lepton (cf. Tables \ref{tbl:elecsel} and \ref{tbl:muonsel} for definitions).  This lepton pair must have an invariant mass between 81 and 101 \GeV.  In addition to the jet corrections described above, a kinematic fitter is applied to the leptons and two leading corrected jets in an event with three or fewer jets\footnote{The gain from using the kinematic fitter is found to be smeared out in events with higher jet multiplicities.} to take advantage of the fact that the 2-lepton final state is closed (cf. \cite{run1note,epsJetRes}); these objects are only used for MVA training/fit inputs.  
+
+In order to increase analysis sensitivity, the analysis is split into orthogonal regions based on the number of jets and the transverse momentum of the $Z$ candidate (the vectoral sum of the lepton pair; this $p_T$ is denoted \ptv): 2 and $\ge3$ jets; $p_T^V$ in $\left[75,150\right),\left[150,\infty\right)$ \GeV.  In addition to the signal regions where the leptons are required to be the same flavor ($e$ or $\mu$), there are top $e-\mu$ control regions used to constrain the top backgrounds.
+
+All of these requirements are summarized in \ref{tab:evsel}.
 
 \begin{table}[!htbp]
   \begin{center}\begin{tabular}{cc}

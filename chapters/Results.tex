@@ -7,7 +7,7 @@ If it's stupid but it works, it isn't stupid.
 \chapter{Fit Results}
 
 \newthought{Much has been said} 
-Expected and observed sensitivities for the different variable sets may be found in Table \ref{tab:Sensitivities}.  The RF fits feature the highest expected sensitivities, outperforming the standard set by 3.5\% and 3.4\% for fits to Asimov and observed datasets, respectively.  The LI variable has a lower set than both for expected fits to both Asimov and data with a 6.7\% (1.7\%) significane than the standard set for the Asimov (observed) dataset.  While the fit using standard variables does have a higher observed significance than both the LI and RF fits, by 2.8\% and 8.6\%, respectively, these numbers should be viewed in the context of the best fit $\hat{\mu}$ values, discussed below.  That is, the standard set may yield the highest sensitivity for this particular dataset, but this is not necessarily the case for any dataset.
+Expected and observed sensitivities for the different variable sets may be found in Table \ref{tab:Sensitivities}.  The RF fits feature the highest expected sensitivities, outperforming the standard set by 3.5\% and 3.4\% for fits to Asimov and observed datasets, respectively.  The LI variable has a lower significance than both for expected fits to both Asimov and data with a 6.7\% (1.7\%) significance than the standard set for the Asimov (observed) dataset.  While the fit using standard variables does have a higher observed significance than both the LI and RF fits, by 2.8\% and 8.6\%, respectively, these numbers should be viewed in the context of the best fit $\hat{\mu}$ values, discussed below.  That is, the standard set may yield the highest sensitivity for this particular dataset, but this is not necessarily (and likely is not) the case for any given dataset.
 
 \begin{table}[!htbp]
 \begin{center}
@@ -15,26 +15,83 @@ Expected and observed sensitivities for the different variable sets may be found
 \hline\hline
  & Standard &LI &RF\\
 \hline
-Expected (Asimov) & 2.057 & 1.919 & 2.129\\
+Expected (Asimov) & 2.06 & 1.92 & 2.13\\
 \hline
-Expected (data) & 1.76 & 1.73 & 1.796\\
+Expected (data) & 1.76 & 1.73 & 1.80\\
 \hline
-Observed (data) & 2.865 & 2.786 & 2.62\\
+Observed (data) & 2.87 & 2.79 & 2.62\\
 \hline
 \hline
 \end{tabular}
 \end{center}
-\caption{Expected (for both data and Asimov) and observed sensitivties for the standard, LI, and RF variable sets.}
+\caption{Expected (for both data and Asimov) and observed significances for the standard, LI, and RF variable sets.}
 \label{tab:Sensitivities}
 \end{table}
 
-A summary of fitted signal strengths end errors for both the Asimov and observed datasets are shown in Figure \ref{fig:MuhatSummary}.  For reference, the standalone two lepton fit from the fiducial analysis is given .
+A summary of fitted signal strengths and errors for both the Asimov (a) and observed (b) datasets are shown in Figure \ref{fig:MuhatSummary}.\footnote{For reference, the standalone 2-lepton fit from the fiducial analysis is $2.11^{+0.50}_{-0.48}(\textrm{stat.})^{+0.64}_{-0.47}(\textrm{syst.})$}  A summary of error breakdowns is given in Tables \ref{tab:bd-asi-summary} (Asimov) and \ref{tab:bd-obs-summary} (observed) for total error, data statistics contributions, total systematic error contributions, and categories for which the total impact is $\ge0.1$ for the standard fit.  As is to be expected for both the Asimov and observed dataset fits, the contribution to the total error on $\mu$ arising from data statistics is nearly identical, since each set of fits uses the same selections and data.\footnote{Though not exactly identical.  Since the BDT's are different for the different variable sets, the binning (as determined by transformation D) and bin contents in each set are generally different, leading to slightly different data statistics errors.}
+
+\begin{table}[!htbp]
+\begin{center}
+\begin{tabular}{lccc}
+\hline\hline
+ &Std-KF &LI+MET &RF\\
+\hline
+Total &  +0.608 / -0.511  &  +0.632 / -0.539  &  +0.600 / -0.494 \\
+\hline
+DataStat &  +0.420 / -0.401  &  +0.453 / -0.434  &  +0.424 / -0.404 \\
+\hline
+FullSyst &  +0.440 / -0.318  &  +0.441 / -0.319  &  +0.425 / -0.284 \\
+\hline
+Signal Systematics &  +0.262 / -0.087  &  +0.272 / -0.082  &  +0.290 / -0.088 \\
+\hline
+MET &  +0.173 / -0.091  &  +0.140 / -0.074  &  +0.117 / -0.063 \\
+\hline
+Flavor Tagging &  +0.138 / -0.136  &  +0.069 / -0.071  &  +0.076 / -0.078 \\
+\hline
+Model Zjets &  +0.119 / -0.117  &  +0.124 / -0.127  &  +0.095 / -0.086 \\
+\hline
+\end{tabular}
+\caption{Summary of error impacts on total $\mu$ error for principal categories in the Asimov standard, LI, and RF fits.}
+\label{tab:bd-asi-summary}
+\end{center}
+\end{table}
+
+\begin{table}[!htbp]
+\begin{center}
+\begin{tabular}{lccc}
+\hline\hline
+ &Std-KF &LI+MET &RF\\
+\hline
+Total &  +0.811 / -0.662  &  +0.778 / -0.641  &  +0.731 / -0.612 \\
+\hline
+DataStat &  +0.502 / -0.484  &  +0.507 / -0.489  &  +0.500 / -0.481 \\
+\hline
+FullSyst &  +0.637 / -0.451  &  +0.591 / -0.415  &  +0.533 / -0.378 \\
+\hline
+Signal Systematics &  +0.434 / -0.183  &  +0.418 / -0.190  &  +0.364 / -0.152 \\
+\hline
+MET &  +0.209 / -0.130  &  +0.190 / -0.102  &  +0.152 / -0.077 \\
+\hline
+Flavor Tagging &  +0.162 / -0.166  &  +0.093 / -0.070  &  +0.115 / -0.099 \\
+\hline
+Model Zjets &  +0.164 / -0.152  &  +0.141 / -0.143  &  +0.101 / -0.105 \\
+\hline
+\end{tabular}
+\caption{Summary of error impacts on total $\hat{\mu}$ error for principal categories in the observed standard, LI, and RF fits.}
+\label{tab:bd-obs-summary}
+\end{center}
+\end{table}
+
+
+The contribution from systematic uncertainties, however, does vary considerably across the variable sets.  The Asimov fits are a best case scenario in the sense that, by construction, all NP's are equal to their predicted values (and so no ``penalty'' is paid for pulls on Gaussian NP's).  The systematics error from the LI fit is slightly higher (subprecent) than that from the standard fit, and 4.6\% higher error overall due to differences in data stats.  The RF Asimov fit, however, has a 6.5\% lower total error from systematics than the standard Asimov fit (and a 2.2\% lower error overall).  Moreover, for both the LI and RF sets, errors are markedly smaller for the MET and Flavor Tagging categories, with the RF fit also featuring a smaller errors on $Z+$jets modeling; the only notable exception to this trend in Asimov fits are the signal systematics.
+
+These trends are more pronounced in the observed fits.  As can be seen in Table \ref{tab:bd-obs-summary}, both the LI and RF fits have smaller errors from systematic uncertainties, both overall and in all principal categories, with the LI and RF fits having 7.5\% (3.7\%) and 16\% (8.8\%) lower systematics (total) error on $\hat{\mu}$, respectively.
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
     \includegraphics[width=0.490000\linewidth]{figures/Plot_mu_rfli-prod-exp}
     \includegraphics[width=0.490000\linewidth]{figures/Plot_mu_rfli-prod-obs}
-  \caption{$\hat{\mu}$ best fit values and error summary for the standard, LI, and RF variable sets; for reference, the values for the fiducial analysis 2 lepton standalone fit is included under the heading ``Paper-2L.''}
+  \caption{$\mu$ summary plots for the standard, LI, and RF variable sets.  The Asimov case (with $\mu=1$ by construction) is in (a), and $\hat{\mu}$ best fit values and error summary are in (b).}
   \label{fig:MuhatSummary}
 \end{figure}
 

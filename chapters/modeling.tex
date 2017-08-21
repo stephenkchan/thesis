@@ -5,11 +5,37 @@ If it's stupid but it works, it isn't stupid.
 \end{savequote}
 
 \chapter{Signal and Bacgkround Modeling}
-\newthought{This chapter} summarizes the modeling of the dominant signal and background processes in this analysis, including corrections and systematic uncertainties (set in \texttt{this} font) related to each process.  
+\newthought{This chapter} summarizes the modeling of the dominant signal and background processes in this analysis, including corrections and systematic uncertainties (set in \texttt{this} font) related to each process.  Further details on the specifics of these topics, including in-depth studies for the derivation and definitions of some of the quantities cited, may be in  \cite{modelingnote}.  We start with a general discussion of modeling and associated major categories of uncertainties before addressing each of the physics processes in turn.  As a general remark, studies related to corrections and systematics (unless noted) are truth-level studies (particle level) done in Rivet \cite{rivetmanual}, the standard tool for studying such effects.  % (we use the latter as a scaffold for this, basically plucking out stuff section by section)
 
-ATL-COM-PHYS-2016-1724 section 4  and Main reference: ATL-COM-PHYS-2016-1747.pdf \cite{modelingnote} (we use the latter as a scaffold for this, basically plucking out stuff section by section)
 
-Most of these studies (unless noted) are truth-level studies (particle level) done in Rivet \cite{rivetmanual} (F.4 for Rivet/reco comparison....not there)
+\section{Event Generation}
+\subsection{The Physics Simulation Event In a Nutshell}
+Before diving into the minutiae of the modeling and systematic uncertainties associated with each major set of physics processes considered in this analysis, we review at a schematic level, the problem of simulation event generation, namely, once a physics processes of interest has been determined, how does one simulate an ensemble of particle collisions with the process in question.  This is illustrated in Figure \ref{fig:evgen}.  Note that the scope of this problem does not include how these generated collision products propagate through one's detector.  This problem is left for Chapter \ref{ch:evsel}.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \begin{subfigure}[t]{0.300000\textwidth}\centering\includegraphics[width=\textwidth]{figures/zhllbb}}\caption{``Simple''}\end{subfigure}
+  \begin{subfigure}[t]{0.300000\textwidth}\centering\includegraphics[width=\textwidth]{figures/qcd_event}}\caption{Decidedly not}\end{subfigure}
+  \caption{The problem here is how to get from (a) to (b).}
+  \label{fig:evgen}
+\end{figure}
+
+
+
+\section{Description of Modeling Uncertainty Categories}
+
+\subsection{Physics Effects: QCD, PDF, UE+PS}
+
+\subsection{Acceptance/Normalization}
+
+\subsection{Division into Regions Based on Number of Jets}
+(Stewart-Tackmann)
+
+\subsection{Division into Regions by Jet Flavor}
+V+jet stuff
+
+\subsection{Shape Systematics}
+Lines
 
 \section{Signal Processes}
 The dominant process is Higgstrahlung; ggF is $\sim$14\%  
