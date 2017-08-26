@@ -5,46 +5,570 @@ If it's stupid but it works, it isn't stupid.
 \end{savequote}
 
 \chapter{Signal and Bacgkround Modeling}
-\newthought{This chapter} summarizes the modeling of the dominant signal and background processes in this analysis, including corrections and systematic uncertainties (set in \texttt{this} font) related to each process.  Further details on the specifics of these topics, including in-depth studies for the derivation and definitions of some of the quantities cited, may be in  \cite{modelingnote}.  We start with a general discussion of modeling and associated major categories of uncertainties before addressing each of the physics processes in turn.  As a general remark, studies related to corrections and systematics (unless noted) are truth-level studies (particle level) done in Rivet \cite{rivetmanual}, the standard tool for studying such effects.  % (we use the latter as a scaffold for this, basically plucking out stuff section by section)
+\newthought{This chapter} summarizes the modeling of the dominant signal and background processes in this analysis, including corrections and systematic uncertainties (set in \texttt{this} font) related to each process.  Further details on the specifics of these topics, including in-depth studies for the derivation and definitions of some of the quantities cited, may be in  \cite{modelingnote}.  We start with a general discussion of modeling and associated major categories of uncertainties before addressing each of the physics processes in turn.    % (we use the latter as a scaffold for this, basically plucking out stuff section by section)
 
 
-\section{Event Generation}
-\subsection{The Physics Simulation Event In a Nutshell}
-Before diving into the minutiae of the modeling and systematic uncertainties associated with each major set of physics processes considered in this analysis, we review at a schematic level, the problem of simulation event generation, namely, once a physics processes of interest has been determined, how does one simulate an ensemble of particle collisions with the process in question.  This is illustrated in Figure \ref{fig:evgen}.  Note that the scope of this problem does not include how these generated collision products propagate through one's detector.  This problem is left for Chapter \ref{ch:evsel}.
+\section{Event Generation In a Nutshell}
+Before diving into the minutiae of the modeling and systematic uncertainties associated with each major set of physics processes considered in this analysis, we review at a schematic level\footnote{i.e. this will not be a technically rigorous discussion.  For a more thorough treatment, the reader is directed to the usual references.}, the problem of simulation event generation, namely, once a physics processes of interest has been determined, how does one simulate an ensemble of particle collisions with the process in question.  This is illustrated in Figure \ref{fig:evgen}.  Note that the scope of this problem does not include how these generated collision products propagate through one's detector.  This problem is left for Chapter \ref{ch:evsel}.  
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-  \begin{subfigure}[t]{0.300000\textwidth}\centering\includegraphics[width=\textwidth]{figures/zhllbb}}\caption{``Simple''}\end{subfigure}
-  \begin{subfigure}[t]{0.300000\textwidth}\centering\includegraphics[width=\textwidth]{figures/qcd_event}}\caption{Decidedly not}\end{subfigure}
+  \begin{subfigure}[t]{0.420000\textwidth}\centering\includegraphics[width=\textwidth]{figures/zhllbb}}\caption{``Simple''}\end{subfigure}
+  \begin{subfigure}[t]{0.420000\textwidth}\centering\includegraphics[width=\textwidth]{figures/qcd_event}}\caption{Decidedly not}\end{subfigure}
   \caption{The problem here is how to get from (a) to (b).}
   \label{fig:evgen}
 \end{figure}
 
+The primary source of complication in event generation comes from dealing with hadronic objects both in the initial state (the lefthand side of Figure \ref{fig:evgen} (a); the LHC is a hadron collider) and the final state (this analysis searches for Higgs decays to $b$-jets, the lower righthand side of Figure \ref{fig:evgen}).  Common to all hadronic objects, by definition, are the many considerations that go into calculations in quantum chromodynamics (QCD).  In calculating the hard scatter process itself, one must make a variety of choices, such as the parton distribution function (PDF) set to use and to what order in perturbation theory to do the calculation (common choices are leading order (LO), (next to) next to leading order ((N)NLO), and (next to) next to leading log (NNLL)).  Similar considerations often need to be made for the electroweak parts of an event.  These considerations and others will be discussed in more detial below.  
 
+The initial state includes not only the hard scatter partons that generate the physics process of interest but also the rest of partons in the colliding protons, known as the underlying event (UE).  Moreover, the hard scatter partons may not be the only interacting partons in an event, further complicating matters; this phenomenon is known as multiple parton interactions (MPI).  Specific to the final state are the kinematic distributions of the final state objects---what their energies and angular distributions will be in addition to the overall cross section of the process as measurable by the detector (acceptance effects).  Furthermore, one has to model hadronization, the process by which any free (colored) partons in an event transform into colorless hadrons.
+
+Typically, it takes several steps and tools to accomplish this.  The hard scatter itself is often done with a dedicated event generator like \textsc{Powheg} \cite{powheg0} or \textsc{MadGraph} \cite{madgraph}, with events generated being interfaced with a tool like \textsc{Pythia} \cite{pythia8} for the PS, UE, and MPI, though there are exceptions (\textsc{Sherpa} \cite{sherpa}, for example, can do both for some processes).
 
 \section{Description of Modeling Uncertainty Categories}
+\label{sec:modsysgen}
+The general idea behind a systematic uncertainty\footnote{The terms ``systematic uncertainty,'' ``systematic,'' ``uncertainty,'' and ``nuisance parameter'' (often simply NP in both writing and speech) are often used interchangeably, though each has its own pedantically distinct definition.}  is to characterize the scale of variation for a given process in such a way that this knowledge can be easily combined with all other sources of uncertainty in an analysis to give total uncertainties for categories of systematics, different channels of analysis, and the analysis as a whole (as well as the single systematic itself).
 
-\subsection{Physics Effects: QCD, PDF, UE+PS}
+  The modeling systematics in this anlaysis are parametrized in a number of ways but are often characterized as Gaussians centered at zero, and so the relevant quantity to derive is the standard deviation for this distribution.  In practice, one does this by, in addition to making distributions of discriminants (usually an MVA or $m_{bb}$) for the nominal case, distributions corresponding to a variation in a given systematic uncertainty by both one standard deviation up and one standard deviation down.  Modeling systematics are exclusively weight systematics; that is, they only effect the weight with which an event is added to discriminating distributions.
 
-\subsection{Acceptance/Normalization}
+Modeling systematics are derived separately for each physics process (simulation sample).  Sometimes, all of the variation for a given process is encapsulated in a single systematic, but oftentimes the variations from multiple considerations are distinct enough to be treated separately.  Furthermore, each of these separate systematics for a given sample may be treated in a number of ways.  We will begin by outlining in more detail the former issue of theoretical considerations before describing the latter problem of different types of systematics.
 
-\subsection{Division into Regions Based on Number of Jets}
-(Stewart-Tackmann)
+The motivation of this section is to give prototypical examples for certain treatments of systematics to prevent verbosity and redundancy when describing each sample in detail.
 
-\subsection{Division into Regions by Jet Flavor}
-V+jet stuff
+\subsection{Physics Considerations}
+As described in the preceding section, many choices must be made when generating events for analysis studies.  In general, evaulating the uncertainties arising from these choices entails generating alternate samples of events, which practically means tuning parameters in the various software packages and/or using alternate packages/libraries to make new samples.  Once these samples have been created, they are compared at truth-level (particle level)using a package called Rivet \cite{rivetmanual} instead of using the full ATLAS detector reconstruction for computational considerations.  Given the nature of the problem and the tools, there are generally three main categories of physics issues, each described below.
 
-\subsection{Shape Systematics}
-Lines
+\subsubsection{Underlying Event and Parton Shower}
+\label{sec:ueps}
+The modeling of the underlying event (UE) and the parton shower (PS) are usually handled by the same package, typically \textsc{Pythia8} and so are usually treated together.  One approach to modeling these uncertainties is to simply see what happens when a different model is used and then compare this alternate set of events to the nominal set, taking the difference as the scale of variation.  Another approach is to vary some parameter within a given model, for example, using different tunes in the A14 set for \textsc{Pythia8} with their accompanying variations, to characterize the scale of variation.  
 
-\section{Signal Processes}
-The dominant process is Higgstrahlung; ggF is $\sim$14\%  
+A natural question is how to treat these two approaches on the same footing.  When examining a set of potential variations related to the same process or effect, oftentimes the largest single variation in a set is picked as defining the scale for the systematic uncertainty; another approach is to use the average over a set of variations.  The \texttt{ATLAS\_UEPS\_VH\_hbb} systematic, for example, uses the \texttt{Pythia8} + A14 tunes approach to determine the scale of UE variation and compares \texttt{Pythia8} with \texttt{Herwig7} to characterize the PS variation.  Each of the A14 tunes comes with an up and down variation, and the difference between each of these variations and a nominal setup may be expressed as a ratio, $R$, of total events.  
 
-$q\bar{q}$ Powheg with MiNLO (multiscale improved NLO generator Ref 1) applied as generator, Pythia 8 + AZNLO tune (Ref 3) + NNPDF3.0 PDF (Ref 4) set; $gg\to ZH$ Powheg + Pythia 8 (Ref 2)
+As is often done when a physical argument can be made for combining related, but utlimately orthogonal categories/measurements/uncertainties/systematics, the combined UE+PS systematic is taken to be the sum in quadrature of these two effects:
+\begin{equation}
+\sum_{tunes}\max_{tune}\left(\left|R_{up}-R_{down}\right|\right)\oplus\sigma_{PS}
+\label{eqn:uepsvhhbb}
+\end{equation}
 
-Alternate samples: MadGraph 5(ref 26)\_aMC@NLO+Pythia 8 
+\subsubsection{QCD Scale}
+The term ``QCD scale'' in the context of modeling uncertainties refers to the choice of renormalization ($\mu_R$) and factorization ($\mu_F$) scales used in QCD calculations.  These are typically treated together.  Usually, some multiplicative scale factor, $f$, is chosen, and each scale is varied in concert with the other scale by 1, $f$, and $1/f$ (nine total combinations), sometimes with a cap on how large the combined variation can be (so ignoring the $\left(f,f\right)$ and $\left(1/f,1/f\right)$ cases).  Just as in the UE+PS, the largest variation is usually taken as the systematic uncertainty.
 
-Cross section: this is done NNLO in QCD and NLO in EW except for ggZH NLO+NNL (QCD).  WH normalized to values in the table; ZH: total as 0.88, ggZH as 0.12, and then qqZH as total - ggZH (refs 15-18)
+\subsubsection{Parton Distribution Functions and $\alpha_S$}
+Finally, separate uncertainties are often made for the choice of parton distribution function (PDF) set and associated choice of strong coupling for QCD ($\alpha_S$).  Much as in the previous two cases, one can vary the parameter $\alpha_S$ and study what samples of simulation events made using different PDF sets relative some nominal setup look like.  Similarly, one can take the maximum, average, or sum in quadrature of different variations to characterize a systematic uncertainty.
+
+\subsection{Modeling Systematic Types}
+\subsubsection{Acceptance/Normalization}
+The most basic type of modeling uncertainty is a normalization uncertainty, often called an acceptance uncertainty.  This simply denotes the uncertainty on the number of predicted events for a given process in a given region of phase space (usually delineated by the number of letpons in the final state sometimes by the number of and jets the \ptv\, of an event) and is usually expressed as a percent.  
+
+As an example, the uncertainty on the theoretical prediction of the $H\to b\bar{b}$ branching ratio, denoted \texttt{ATLAS\_BR\_bb} (it is an ATLAS-wide systematic), is expressed as a normalization systematic with a value of 1.7\%, affecting all $VH$ processes.  Now imagine we have an event in a $VH$ sample with weight 1.0.  The nominal histograms for this region gets filled with this event's relevant information with weight 1.0, while the \texttt{ATLAS\_BR\_bb\_\_1up} (\texttt{\_\_1do}) histograms get filled with weight 1.017 (0.983).
+
+\subsubsection{Shape Systematics}
+\label{sec:shapesys}
+In addition to normalization systematics expressed as single numbers attached to different processes in different regions, there are also the so-called ``shape systematics'' and ``shape corrections.''  These have the schematic form
+\begin{equation}
+\label{eqn:shapesys}
+w_{event} = A_{region}\times f_{region}\left(event\right)
+\end{equaiton}
+where $w_{event}$ is the simulated event's weight, $A_{region}$ is the overall normalization (in principle including any systematics), and $f_{region}\left(event\right)$ is some function of event-level variables, usually a single variable, like \ptv\, or \mbb.  The purpose of these systematics is to take into acount (in the case of a systematic) or correct (in the case of a correction applied to the event weight) the non-trivial dependence of a normalization on one of these quantities.  Some of these are taken from histgorams while others are parametric functions (in this analysis, usually linear ones).
+
+An example of the former case is the quantity $\delta_{EW}$, the difference between the nominal $qqVH$ cross section and the differential cross section as a function of \ptv\, at next to leading order (NLO).  As a correction, this term is simply used as a correction factor $k_{EW}^{NLO}=\left(1+\delta_{EW}\right)$.  
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \centering\includegraphics[width=0.5\textwidth]{figures/modeling/nlo_ewk_corrections_hzll}
+  \caption{The $\delta_{EW}$ correction term for 2-lepton $qqZH$.}
+  \label{fig:nloewkdelta}
+\end{figure}
+
+An example of the latter case is the systematic associated with the \mbb\,dependence of the the \tt\,normalization for 2 jet, \ptv$\in\left[75,150\right)$ \GeV, 2 lepton events.  In this case, a variety of effects are studied (ME, PS, UE), but the treatment of the ME calculation was seen to have the largest effect on normalizaiton, so a linear fit to reasonably envelope the largest variation was done, and this was taken as a systematic variation.  \footnote{If this all seems a little ad-hoc, that's because it is, but, at least in this instance, the idea was that a single systematic covered the largest effect, so others were unnecessary.}
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \centering\includegraphics[width=0.5\textwidth]{figures/modeling/2lep2tag2jetMediumPtv_mBB_2017_extension_newnew-crop}
+  \caption{The derivation of the 2-lepton \tt\,\mbb\, shape systematic.}
+  \label{fig:ttbarmbbl2eg}
+\end{figure}
+
+\subsubsection{Dividing Moedling Uncertainties: Acceptance Ratios}
+In addition to uncertainties on absolute normalizations (both inclusive and region specific), modeling uncertainties are sometimes introduced for the ratio of normalizations in different regions.  The two main categories are ratios between different flavor regions and between regions with different numbers of jets (henceforth \nj\,regions).  The former category is only relevant for $V+$jets systematics and will be treated in that process's dedicated section below.  In order to discuss the \nj\,ratio systematics, we must first describe how exclusive \nj\,cross section calculations are done.\footnote{We don't really need to do this, but everyone seems to mention Stewart-Tackmann, and no one ever explains it.  The upshot is fairly simple, but the reasoning isn't necessarily so obvious.}
+
+\paragraph{Theoretical Aside: Stewart-Tackmann}
+A way to calculate uncertainties on processes in regions with different numbers of jets was developed by Stewart and Tackmann and is implicitly used for most \nj\, ratio systematics \cite{stewarttackmann}.  The problem is how to calculate the cross section and associated uncerainty for a process with exclusively $N$ jets in the final state.  Generically:
+\begin{equation}
+\label{eqn:stewtack1}
+\sigma_{\ge N}=\sigma_N+\sigma_{\ge N+1}
+\end{equation}
+
+The physical interpretation of one parton to one jet is an idealized case.  In order to demarcate between jets, one has some quantity that is used as a cutoff in an integral that defines the border between jet regions.  
+\begin{equation}
+\label{eqn:stewtack2}
+\sigma_{\ge N}=\int_0^{p_{cut}}\frac{d\sigma_N}{dp}+\int_{p_{cut}}\frac{d\sigma_{\ge N+1}}{dp}
+\end{equation}
+
+Since these cutoffs (not necessarily constant, etc.) can make calculations more complicated, inclusive cross sections tend to be easier to calculate.  Hence, it is usually much easier to evaluate the two inclusive cross sections and find the uncertainties on these by varying $\alpha_S$ in the usual way.  One then assumes the inclusive uncertainties are uncorrelated, for a covariance matrix for $\left\{\sigma_{\ge N},\sigma_N,\sigma_{\ge N+1}\right\}$ of:
+\begin{equation}
+\label{stewtackcov}
+\Sigma=\left(\begin{array}{ccc} \Delta^2_{\ge N} & \Delta^2_{\ge N} &0\\ \Delta^2_{\ge N}& \Delta^2_{\ge N}+\Delta^2_{\ge N+1}& -\Delta^2_{\ge N+1}\\ 0& -\Delta^2_{\ge N+1} & \Delta^2_{\ge N+1} \end{array}\right)
+\end{equation}
+
+The main idea is that you have Sudakov double logs of $p/Q$, where $Q=m_H$ or whatever scale your hard process occurs at, and $p_{cut}$ is usually something like a $p_T$ cutoff.  Now, the $N+1$ term in that matrix is actually some uncertainty associated with your cutoff, but your double logs will dominate your higher order terms with Stewart and Tackmann giving the following reasoning:
+
+``In the limit $\alpha_sL^2 \approx 1$, the fixed-order perturbative expansion breaks down and the logarithmic terms must be resummed to all orders in $\alpha_s$ to obtain a meaningful result.  For typical experimental values of pcut fixed-order perturbation theory can still be considered, but the logarithms cause large corrections at each order and dominate the series.  This means varying the scale in $\alpha_s$ in Eq. (9) directly tracks the size of the large logarithms and therefore allows one to get some estimate of the size of missing higher-order terms caused by $p_{cut}$, that correspond to $\Delta_{cut}$.  Therefore, we can approximate $\Delta_{cut}$ = $\Delta_{\ge 1}$, where $\Delta_{\ge 1}$ is obtained from the scale variation for $\sigma_{\ge 1}$.''
+
+%They use the example of ggF Higgs production with $\left\{\sigma_{total},\sigma_0,\sigma_{\ge 1}\right\}$ and say this works to all $N$ for all processes, provided one picks $\mu\approx Q$ so you can use perturbative expansions.
+
+The above considerations are important for this analysis since phase space is separated into got 2 and $\ge3$ jet regions, and the uncertainties for these regions are anti-correlated.%  For 2 jet TheoryAcc\_J2 and TheoryAcc\_J3; 3 jet has TheoryAcc\_J3, which is anti-correlated with the 2 jet J3 term
+
+Of particular importance to ratio systematics is the so-called ``double ratio'' that is often take as the scale of variation (plus one).  The \texttt{ATLAS\_UEPS\_VH\_hbb} systematic mentioned above, for example, has associated with it, \texttt{ATLAS\_UEPS\_VH\_hbb\_32JR}.  This systematic is evaluated by dividing the 3 jet to 2 jet ratio in the nominal setup by the same ratio in an alternate setup.  Such a ratio generically looks like:
+
+\begin{equation}
+\label{eqn:doubleratio}
+\left. \dfrac{Acceptance[Category_{A}(nominal MC)]}{Acceptance[Category_{B}(nominal MC)]} \middle/ \dfrac{Acceptance[Category_{A}(alternative MC)]}{Acceptance[Category_{B}(alternative MC)]} \right.
+\end{equation}
+
+\section{Process Specific Systematic Summaries}
+Brief descriptions of modeling systematics, including recapitulations of nominal sample generation, are given in the following sections.  The general approach here is to copy the relevant summary tables and describe any major deviations from the general procedures described in the previous section.  The dominant backgrounds for the 2-lepton channel are $Z+$hf and \tt, accounting for well over 90\% of all background events.  Diboson samples are the next-leading background and are an important validation sample; others are included for completeness.  A summary of all the modeling systematics in this analysis are given in Table \ref{tab:modelsyssum}.  
+\begin{table}[!htbp]
+  \begin{center}
+    \begin{tabular}{lp{5in}}
+      \hline\hline
+      Process & Systematics\\
+      \hline
+      Signal  & $H\to bb$ decay, QCD scale, PDF+$\alpha_S$ scale, UE+PS (acc., $p_T^V$, $m_{bb}$, 3/2 jet ratio)\\
+      $Z$+jets  & Acc, flavor composition, $p_T^V$+$m_{bb}$ shape\\
+      \tt  & Acc, $p_T^V$+$m_{bb}$ shape\\
+      Diboson  &  Overall acc., UE+PS (acc, $p_T^V$, $m_{bb}$, 3/2 jet ratio), QCD scale  (acc (2, 3 jet, jet veto), $p_T^V$, $m_{bb}$)\\
+      Single top  & Acc., $p_T^V$+$m_{bb}$ shape\\
+      \hline\hline
+    \end{tabular}
+  \end{center}
+  \caption{Summary of modeling systematic uncertainties, with background samples listed in order of importance.}
+  \label{tab:modelsyssum}
+\end{table}
+
+\subsection{Signal Processes}
+Nominal signal $qqVH$ samples are generated using \textsc{Powheg} with the \texttt{MiNLO} (multiscale improved NLO) \cite{minlo} procedure applied interfaced with \textsc{Pythia8} using the AZNLO tune \cite{aznlo} and NNPDF3.0 PDF set \cite{nnpdf3}.  For the 2-lepton case, gluon fusion initiated Higgs production is also considered (accounting for $\sim$14\% of the total cross section in this channel), with samples generated with \powheg interfaced with \pythia8 using the AZNLO tune; the NNPDF2.3 set \cite{nnpdf23} is used for both the ME and UE+PS.
+
+Alternate samples $qqVH$ samples are generated using \mg\_aMC@NLO \cite{mg5amc} for the ME and \pythia8 for the UE+PS, hadronizaiton and MPI.  The NNPDF2.3 5f FFN PDF sets and the A14 tune \cite{a14tune}; the latter has variations included.  \powheg+\texttt{MiNLO}+\herwig7 were samples were also used for systematics.
+
+The signal systematics categories are $H\to bb$ decay cross section, QCD scale, PDF+$\alpha_S$ scale, and UE+PS.  Additionally, there is the NLOEWK correction described above.  The correction scale factor is derivedusing the HAWK MC software.  To encapsulate NNLOEW effects the maximum of 1\%, the square of the correction factor, and the photon induced cross section is used as a systematic.  
+
+Table \ref{tab:vhSysTheorySummary}, reproduced from \cite{modelingnote}, summarizes the signal cross section systematics, which are applied uniformly across the analysis channels (as applicable).
+
+\begin{table}[!htbp]
+\footnotesize
+\centering
+\begin{tabular}{ c || c | c | c  }
+\hline
+\hline
+Sys Name  & source & Norm. effect & applied to \\
+\hline
+\texttt{ATLAS\_BR\_bb} 			&  $H\to bb$ decay uncertainties (HO effects, $m_b$, $\alpha_s$)	&  1.7\% 	& all $VH$ processes 	\\
+\hline	
+\texttt{ATLAS\_QCDscale\_VH}		& QCD scale uncertainty									&  0.7\%	& $qq\to VH$ processes	\\
+\hline
+\texttt{ATLAS\_QCDscale\_ggZH}	& QCD scale uncertainty									&  27\%	  & $gg\to ZH$			\\
+\hline
+\multirow{2}{*}{\texttt{ATLAS\_pdf\_Higgs\_VH}}  & \multirow{2}{*}{PDF+$\alpha_s$ uncertainty}                  &  1.9\%    & $qq\to WH$                  \\
+									  &											 &  1.6\%    &  $qq\to ZH$                  \\   
+\hline
+\texttt{ATLAS\_pdf\_Higgs\_ggZH}    &  PDF+$\alpha_s$ uncertainty								&    5.0\%   & $gg\to ZH$			\\
+\hline
+\hline
+\end{tabular}
+\caption{Summary of all systematic uncertainties on the $VH$ cross section including their value, source and the corresponding nuisance parameter name.}
+\label{tab:vhSysTheorySummary}
+\end{table}
+
+The remaining signal systematics are analysis channel specific and are summarized in \ref{tab:vhSysSummaryAna}.  The methodologies match those described in \ref{sec:modsysgen}.  The UE+PS systematics were derived using the alternate samples mentioned above; QCD scale uncertainties were derived by varying scales by 1/3 and 3; and PDF uncertainties were derived by comparing the nominal set with the PDF4LHC15\_30 PDF set \cite{pdf4lhc}.
+
+
+\begin{table}[!htbp]
+\small
+\centering
+\begin{tabular}{ c ||| c | c || c | c || c | c  }
+\hline
+\hline
+		  & \multicolumn{2}{c ||}{0L: \Zhtovvbb}	& \multicolumn{2}{c ||}{1L: \Whtolvbb} 	& \multicolumn{2}{c }{2L: \Zhtollbb}  \\
+NP name    & 2j		& 3j					   	& 2j		& 3j						&  2j		& $\geq$3j			\\		
+\hline
+\hline
+\texttt{ATLAS\_UEPS\_VH\_hbb}  		& 10.0\%  &  10.0\%  			&  12.1\% & 12.1\%			& 13.9\% & 13.9\% \\
+\hline
+\texttt{ATLAS\_UEPS\_VH\_hbb\_32JR}	& --	      & {13.0\%}  & --         & {12.9\%}  & -- 	& {13.4\%} \\
+\hline
+\texttt{ATLAS\_UEPS\_VH\_hbb\_VPT}	&  \multicolumn{4}{ c |}{shape only}		&    \multicolumn{2}{ c }{shape+norm}		\\ 
+\hline
+\texttt{ATLAS\_UEPS\_VH\_hbb\_MBB}	&  \multicolumn{6}{ c }{shape only} \\ 
+\hline
+\texttt{QCDscale\_VH\_ANA\_hbb\_J2}  	& 6.9\%  &  --  			&  8.8\% & --			& 3.3\% & -- \\
+\hline
+\texttt{QCDscale\_VH\_ANA\_hbb\_J3}  	& -7\%  &  +5\%		&  -8.6\% & +6.8\%		& -3.2\% & +3.9\% \\
+\hline
+\texttt{QCDscale\_VH\_ANA\_hbb\_JVeto} & --       &  -2.5\%              &  --         & 3.8\%              & -- & -- \\
+\hline
+\texttt{QCDscale\_VH\_ANA\_hbb\_VPT}	&  \multicolumn{4}{ c |}{shape only}		&    \multicolumn{2}{ c }{shape+norm}		\\ 
+\hline
+\texttt{QCDscale\_VH\_ANA\_hbb\_MBB } &  \multicolumn{6}{ c }{shape only} \\ 
+\hline
+\texttt{pdf\_HIGGS\_VH\_ANA\_hbb}  	& 1.1\%  &  1.1\%  		&  1.3\% & 1.3\%		& 0.5\% & 0.5\% \\
+\hline
+\texttt{pdf\_VH\_ANA\_hbb\_VPT}	&  \multicolumn{4}{ c |}{shape only}		&    \multicolumn{2}{ c }{shape+norm}		\\ 
+\hline
+\texttt{pdf\_VH\_ANA\_hbb\_MBB } &  \multicolumn{6}{ c }{shape only} \\ 
+\hline
+\hline
+\end{tabular}
+\caption{Summary of all systematic uncertainties on the $VH$ acceptance and shapes originating from altering the PDF and $\alpha_s$ uncertainties, including their corresponding nuisance parameter name.}
+\label{tab:vhSysSummaryAna}
+\end{table}
+
+
+%\section{Background}
+%Main backgrounds are V+jet, ttbar, VV, single top (, and multijet in 1lep)
+
+\subsection{$V+$jets}
+Nominal $V+$jets samples are generated using \sherpa\, 2.2.1@NLO\footnote{\sherpa\, 2.1 is used for some variations not available in \sherpa\, 2.2.1.} \cite{modeling23} for both the ME and PS, interfaced with the NNPDF's and using a five quark flavor scheme, and alternative samples are derived using \mg5 interfaced with \pythia8.  In order to increase statistics in important regions of phase space, these samples were separated into kinematic slices based on \ptv\,and into bins of jet flavor.  The kinematic slices were in the quantity $\max\left(H_T,P_T^V\right)$ and had the intervals $\left[0–70, 70–140, 140–280, 280–500, 500–1000, >1000\right]$ \GeV.  The jet flavor slices were made using flavor vetoes and filters:
+\begin{itemize}
+\item BFilter: at least 1 b-hadron with $\left|\eta\right|<4, p_T >0$ GeV
+\item CFilterBVeto: at least 1 c-hadron with $\left|\eta\right|<3, p_T >4$ GeV; veto events which pass the BFilter
+\item CVetoBVeto: veto events which pass the BFilter or the CFilterBVeto
+\end{itemize}
+
+These in turn are related to the main flavor regions used in the analysis, based on the flavor of the two leading jets in an event (based on $p_T$).  These five flavors (with up, down, and strange collectively known as ``light'') yield six different flavor combinations: $bb$, $bc$, $bl$ (these first three collectively known as ``heavy flavor'' or $V+$hf), $cc$, $cl$, $ll$ (or just ``light'' or $l$).  Ratio systematics are often made with respect to the acceptance in the $bb$ region.
+
+$V+$jet systematics are derived in several steps.  The first is to use double ratios of acceptances between analysis regions and nominal versus alternative MC's (so (Region1-nominal/Region2-nominal)/(Region1-alternate/Region2-alternate)).  The main region comparisons are 2 jet versus 3 jet (3+ jet for 2-lepton) and then 0-lepton versus 2-lepton (1-lepton) for Z+hf (W+hf\footnote{The W+hf CR versus the SR is also considered for W+hf}).  The final uncertainty contains the sum in quadrature of four effects:
+\begin{enumerate}
+\item Variation of 0.5 and 2 of QCD scales in the \sherpa\, sample
+\item Sum in quadrature of half the variation from different resummation and CKKW merging scales \footnote{cf. \cite{modeling25}, Section 2 for a summary of the CKKW method for different parton multiplicties used in \sherpa}
+\item Maximal variation between nominal setup and \sherpa\, 2.2.1 with the MMHT2014nnlo68cl and CT14nnlo PDF sets
+\item Difference between the \sherpa\, and \mg\, sets
+\end{enumerate}
+
+Summaries of the $Z+$jets uncertainties are provided here; the reader is referred to \cite{modelingnote} for the $W+$jets systematics, as these events are virtually non-existent in the 2-lepton case with which this thesis is almost exclusively concerned.  In Table \ref{tab:zjetsnorm}, from \cite{modelingnote} are the normalization systematics.
+
+\begin{table}[!htpb] 
+\begin{center} 
+\small 
+\begin{tabular}{ c || c || c | c | c || c | c | c   } 
+\hline 
+\hline 
+ Process 	& Name  	& \multicolumn{6}{ c }{prior in region}                                                             \\
+       	       	&            	&  \multicolumn{3}{ c ||}{2jet}   		&   \multicolumn{3}{ c }{($\geq$)3jets}    \\ 
+		&	  	& 2L: low Vpt  &  2L: high Vpt  & 0L 	&   2L: low Vpt  &  2L high Vpt  &    0L  \\ 
+\hline 
+\hline
+$Z$+l     &  \texttt{SysZclNorm}            &  \multicolumn{6}{ c }{ 18\% } \\
+$Z$+cl   &  \texttt{SysZlNorm}              &  \multicolumn{6}{ c }{ 23\% } \\
+$Z$+hf   & \texttt{norm\_Zbb}               &  \multicolumn{6}{ c }{ Floating Normalisation} \\
+\hline
+$Z$+hf   & \texttt{SysZbbNorm\_L2\_J3}   	&  --  & --	&  -- 		&  30\%  &  30\% & -- 	\\  
+$Z$+hf   & \texttt{SysZbbNorm\_J3}   	&  -- 	& --	&  -- 		&  --  &  -- & 17\%  		\\  
+$Z$+hf   & \texttt{SysZbbNorm\_0L}    	&  --  & --  &  7\%	&  --  &  -- &   7\%  		\\
+$Z$+hf   & $\texttt{SysZbbPTV}$               &   \multicolumn{6}{ c }{effect on each region obtained from shape rw}       \\
+\hline 
+\hline 
+\end{tabular} 
+\caption{ \label{tab:zjetsnorm} Effect of modelling systematics on $Z$+jets normalisation in the 2lepton regions. For systematic uncertainties implemented with a prior the effect of 1-$\sigma$ variation is reported. 
+The uncertainties labelled as $Zbb$ act on the entire $Z$+hf background.} 
+\end{center} 
+\end{table} 
+
+The flavor composition ratio systematics are in Table \ref{tab:zhf}, also from \cite{modelingnote}.
+
+\begin{table}[!htbp]
+\begin{center}
+\begin{tabular}{c|c|c|c}
+        \hline
+        \hline
+         Category & Nuisance Parameter Name & Prior & Applied to\\ 
+        \hline
+        \multirow{ 3}{*}{$Z$+bc/$Z$+bb} & \multirow{ 3}{*}{\texttt{SysZbcZbbRatio}}  & 40\% & $Z$+bc events (0-Lepton)\\
+                                                            &								    & 40\% & $Z$+bc events (2-Lepton 2jet)\\
+							  &								    & 30\% & $Z$+bc events (2-Lepton $\geq$3jet)\\		
+        \hline
+        \multirow{ 3}{*}{$Z$+bl/$Z$+bb} & \multirow{ 3}{*}{\texttt{SysZblZbbRatio}}     & 25\% & $Z$+bl events (0-Lepton)\\
+                                                            &								    & 28\% & $Z$+bl events (2-Lepton 2jet)\\
+							  &								    & 20\% & $Z$+bl events (2-Lepton $\geq$3jet)\\	
+	\hline
+        \multirow{ 3}{*}{$Z$+cc/$Z$+bb} & \multirow{ 3}{*}{\texttt{SysZccZbbRatio}}    & 15\% & $Z$+cc events (0-Lepton)\\
+                                                            &								    &  16\% & $Z$+cc events (2-Lepton 2jet)\\
+							  &								    &   13\% & $Z$+cc events (2-Lepton $\geq$3jet)\\	
+        \hline
+        \hline
+\end{tabular}
+\caption{The priors on the relative acceptance variations for $Z$+hf. The first column details the flavour components across which the acceptance variation is being considered, the second column lists the names of the corresponding nuisance parameter in the Profile Likelihood Fit, the third contains the value of the prior and the fourth column the processes and categories to which this nuisance parameter is applied.}
+\label{tab:zhf}
+\end{center}
+\end{table}
+
+Finally, the \ptv\,and\mbb\,shape systematics are derived using control regions in data\footnote{These use the same selections as the signal regions except for $b$-tags (0, 1, and 2 tags are studied), with the added requirement in 2tag regions that \mbb\,not be in the range of 110--140\GeV.}.  The functional form for the \ptv\, systematic is $\pm 0.2 \log10 (p_T^V/50 {\text GeV})$, and that of the \mbb \,systematic is $\pm 0.0005 \times (m_{jj}-100~{\text GeV})$.
+
+\subsection{Top-Pair Production}
+Nominal \tt\,samples are produced with \powheg at NLO for the ME calculation using the NNPDF3.0 PDF set interfaced with \pythia8.210 using the A14 tune and the NNPDF2.3 PDF set at LO.  The parameters \texttt{hdamp} (nominal value $1.5m_{top}$, a resummation damping factor for ME/PS matching that can heuristically thought of as tuning high $p_T$ radiation) in \powheg and \texttt{pThard} (nominal value 0) and \texttt{pTdef} (nominal value 2) in \pythia\, (both control merging with \powheg) are varied to evaluate certain systematics.  Alternative \tt\,samples use \powheg+\herwig7, \mg5\_aMC@NLO+\pythia8.2, and the nominal setup with varied tunes and parameter values.  Uncertainties are taken to cover the largest difference between the nominal and any of these alternate configurations.
+
+The overall \tt\,normalization is a floating normalization\footnote{The use of a top $e-\mu$ control region helps constrain this.}, and further systematics attached to the ratio of acceptances between regions (3-to-2 jet, SR-to-WhfCR, and 1-to-0 lepton) are defined using double ratios; these are summarized in Tables \ref{tab:ttbarSysSummary1} and \ref{tab:ttbarSysSummary2}, taken from \cite{modelingnote}
+
+
+\begin{table}[!htpb] 
+\begin{center} 
+\small 
+\begin{tabular}{ c || c | c || c | c | c | c  } 
+\hline 
+\hline 
+                   &  \multicolumn{2}{| c ||}{0-lepton}    &   \multicolumn{4}{| c }{1-lepton}    \\ 
+\hline 
+Systematic  &         2j    &    3j      &  WCR 2j   &   SR 2j   &   WCR 3j   &   SR 3j   \\
+\hline 
+$\texttt{norm\_ttbar}$		 			&  \multicolumn{6}{ c }{floating normalisation} \\    
+\hline
+$\texttt{SysttbarNorm\_L0}$ 			&   8\%	&   8\%	&  -- 		&  -- 		&  -- 		&  -- \\    
+$\texttt{SysttbarNorm\_J2}$ 			&   9\%	&    --	&  9\%    	&  9\% 	&  -- 		&  -- \\  
+$\texttt{SysttbarNorm\_DWhfCR\_L1}$ 	&   --		&    --	&  25\%   	& -- 		&  25\% 	&   -- \\  
+\hline 
+\hline 
+\end{tabular} 
+\caption{ \label{tab:ttbarSysSummary1} Effect of modelling systematics on \ttbar\ normalisation in the 0 and 1-lepton analysis region.} 
+\end{center} 
+\end{table} 
+
+\begin{table}[!htpb] 
+\begin{center} 
+\small 
+\begin{tabular}{ c || c | c || c | c |  } 
+\hline 
+\hline 
+                   &  \multicolumn{2}{ c ||}{2jet}   			&   \multicolumn{2}{ c }{$\geq$3jets}    \\ 
+		  & low Vpt [SR/CR]  &  high Vpt [SR/CR]  &   low Vpt [SR/CR]  &  high Vpt [SR/CR]   \\ 
+\hline 
+$\texttt{norm\_ttbar\_J2\_L2}$	&  \multicolumn{2}{ c ||}{floating normalisation} & \multicolumn{2}{ c }{ -- }  \\    
+$\texttt{norm\_ttbar\_J3\_L2}$	&  \multicolumn{2}{ c ||}{ -- }  & \multicolumn{2}{ c |}{floating normalisation}  \\    
+\hline
+$\texttt{SysTTbarPTV\_L2\_L2}$         &   \multicolumn{4}{ c }{effect on each region obtained from shape rw}       \\
+\hline 
+\hline 
+\end{tabular} 
+\caption{ \label{tab:ttbarSysSummary2} Effect of modelling systematics on \ttbar\ normalisation in the 2lepton regions. The \texttt{SysTTbarPTV\_L2\_L2} systematic is implemented as a shape systematic over the full VpT>75\,GeV range, and as a result has different acceptance effects in the low and high VpT regions.} 
+\end{center} 
+\end{table} 
+
+Shape systematics for \ptv\,and\mbb\, are linear and taken to cover the largest difference reasonably well, as described above in \ref{sec:shapesys}.  These are summarized in Table \ref{tab:ttbarSysShapeSummary}, again taken from \cite{modelingnote}.
+
+\begin{table}[!htb]
+\small
+\begin{center}
+\begin{tabular}{c|c|c|c|c}
+        \hline
+        \hline
+        Analysis region & Uncertainty & Value & Source & Nuisance Parameter \\
+        \hline
+        0,1 lepton & $p_T^V$ shape & shape & fit through largest & \texttt{TTbarPTV} \\
+	              & & & deviation (aMC@NLO+\PYTHIA8)  & \\ 
+	              \hline
+        2 lepton & $p_T^V$ shape & norm & fit through largest & \texttt{TTbarPTV\_L2} \\
+	              & & + shape & deviation (aMC@NLO+\PYTHIA8)  & \\
+	              \hline 
+	0,1 lepton & $m_{b\bar{b}}$ shape & shape & fit through largest & \texttt{TTbarMBB} \\
+	              & & only & deviation (aMC@NLO+\PYTHIA8)  & \\ 
+	              \hline
+        2 lepton & $m_{b\bar{b}}$ shape & shape & fit through largest & \texttt{TTbarMBB\_L2} \\
+	              & & only & deviation (aMC@NLO+\PYTHIA8)  & \\ 
+        \hline
+        \hline
+\end{tabular}
+\caption{Summary of all shape uncertainties for the $t\bar{t}$ process with short descriptions and the name of the corresponding nuisance parameters. }
+\label{tab:ttbarSysShapeSummary}
+\end{center}
+\end{table}
+
+\subsection{Diboson Production}
+Three diboson production processes (collectively denoted \vv) are important for these analyses: $ZZ$, $WZ$, and $WW$.  Nominal samples are created using \sherpa\, 2.2.1 using the NNPDF3.0 PDF set.  Alternative samples use \powheg+\pythia8 and \powheg+\herwig++.  The methodology here is similar to that of the \tt\,systematics, with both overall acceptance and lepton channel specific uncertainties, with the exception that UE+PS and QCD scale are treated separately (PDF+$\alpha_S$ was found to be neglibible).  \ptv\, shape systematics are described using linear fits, while \mbb\, shape systematics are described using hyperbolic tangents (thrid degree polynomials) in the 2 jet (3 jet) regions. Once again, summary tables from \cite{modelingnote} are reproduced here.
+
+\begin{table}[!htbp]
+\small
+\centering
+\begin{tabular}{ c || c | c | c  }
+\hline
+\hline
+Sys Name  & source & Norm. effect & applied to \\
+\hline
+\texttt{SysWWNorm} 		&  overall cross section uncertainty	&  25\% 	& WW in all regions 	\\
+\hline	
+\texttt{SysWZNorm} 			&  overall cross section uncertainty	&  26\% 	& WZ in all regions 	\\
+\hline
+\texttt{SysZZNorm} 			&  overall cross section uncertainty	&  20\% 	& ZZ in all regions 	\\
+\hline
+\hline
+\end{tabular}
+\caption{Summary of all systematic uncertainties on the diboson cross section including their value, source and the corresponding nuisance parameter name. } 
+%%(These uncertainties from ICHEP continue to be used in the current analysis). }
+%\textcolor{red}{THOSE ARE THE ICHEP NUMBERS ... THEY COULD STAY SINCE WE ARE NOT SO SENSITIVE TO THEM ... BUT WE NEED TO JUSTIFY THEM.} }
+\label{tab:DibOverall}
+\end{table}
+
+
+\begin{table}[ht!b]
+\small
+\centering
+\begin{tabular}{ c ||| c | c || c | c || c | c  }
+\hline
+\hline
+		  & \multicolumn{2}{c ||}{0L: \ZZtovvbb}	& \multicolumn{2}{c ||}{1L: \WZtolvbb} 	& \multicolumn{2}{c }{2L: \ZZtollbb}  \\
+NP name    & 2j		& 3j					   	& 2j		& 3j						&  2j		& $\geq$3j			\\		
+\hline
+\hline
+\texttt{SysVZ\_UEPS\_Acc}  	& 5.6\%  &  5.6\%  		&  3.9\% & 3.9\%		& 5.8\% 	& 5.8\% \\
+\hline
+\texttt{SysVZ\_UEPS\_32JR}	& --	      &  7.3\%  		& --         & 10.8\%	  	& -- 		& 3.1\% \\
+\hline
+\texttt{SysVZ\_UEPS\_VPT}	&    \multicolumn{2}{ c ||}{shape+norm}  &  \multicolumn{2}{ c ||}{shape only}		&    \multicolumn{2}{ c }{shape+norm}		\\ 
+\hline
+\texttt{SysVZ\_UEPS\_MBB}	&  \multicolumn{6}{ c }{shape only} \\ 
+\hline
+\texttt{SysVZ\_QCDscale\_J2}  		& 10.3\%  &  --  		&  12.7\% & --			& 11.9\% & -- \\
+\hline
+\texttt{SysVZ\_QCDscale\_J3}  		& -15.2\%  &  +17.4\%	&  -17.7\% & +21.2\%	& -16.4\% & +10.1\% \\
+\hline
+\texttt{SysVZ\_QCDscale\_JVeto} 	& --       &  +18.2\%            &  --         & +19.0\%         & -- & -- \\
+\hline
+\texttt{SysVZ\_QCDscale\_VPT}	&    \multicolumn{2}{ c ||}{shape+norm} &  \multicolumn{2}{ c ||}{shape only}		&    \multicolumn{2}{ c }{shape+norm}		\\ 
+\hline
+\texttt{SysVZ\_QCDscale\_MBB } 	&  \multicolumn{6}{ c }{shape only} \\ 
+\hline
+\hline
+\end{tabular}
+\caption{Summary of the systematic uncertainties on the VH acceptance in each analysis region and on the $p_{T}^{V}$ and $m_{b\bar{b}}$ shapes originating from altering the QCD scale, including their nuisance parameter name. %%%%%\textcolor{red}{Need to decide whether to decorrelate $WZ$ and $ZZ$ or not.} 
+}
+\label{tab:dibosonSysSummaryAna}
+\end{table}
+
+\subsection{Single Top Production}
+Single top sample are generated separately for the different production channels ($s$, $t$, and $Wt$) using \powheg\,with the CT10 NLO PDF's interfaced with \pythia6 using the PERUGIA2012 PS tune and the corresponding CTEQ6l1 LO PDF's and PHOTOS (TAUOLA) for QED final state ($\tau$) decays.\footnote{No references were given in the note, and this background really isn't that important.}  Just as with \tt\,samples, \powheg\,and\pythia\, settings are varied for certain systematics.  Alternative samples use \powheg+\pythia6 with $Wt$ disagram subtraction (DS) (instead of ``diagram removal'' for the ME calculation) and \mg5\_aMC@NLO+\herwig++.  Systematics are derived separately in each channel, and are well described in the sumamry Table \ref{tab:stopSysSummary} taken from \cite{modelingnote}.
+
+
+\begin{table}[!htbp]
+\begin{scriptsize}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \hline
+        Production & Uncertainty & Value & Source & Nuisance Parameter \\
+        \hline
+        \hline
+        $s$-channel & overall normalisation & 4.6\% &  sum in quadrature of $\mu_R$, & \texttt{stopsNorm} \\
+                & & & $\mu_F$, $\alpha_{S}$ and PDF uncertainties & \\
+        \hline
+        $t$-channel & overall normalisation & 4.4\% & sum in quadrature of $\mu_R$, & \texttt{stoptNorm} \\
+        & & & $\mu_F$, $\alpha_{S}$ and PDF uncertainties &  correlated with 2 jet and 3 jet case \\
+        	$t$-channel & 2 jet region acceptance & 17\% & sum in quadrature & \texttt{stoptAcc} \\
+	              & & & of deviations in alternative generators  &  correlated with overall and 3 jet case\\ 
+	$t$-channel & 3 jet region acceptance & 20\% & sum in quadrature & \texttt{stoptAcc} \\
+	              & & & of deviations in alternative generators  & correlated with overall and 2 jet case \\ 
+        \hline
+        $Wt$ channel & overall normalisation & 6.2\% & sum in quadrature of $\mu_R$, & \texttt{stopWtNorm}\\
+                        & & & $\mu_F$, $\alpha_{S}$ and PDF uncertainties & correlated with 2 jet and 3 jet case  \\
+	$Wt$ channel & 2 jet region normalisation & 35\% & sum in quadrature & \texttt{stopWtAcc} \\
+	              & & & of deviations in alternative generators  & correlated with overall and 3 jet case \\ 
+	  %            \hline
+	$Wt$ channel & 3 jet region normalisation & 41\% & sum in quadrature & \texttt{stopWtAcc} \\
+	              & & & of deviations in alternative generators  & correlated with overall and 2 jet case\\ 
+	\hline
+        $t$-channel & $p_T^V$ shape & shape & fit through largest deviation  & \texttt{StoptPTV} \\
+	              & & & (\POWHEG+\HERWIG++)  & \\ 
+	              & & & $\pm 0.001\times p_T^V \mp 0.17 + 1$  & \\ 
+	              \hline 
+        $t$-channel & $m_{b\bar{b}}$ shape & shape & fit through largest deviation& \texttt{StoptMBB} \\
+	              & & & (\POWHEG+\PYTHIA6 |radHi-radLo|)  & \\ 
+	              & & & $\pm 0.0008\times m_{b\bar{b}} \mp 0.12 + 1$  & \\ 
+	              \hline
+        $Wt$ channel & $p_T^V$ shape & shape & fit through largest deviation & \texttt{StopWtPTV} \\
+	              & & & (\POWHEG+\PYTHIA6 with diagram subtraction)  & \\ 
+	              & & & $\pm 0.003\times p_T^V \mp 0.69 + 1$  & \\ 
+	              \hline 
+        $Wt$ channel & $m_{b\bar{b}}$ shape & shape & fit through largest  deviation & \texttt{StopWtMBB} \\
+	              & & & (\POWHEG+\PYTHIA6 with diagram subtraction)  & \\ 
+	              & & & $\pm 0.0036\times m_{b\bar{b}} \mp 0.52 + 1$ \; ($m_{b\bar{b}}<275$\,GeV)  & \\ 
+	              & & & $\mp 0.47 + 1$ \; ($m_{b\bar{b}}\geq 275$\,GeV)  & \\ 
+	              \hline
+        \hline
+        \hline
+\end{tabular}
+\caption{Summary of all uncertainties for the single top process with short descriptions and the name of the corresponding nuisance parameters, updated for the winter baseline analysis.}
+\label{tab:stopSysSummary}
+\end{center}
+\end{scriptsize}
+\end{table}
+
+\begin{comment}
+\section{Notes}
+Notes from Kevin's thesis:
+Signal:
+\begin{itemize}
+\item \textit{pTV NLOEWK} The signal processes have some pTV dependence at next to leading order (NLO) due to electroweak corrections
+\item \textit{TheoryQCDScale, TheoryPDF} for renormalization/scale uncertainties, PDF uncertainties 
+\item \textit{TheoryAcc\_J[23]} Stewart-Tackmann stuff
+\item \textit{TheoryAccPDF} do acceptance calculations with different PDF's
+\item \textit{TheoryVPtQCD} this is one of those functional things---probably different in Run2; linear of pTV
+\end{itemize}
+
+Background
+\begin{itemize}
+\item \textit{ZDPhi} $\Delta\phi\left(b_1,b_2\right)$ mismodeling; shape---another linear of dphi; a correction and the correction is a systematic for each event
+\item \textit{ZPtV} $\Delta\phi\left(b_1,b_2\right)$ mismodeling; const+log and half the correction is a systematic for each event
+\item \textit{Z+jet Normalizations} broken down by flavor region; both Norm's and Ratio between regions
+\item \textit{ZMbb} const(mbb e-3 -c const); systematic
+\item \textit{ttbar} pT, (2/3 jet ratio across generators), mBB
+\item \textit{VV} NLO xsec, $\alph_s$/PDF's, mJJ
+\end{itemize}
+
+
+\subsection{CKKW-L}
+
+When you're looking to generate MC events, there are two main event generators.  There are the parton shower event generators (PSEG), like Pythia, and the matrix element generators (MEG) like MadGraph or Powheg, both of which have nice and not-so-nice features.  If we follow \cite{modeling25}, section 2, we get a nice illustration.  Sherpa does both and stitches things together for you.
+
+So PSEG's have the nice feature that you don't get nasty infinities.  You start with some primary hard scatter (say $e^+e^-\to q\bar{q}$) and then let your incoming and outgoing partons cascade via iterative $1\to2$ branching.  You order the emissions by some ``evolution scale $\rho$,'' starting at $\rho_0$ and descreasing unitl you reach some pre-determined cutoff $\rho_c$ (usually to match some model) to generate $0,1\ldots n$ extra partons, there are exlusive cross sections involving well-ordered, intermediate scales $\rho_i$, some phase space variables (like momentum fractions $z_i$) denoted $\Omega_i$, probabilities of non-emission between scales in the form of Sudakov form factors $\Delta_{S_i}\left(\rho_i,\rho_{i+1}\right)$, coefficients $c_{nn}^{PS}$ associated with splitting functions that depend on $\rho_i,\Omega_i$ and sum over flavors, blah blah.
+
+The $\Delta$'s looke like:
+\begin{equation}
+\label{eqn:psdelta}
+\Delta_S\left(\rho_i,\rho_{i+1}\right)=\exp\left(-\int_{\rho_{i+1}}^{\rho_i}\frac{d\rho}{\rho}\alpha_s\left(\rho\right)\int dz\,P\left(z\right)\right)
+\end{equation}
+and these can be written as a perturbative series in $\alpha_s$ (``duh'')
+\begin{eqnarray}
+\label{eqn:pssigma}
+\sigma_{+0}&=&\sigma_0\Delta_{S_0}\left(\rho_0,\rho_c\right)\\
+\sigma_{+n}&=&\sigma_0c_{nn}^{PS}\Delta_{S_n}\left(\rho_0,\rho_c\right)\prod_{i=1}^n\alpha_s(\rho_i\right)\Delta_{S_i-1}\left(\rho_{i-1},\rho_i\right)d\rho_id\Omega_i\\
+\sigma_{+n}&=&\sigma_0c_{nn}^{PS}\left(1+c_{n,n+1}^{PS}\alpha_s+c_{n,n+2}^{PS}\alpha_s^2+\ldots\right)\prod_{i=1}^n d\rho_id\Omega_i
+\end{eqnarray}
+Now, these $c^{PS}_{ij}$ blow up in the soft/collinear limit of $\rho_c\to0$, but a resummation in all order for the $\Delta$'s gives a finite result for each cross section.  Moreover, $\sum_0^{\infty}\sigma_{+i}=\sigma_0$.  \textit{The problem is that for several hard partons, this description only makes sense for strict ordering (the intermediate states) of hard partons because of the splitting funciton dependent coefficients.}
+
+For MEG's, the picture is simpler because we use tree-level matrix elements for each parton final state.  However, the cross-sections are \textit{inclusive} (so each of these is {at least \it} $n$ jets), and these all blow up in the soft/collinear regime, where the resummation gets nasty.  The authors note that you can make PSEG's look like the MEG for the first emission ($c_{11}^{PS}\to c_{11}^{ME}$).
+\begin{eqnarray}
+\label{eqn:mesigma}
+\sigma_{+0}&=&\sigma_0 \\
+\sigma_{+n}&=&\sigma_0\alpha_s^nc_{nn}^{ME}\prod_{i=1}^n d\mathbf{\Omega}_i
+\end{eqnarray}
+
+So what to do?  ``...the solution should be obvious.''  Just use the MEG to generate your partons over some $Q_{cut}$, reweight the generated states with the Sudakov form factors, and use the PSEG to make parton showers for these final state objects so that the showers make everything under $Q_{cut}$.  But those Sudakov scales need an ordered set of emission scales since all the diagrams are added together.
+
+How does one set up an ordered set of scales?  You can use the $k_{\perp}-$algorithm (takes pairs based on something like $p_T$ (??)); use those scales as arguments to $\alpha_s$; use $k_{\perp}-$algorithm resolution as a cutoff.  This approach is good to NLL but has some discontinuities.  Anyway, $k_{\perp}$ is basically the same thing as $k_t$ clustering for jets\cite{kperp}.
+Actually, it \emph{is} the same exact thing for lepton colliders, so they use the angle between particles times a minimum square energy instead of $\Delta R$ and define beam jets\ldots they also don't have the minimum distance built in, so there's a $d_{cut}$, which can be the square energy or some other thing; you can define it by the resolution in $y$ you want by $y_{cut}=Q_0/d_{cut}$).  Remember, $k_t$ starts with your softest stuff and clusters upwards from there.  For the resolution variable, remember that you have some characteristic distance after which things.  Blah blah, so you pre-cluster (their topocluster type stuff for hadronic deposits based on the $\min\left{E_{T,i}^2,E_{T,j}^2\right}\theta_{ij}^2$ metric) until all distances remaining are bigger than $d_{cut}$.  Now define $y_{cut}=Q_0^2/d_{cut}$ and use $y_{kl}=d_{kl}/d_{cut}$ and cluster until all bigger than $y_{cut}$.  \emph{The important thing from this mess is just that $y_{cut}$ is the resolution mentioned above; you don't have this mess with our usual algorithms because distances come in with $\Delta R^2/R_{alg}^2$, so if distances remaining are bigger, the plain ``beam distance'' keeps things unclustered.}
+
+
+\subsubsection{Dipole Cascade Model}
+You can also use the dipole cascade model ($2\to3$ where the 2 partons are a color dipole).  The dipoles mean you don't have to do an angular ordering for the partons?  Your $\rho$ is $p_{\perp}^2=\frac{s_{12}s_{23}}{s_{123}}$ where $s$'s are invariant masses of the combinations.  There's also a rapidity associated with the $p_{\perp}$'s: $y=\frac{1}{2}\ln\left(\frac{s_{12}}{s_{23}}$.  The emission probability depends on splitting functions, which in turn depend on the parton pair type (parton 2 is the emitted one in this convention), where $x_i=2E_i/\sqrt{s_{123}}$:
+\begin{eqnarray}
+\label{eqn:dsplit}
+D_{q\bar{q}}\left(p_{\perp}^2,y\right)=\frac{2}{3\pi}\frac{x_1^2+x_3^2}{\left(1-x_1\right)\left(1-x_3\right)}\\
+D_{qg}\left(p_{\perp}^2,y\right)=\frac{3}{4\pi}\frac{x_1^2+x_3^3}{\left(1-x_1\right)\left(1-x_3\right)}\\
+D_{gg}\left(p_{\perp}^2,y\right)=\frac{3}{4\pi}\frac{x_1^3+x_3^3}{\left(1-x_1\right)\left(1-x_3\right)}\\
+\end{eqnarray}
+Finally, we get the probability:
+\begin{equation}
+\label{eqn:dpcascade}
+dP\left(p_{\perp}^2,y\right) = \alpha_s(p_{\perp}^2 )D_{ij}\left(p_{\perp}^2,y\right) \exp\left( -\int_{p_{\perp}^2} \frac{p'_{\perp}^2}{p'_{\perp}^2}\int dy'\alpha_s\left(p'_{\perp}^2\right)D_{ij}\left(p'_{\perp}^2,y'\right)\right)\frac{dp_{\perp}^2}{p_{\perp}^2} dy
+\end{equation}
+(notice your old exp friend, the Sudakov).  Also, hey, look, your intermediate partons are on shell, unlike in a $1\to2$ cascade sicne your dipole asorbs recoil, and your inverse cascade is a well-behaved ``jet clustering'' algorithm.  But $g\to q\bar{q}$ has to be done by hand.  Basically, you use this cascade/shower on your MEG partons to get scales that you reweight by $\prod_i \alpha_s\left(p_{\perp i}\right)/\alpha_s\left(p_{\perp c}\right)^n$ for some n.
+
+% For an example of a full page figure, see Fig.~\ref{fig:myFullPageFigure}.
 
 \begin{table}[!htbp]
 \label{higgsxsec}
@@ -118,11 +642,7 @@ Analysis specific: analysis category acceptances; pTV, mBB shape
   \item Same pTV, mBB NP scheme for nLep/nJet as for UEPS
   \end{itemize}
 \end{itemize}
-
-\section{Background}
-Main backgrounds are V+jet, ttbar, VV, single top (, and multijet in 1lep)
-
-\subsection{V+jet}
+\subsection{$V+$jets}
 cf. \cite{modeling21} for details of MC generation
 \begin{itemize}
 \item Sherpa 2.2.1@NLO \cite{modeling23} for matrix element (ME) and PS tuning (Tables 7--10)
@@ -215,100 +735,4 @@ Systematics---Rivet
 \end{itemize}
 \end{itemize}
 
-\section{Notes}
-Notes from Kevin's thesis:
-Signal:
-\begin{itemize}
-\item \textit{pTV NLOEWK} The signal processes have some pTV dependence at next to leading order (NLO) due to electroweak corrections
-\item \textit{TheoryQCDScale, TheoryPDF} for renormalization/scale uncertainties, PDF uncertainties 
-\item \textit{TheoryAcc\_J[23]} Stewart-Tackmann stuff
-\item \textit{TheoryAccPDF} do acceptance calculations with different PDF's
-\item \textit{TheoryVPtQCD} this is one of those functional things---probably different in Run2; linear of pTV
-\end{itemize}
-
-Background
-\begin{itemize}
-\item \textit{ZDPhi} $\Delta\phi\left(b_1,b_2\right)$ mismodeling; shape---another linear of dphi; a correction and the correction is a systematic for each event
-\item \textit{ZPtV} $\Delta\phi\left(b_1,b_2\right)$ mismodeling; const+log and half the correction is a systematic for each event
-\item \textit{Z+jet Normalizations} broken down by flavor region; both Norm's and Ratio between regions
-\item \textit{ZMbb} const(mbb e-3 -c const); systematic
-\item \textit{ttbar} pT, (2/3 jet ratio across generators), mBB
-\item \textit{VV} NLO xsec, $\alph_s$/PDF's, mJJ
-\end{itemize}
-
-\subsection{Stewart-Tackmann}
-A way to calculate uncertainties on processes in different nJet bins \cite{stewarttackmann}.  Generically:
-\begin{equation}
-\label{eqn:stewtack1}
-\sigma_{\ge N}=\sigma_N+\sigma_{\ge N+1}
-\end{equation}
-
-There's some quantity that you make a cutoff in an integral that defines the border between jet regions.  
-\begin{equation}
-\label{eqn:stewtack2}
-\sigma_{\ge N}=\int_0^{p_{cut}}\frac{d\sigma_N}{dp}+\int_{p_{cut}}\frac{d\sigma_{\ge N+1}}{dp}
-\end{equation}
-
-So for some fucking reason, inclusive cross sections are easier to calculate, so you can just vary $\alpha_S$ in the usual way for those and treat the two inclusive cross sections.  Anywho, we assume the inclusive uncertainties are uncorrelated, for a covariance matrix for $\left\{\sigma_{\ge N},\sigma_N,\sigma_{\ge N+1}\right\}$ of:
-\begin{equation}
-\label{stewtackcov}
-\Sigma=\left(\begin{array}{ccc} \Delta^2_{\ge N} & \Delta^2_{\ge N} &0\\ \Delta^2_{\ge N}& \Delta^2_{\ge N}+\Delta^2_{\ge N+1}& -\Delta^2_{\ge N+1}\\ 0& -\Delta^2_{\ge N+1} & \Delta^2_{\ge N+1} \end{array}\right)
-\end{equation}
-
-The main idea is that you have Sudakov double logs of $p/Q$, where $Q=m_H$ or whatever scale your hard process occurs at, and $p_{cut}$ is usually something like a $p_T$ cutoff.  Now, the $N+1$ term in that matrix is actually some uncertainty associated with your cutoff, but your double logs will dominate your higher order terms\ldots the paper has this reasoning:
-
-``In the limit $\alpha_sL^2 \approx 1$, the fixed-order perturbative expansion breaks down and the logarithmic terms must be resummed to all orders in $\alpha_s$ to obtain a meaningful result.  For typical experimental values of pcut fixed-order perturbation theory can still be considered, but the logarithms cause large corrections at each order and dominate the series.  This means varying the scale in $\alpha_s$ in Eq. (9) directly tracks the size of the large logarithms and therefore allows one to get some estimate of the size of missing higher-order terms caused by $p_{cut}$, that correspond to $\Delta_{cut}$.  Therefore, we can approximate $\Delta_{cut}$ = $\Delta_{\ge 1}$, where $\Delta_{\ge 1}$ is obtained from the scale variation for $\sigma_{\ge 1}$.''
-
-They use the example of ggF Higgs production with $\left\{\sigma_{total},\sigma_0,\sigma_{\ge 1}\right\}$ and say this works to all $N$ for all processes, provided one picks $\mu\approx Q$ so you can use perturbative expansions.
-
-Anyway, the upshot is this: we've got 2 and 3 jet bins.  For 2 jet TheoryAcc\_J2 and TheoryAcc\_J3; 3 jet has TheoryAcc\_J3, which is anti-correlated with the 2 jet J3 term
-
-\subsection{CKKW-L}
-
-When you're looking to generate MC events, there are two main event generators.  There are the parton shower event generators (PSEG), like Pythia, and the matrix element generators (MEG) like MadGraph or Powheg, both of which have nice and not-so-nice features.  If we follow \cite{modeling25}, section 2, we get a nice illustration.  Sherpa does both and stitches things together for you.
-
-So PSEG's have the nice feature that you don't get nasty infinities.  You start with some primary hard scatter (say $e^+e^-\to q\bar{q}$) and then let your incoming and outgoing partons cascade via iterative $1\to2$ branching.  You order the emissions by some ``evolution scale $\rho$,'' starting at $\rho_0$ and descreasing unitl you reach some pre-determined cutoff $\rho_c$ (usually to match some model) to generate $0,1\ldots n$ extra partons, there are exlusive cross sections involving well-ordered, intermediate scales $\rho_i$, some phase space variables (like momentum fractions $z_i$) denoted $\Omega_i$, probabilities of non-emission between scales in the form of Sudakov form factors $\Delta_{S_i}\left(\rho_i,\rho_{i+1}\right)$, coefficients $c_{nn}^{PS}$ associated with splitting functions that depend on $\rho_i,\Omega_i$ and sum over flavors, blah blah.
-
-The $\Delta$'s looke like:
-\begin{equation}
-\label{eqn:psdelta}
-\Delta_S\left(\rho_i,\rho_{i+1}\right)=\exp\left(-\int_{\rho_{i+1}}^{\rho_i}\frac{d\rho}{\rho}\alpha_s\left(\rho\right)\int dz\,P\left(z\right)\right)
-\end{equation}
-and these can be written as a perturbative series in $\alpha_s$ (``duh'')
-\begin{eqnarray}
-\label{eqn:pssigma}
-\sigma_{+0}&=&\sigma_0\Delta_{S_0}\left(\rho_0,\rho_c\right)\\
-\sigma_{+n}&=&\sigma_0c_{nn}^{PS}\Delta_{S_n}\left(\rho_0,\rho_c\right)\prod_{i=1}^n\alpha_s(\rho_i\right)\Delta_{S_i-1}\left(\rho_{i-1},\rho_i\right)d\rho_id\Omega_i\\
-\sigma_{+n}&=&\sigma_0c_{nn}^{PS}\left(1+c_{n,n+1}^{PS}\alpha_s+c_{n,n+2}^{PS}\alpha_s^2+\ldots\right)\prod_{i=1}^n d\rho_id\Omega_i
-\end{eqnarray}
-Now, these $c^{PS}_{ij}$ blow up in the soft/collinear limit of $\rho_c\to0$, but a resummation in all order for the $\Delta$'s gives a finite result for each cross section.  Moreover, $\sum_0^{\infty}\sigma_{+i}=\sigma_0$.  \textit{The problem is that for several hard partons, this description only makes sense for strict ordering (the intermediate states) of hard partons because of the splitting funciton dependent coefficients.}
-
-For MEG's, the picture is simpler because we use tree-level matrix elements for each parton final state.  However, the cross-sections are \textit{inclusive} (so each of these is {at least \it} $n$ jets), and these all blow up in the soft/collinear regime, where the resummation gets nasty.  The authors note that you can make PSEG's look like the MEG for the first emission ($c_{11}^{PS}\to c_{11}^{ME}$).
-\begin{eqnarray}
-\label{eqn:mesigma}
-\sigma_{+0}&=&\sigma_0 \\
-\sigma_{+n}&=&\sigma_0\alpha_s^nc_{nn}^{ME}\prod_{i=1}^n d\mathbf{\Omega}_i
-\end{eqnarray}
-
-So what to do?  ``...the solution should be obvious.''  Just use the MEG to generate your partons over some $Q_{cut}$, reweight the generated states with the Sudakov form factors, and use the PSEG to make parton showers for these final state objects so that the showers make everything under $Q_{cut}$.  But those Sudakov scales need an ordered set of emission scales since all the diagrams are added together.
-
-How does one set up an ordered set of scales?  You can use the $k_{\perp}-$algorithm (takes pairs based on something like $p_T$ (??)); use those scales as arguments to $\alpha_s$; use $k_{\perp}-$algorithm resolution as a cutoff.  This approach is good to NLL but has some discontinuities.  Anyway, $k_{\perp}$ is basically the same thing as $k_t$ clustering for jets\cite{kperp}.
-Actually, it \emph{is} the same exact thing for lepton colliders, so they use the angle between particles times a minimum square energy instead of $\Delta R$ and define beam jets\ldots they also don't have the minimum distance built in, so there's a $d_{cut}$, which can be the square energy or some other thing; you can define it by the resolution in $y$ you want by $y_{cut}=Q_0/d_{cut}$).  Remember, $k_t$ starts with your softest stuff and clusters upwards from there.  For the resolution variable, remember that you have some characteristic distance after which things.  Blah blah, so you pre-cluster (their topocluster type stuff for hadronic deposits based on the $\min\left{E_{T,i}^2,E_{T,j}^2\right}\theta_{ij}^2$ metric) until all distances remaining are bigger than $d_{cut}$.  Now define $y_{cut}=Q_0^2/d_{cut}$ and use $y_{kl}=d_{kl}/d_{cut}$ and cluster until all bigger than $y_{cut}$.  \emph{The important thing from this mess is just that $y_{cut}$ is the resolution mentioned above; you don't have this mess with our usual algorithms because distances come in with $\Delta R^2/R_{alg}^2$, so if distances remaining are bigger, the plain ``beam distance'' keeps things unclustered.}
-
-
-\subsubsection{Dipole Cascade Model}
-You can also use the dipole cascade model ($2\to3$ where the 2 partons are a color dipole).  The dipoles mean you don't have to do an angular ordering for the partons?  Your $\rho$ is $p_{\perp}^2=\frac{s_{12}s_{23}}{s_{123}}$ where $s$'s are invariant masses of the combinations.  There's also a rapidity associated with the $p_{\perp}$'s: $y=\frac{1}{2}\ln\left(\frac{s_{12}}{s_{23}}$.  The emission probability depends on splitting functions, which in turn depend on the parton pair type (parton 2 is the emitted one in this convention), where $x_i=2E_i/\sqrt{s_{123}}$:
-\begin{eqnarray}
-\label{eqn:dsplit}
-D_{q\bar{q}}\left(p_{\perp}^2,y\right)=\frac{2}{3\pi}\frac{x_1^2+x_3^2}{\left(1-x_1\right)\left(1-x_3\right)}\\
-D_{qg}\left(p_{\perp}^2,y\right)=\frac{3}{4\pi}\frac{x_1^2+x_3^3}{\left(1-x_1\right)\left(1-x_3\right)}\\
-D_{gg}\left(p_{\perp}^2,y\right)=\frac{3}{4\pi}\frac{x_1^3+x_3^3}{\left(1-x_1\right)\left(1-x_3\right)}\\
-\end{eqnarray}
-Finally, we get the probability:
-\begin{equation}
-\label{eqn:dpcascade}
-dP\left(p_{\perp}^2,y\right) = \alpha_s(p_{\perp}^2 )D_{ij}\left(p_{\perp}^2,y\right) \exp\left( -\int_{p_{\perp}^2} \frac{p'_{\perp}^2}{p'_{\perp}^2}\int dy'\alpha_s\left(p'_{\perp}^2\right)D_{ij}\left(p'_{\perp}^2,y'\right)\right)\frac{dp_{\perp}^2}{p_{\perp}^2} dy
-\end{equation}
-(notice your old exp friend, the Sudakov).  Also, hey, look, your intermediate partons are on shell, unlike in a $1\to2$ cascade sicne your dipole asorbs recoil, and your inverse cascade is a well-behaved ``jet clustering'' algorithm.  But $g\to q\bar{q}$ has to be done by hand.  Basically, you use this cascade/shower on your MEG partons to get scales that you reweight by $\prod_i \alpha_s\left(p_{\perp i}\right)/\alpha_s\left(p_{\perp c}\right)^n$ for some n.
-
-% For an example of a full page figure, see Fig.~\ref{fig:myFullPageFigure}.
+\end{comment}

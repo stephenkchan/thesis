@@ -327,6 +327,7 @@
 \def\ptv {\ensuremath{p_{\mathrm{T}}^{\mathrm{V}}}}
 \def\mbb{\ensuremath{m_{bb}}}
 \def\mh{\ensuremath{m_{h}}}
+\def\nj{\ensuremath{n_{jet}}}
 \def\mH{\ensuremath{m_{H}}}
 \def\mA{\ensuremath{m_{A}}}
 \def\tt{\ensuremath{t\bar{t}}}
@@ -346,6 +347,9 @@
 \def\ptmiss{\ensuremath{E^{\mathrm{miss}}_\textrm{T, trk}}}
 \def\sumpt{\ensuremath{S_\textrm{T}}}
 \def\to{\ensuremath{\rightarrow}}
+\def\vv{\ensuremath{VV}}
+\def\ephni{\ensuremath{\eta-\phi}}
+\def\aeta{\ensuremath{\left|\eta\right|}}
 \def\mindphi{\ensuremath{|\text{min}\Delta\phi(\met,\text{jet})|}}
 \def\TeV{\ifmmode {\mathrm{\ Te\kern -0.1em V}}\else
                    \textrm{Te\kern -0.1em V}\fi}%
@@ -362,3 +366,13 @@
 \let\mev=\MeV
 \let\kev=\keV
 \let\ev=\eV
+\let\met=\vecmet
+\def\powheg{\textsc{Powheg}}
+\def\pythia{\textsc{Pythia}}
+\def\herwig{\textsc{Herwig}}
+\def\sherpa{\textsc{Sherpa}}
+\def\mg{\textsc{MadGraph5}}
+\let\PYTHIA=\pythia
+\let\POWHEG=\powheg
+\let\HERWIG=\herwig
+\let\SHERPA=\sherpa
