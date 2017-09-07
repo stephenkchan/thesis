@@ -270,6 +270,7 @@ The MMTP uses the first hits registered passing a charge threshold requirement g
 \section{Misalignments and Corrections}
 The performance of the trigger algorithm under misalignment has been studied for each of the six alignment quantities (three translations and three rotations all along the principal axes) described in \cite{Chevalier:684070} and \cite{Chevalier:684070}, whose convention we will follow here.  For the simulated wedge studied here the local coordinates described in \cite{Chevalier:684070} are taken to be centered at the center of the base of the wedge\footnote{Not, as is sometimes the case, the centroid position for simplicity's sake, as the agreed upon geometry of the detector changed several times while studies were in progress; any  transformation in a centroid-origin coordinate system can of course be formed by a combination of the six transformations examined.}, the local $t$ axis corresponds to the axis of the beam line, the local $z$ axis corresponds to the direction orthogonal to both the beam line and the horizontal strips, and the local $s$ axis completes the right-handed coordinate system.  The rotation angles $\alpha$, $\beta$, and $\gamma$ correspond to rotations around the local $t$, $z$, and $s$ axes, respectively.  Note that the local $s$, $z$, and $-t$, axes correspond to the usual global $x$, $y$, and $z$ axes.  Misalignments were studied in twenty evenly spaced increments from nominal positions to misalignments of 1.5 mrad for the rotations (-1.5 mrad to +1.5 mrad for the $\gamma$ case), and of 5 mm (a roughly corresponding linear shift) for the translations.  In all cases, the front quadruplet is misaligned while the rear quadruplet remains in its nominal position.  While only the front quadruplet of a single wedge is misaligned, the framework for misalignment presented below could be used to study generic local and global misalignments.  The six misalignments are schematically represented in Figure \ref{fig:misalscheme}.  
 \label{sec:mal}
+\begin{comment}
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
   \begin{subfigure}{0.32\textwidth}\includegraphics[width=\textwidth,keepaspectratio,trim=5cm 2cm 5cm 2cm,clip]{./figures/dts}\end{subfigure}
@@ -278,6 +279,18 @@ The performance of the trigger algorithm under misalignment has been studied for
   \begin{subfigure}{0.32\textwidth}\includegraphics[width=\textwidth,keepaspectratio,trim=5cm 2cm 5cm 2cm,clip]{./figures/drs}\end{subfigure}
   \begin{subfigure}{0.32\textwidth}\includegraphics[width=\textwidth,keepaspectratio,trim=5cm 2cm 5cm 2cm,clip]{./figures/drz}\end{subfigure}
   \begin{subfigure}{0.32\textwidth}\includegraphics[width=\textwidth,keepaspectratio,trim=5cm 2cm 5cm 2cm,clip]{./figures/drt}\end{subfigure}
+  \caption{\label{fig:misalscheme}The different misalignment cases as defined in the AMDB manual.}
+\end{figure}
+\end{comment}
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \begin{subfigure}{0.32\textwidth}\includegraphics[width=\textwidth]{./figures/dts}\end{subfigure}
+  \begin{subfigure}{0.32\textwidth}\includegraphics[width=\textwidth]{./figures/dtz}\end{subfigure}
+  \begin{subfigure}{0.32\textwidth}\includegraphics[width=\textwidth]{./figures/dtt}\end{subfigure}
+  \begin{subfigure}{0.32\textwidth}\includegraphics[width=\textwidth]{./figures/drs}\end{subfigure}
+  \begin{subfigure}{0.32\textwidth}\includegraphics[width=\textwidth]{./figures/drz}\end{subfigure}
+  \begin{subfigure}{0.32\textwidth}\includegraphics[width=\textwidth]{./figures/drt}\end{subfigure}
   \caption{\label{fig:misalscheme}The different misalignment cases as defined in the AMDB manual.}
 \end{figure}
 

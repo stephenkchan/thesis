@@ -91,8 +91,9 @@
 \RequirePackage{url}
 \RequirePackage{amssymb}
 \RequirePackage{mathspec}
-\setmathsfont(Digits,Latin,Greek)[Numbers={Proportional}]{EB Garamond}
-\setmathrm{EB Garamond}
+%\setmathsfont(Digits,Latin,Greek)[Numbers={Proportional}]{EB Garamond}
+%\setmathrm{EB Garamond}
+\setmathsfont(Digits,Latin)[Numbers={Proportional}]{EB Garamond}
 \AtBeginEnvironment{tabular}{\addfontfeature{RawFeature=+tnum}}
 \widowpenalty=300
 \clubpenalty=300
@@ -319,7 +320,7 @@
 }
 
 \def\LUMI{36.1 fb\ensuremath{^{-1}}}
-
+\def\fb{fb\ensuremath{^{-1}}}
 \def\vecmet {\ensuremath{\vec{E}^{\mathrm{miss}}_{\mathrm{T}}}}
 \def\vecmpt {\ensuremath{\vec{p}_{\mathrm{T}}^{\mathrm{\ miss}}}}
 \def\Et{\ensuremath{E_{\mathrm{T}}}}
@@ -347,6 +348,7 @@
 \def\ptmiss{\ensuremath{E^{\mathrm{miss}}_\textrm{T, trk}}}
 \def\sumpt{\ensuremath{S_\textrm{T}}}
 \def\to{\ensuremath{\rightarrow}}
+\def\drbb{\ensuremath{\Delta R\left(b_1,b_2\right)}}
 \def\vv{\ensuremath{VV}}
 \def\ephni{\ensuremath{\eta-\phi}}
 \def\aeta{\ensuremath{\left|\eta\right|}}

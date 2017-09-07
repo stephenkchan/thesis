@@ -5,30 +5,37 @@ Noli turbare circulos meos
 \end{savequote}
 
 \chapter{The Large Hadron Collider and the ATLAS Detector}
-Look at \cite{run1note}, \cite{jinstpaper}
 
-\newthought{The CERN accelerator complex and its experiments} stand as a testament to human ingenuity and
+\newthought{The CERN accelerator complex and its experiments} stand as a testament to human ingenuity and its commitment to the pursuit of fundamental knowledge.  In this chapter, we give a cursory overview of the injection to and of the Large Hadron Collider (LHC) before moving on to a more detailed review of the ATLAS detector.
 
 \section{The CERN Accelerator Complex}
-\begin{itemize}
-\item ionize hydrogen in $\vector{E}$
-\item LINAC 2: 50 MeV
-\item BOOSTER: 1 GeV
-\item PS: 26 GeV
-\item SPS: 450 GeV
-\item LHC
-\end{itemize}
+The journey of protons from hydrogen canister to high energy collisions is also one through the history of CERN's accelerator program.  After being ionized in an electric field, protons are first accelerated in a linear accelerator, LINAC 2\footnote{1978's LINAC 2 is the successor to 1959's LINAC 1; it will be replaced in 2020 by LINAC 4; LINAC 3 is responsible for ion production.}, to a kinetic energy of 50 \MeV.  From there, they are fed into the Proton Synchotron Booster\footnote{Protons can be directly from a LINAC into the PS, but the higher injection energy allows for more apprximately 100 times more protons to be used at once\cite{booster}, 1972.}, which further accelerates them to 1.4 \GeV and, as its name implies, feeds them to the 628 m Proton Synchotron (PS, 1959\cite{ps}) and up to 25 \GeV.  The penultimate stage is the 7 km Super Proton Synchotron (SPS, 1976; responsible for the discovery of the $W$ and $Z$ bosons and the 1983 Nobel Prize \cite{sps}), which accelerates the protons to a kinetic energy of 450 \GeV.  Finally, these 450 \GeV\,protons are injected into the LHC\cite{lhcjinst}, a proton-proton collider housed in the 27 km circumfrence tunnel that housed the Large Electron Positron Collider (LEP) before its operations ceased in 2000.  This is illustrated in Figure \ref{fig:cern}.
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-  \includegraphics[width=0.800000\linewidth]{figures/atlas/lhc}
-  \caption{The Large Hadron Collider.}
+  \includegraphics[width=\linewidth]{figures/atlas/CERN-accelerator-complex2013}
+  \caption{The CERN Accelerator Complex \cite{rings}}
   \label{fig:cern}
 \end{figure}
 
+
 \section{The Large Hadron Collider}
-The Large Hadron Collider
-\afterpage{\begin{landscape}
+The LHC was designed to function primarily as a proton-proton collider with a center of mass energy $\sqrt{s}=14$ \TeV and an instantaneous luminosity of $1\times10^{34}\,\text{cm}^{-2}\cdot\text{s}^{-1}$, though it is also capable of producing heavy ion (Pb-Pb) collisions, which it does approximately for one month in a typical run year.  Owing to an accident at the beginning of the LHC's initial run, the accelerator has operated at center of mass energies of 7, 8, and now 13 \TeV.
+
+The limited size of the LEP tunnel ($\sim 3.6$ m) means that it is impractical to have separate rings and magnet systems for each proton beam (proton-antiproton colliders like the Tevatron do not face this complication and can have both beams circulating in the same beam pipe), so the LHC magnets are coupled in a ``twin bore'' design.  The LHC magnets make use of superconducting NbTi cables and are cooled using superfluid helium to a temperature of 2 K, which allows for operational field strengths in excess of 8 T.  The layout of a LHC dipole magnet is shown in Figure \ref{fig:lhcdipole}.  These dipole magnets are responsible for bending the LHC's proton beams, and their strength is the principal limiting factor in the center of mass energy achievable at a circular collider.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=0.7500000\linewidth]{figures/atlas/lhcdipole}
+  \caption{Schematic drawing of an LHC dipole magnet and cryogenics system.}
+  \label{fig:lhcdipole}
+\end{figure}
+
+In addition to the dipole magnets there are quadrupole magnet assemblies in the short straight sections for beam focusing, as well as quadrupole, octupole, and sextupole magnets interspersed throughout the length of the LHC ring for beam stabilization and other higher order corrections.  The interior of the LHC beam pipe operates at a nominal pressure of $\sim10^{-7}$ Pa, famously more rarefied than outer space.
+
+  The LHC ring itself is between 45 m and 170 m below ground and has a 1.4\% incline towards Lac L\'eman with eight arcs and eight straight sections.  In the middle of each of the eight straight sections there are potential interaction points (each colloquially referred to by its number as ``Point $N$''), with each point housing either accelerator infrastructure or an experiment.  A schematic of the contents of each component, as well as a more detailed view of the infrastructure in the LHC ring can be found in Figure \ref{fig:lhcring}.
+
+\begin{landscape}
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
   \begin{subfigure}[t]{0.4950000\linewidth}\centering\includegraphics[width=\textwidth]{figures/atlas/lhcschematic}}\caption{}\end{subfigure}
@@ -36,87 +43,104 @@ The Large Hadron Collider
   \caption{Schematic and detailed views of the LHC ring. IC: \cite{lhccartoon}, \cite{lhcdetail}}
   \label{fig:lhcring}
 \end{figure}
-\end{landscape}}
+\end{landscape}
 
-Describe the magnets I guess
+Points 1, 2, 5, and 8 house the LHC's experiments, ATLAS (one of the two general purpose detectors, discussed in detail below), ALICE (A Large Ion Collider Experiment dedicated heavy ion experiment), CMS (Compact Muon Solenoid, the other general purpose detector), and LHCb (LHC beauty, a $B$ physics experiment), respectively.  Point 3 houses a series of collimators that scatters and absorbs particles in the beam with a large momentum deviation from other particles in the beam (``momentum cleaning''), while Point 7 has a similar setup to remove particles with large betatron amplitudes (``betatron cleaning'').  Betatron amplitudes are related to how well focused beams are and can be thought of as giving a characteristic size for a beam; just as one wants to screen out particles deviating in physical space just as in momentum space as well focused beams in both position and momentum space are crucial to high quality collisions.  Point 4 contains the LHC's RF (radio frequency; 400 MHz) acceleration system, responsible for taking protons from their injection energy of 450 \GeV\,to their collision energy of 3.5, 4, 6.5, or 7 \TeV.  Point 6 is where the energetic ionizing radiation of circulating beams can be safely taken out of the collider into a block of abosrbing material either at the end of a data-taking run or in the event of an emergency (in the event of irregular behavior, it is essential to do this as quickly as possible to minimize damage to the accelerator and experiments); this is known as a ``beam dump.''
 
-\section{The ATLAS Coordinate System}
-{\bf A} {\bf T}oroidal {\bf L}HC {\bf A}pparatu{\bf S} is one of the two general purpose, high luminosity detectors at the LHC, located at Interaction Point 1, as described above.  With a length of 44 m and a height of 25 m, it is the detector with largest physical dimensions at the LHC.\footnote{This is the only reason CMS can call itself ``compact.''}.  The ATLAS detector and its main components are shown in Figure \ref{fig:atlas}
+\section{ATLAS at a Glance}
+\subsection{Coordinates and Distances in the ATLAS Detector}
+\emph{A} \emph{T}oroidal \emph{L}HC \emph{A}pparatu\emph{S} is one of the two general purpose, high luminosity detectors at the LHC, located at Interaction Point 1, as described above.  With a length of 44 m and a height of 25 m, it is the detector with largest physical dimensions at the LHC.\footnote{This is the only reason CMS can call itself ``compact.''}.  While primarily a high luminosity proton-proton collision detector, ATLAS does collect heavy ion collision data, typically for one month during a year of typical operation.  
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
-  \centering
-  \includegraphics[width=0.8\linewidth]{figures/atlas/atlasfullp}
-  \caption{The ATLAS detevtor with principal subsystems shown.}
-  \label{fig:atlas}
-\end{figure}
-
-While primarily a high luminosity proton-proton collision detector, ATLAS does collect heavy ion collision data, typically for one month during a year of typical operation.  
-
-The ATLAS coordinate system is cylindrical and shown in Figure
+The ATLAS coordinate system is shown in Figure \ref{fig:acoord}.  It is a right-handed coordinate system centered at the nominal collision point, with the $x$ axis pointing towards the center of the LHC ring, the $z$ axis pointing up, and the $y$ axis completing the right-handed coordinate system.
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
   \includegraphics[width=0.800000\linewidth]{figures/coord}
-  \caption{The  ATLAS coordinate system.}
+  \caption{The  ATLAS coordinate system.  ``A'' side is the airport, and ``C'' side is ``Charlie's,'' a pub in Saint-Genis, France.}
   \label{fig:acoord}
 \end{figure}
-\begin{description}
-\item[(Pseudo)Rapidity] Rapidity $y=\frac{1}{2}\ln\left[\frac{E+p_z}{E-p_z}\right]$, pseudorapidity $\eta=-\ln\tan\frac{\theta}{2}$; same for massless particles
-\item[$\phi$,$r$] Azimuthal angle and perpendicular distance from beam axis
-\item[$p_T,E_T,E^{miss}_T$] Transverse momentum ($p_T=\sqrt{p_x^2+p_y^2}$), transverse energy, and missing transverse energy ($E_T=\sqrt{E_x^2+E_y^2}=-E_T^{miss}$).  Neutrinos only show up as $E_T^{miss}$.
-\item[Barrel] Lower $\left|\eta\right|$ material; cylindrical layers of the detector
-\item[End Cap] Higher $\left|\eta\right|$ material; arranged in disks centered on the beam pipe
-\end{description}
 
+While the Cartesian coordinates are useful for specifying the locations of things like detector components and activated calorimeter cells, cylindrical polar coordinates with the same origin, $z$ axis, and handedness are often more suitable, with a point in 3-space expressed as $\left(r,\phi,\eta\right)$.  $r$ is the perpendicular distance from the beam axis.  This differs from the usual spherical $\rho$, the distance of a point from the origin, because the ATLAS detector is cylindrical\footnote{``toroidal;'' the hole is the beam pipe}, and so detector components are more easily located using $r$ instead of $\rho$.  In some contexts, the latter is used, though this is (or should be) made clear.  $\phi$ is the usual (right-handed) azimuthal angle around the beam axis, with 0 at the $+x$ axis.
 
-\section{The Inner Detector}
-The inner detector uses two layers of silicon detector and one layer of gas straw detectors with filaments for $e/\pi$ discrimination.  There's a 2T magnetic field generated by a superconducting solenoid surrounding the ID (4.5 K).  The ID's extent is to $\left|\eta\right|<2.5$.  Generally, there are two radiation lengths in the inner detector (it varies with $\eta$). So let's describe the sub-systems:
+In a lepton collider where total momentum is conserved, a useful coordinate is the relativistic rapidity of a particle:
+\begin{equation}
+y=\frac{1}{2}\ln\left[\frac{E+p_z}{E-p_z}\right]
+\end{equation}
+with $E$ and $p_z$ as the energy and longitudinal momentum of the particle, respectively.  The rapidity is the relativistic analog of a rotation angle; boosts can be composed in a manner to rotations\footnote{Generally, one need only insert the appropriate factor of $i$, the sqaure root of -1; this introduces differences in sign and changes all of the trigonometric functions associated with rotations into hyperbolic trigonometric functions; time is still special---it comes with special letters}, and differences in boosts are invariant under boosts.  In a hadronic collider, where the participants in the hard scatter are partons inside of the proton of unknown momentum fraction, momentum is not conserved in the $z$ direction.  Nevertheless, since the incident momentum is entirely in the $z$ direction, momentum is still conserved in the transverse plane, so quantities like trasnverse momentum $\vec{p}_T$ or energy ($E_T$\footnote{Energy is not a vectoral quantity, but one can take the scalar or vectoral sum of vectors formed from energy deposits with their location as the direction and energy value as magnitude.  In practice, primitives are almost always ssumed to be massless, so transverse energy and momentum may loosely be thought of as equivalent, with $E_T=\left|\vec{p}_T\right|=p_T$}) are often very useful in analysis.  However, in the massless limit\footnote{not a terrible one for most particles depositing energy in the calorimeter; pions have masses of $\sim130$ \MeV, and typical energies of calorimeter objects are $\sim10$'s of \GeV, making for a boost of roughly 100.}, we can take $E=\sqrt{p_T^2+p_z^2}$.  Hence, with $\theta$ being the zenith angle with 0 corresponding to the $+z$ direction, for a massless particle, $p_z=E\cos\theta$, using the usual half angle formula $\cos\theta=(1-\tan^2\theta)/(1+\tan^2\theta)$
+\begin{equation}
+y=\frac{1}{2}\ln\left[\frac{1+\cos\theta}{1-\cos\theta}\right]=\frac{1}{2}\ln\left[\frac{\left(1+\tan^2\left(\theta/2\right)\right)+\left(1-\tan^2\left(\theta/2\right)\right)}\left(1+\tan^2\left(\theta/2\right)\right)-\left(1-\tan^2\left(\theta/2\right)\right)}\right]=\frac{1}{2}\ln\left[\frac{2}{2\tan^2\left(\theta/2\right)}\right]=-\ln\left(\tan\frac{\theta}{2}\right)
+\end{equation}
+
+This last expression, is denoted $\eta$ and is known as the pseudorapidity.  
+\begin{equation}
+\eta=-\ln\left(\tan\frac{\theta}{2}\right)
+\end{equation}
+Lower values of \aeta\, ($\lessim 1.3$) correspond to more central areas of the detector known as the ``barrel,'' with the typical layout here being concentric, cylindrical layers.  Larger values of \aeta\, (to $\sim2.5$ for some systems and up to as much as $\sim 4.5-5$ for others) are known as the ``end caps,'' where material is typically arranged as disks of equal radius centered on the beam pipe stacked to ever greater values of $\left|z\right|$.  This terminology will be useful when discussing the various subsystems of the ATLAS detector.
+
+Since decay products from a collision propagate radially (in the calorimeter portions of the detector with no magnetic field), the radial coordinate is not so important for composite physics objects like electrons or jets, which are typically expressed as momentum 4-vectors.  Hence, only $\eta$ and $\phi$ are the only useful spatial coordinates.  Distances between objects are often expressed not as a difference in solid angle, but as a distance, $\Delta R$, in the \ephi\,plane, where
+
+\begin{equation}
+\Delta R_{12} = \left(\eta_1-\eta_2\right)^2+\left(\phi_1-\phi_2\right)^2
+\end{equation}
+
+In addition to the physical distance traveled by particles, also important in talking about particle detectors are radiation lengths and (nuclear) interaction lengths, both of which characterize typical lengths for the energy loss of energetic particles traveling through materials.  In general, the energy loss is modeled as an exponential
+\begin{equation}
+E=E_0e^{-l/L}
+\end{equation}
+where $E_0$ is the initial energy, and $L$ is the characteristic length.  These lengths are characteristics of the materials through which particles pass.  In the case of uniform, composite materials, the length may be found by calculating the reciprocal of the sum of mass fraction weighted reciprocal characteristic lengths of the components.  This formula works quite well for modeling the very regular behavior of electromagnetic showers (energetic photons convert into electron/positron pairs, which emit photons\ldots).  In this case, $L$ is denoted $X_0$; this is the radiation length.  Hadronic showers are far more complicated, with shower multiplicity ane makeup dependent on the particle in question and generally being highly variable (and things like pions converting to photons, which then shower electromagnetically).  Nevertheless, a characteristic length can be tabulated for a standard particle type, typically pions, and is called the nuclear interaction length.
+
+\subsection{General Layout of ATLAS}
+The ATLAS detector and its main components are shown in Figure \ref{fig:atlas}.  ATLAS is designed as a largely hermetic detector, offering full coverage in $\phi$ and coverage in \aeta\, up to 4.7.  The multiple subsystems allow for good characterization of the decay products from collisions in the LHC.  The innermost system is the inner detector (ID); composed primarily of silicon pixels and strips immersed in a magnetic field, it is designed to construct the curved trajectories of charged particles produced in collisions while taking up as little material as possible.
+
+  Surrounding the ID is the liquid argon based electromagnetic calorimeter (ECAL), which is designed to capture all of the energy of the electromagnetic showers produced by electrons and photons coming from particle collisions.  The ECAL is in turn encapsulated by a scintillating tile based and liquid argon based hadronic calorimeter (HCAL) that captures any remaining energy from the jets produced by hadronizing quarks and gluons coming from collisions.
+
+  The outermost layer of ATLAS is the muon spectrometer (MS) with its own magnetic field produced by toroidal magnets.  Muons are highly penetrating particles that escape the calorimeters with most of their initial momentum, so the MS and its magnets are designed to curve these charged particles and measure their trajectories to measure their outgoing momenta.  Each of these detector systems has several principal subsytems and performance characteristics, which will be described in turn below.
+
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-  \includegraphics[width=0.800000\linewidth]{figures/atlas/ind_det_labp}
-  \caption{The ATLAS inner detector.}
+  \includegraphics[width=0.95\linewidth]{figures/atlas/atlasfullp}
+  \caption{The ATLAS detector with principal subsystems shown.}
+  \label{fig:atlas}
+\end{figure}
+
+\section{The Inner Detector}
+ATLAS's inner detector (ID) is surrounded by a superconducting solenoid that is cryogenically cooled to a temperature of 4.5 K, which immerses it in a 2 T magnetic field.  The ID uses two silicon detector subsystems (the Pixel and SemiConductor (strip) Tracker (SCT)) to track the curved trajectories of charged particles emanating from particle collisions and one subsystem composed of gas straw detectors with filaments for $e/\pi$ discrimination, as shown in Figure \ref{fig:indet}.  The ID offers full coverage in $\phi$ and extends to an \aeta\,of 2.5.  
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=0.750000\linewidth]{figures/atlas/in_det_labp}
+  \caption{The ATLAS inner detector. IC: \cite{jinstpaper}}
   \label{fig:indet}
 \end{figure}
+
+Since the components of the ID do not provide an energy measurement, it is desriable for a tracking system to have as small a material budget as possible so that more accurate energy measurements may be done in the calorimeters.  Generally, there are two radiation lengths in the inner detector (it varies with $\eta$); the full material budget, with the layout of the individual layers in each subsystem, can be seen in \ref{fig:idmb}.  
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=\linewidth]{figures/atlas/id_x0}
+  \caption{The ID material budget. IC: \cite{idmaterial}}
+  \label{fig:idmb}
+\end{figure}
+
 \subsection{The Pixel Detector}
-\begin{itemize}
-\item Cooled to $\sim-5$\celsius\  with $N_2$ gas, 150--600 V
-\item 10(115) $\mu$m resolution in $r-\phi$ ($z$); pixels are $50\times400(600)\times250$ $\mu$m
-\item Barrel: Layers at 50.5, 88.5, and 122.5 mm at a 20\degree\ tilt with overlap in $r-\phi$
-\item End Cap: 495, 580, 650 mm; rotate in $\phi$ by 3.75\degree\
-\end{itemize}
+The innermost part of ATLAS is the pixel detector, which, as the name suggests, is comprised of four layers of pixels in the barrel at 32, 51, 89, and 123 mm from the beam pipe, and three years in the end caps at 495, 580, and 650 mm from the beam pipe, with over 80 million channels total.  The innermost layer of pixels, the insertable $B$ layer (IBL) was installed during the 2013--14 LHC shutdown.  The pixels are cooled to a temperature of $\sim-5$\celsius\, with $N_2$ gas and operate at 150--600 V.  The pixels themselves come in two sizes $50\times400(600)\times250$ $\mu$m, with the larger pixels being in the outer layers.  They provide nominal resolution of 10(115) $\mu$m resolution in $r-\phi$ ($z$) direction.
+
+In order to improve total coverage in the detector and prevent any gaps, pixels are not installed flush with each other.  Pixels in the barrel are tilted at about 20\degree\, with an overlap in $r-\phi$, as shown in Figure \ref{fig:idmb}.  The disks of the ID end caps are rotated with respect to each other by 3.75\degree.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=0.850000\linewidth]{figures/atlas/ibl}
+  \caption{Arrangement of pixels in the barrel. IC: \cite{ibltdr}}
+  \label{fig:idmb}
+\end{figure}
+
 \subsection{The Silicon Microstrip Detector (SCT)}
-\begin{itemize}
-\item Cooled to $\sim-5$\celsius\  with N$_2$ gas, 150--600 V
-\item 17(580) $\mu$m resolution in $r-\phi$ ($z$)
-\item Barrel: 11\degree\ tilt, 4 layers (299, 371, 443, 514 mm), rectangles
-\item End Cap: 9 disks each side (934--2720 mm), trapezoids
-\end{itemize}
+The layout of the SCT is similar to that of the Pixel detector, except, for cost considerations, the SCT uses silicon strips that are also cooled to $\sim-5$\celsius\  with N$_2$ gas and operate from 150--350 V.  Strip dimensions are $80\times 6 000\times285$ $\mu$m, and provide nominal  17(580) $\mu$m resolution in $r-\phi$ ($z$).  Barrel strips feature an 11\degree\ tilt and come in four layers at 299, 371, 443, and 514 mm.  There are nine  end cap disks on each side at $z$ values varying from 934--2720 mm.
+
 \subsection{Transition Radiation Tracker (TRT)}
-(Transition radiation is the X-ray emission from relativistic electrons as they go from dielectric to gas.)
-\begin{itemize}
-\item $\left|\eta\right|<2$; 130 $\mu$m resolution; Straws 4 mm diameter; Xe-CO$_2$-O$_2$ (70-27-3); $-1500$ V
-\item Filaments/foil cause the transition radiation for $e/\pi$ identification $-dE/dx\sim\gamma$
-\item Barrel: 73 layers, 144 cm long, along $z$
-\item End Cap: 160 cm, 37 cm long, disks, each straw points in $\hat{r}$ at constant $\phi$
-\end{itemize}
+The final and outermost subsytem in the ID is the transition radiation tracker (TRT).  It provides coverage for \aeta\,up to 2.0 and is composed of straw detectors with a 4 mm diameter and run the length of the detector module, which provide 130 $\mu$m resolution and filled with a Xe-CO$_2$-O$_2$ (70-27-3) gas combination and operate at $-1500$ V.  The filaments and foil lining inside the straws induce X-ray emission in electrons and pions passing through the TRT as they move from a dielectic to a gas; this ``transition radiation'' is the source of the TRT's name.  Since the energy deposited due to transition radiation is proportional to the relativistic boost $\gamma$, for constant momentum, this is inversely proportional to mass, so electrons will have $\sim 130/0.5=260\times$ more transition radiation than pions, in principle enabling excellent electron/pion discrimination.  The TRT will be replaced by silicon strips in the Phase II upgrade.
 
 
 \section{The ATLAS Calorimeters}
-\subsection{Calorimeter Resolution}
-Following Tully's notation, we parameterize the momentum resolution of a \emph{tracker} as:
-\begin{equation}
-\frac{\sigma_{p_T}}{p_T}=c_0\oplus c_1\cdot p_T
-\label{eqn:ptres}
-\end{equation}
-Effects: \emph{multiple scattering}: $c_0=0.5-2\%$ (much of a problem at high $B$); \emph{curvature resolution} $c_1=10^{-3}-10^{-4}$ GeV$^{-1}$ (related: charge confusion happens when high $p_T$ tracks have small curvature, wrong sign)
-
-\begin{equation}
-\frac{\sigma_E}{E}=\frac{S}{\sqrt{E}}\oplus\frac{N}{E}\oplus C
-\label{eqn:eres}
-\end{equation}
-$S\sim2.7\%\sqrt{d_{active}\left[\text{mm}\right]/f_{samp}}$ (the stocastic term; the sampling fraction in the tile calorimeter is $\sim1/36$) and $C$ (constant term, calibration effects---would be zero for a single detector because you could understand it ``perfectly'' in principle) will be noted for different calorimeters below.  $N\sim0.1-0.5$ GeV.
-
-Calorimeter energy resolution is noted in Eqn. \ref{eqn:eres}. 89 K, liquid nitrogen, similar readouts.
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
   \includegraphics[width=0.800000\linewidth]{figures/atlas/ehfcalp}
@@ -124,52 +148,111 @@ Calorimeter energy resolution is noted in Eqn. \ref{eqn:eres}. 89 K, liquid nitr
   \label{fig:indet}
 \end{figure}
 
-\subsection{The Electromagnetic Calorimeter (ECAL)}
-\begin{itemize}
-\item $S=0.1$ GeV$^{-1/2}$, $C=0.002$;450 ns drift time
-\item 2-4 interaction lengths, $20-40X_0$, LAr/Pb active/absorber
-\item accordion geometry, absorber thickness 1.53 (1.13) mm $\left|\eta\right|<(>)0.8$ (constant $f_{samp}$
-\item Pre-sampler: $\left|\eta\right|<1.8$ 11 mm of LAr (in barrel)
-\item Barrel: $\left|\eta\right|<1.475\right|$, 3 layers: 1150, 1250, 2050 mm
-\item End Cap: $1.375<\left|\eta\right|<2.5(3.2)\right|$ inner (outer) wheel, 3 (2) layers: out to 3100 mm
-\end{itemize}
-\subsection{The Hadronic Calorimeter (HCAL)}
-\begin{itemize}
-\item $S=0.5$ GeV$^{-1/2}$, $C=0.05$ (0.03 after calibration)
-\item $\sim10$ interaction lengths (up to 20), 2.28--4.25 m
-\item $0.1\times0.1 (0.2\times0.2)$ $\eta,\phi$ granularity with(out) tracking
-\item Barrel: polystyrene/steel, staggered matrix, $\left|\eta\right|<1.7$ (UV scint.), 1800 V, 400 ns DT
-\item End Cap: $1.5<\left|\eta\right|<3.2\right|$ LAr/Cu; two wheels each side $372(475)-2030$ mm $r$, $4300<z<6100$ mm
-\end{itemize}
-\subsection{The Forward Calorimeter (FCAL)}
-\begin{itemize}
-\item $S\approx1$ GeV$^{-1/2}$
-\item $3.1<\left|\eta\right|<4.9$; LAr/Cu-W, matrix of absorber, rods inside tubes (LAr lives in the gap between the rod and tube)
-\end{itemize}
-
-
-\section{The Muon Spectrometer}
+ATLAS has four main calorimeter systems: the liquid argon based electromagnetic (ECAL), hadronic end cap (HEC), and forward (FCAL) calorimeters, and the scintillating tile based hardronic Tile calorimeter in the barrel.  Their layout and material budget in interaction lengths can be seen in Figure \ref{fig:calbudget}.
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-  \includegraphics[width=0.800000\linewidth]{figures/atlas/muonspecp}
-  \caption{The ATLAS muon spectrometer.}
+  \includegraphics[width=0.850000\linewidth]{figures/atlas/ehfcal_mat}
+  \caption{Material depth of the ATLAS calorimeters. IC: \cite{jinstpaper}}
+  \label{fig:calbudget}
+\end{figure}
+
+\subsection{Calorimeter Resolution}
+Before diving into the specifics of each of the ATLAS calorimeters, we review how calorimeter energy resolution performance is typically quoted.  A calorimeters relative energy resolution (a ratio) can be broken up into three orthogonal components, as shown in Equation \ref{eqn:eres}.
+\begin{equation}
+\frac{\sigma_E}{E}=\frac{S}{\sqrt{E}}\oplus\frac{N}{E}\oplus C
+\label{eqn:eres}
+\end{equation}
+$S$ is the photoelectron statistics or stochastic term represents the coefficient to the usual counting term (assuming Gaussian statistics); $N$ is a noise term, which is constant per channel (and hence comes in as $1/E$ in the relative energy resolution); and $C$ is a constant ``calibration'' term, which reflects how well one intrinsically understands a detector (i.e. mismodelling introduces an irreducible component to the energy resolution).  If any detector were perfectly modeled/understood, it's $C$ term would be zero.  $N\sim0.1-0.5$ \GeV\, for the typical calorimeter regardless of type, so $S$ and $C$ are typically quoted.
+
+A typical stochastic term scales as $S\sim \text{few}\%\sqrt{d_{active}\left[\text{mm}\right]/f_{samp}}$, where $f_{samp}$ is the sampling fraction or the ratio of a calorimeter by mass is composed of an active volume capable (i.e. one that registers energy deposits).  The tile calorimeter, for example, has a sampling fraction of about 1/36.  There are several reasons that this fraction is so low.  First, many active volumes have insufficient stopping power; one wants to capture as much energy as possible from electromagnetic and hadronic showers inside the calorimeter, and this simply is not possible for most active media (one notable exception to this is the CMS crystal-based calorimeter; ATLAS is a more conservative design), so well-behaved absorbers like lead or iron are necessary to ensure all the energy is contained within a calorimeter.  Another factor is cost; things like liquid argon are expensive.  Finally, most active media are unsuitable for structural support, so sturdy absorbing materials help relieve engineering constraints.
+
+%Calorimeter energy resolution is noted in Eqn. \ref{eqn:eres}. 89 K, liquid nitrogen, similar readouts.
+\subsection{The Electromagnetic Calorimeter (ECAL)}
+The ECAL has liquid argon (LAr) as an active material with lead as an absorber.  The ECAL barrel extends to \aeta\, of 1.475 with three layers at 1150, 1250, and 2050 mm, and its end cap, comprised of two wheels extends covers $1.375<\left|\eta\right|<2.5(3.2)\right|$  for the inner (outer) wheel, with 3 (2) layers out to 3100 mm.  There is a 1.1 (0.5) cm thick layer of LAr pre-sampler up to \aeta\, of 1.8 in the barrel (end cap) of the ECAL, which is designed to aid in correcting for electron and photon energy loss in the ID.
+
+The LAr and lead absorber are arranged in alternating beveled sawtooth layers in what is known as an ``accordion'' geometry, shown in Figure \ref{fig:accordion}, which shows the layout of a barrel module in the ECAL.  The absorber thickness is 1.53 (1.13) mm for \aeta less (more) than 0.8 to ensure a constant sampling fraction.  This arrangement helps provide greater coverage in $\phi$.
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=0.750000\linewidth]{figures/atlas/accordion}
+  \caption{The accordion geometry of the LAr electromagnetic calorimeters is prominently shown in this illustration of an ECAL barrel module.  IC: \cite{jinstpaper}}
+  \label{fig:accordion}
+\end{figure}
+
+The ECAL overall typically covers 2--4 interaction lengths or about 20--40 radiation lengths.  Its performance corresponds to resolution coefficients $S=0.1$ GeV$^{-1/2}$ and $C=0.002$ with a 450 ns drift time.  In order to optimize the material budget and overall detector construction, the ECAL barrel infrastructure is integrated with that of the ID's solenoid.  The granularity of the ECAL barrel middle layer, $\Delta\eta\times\Delta\phi$ cells of size $0.025\times0.025$, are used to define the granularity of calorimeter cluster reconstruction in ATLAS.
+
+\subsection{Hadronic End Caps (HEC)}
+The HEC covers an \aeta \, range of 1.5 to 3.2.  Like the ECAL end caps, the HEC consists of two identical wheels out to a distance from the beam axis of 2030 mm; its layout is shown in Figure \ref{fig:hec}.  The HEC also has LAr as the active material, but instead has flat copper plates as absorbers for sampling fraction of 4.4\% and 2.2\% in the first and second wheels, respectively.  Its granularity in \ephi\, is $0.1\times0.1$ for \aeta\, up to 2.5 and $0.2\times0.2$ in the more forward regions.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=0.750000\linewidth]{figures/atlas/hec}
+  \caption{The layout of the HEC in $r-\phi$ and $r-z$; dimensions are in millimeters.  IC: \cite{jinstpaper}}
+  \label{fig:hec}
+\end{figure}
+
+\subsection{The Forward Calorimeter (FCAL)}
+The FCAL covers an \aeta\, range from 3.1 to 4.9, again using LAr as the active material in gaps between rods and tubes in a copper-tungsten matrix, as shown in Figure \ref{fig:fcal}.  These system has characteristic performance corresponding to stochastic term of $S\approx1$ GeV$^{-1/2}$.  There are three modules in the FCAL: one electromagnetic and two hadronic, with the latter two featuring a higher tungsten content for a larger absorption length.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=0.550000\linewidth]{figures/atlas/fcal}
+  \caption{The material layout for a typical section of the FCAL in the transverse plane.  IC: \cite{jinstpaper}}
+  \label{fig:fcal}
+\end{figure}
+
+\subsection{The Hadronic Tile Calorimeter}
+The tile calorimeter, covering at \aeta\,of up to 1.7 is made up of 64 modules in the barrel (each covering $\Delta\phi$ of 360/64 = 5.625\degree), each with a layout as in Figure \ref{fig:tile}.  
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=0.550000\linewidth]{figures/atlas/tile}
+  \caption{The material layout for a typical section of the hadronic tile calorimeter.  IC: \cite{jinstpaper}}
+  \label{fig:tile}
+\end{figure}
+It is designed to be self-supporting for structural reasons, and so is the only calorimeter without LAr as a an active medium, with a staggered matrix of active scintillating polystyrene and supporting steel.  It operates at 1800 V with a 400 ns dead time and has a thickness corresponding to 10--20 interaction lengths (2.28--4.25 m).  Its cell have a $\Delta\eta\times\Delta\phi$ granularity of $0.1\times0.1$ in the first two layers and $0.2\times0.1$ in the last layer.  Its performance corresponds to $S=0.5$ GeV$^{-1/2}$ and $C=0.05$ (0.03 after calibration).
+
+\section{The Muon Spectrometer}
+Since the energy of muons is not captured within the calorimeters, the stations of the ATLAS MS surrounds the entire detectors and provides tracks of outgoing muons that can be matched to tracks in the ID.  The ATLAS toroids, which provide field strengths of up to 2.5 (3.5) T in the barrel (end cap) with typical strengths of 0.5--1.0 T, bends the muons, which allows for a muon momentum measurement since the mass of the muon is known.  The relative momentum resolution of a tracker (assuming, as in ATLAS, that bending primarily happens in the $\phi$ direction) may be expressed as
+\begin{equation}
+\frac{\sigma_{p_T}}{p_T}=c_0\oplus c_1\cdot p_T
+\label{eqn:ptres}
+\end{equation}
+The $c_0$ term represents a degradation in resolution due to multiple scattering, and is typically 0.5--2\%\cite{tully}.  The $c_1$ term describes the effect that, for a constant magnetic field, higher momentum muons will curve less.  This term has typical values of $10^{-3}-10^{-4}$ GeV$^{-1}$.  At very high $p_T$ values, this is of particular concern since a very small curvature can result in charge misidentification.
+
+A cross-sectional view (in $r-z$) of the muon spectrometer with station names, detector types, and layouts is shown in Figure \ref{fig:ms}.  There are three layers of muon detectors in both the barrel (at 5 000, 7 500, and 10 000 mm) and end cap (at 7 000 (11 000), 13 500, and 21 000 mm), with the innermost end cap layer split in two due to the end cap toroid.  This corresponds to an \aeta\,range up to 2.4 for both precision and trigger coverage, and up to 2.7 for precision detection only.  
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=\linewidth]{figures/atlas/msdetail}
+  \caption{The ATLAS muon spectrometer.  Naming of the MDT stations obeys the following convention [BE] (barrel or end cap) [IEM0] (inner, inner extended (end cap only), middle, or outer layer) [1-6] (increasing in $z$ ($r$) for the barrel (end cap)), so EI1 is the station in the inner most end cap layer closest to the beam pipe.  IC: \cite{jinstpaper}}
   \label{fig:ms}
 \end{figure}
-\begin{itemize}
-\item Three layers: 5, 7.5, 10 m (barrel); 7, (11, small layer EC toroid), 13, 21 m (end cap)
-\item Air toroid 4.5 K LHe, 4 T max (0.5--1.0 T), coils. 20.5 kA
-\item momentum resolution, charge reconstruction: 5 GeV up to 3 TeV (10\% resolution at 1 TeV (3\% at 100 GeV)) 
-\end{itemize}
-\subsection{Precision Detectors}
-\begin{itemize}
-\item MDT: 3 cm diameter Monitored Drift Tubes, Ar/CO$_2$ gas, W-Re wire at 3 kV, $\left|\eta\right|<2.0$, 700 ns DT
-\item CSC: Cathode Strip Chamber, $2.0\left|\eta\right|<2.7$,  multiwire proportional chamber, more radiation hard, DT $\lesssim40$ ns
-\end{itemize}
-\subsection{Trigger Detectors}
-\begin{itemize}
-\item $\left|\eta\right|< 2.4$, must be fast, approx. $p_T$ and pos. of $\mu$ track
-\item RPC: Resistive Plate Chamber, parallel plate detector, 2 mm, 9.8 kV, 5 ns; 3 layers, barrel
-\item TGC: Thin Gap Chamber, multiwire proportional chamber, DT+prop. $<25$ ns; 4 layers, EC
-\end{itemize}
 
+The MS can reconstruct muons with transverse momenta from 5 GeV up to 3 TeV (with 10\% resolution at 1 TeV (3\% at 100 GeV)).  Detectors in the MS fall into two broad headings, precision detectors and trigger detectors, both described below.  Nominal performance of the current detector types in the MS is summarized in Figure \ref{fig:mutab}, a table taken from \cite{jinstpaper}.  It should be noted that \aeta\, ranges quoted below, where applicable, do not include the range 0-0.1, where this a gap in the MS to allow for cabling and other services to the ATLAS detector; for a discussion of compensatory measures in muon reconstruction, see Chapter \ref{ch:object}.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=\linewidth]{figures/atlas/mutab}
+  \caption{ATLAS MS detector performance.  IC: \cite{jinstpaper}}
+  \label{fig:mutab}
+\end{figure}
+
+\subsection{Precision Detectors}
+The ATLAS MS has two types of precision detectors: monitored drift tubes (MDT's) and cathode strip chambers (CSC's).  An MDT is a tube with a 3 cm diameter with length depending on the station in which the tube is located.  The tube is filled with an Ar/CO$_2$ gas mixture and has a tungsten-rhenium wire at its center that is kept at 3 000 V when operational.  The MDT's provide 35 $\mu$m resolution (per chamber) in their cross-sectional dimension (there is no sensitivity along the axis of the wire).  Resolution of this magnitude requires very precise knowledge of the location of the wires within the MDT's; this is generally true for detectors in the MS (trigger as well as precision); to this end, stations of the MS are aligned using an optical laser system.  For a detailed description of how misalignment can affect performance, see Appendix \ref{ch:mmt} for a detailed discussion of misalignment's simulated effets on the performance of the proposed micromegas trigger processor in the New Small Wheel (NSW) of the Phase I upgrade.  Their 700 ns dead time, however, percludes their use as trigger detectors and also in the region of the small wheel (innermost endcap) closest to the beam pipe (\aeta\, from 2.0 to 2.7), where rates are highest.
+
+In this region, the precision detectors are the CSC's, which have a much lower dead time of $\sim40$ ns.  These are multiwire proprotional chambers with cathode planes that have orthogonal sets of strips, allowing for a measurement in both the principal directions.  CSC detector sizes also vary by station, coming in both small and large chambers.  The CSC strip pitch is 5.31 (5.56) mm for the large (small) chambers, with position determined from the induced charge distribution in the strips.  This corresponds to a nominal resolution of 60 (5 000) $\mu$m per plane in the bending (non-bending) direction.  These are slated be replaced micromegas detectors in the NSW.
+
+\subsection{Trigger Detectors}
+Trigger detectors have a fundamentally different role than the precision detectors, instead needing to deliver ``good enough'' approximate values of muon track positions and $p_T$ values.  The MS has two types of trigger detectors: resistive placte chambers (RPC's) in the barrel and thin gap chambers (TGC's) in the end caps.  They collectively cover an \aeta\, range to 2.4, and their arrangement is shown in Figure \ref{fig:mstrig}.
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=\linewidth]{figures/atlas/mstrigger}
+  \caption{ATLAS MS trigger detector arrangement.  IC: \cite{jinstpaper}}
+  \label{fig:mstrig}
+\end{figure}
+
+The RPC's are parallel plate detectors with a dead tiem of 5 ns and a thickness of 2 mm, kept at a potential of 9 800 V; they are deployed in three layers.  RPC's, too, feature strips with orthogonal arrangements on the top and bottom planes, with a strip pitch of 23--35 mm.  
+
+The TGC's are multiwire proportional chambers with a dead time of 25 ns.  Also, featuring orthogonal strips, the TGC's also provide a $\phi$ measurement to compensate for the lack of MDT sensitivity in this direction.  There are four layers of TGC's in the end cap.  TGC's will be supplanted by sTGC's (small thin gap chambers) in the NSW.
+
+For more details on how detector level trigger objects work in the ATLAS MS, see Appendix \ref{ch:mmt} for details on the micromegas trigger processor algorithm.
 
