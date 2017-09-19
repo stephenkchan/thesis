@@ -6,7 +6,7 @@ If it's stupid but it works, it isn't stupid.
 
 \chapter{Measurement Combinations}
 
-\newthought{Much has been said} 
+\newthought{In order to maximize} sensitivity, it is necessary to use all available datasets.  
 The Run1 ($\sqrt{s}=$7 TeV with 4.7 fb$^{-1}$ of data, and $\sqrt{s}=$8 TeV with 20.3 fb$^{-1}$ of data) and Run2 workspaces are combined according to the correlation scheme in Table~\ref{tableComb1}.  The impact of correlating experimental and modelling nuisance parameters (NP's) was checked and found to have neglible impact on fit results (details may be found in Appendix~\ref{app:comb}).  Hence, only signal NP's and the $b$-jet energy scale are correlated.   
 
 \begin{table}[!htbp]
@@ -29,7 +29,7 @@ SysJetFlavB\_ 7TeV & SysJetFlavB\_ 8TeV & SysJET\_21NP\_JET\_BJES\_Response\\
 The combined results yields an observed (expected) significance of 3.57 (4.00) and an observed (expected) limit of 1.37 ($0.510^{+0.200}_{-0.143}$), with a signal strength of $\hat{\mu}=0.898^{+0.278}_{-0.261}$.
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-  \includegraphics[width=0.45\linewidth]{figures/comb/r1_combData-r2_obsData-jes_partial-eps02_rank_job100of100_Run1Run2Comb_r1_combData-r2_obsData-jes_partial-eps02_pulls_125.pdf}
+  \includegraphics[width=0.45\linewidth]{figures/comb/r1_combData-r2_obsData-jes_partial-eps02_rank_job100of100_Run1Run2Comb_r1_combData-r2_obsData-jes_partial-eps02_pulls_125}
   \caption{Ranked nuisance parameters for the Run1+Run2 combination.}
   \label{fig:combranks}
 \end{figure}
@@ -54,21 +54,21 @@ Combined & 0.90 & +0.28 / -0.26 & 3.57 (4.00)\\
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \begin{center}
-  \includegraphics[width=0.75\linewidth]{figures/comb/Plot_mu_eps02_WHZH.pdf}
+  \includegraphics[width=0.75\linewidth]{figures/comb/Plot_mu_eps02_WHZH}
   \caption{$\hat{\mu}$ summary plot for a two parameter of interest fit.}
   \label{fig:combmushat1}
   \end{center}
 \end{figure}
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \begin{center}
-  \includegraphics[width=0.75\linewidth]{figures/comb/Plot_mu_eps02_channels.pdf}
+  \includegraphics[width=0.75\linewidth]{figures/comb/Plot_mu_eps02_channels}
   \caption{$\hat{\mu}$ summary plot for a three parameter of interest fit.}
   \label{fig:combmushat2}
   \end{center}
 \end{figure}
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \begin{center}
-  \includegraphics[width=0.75\linewidth]{figures/comb/Plot_mu_eps02_7813.pdf}
+  \includegraphics[width=0.75\linewidth]{figures/comb/Plot_mu_eps02_7813}
   \caption{$\hat{\mu}$ summary plot for different $\sqrt{s}$ values.}
   \label{fig:combmushat3}
   \end{center}
@@ -125,7 +125,7 @@ Figures ~\ref{fig:combmushat4}--~\ref{fig:combmushat6} show $\hat{\mu}$ summary 
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \begin{center}
-  \includegraphics[width=0.75\linewidth]{figures/comb/Plot_mu_eps02_r1r2whzh.pdf}
+  \includegraphics[width=0.75\linewidth]{figures/comb/Plot_mu_eps02_r1r2whzh}
   \caption{$\hat{\mu}$ summary plot for a four parameter of interest fit.}
   \label{fig:combmushat4}
   \end{center}
@@ -133,7 +133,7 @@ Figures ~\ref{fig:combmushat4}--~\ref{fig:combmushat6} show $\hat{\mu}$ summary 
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \begin{center}
-  \includegraphics[width=0.75\linewidth]{figures/comb/Plot_mu_eps02_r1r2channels.pdf}
+  \includegraphics[width=0.75\linewidth]{figures/comb/Plot_mu_eps02_r1r2channels}
   \caption{$\hat{\mu}$ summary plot for a six parameter of interest fit.}
   \label{fig:combmushat5}
   \end{center}
@@ -141,7 +141,7 @@ Figures ~\ref{fig:combmushat4}--~\ref{fig:combmushat6} show $\hat{\mu}$ summary 
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \begin{center}
-  \includegraphics[width=0.75\linewidth]{figures/comb/Plot_mu_eps02_r1r2.pdf}
+  \includegraphics[width=0.75\linewidth]{figures/comb/Plot_mu_eps02_r1r2}
   \caption{$\hat{\mu}$ summary plot for a two parameter of interest (Run 1 and Run 2) values.}
   \label{fig:combmushat6}
   \end{center}
@@ -164,13 +164,13 @@ NP_{i,eff} = \frac{\sum_j A_{ij} \left|NP_{j,unf}\right| NP_{j,unf}}{\sqrt{\sum_
 where \textit{eff} and \textit{unf} are for effective and unfolded NP's, respectively, the $A_{ij}$'s are scalar coeffecients taken from raw maps, and $\left|NP_{j,unf}\right|$ are the amplitudes of the unfolded NP's.  The raw $A_{ij}$ and scaled maps for Run 1 and Run 2 may be found in Figure~\ref{fig:comb_jes_maps}
 
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
   \begin{tabular}{cccc}
-\begin{subfigure}[t]{0.24\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/run1_maps/Coeffs_2DHisto_original.pdf}}\caption{}\end{subfigure}
-\begin{subfigure}[t]{0.24\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/run1_maps/Coeffs_2DHisto_scaled.pdf}}\caption{}\end{subfigure}
-\begin{subfigure}[t]{0.24\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/run2_maps/Coeffs_2DHisto_original.pdf}}\caption{}\end{subfigure}
-\begin{subfigure}[t]{0.24\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/run2_maps/Coeffs_2DHisto_scaled.pdf}}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.24\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/run1_maps/Coeffs_2DHisto_original}}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.24\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/run1_maps/Coeffs_2DHisto_scaled}}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.24\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/run2_maps/Coeffs_2DHisto_original}}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.24\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/run2_maps/Coeffs_2DHisto_scaled}}\caption{}\end{subfigure}
     \end{tabular}
     \caption{The raw and scaled coefficients for unfolding Run 1 (a and b) and Run 2 (c and d), respectively}
     \label{fig:comb_jes_maps}
@@ -195,29 +195,75 @@ Obs. Limit & 1.21 & 1.21 & 1.94 & 1.94 & 1.36 & 1.37\\
 \label{tab:unfold_jes_sensitivities}
 \end{table}
 
-\begin{table}[htbp]
-\begin{center}\begin{tabular}{|l|c|c|c|c|c|c|}
+\begin{table}[!htbp]
+\begin{center}\begin{tabular}{lcc}
 \hline\hline
- & R1 Unfold & R1 Eff & R2 Unfold & R2 Eff & Comb Unfold & Comb Eff\\
+ & R1 Unfold & R1 Eff \\
 \hline
-$\left|\Delta\hat{\mu}\right|$ &  \multicolumn{2}{|c|}{0.0018} &  \multicolumn{2}{|c|}{0.0} &  \multicolumn{2}{|c|}{0.0006}\\
-muhat & 0.5064 & 0.5082 & 1.2051 & 1.2052 & 0.8992 & 0.8985\\
+$\left|\Delta\hat{\mu}\right|$ &  \multicolumn{2}{c}{0.0018} \\
+$\hat{\mu}$ & 0.5064 & 0.5082 \\
 \hline
-Total &  +0.400 / -0.373  &  +0.401 / -0.373  &  +0.421 / -0.366  &  +0.421 / -0.366  &  +0.278 / -0.261  &  +0.278 / -0.261 \\
-DataStat &  +0.312 / -0.301  &  +0.312 / -0.301  &  +0.239 / -0.234  &  +0.239 / -0.234  &  +0.185 / -0.181  &  +0.185 / -0.181 \\
-FullSyst &  +0.250 / -0.220  &  +0.251 / -0.220  &  +0.346 / -0.282  &  +0.346 / -0.282  &  +0.208 / -0.187  &  +0.208 / -0.188 \\
+Total &  +0.400 / -0.373  &  +0.401 / -0.373  \\
+DataStat &  +0.312 / -0.301  &  +0.312 / -0.301\\
+FullSyst &  +0.250 / -0.220  &  +0.251 / -0.220\\
 \hline
-Jets &  +0.060 / -0.051  &  +0.060 / -0.052  &  +0.066 / -0.047  &  +0.066 / -0.047  &  +0.040 / -0.044  &  +0.041 / -0.036 \\
-BTag &  +0.094 / -0.079  &  +0.095 / -0.079  &  +0.119 / -0.106  &  +0.119 / -0.106  &  +0.076 / -0.076  &  +0.077 / -0.076 \\
+Jets &  +0.060 / -0.051  &  +0.060 / -0.052  \\
+BTag &  +0.094 / -0.079  &  +0.095 / -0.079  \\
+&  +0.119 / -0.106  &  +0.119 / -0.106  &  +0.076 / -0.076  &  +0.077 / -0.076 \\
 \hline
 \hline
 \end{tabular}
-\caption{Error on signal strength breakdowns for  Run 1, Run 2, and combined workspaces with effective and unfolded JES NP's.}
-\label{tab:unfold_jes_breakdowns}
+\caption{Error on signal strength breakdowns for  Run 1 workspaces with effective and unfolded JES NP's.}
+\label{tab:unfold_jes_breakdowns1}
 \end{center}
 \end{table}
 
-\begin{comment}
+
+\begin{table}[!htbp]
+\begin{center}\begin{tabular}{lcc}
+\hline\hline
+ & R1 Unfold & R1 Eff & R2 Unfold & R2 Eff & Comb Unfold & Comb Eff\\
+\hline
+$\left|\Delta\hat{\mu}\right|$ &  \multicolumn{2}{c}{0.0}\\
+$\hat{\mu}$ & 1.2051 & 1.2052\\
+\hline
+Total & +0.421 / -0.366  &  +0.421 / -0.366\\
+DataStat &  +0.239 / -0.234  &  +0.239 / -0.234\\
+FullSyst &  +0.346 / -0.282  &  +0.346 / -0.282\\
+\hline
+Jets &  +0.066 / -0.047  &  +0.066 / -0.047\\
+BTag &  +0.119 / -0.106  &  +0.119 / -0.106\\
+\hline
+\hline
+\end{tabular}
+\caption{Error on signal strength breakdowns for Run 2 workspaces with effective and unfolded JES NP's.}
+\label{tab:unfold_jes_breakdowns2}
+\end{center}
+\end{table}
+
+
+\begin{table}[!htbp]
+\begin{center}\begin{tabular}{lcc}
+\hline\hline
+ & Comb Unfold & Comb Eff\\
+\hline
+$\left|\Delta\hat{\mu}\right|$ &  \multicolumn{2}{c}{0.0006}\\
+$\hat{\mu}$ & 0.8992 & 0.8985\\
+\hline
+Total &  +0.278 / -0.261  &  +0.278 / -0.261 \\
+DataStat &  +0.185 / -0.181  &  +0.185 / -0.181 \\
+FullSyst &  +0.208 / -0.187  &  +0.208 / -0.188 \\
+\hline
+Jets &  +0.040 / -0.044  &  +0.041 / -0.036 \\
+BTag &  +0.076 / -0.076  &  +0.077 / -0.076 \\
+\hline
+\hline
+\end{tabular}
+\caption{Error on signal strength breakdowns for combined workspaces with effective and unfolded JES NP's.}
+\label{tab:unfold_jes_breakdownsc}
+\end{center}
+\end{table}
+
 It was also found that fit quantities of interest were similarly indifferent to the use of either the strong or weak JES correlation schemes, as shown in Tables~\ref{tab:sw_jes_sensitivities} and~\ref{tab:sw_jes_breakdowns}.
 
 \begin{table}[!htbp]
@@ -258,31 +304,29 @@ BTag &  $^{+ 0.0975}_{-0.0933}$ &  $^{+ 0.098}_{-0.0936}$ &  $^{+ 0.0979}_{-0.09
 
 \label{tab:sw_jes_breakdowns}\end{center}
 \end{table}
-\end{comment}
 
 
-\begin{figure}[!htbp]
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{x_combData-jesu1_rank_job100of100_Run1Run2Comb_x_combData-jesu1_pulls_125.pdf}}\caption{R1 Unfold}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{r1_combData-613r1_rank_job100of100_Run1Run2Comb_r1_combData-613r1_pulls_125.pdf}}\caption{R1 Eff}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/x_combData-jesu1_rank_job100of100_Run1Run2Comb_x_combData-jesu1_pulls_125}}\caption{R1 Unfold}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r1_combData-613r1_rank_job100of100_Run1Run2Comb_r1_combData-613r1_pulls_125}}\caption{R1 Eff}\end{subfigure}
   \caption{Ranks for the effective and unfolded JES NP Run1 combined workspaces.}
     \label{fig:Ranks:jesu1}
 \end{figure}
 
-\begin{figure}[!htbp]
+\begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{test_obsData-jesu2_rank_Run1Run2Comb_test_obsData-jesu2_pulls_125.pdf}}\caption{R1 Unfold}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{r2_obsData-907r2_rank_Run1Run2Comb_r2_obsData-907r2_pulls_125.pdf}}\caption{R1 Eff}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/test_obsData-jesu2_rank_Run1Run2Comb_test_obsData-jesu2_pulls_125}}\caption{R1 Unfold}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r2_obsData-907r2_rank_Run1Run2Comb_r2_obsData-907r2_pulls_125}}\caption{R1 Eff}\end{subfigure}
   \caption{Ranks for the effective and unfolded JES NP Run2 combined workspaces.}
     \label{fig:Ranks:jesu2}
 \end{figure}
 
-\begin{figure}[!htbp]
+\begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-\begin{subfigure}[t]{0.45\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r1_asimovData_cnd1_0-51-r2_asimovData_cnd1_1-jesu_partial-509alpha_rank_job100of100_Run1Run2Comb_r1_asimovData_cnd1_0-51-r2_asimovData_cnd1_1-jesu_partial-509alpha_pulls_125.pdf}}\caption{Weak Unfold}\end{subfigure}
-\begin{subfigure}[t]{0.45\linewidth]{figures/comb/r1_asimovData_cnd1_0-51-r2_asimovData_cnd1_1-jes_partial-509alpha_rank_job100of100_Run1Run2Comb_r1_asimovData_cnd1_0-51-r2_asimovData_cnd1_1-jes_partial-509alpha_pulls_125.pdf}} \\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r1_asimovData_cnd1_0-51-r2_asimovData_cnd1_1-jes_partial-509alpha_rank_job100of100_Run1Run2Comb_r1_asimovData_cnd1_0-51-r2_asimovData_cnd1_1-jes_partial-509alpha_pulls_125.pdf}}\caption{Weak Eff}\end{subfigure}
-\begin{subfigure}[t]{0.45\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r1_combData-r2_obsData-jesu_partial-eps02_rank_job100of100_Run1Run2Comb_r1_combData-r2_obsData-jesu_partial-eps02_pulls_125.pdf}}\caption{Unfolded JES}\end{subfigure}
-\begin{subfigure}[t]{0.45\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r1_combData-r2_obsData-jes_partial-eps02_rank_job100of100_Run1Run2Comb_r1_combData-r2_obsData-jes_partial-eps02_pulls_125.pdf}}\caption{Effective JES}\end{subfigure}
+\begin{subfigure}[t]{0.45\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r1_combData-r2_obsData-jesu_partial-eps02_rank_job100of100_Run1Run2Comb_r1_combData-r2_obsData-jesu_partial-eps02_pulls_125}}\caption{Comb Unfolded}\end{subfigure}
+\begin{subfigure}[t]{0.45\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r1_combData-r2_obsData-jes_partial-eps02_rank_job100of100_Run1Run2Comb_r1_combData-r2_obsData-jes_partial-eps02_pulls_125}}\caption{Comb Effective}\end{subfigure}
   \caption{Ranks for the effective and unfolded JES NP Run1+Run2 combined workspaces.}
     \label{fig:Ranks:jesuc}
 \end{figure}
@@ -293,30 +337,30 @@ As a result of these studies, the weak JES correlation scheme with uncorrelated 
 
 \subsubsection{JES Pull Comparisons}
 
-\begin{figure}[!htbp]
+\begin{figure}[!htbp]\captionsetup{justification=centering}
 \centering
-\begin{subfigure}[t]{0.67\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/pullcomp-jesu/NP_Jet.pdf}}\caption{Jet}\end{subfigure}
+\includegraphics[width=\textwidth]{figures/comb/pullcomp-jesu/NP_Jet}
   \caption{Pull Comparisons: jesu---Jet  \textcolor{black}{Comb Unfold}, \textcolor{red}{Comb Eff}, \textcolor{blue}{Strong Unfold}, \textcolor{magenta}{Strong Eff}}
   \label{fig:PullComparisons:jesu---Jet}  
 \end{figure}
 
-\begin{figure}[!htbp]
+\begin{figure}[!htbp]\captionsetup{justification=centering}
 \centering
-\begin{subfigure}[t]{0.67\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/pullcomp-jesu/NP_JetMatched.pdf}}\caption{JetMatched}\end{subfigure}
+\includegraphics[width=\textwidth]{figures/comb/pullcomp-jesu/NP_JetMatched}
   \caption{Pull Comparisons: jesu---JetMatched  \textcolor{black}{Comb Unfold}, \textcolor{red}{Comb Eff}, \textcolor{blue}{Strong Unfold}, \textcolor{magenta}{Strong Eff}}
   \label{fig:PullComparisons:jesu---JetMatched}
 \end{figure}
 
-\begin{figure}[!htbp]
+\begin{figure}[!htbp]\captionsetup{justification=centering}
 \centering
-\begin{subfigure}[t]{0.67\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/pullcomp-jesu/NP_JetEff.pdf}}\caption{JetEff}\end{subfigure}
+\includegraphics[width=\textwidth]{figures/comb/pullcomp-jesu/NP_JetEff}
   \caption{Pull Comparisons: jesu---JetEff  \textcolor{black}{Comb Unfold}, \textcolor{red}{Comb Eff}, \textcolor{blue}{Strong Unfold}, \textcolor{magenta}{Strong Eff}}
   \label{fig:PullComparisons:jesu---JetEff}
 \end{figure}
 
-\begin{figure}[!htbp]
+\begin{figure}[!htbp]\captionsetup{justification=centering}
 \centering
-\begin{subfigure}[t]{\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/pullcomp-jesu/NP_JetUnfold.pdf}}\caption{JetUnfold}\end{subfigure}
+\includegraphics[width=\textwidth]{figures/comb/pullcomp-jesu/NP_JetUnfold}
   \caption{Pull Comparisons: jesu---JetUnfold  \textcolor{black}{Comb Unfold}, \textcolor{red}{Comb Eff}, \textcolor{blue}{Strong Unfold}, \textcolor{magenta}{Strong Eff}}
   \label{fig:PullComparisons:jesu---JetUnfold}
 \end{figure}
@@ -331,17 +375,11 @@ Another principal systematic category is modeling uncertainties.  The effect of 
  & $\left|\Delta\mu\right|$ & $\sigma$ & $\left|\Delta\sigma\right|$ & $\chi^2$\\
 \hline
 $\rho$=-1 & 0.0024 & 0.2448 & 0.011 (4.3\%) & 0.95\\
-\hline
 $\rho$=-0.6 & 0.0015 & 0.2493 & 0.00654 (2.55\%) & 0.9804\\
-\hline
 $\rho$=-0.3 & 0.0008 & 0.2526 & 0.00325 (1.27\%) & 1.0045\\
-\hline
 $\rho$=0 & --- & 0.2558 & --- & 1.0298\\
-\hline
 $\rho$=0.3 & 0.0008 & 0.259 & 0.0032 (1.25\%) & 1.0564\\
-\hline
 $\rho$=0.6 & 0.0017 & 0.2622 & 0.00636 (2.49\%) & 1.0844\\
-\hline
 $\rho$=1 & 0.0029 & 0.2664 & 0.0105 (4.11\%) & 1.1242\\
 \hline\hline
 \end{tabular}
@@ -351,119 +389,6 @@ $\rho$=1 & 0.0029 & 0.2664 & 0.0105 (4.11\%) & 1.1242\\
 \end{table}
 
 \begin{comment}
-\begin{figure}[!htbp]
-\center
-  \label{fig:SingleTopRun11of2}
-\begin{subfigure}[t]{0.225\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_8TeV/f_SysTopMbb.pdf}}\caption{SysTopMbb}\end{subfigure}
-\begin{subfigure}[t]{0.225\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_8TeV/f_SysWtPt2jHighPt.pdf}}\caption{SysWtPt2jHighPt}\end{subfigure}
-\begin{subfigure}[t]{0.225\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_8TeV/f_SysWtPt2jLowPt.pdf}}\caption{SysWtPt2jLowPt}\end{subfigure}
-\begin{subfigure}[t]{0.225\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_8TeV/f_SysWtPt3jHighPt.pdf}}\caption{SysWtPt3jHighPt}\end{subfigure}
-  \caption{Single Top, Run1 (1 of 2) }
-\end{figure}
-
-\begin{figure}[!htbp]
-\center
-  \label{fig:SingleTopRun12of2}
-\begin{subfigure}[t]{0.45\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_8TeV/f_SysWtPt3jLowPt.pdf}}\caption{JetMatcSysWtPt3jLowPthed}\end{subfigure}
-  \caption{Single Top, Run1 (2 of 2) }
-\end{figure}
-
-\begin{figure}[!htbp]
-\center
-  \label{fig:SingleTopRun21of1}
-\begin{subfigure}[t]{0.3\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_13TeV/f_SysStopWtMBB.pdf}}\caption{SysStopWtMBB}\end{subfigure}
-\begin{subfigure}[t]{0.3\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_13TeV/f_SysStopWtPTV.pdf}}\caption{SysStopWtPTV}\end{subfigure}
-\begin{subfigure}[t]{0.3\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_13TeV/f_SysStoptMBB.pdf}}\caption{SysStoptMBB}\end{subfigure}
-  \caption{Single Top, Run2 (1 of 1) }
-\end{figure}
-
-\begin{figure}[!htbp]
-\center
-  \label{fig:V+jetsMbbRun11of1}
-\begin{subfigure}[t]{0.3\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_8TeV/f_SysWMbb.pdf}}\caption{SysWMbb}\end{subfigure}
-\begin{subfigure}[t]{0.3\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_8TeV/f_SysWbbPtW.pdf}}\caption{SysWbbPtW}\end{subfigure}
-\begin{subfigure}[t]{0.3\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_8TeV/f_SysZMbb.pdf}}\caption{SysZMbb}\end{subfigure}
-  \caption{V+jets Mbb, Run1 (1 of 1) }
-\end{figure}
-
-\begin{figure}[!htbp]
-\center
-  \label{fig:V+jetsMbbRun21of1}
-\begin{subfigure}[t]{0.3\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_13TeV/f_SysWMbb.pdf}}\caption{SysWMbb}\end{subfigure}
-\begin{subfigure}[t]{0.3\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_13TeV/f_SysWPtV.pdf}}\caption{SysWPtV}\end{subfigure}
-\begin{subfigure}[t]{0.3\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_13TeV/f_SysZMbb.pdf}}\caption{SysZMbb}\end{subfigure}
-  \caption{V+jets Mbb, Run2 (1 of 1) }
-\end{figure}
-
-\begin{figure}[!htbp]
-\center
-  \label{fig:DibosonRun11of1}
-\begin{subfigure}[t]{0.45\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_8TeV/f_SysWZMbb.pdf}}\caption{SysWZMbb}\end{subfigure}
-\begin{subfigure}[t]{0.45\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_8TeV/f_SysZZMbb.pdf}}\caption{SysZZMbb}\end{subfigure}
-  \caption{Diboson, Run1 (1 of 1) }
-\end{figure}
-
-\begin{figure}[!htbp]
-\center
-  \label{fig:DibosonRun21of2}
-\begin{subfigure}[t]{0.225\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_13TeV/mBB__WZlvqq_PS_PS_fit.pdf}}\caption{mBBWZlvqqPSPS}\end{subfigure}
-\begin{subfigure}[t]{0.225\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_13TeV/mBB__WZlvqq_PS_Sherpa_fit.pdf}}\caption{mBBWZlvqqPSSherpa}\end{subfigure}
-\begin{subfigure}[t]{0.225\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_13TeV/mBB__ZZqqll_PS_PS_fit.pdf}}\caption{mBBZZqqllPSPS}\end{subfigure}
-\begin{subfigure}[t]{0.225\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_13TeV/mBB__ZZqqll_PS_Sherpa_fit.pdf}}\caption{mBBZZqqllPSSherpa}\end{subfigure}
-  \caption{Diboson, Run2 (1 of 2) }
-\end{figure}
-
-\begin{figure}[!htbp]
-\center
-  \label{fig:DibosonRun22of2}
-\begin{subfigure}[t]{0.45\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_13TeV/mBB__ZZqqvv_PS_PS_fit.pdf}}\caption{mBBZZqqvvPSPS}\end{subfigure}
-\begin{subfigure}[t]{0.45\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_13TeV/mBB__ZZqqvv_PS_Sherpa_fit.pdf}}\caption{mBBZZqqvvPSSherpa}\end{subfigure}
-  \caption{Diboson, Run2 (2 of 2) }
-\end{figure}
-
-\begin{figure}[!htbp]
-\center
-  \label{fig:ttbarPtVRun11of1}
-\begin{subfigure}[t]{0.45\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_8TeV/f_SysTtbarPtVhpt.pdf}}\caption{SysTtbarPtVhpt}\end{subfigure}
-\begin{subfigure}[t]{0.45\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_8TeV/f_SysTtbarPtVlpt.pdf}}\caption{SysTtbarPtVlpt}\end{subfigure}
-  \caption{ttbar PtV, Run1 (1 of 1) }
-\end{figure}
-
-\begin{figure}[!htbp]
-\center
-  \label{fig:ttbarPtVRun21of1}
-\begin{subfigure}[t]{0.45\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_13TeV/f_SysTTbarPTV_01lep.pdf}}\caption{SysTTbarPTV01lep}\end{subfigure}
-\begin{subfigure}[t]{0.45\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_13TeV/f_SysTTbarPTV_2lep.pdf}}\caption{SysTTbarPTV2lep}\end{subfigure}
-  \caption{ttbar PtV, Run2 (1 of 1) }
-\end{figure}
-
-\begin{figure}[!htbp]
-\center
-  \label{fig:ttbarMBBRun11of1}
-\begin{subfigure}[t]{0.225\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_8TeV/f_SysTtbarMBB2jethpt.pdf}}\caption{SysTtbarMBB2jethpt}\end{subfigure}
-\begin{subfigure}[t]{0.225\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_8TeV/f_SysTtbarMBB2jetlpt.pdf}}\caption{SysTtbarMBB2jetlpt}\end{subfigure}
-\begin{subfigure}[t]{0.225\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_8TeV/f_SysTtbarMBB3jethpt.pdf}}\caption{SysTtbarMBB3jethpt}\end{subfigure}
-\begin{subfigure}[t]{0.225\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_8TeV/f_SysTtbarMBB3jetlpt.pdf}}\caption{SysTtbarMBB3jetlpt}\end{subfigure}
-  \caption{ttbar MBB, Run1 (1 of 1) }
-\end{figure}
-
-\begin{figure}[!htbp]
-\center
-  \label{fig:ttbarMBBRun21of2}
-\begin{subfigure}[t]{0.225\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_13TeV/f_SysTTbarMBB_01lep.pdf}}\caption{SysTTbarMBB01lep}\end{subfigure}
-\begin{subfigure}[t]{0.225\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_13TeV/f_SysTTbarMBB_0lep.pdf}}\caption{SysTTbarMBB0lep}\end{subfigure}
-\begin{subfigure}[t]{0.225\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_13TeV/f_SysTTbarMBB_1lep.pdf}}\caption{SysTTbarMBB1lep}\end{subfigure}
-\begin{subfigure}[t]{0.225\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_13TeV/f_SysTTbarMBB_2lep.pdf}}\caption{SysTTbarMBB2lep}\end{subfigure}
-  \caption{ttbar MBB, Run2 (1 of 2) }
-\end{figure}
-
-\begin{figure}[!htbp]
-\center
-  \label{fig:ttbarMBBRun22of2}
-\begin{subfigure}[t]{0.45\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_13TeV/f_SysTTbarMBB_2lep2jet.pdf}}\caption{SysTTbarMBB2lep2jet}\end{subfigure}
-\begin{subfigure}[t]{0.45\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/CS_TwoLep_13TeV/f_SysTTbarMBB_2lep3jet.pdf}}\caption{SysTTbarMBB2lep3jet}\end{subfigure}
-  \caption{ttbar MBB, Run2 (2 of 2) }
-\end{figure}
 
 \label{tab:run1+run2DibosonCorrelationProjections}
 \begin{center}
@@ -724,27 +649,25 @@ BTag b &  +0.062 / -0.059  &  +0.055 / -0.049  &  +0.064 / -0.060 \\
 \end{center}\end{table}
 
 
-\begin{figure}[!htbp]
+\begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-\begin{subfigure}[t]{0.32\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r1_combData-r2_obsData-jes_partial-eps02_rank_job100of100_Run1Run2Comb_r1_combData-r2_obsData-jes_partial-eps02_pulls_125.pdf}}\caption{Comb Eff}\end{subfigure}
-\begin{subfigure}[t]{0.32\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r1_combData-r2_obsData-btag-b_partial-eps02_rank_job100of100_Run1Run2Comb_r1_combData-r2_obsData-btag-b_partial-eps02_pulls_125.pdf}}\caption{BTag B0}\end{subfigure}
-\begin{subfigure}[t]{0.32\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r1_combData-r2_obsData-btag-nf_partial-eps02_rank_job100of100_Run1Run2Comb_r1_combData-r2_obsData-btag-nf_partial-eps02_pulls_125.pdf}}\caption{B0 8 TeV Not Flipped}\end{subfigure}
+\begin{subfigure}[t]{0.51\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r1_combData-r2_obsData-jes_partial-eps02_rank_job100of100_Run1Run2Comb_r1_combData-r2_obsData-jes_partial-eps02_pulls_125}}\caption{Comb Eff}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r1_combData-r2_obsData-btag-b_partial-eps02_rank_job100of100_Run1Run2Comb_r1_combData-r2_obsData-btag-b_partial-eps02_pulls_125}}\caption{BTag B0}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r1_combData-r2_obsData-btag-nf_partial-eps02_rank_job100of100_Run1Run2Comb_r1_combData-r2_obsData-btag-nf_partial-eps02_pulls_125}}\caption{B0 8 TeV Not Flipped}\end{subfigure}
   \caption{NP rankings for a combination featuring the weak JES scheme and a combination with the weak JES scheme + leading $b$ NP's correlated.}
     \label{fig:Ranks:btag-b}
 \end{figure}
 
 It is clear from these results that correlating the leading effective Eigen NP associated with $b$'s can have a noticeable effect on final fit results and that the 8 TeV B0 NP is the most important component of a combined B0 NP.  What is less clear is whether there are sufficient grounds for doing so (i.e. does the correspondence of these NP's across years warrant a full correlation).
 
-\begin{figure}[!htbp]
-\center
-  \label{fig:PullComparisons:btag-b---BTagB0}
-\begin{subfigure}[t]{0.67\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/pullcomp-btag-b/NP_BTagB0.eps}}\caption{BTagB0}\end{subfigure}
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+\centering\includegraphics[width=\textwidth]{figures/comb/pullcomp-btag-b/NP_BTagB0}
   \caption{Pull Comparisons: btag-b---BTagB0  \textcolor{black}{Comb Eff}, \textcolor{red}{BTag B0}}
+  \label{fig:PullComparisons:btag-b---BTagB0}
 \end{figure}
 
-\begin{figure}[!htbp]
-\center
-  \label{fig:PullComparisons:btag-b---BTagB}
-\begin{subfigure}[t]{0.67\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/pullcomp-btag-b/NP_BTagB.eps}}\caption{BTagB}\end{subfigure}
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+\centering\includegraphics[width=\textwidth]{figures/comb/pullcomp-btag-b/NP_BTagB}
   \caption{Pull Comparisons: btag-b---BTagB  \textcolor{black}{Comb Eff}, \textcolor{red}{BTag B0}}
+  \label{fig:PullComparisons:btag-b---BTagB}
 \end{figure}
