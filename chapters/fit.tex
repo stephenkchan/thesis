@@ -24,7 +24,7 @@ The only source of uncertainty would be due to data statistics, so for an infini
 In order to derive the strength of the signal process \ZH and other quantities of interest while taking into account systematic uncertainties or nuisance parameters (NP's, collectively denoted $\theta$), a binned likelihood function is constructed as the product over bins of Poisson distributions:
 \begin{equation}
 \label{eqn:like}
-\mathcal{L}\left(\mu,\theta\right)=\text{Pois}\left(n\right.\left|\mu S+B\right)\left[\prod_{i\in\text{bins}}\frac{\mu s_i+b_i}{\mu S+B}\right]
+\mathcal{L}\left(\mu,\theta\right)=\text{Pois}\left(n\right.\left|\mu S+B\right)\left[\prod_{i\in\text{bins}}\frac{\mu s_i+b_i}{\mu S+B}\right]\prod_{j\in\text{NP's}}\mathcal{N}_{\theta_j}\left(\theta_j,\sigma_j^2\right.\left|0,1\right)
 \end{equation}
 where $n$ is the total number of events observed, $s_i$ and $b_i$ are the number of expected signal and background events in each bin, and $S$ and $B$ are the total expected signal and background events.  The signal and background expectations generally are functions of the  NP's $\theta$.  NP's related to the normalization of signal and background processes fall into two categories.  The first set is left to float freely like $\mu$ while the second set are parametrized as log-normally distributed to prevent negative predicted values.  All other NP's are parametrized with Gaussian priors.  This results in a ``penalty'' on the NLL discussed below of $\left(\hat{\alpha}-\mu_{\alpha}\right)^2/\sigma_{\alpha}^2$, for NP $\alpha$, normally parametrized with mean $\mu_{\alpha}$ and variance $\sigma_{\alpha}^2$ for an MLE of $\hat{\alpha}$.
 

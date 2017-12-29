@@ -6,9 +6,11 @@ If it's stupid but it works, it isn't stupid.
 
 \chapter{Multivariate Analysis Configuration}
 \label{ch:mva}
-\newthought{Much has been said} 
+\newthought{In order to} fully leverage the descriptive power of the 13 \tev dataset, this analysis makes use of a multivariate (MVA) discriminant.  Where traditionally event counts or single discriminating variables per region of phase space have been fed to fits, MVA discriminants seek to integrate additional information not captured in the conventional phase space cuts plus dijet invariant mass distributions.  Formulating the MVA discriminant is an exercise in supervised learning to construct a binary classifier, where one uses labeled ``signal'' and ``background'' MC events to train optimize the parameters of a statistical model---in this case a boosted decision tree (BDT) with some set of physically motivated variables (or ``factors'').  The interested reader is directed to the standard references on machine learning for further details.  Sample and variable selection, including the RestFrames and Lorentz Invariants variable concepts, are discussed in Section \ref{sec:samvar}; MVA training is treated in Section \ref{sec:mvatra}; and the data statistics only (no systematics) performance of the three MVA discriminants is explored in Section \label{subsec:statonlyperf}.
+
 \section{Training Samples and Variable Selection}
-A subset of samples described in Section \ref{ch:samples} was used for multivariate analysis (MVA) training, with $qqZH\to\ell\ell b\bar{b}$ and $ggZH\to\ell\ell b\bar{b}$ used as signal samples and $Z+$jets, $t\bar{t}$, and $VV$ used as background samples.  Truth-tagging is used on all samples in MVA training to improve training statistics and stability.  All figures quoted in this section scale distributions to a luminosity of \LUMI.
+\label{sec:samvar}
+A subset of samples described in Section \ref{ch:samples} was used for multivariate analysis training, with $qqZH\to\ell\ell b\bar{b}$ and $ggZH\to\ell\ell b\bar{b}$ used as signal samples and $Z+$jets, $t\bar{t}$, and $VV$ used as background samples.  Truth-tagging is used on all samples in MVA training to improve training statistics and stability.  All figures quoted in this section scale distributions to a luminosity of \LUMI.
 
 \subsection{Standard Variables}
 The standard set of variables taken as a baseline is the same as used in the fiducial analysis.  The variables fall into several main categories: energy/momentum scales of composite objects ($m_{bb}$, $m_{bbj}$, $p_T^V$, \mll), angles ($\Delta R\left(b_1,b_2\right)$, $\Delta\phi\left(V,H\right)$, $\Delta\eta\left(V,H\right)$), transverse momenta of the jets in the event ($p_T^{b_1}$, $p_T^{b_2}$, $p_T^{j_3}$), and $E_T^{miss}$.  Input distributions for these variables in all the 2 ($\ge3$ jet)  analysis signal regions may be found in Figure \ref{fig:std-kf-inputs2} (\ref{fig:std-kf-inputs3}).  The ``kf'' at the end of variable names denotes that these are derived using 4-vectors that are the result of the kinematic fitter.
@@ -164,6 +166,7 @@ A summary of the variables used in the three cases is given in \ref{tab:variable
 
 
 \section{MVA Training}
+\label{sec:mvatra}
 With variables chosen the MVA discriminants must be trained and optimized.  MVA training and hyperparameter optimization (in this case, just the order in which variables are fed into the MVA) is conducted using the ``holdout'' method.
 %{LOOK at roger's thesis for a reference}.
   In this scheme, events are divided into three equal portions (in this case using \texttt{EventNumber\%3}), with the first third (the ``training'' set) being used for the initial training, the second third (the ``validation'' set) being used for hyperparameter optimizaiton, and the final third (the ``testing'' set) used to evaluate the performanace of the final discriminants in each analysis region.

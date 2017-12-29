@@ -136,19 +136,8 @@ where $c$ is the mean of the distribution in the signal MC distribution.  These 
   The number of useful angles can be reduced by recognizing some symmetries inherent in the final state.  The symmetry around the beam axis eliminates one angle.  Furthermore, the boost of the $VH$ system is primarily in the beam direction ($z$) direction, marginalizing the utility of the transverse boost angles.  This leaves the boost in the $z$ direction, denoted \texttt{gamma\_ZHz}, and two angles chosen to be the angle between the $b\bar{b}$ system and the beam (\texttt{angle\_bb\_z}) and the angle between $\left(b_1+b_2\right)\times\hat{z}$ and $\left(b_1+b_2\right)\times\left(l_1+l_2\right)$ (\texttt{angle\_bbz\_bbll}).
 
 These variables do contain a lot of information similar to the usual set: there are mass equivalents (\texttt{j0\_j1}$\leftrightarrow$\texttt{mBB}, and \texttt{l0\_l1}$\leftrightarrow$\texttt{mLL}) and angles.  Instead of individual final state object scales, there are the four jet/lepton inner products, though this correspondence (and indeed any physical intepretation) is far from clear.  An important advantage of the LI variable set is that all of the variables are in it are orthogonal in the signal case by construction.  A drawback of this framework in a completely closed final state is that there is no way to treat $E_T^{miss}$ in a Lorentz invariant way.  %In practice, however, it is found that the $E_T^{miss}$ has correlations comparable to other correlations between variables (cf. Figure \ref{fig:2jet-hiptv-correlations} (b) and (e)).
+
   There is also no prescription for any additional jets in the event beyond the two $b$-tagged jets.  They are simply ignored in these variable calculations since the fiducial analysis requirement of exactly two $b$-tagged jets elminates any combinatoric ambiguity.  
-
-Perhaps a more troubling weakness of the Lorentz Invariants approach is that it is not generically applicable to all analysis channels.  The LI concept was initially formulated for sensitivity improvement in the 1-lepton channel.  In this case, the \met\, has a natural interpretation as the transverse momentum of the single neutrino in the signal topology.  Using the constraint of a massless neutrino, there is only one free parameter remaining, which is chosen to the be the neutrino's longitudinal momentum.  Following the discussion in \cite{litalk}, we first guess the neutrino energy in its rest frame and then boost to the lab frame:
-\begin{equation}
-\left<E_\nu\right>=\frac{1}{4}m_{WH}\implies \left<p_z^{\nu}\right>=\beta\gamma\left<E_\nu\right>=\frac{p_z^{WH}}{m_{WH}}\left<E_\nu\right>=\frac{1}{4}p_z^{WH}
-\end{equation}
-Finally, assuming energy and momentum in aggregate are equally shared among final state constitutents, we arrive at
-\begin{equation}
-\left<p_z^{\nu}\right>=\frac{1}{4}\times \frac{4}{3}\left(p_z^l+p_z^{j0}+p_z^{j1}\right)
-\end{equation}
-Nevertheless, there is no straightforward way to generalize this to the 0-lepton case, as there are twice as many degrees of freedom, making such a simple and intuitive guess impractical, or at least not immediately obvious.
-
-This concept of rest frames and boost is actually the central tenant of the RestFrames variables, which can be used to construct variables for generic decay trees and to which we now turn.
 
 \section{RestFrames Variables}
 The RestFrames variables \cite{rjr}, calculated using the software package of the same name, is based upon the idea that the most natural frame in which to analyze objects of the signal decay tree is in their individual production (rest) frames.  The signal decay tree for \ZH\, is show in Figure \ref{fig:rftree}.
@@ -169,9 +158,27 @@ R_{p_T} = \frac{p_{T,CM}}{p_{T,CM}+M_{CM}},\;R_{p_z} = \frac{p_{z,CM}}{p_{z,CM}+
 \end{equation}
 denoted \texttt{Rpt}, \texttt{Rpz}, and \texttt{Rmet}.  These can be thought of as behaving like significance based variables in particle physics, like METHT or impact parameter significances.  These are used instead of the final state object scales and standard $E_T^{miss}$ of the standard variable set.
 
-Unlike the LI variables, the physical interpretation of RF variables is very clear.  Everything has physical units, and these are variables one might have introduced in the usual process of developing an MVA with the traditional mindset.  The solution to the issue of additional jets in an event is not immediately clear.  In order to keep the two non-standard MVA's on as equal footing as possible, the approach of simply ignoring additional jets is taken in this thesis.  Nevertheless, it would be easy enough to redefine the $H$ intermediate frame to have, for example, the two $b$-tagged jets and the highest $p_T$ untagged jet for any subset of events.  Of course, \texttt{RestFrames} cannot tell you what approach to take, but it is capable of handling more flexible topologies once optimization studies have been completed.
+Unlike the LI variables, the physical interpretation of RF variables is very clear.  Everything has physical units, and these are variables one might have introduced in the usual process of developing an MVA with the traditional mindset.  The solution to the issue of additional jets in an event is not immediately clear.  In order to keep the two non-standard MVA's on as equal footing as possible, the approach of simply ignoring additional jets is taken in this thesis.  Nevertheless, it would be easy enough to redefine the $H$ intermediate frame to have, for example, the two $b$-tagged jets and the highest $p_T$ untagged jet for any subset of events.  This flexibility is not a feature of the Lorentz Invariants framework.  Of course, \texttt{RestFrames} cannot tell you what approach to take, but it is capable of handling more flexible topologies once optimization studies have been completed.
 
-Extension to other analysis channels is much more straightforward using the RestFrames approach than with the Lorentz Invariants.  In fact, calculating such variables for generic decay trees with multiple invisible objects and combinatoric ambiguities (allowing, for example, potential extensions to regions of phase space other than those with a strict 2 $b$-tag requirement) is the focus of much of \cite{rjr} and the functionality of the \texttt{RestFrames} package.  Schematically, for the 1-lepton channel, one of the visible leptons in Figure \ref{fig:rftree} is replaced with an invisible neutrino, and for the 0-lepton case, the $Z$ is treated as an invisible final state particle.  Solving for the boost between frames can actually be done generically and \texttt{RestFrames} 
+\section{Extensions to the 1 and 0 Lepton Channels}
+Both the LI and RF variable concepts are readily extendible to the 1-lepton channel.  In this topology, one of the leptons in the \ZH\, diagram is replaced by a neutrino, the lone invisible particle in the final state.  We can assume that the neutrino has zero mass and transverse momentum equal to the \met\, in the event, leaving one undetermined degree of freedom, the longitudinal momentum of the neutrino, $p_z^{\nu}$.  
 
-\emph{Insert discussion of recursive jigsaw reconstruction?  Maybe replicate}
+The LI concept was in fact initially formulated for sensitivity improvement in the 1-lepton channel, with the same orthogonality of variables described in the 2-lepton case being the main draw.  The LI approach to estimating the neutrino longitudinal momentum is outlined in \cite{litalk}, which we reproduce here.  We first guess the neutrino energy in its rest frame and then boost to the lab frame:
+\begin{equation}
+\left<E_\nu\right>=\frac{1}{4}m_{WH}\implies \left<p_z^{\nu}\right>=\beta\gamma\left<E_\nu\right>=\frac{p_z^{WH}}{m_{WH}}\left<E_\nu\right>=\frac{1}{4}p_z^{WH}
+\end{equation}
+Finally, assuming energy and momentum in aggregate are equally shared among final state constitutents, we arrive at
+\begin{equation}
+\label{eqn:lipz}
+\left<p_z^{\nu}\right>=\frac{1}{4}\times \frac{4}{3}\left(p_z^l+p_z^{j0}+p_z^{j1}\right)
+\end{equation}
+
+The RF approach for the 1-lepton case amounts to replacing the $Z\to\ell\ell$ in \ref{fig:rftree} with $W\to\el\nu$.  As alluded to in the 2-lepton discussion, when there is missing information in the final state from invisible particles and/or combinatoric ambiguities, recursive jigsaw reconstruction (RJR) offers a standard toolkit for deriving estimated boosts between rest frames by analytically minimizing on unknown quantities.  While in more exotic final states with multiple invisible particles and combinatoric ambiguities the choice of jigsaw rule can be subjective, the case of $W$ is well-studied and outlined in detail in Section V.A. of \cite{rjr}.  It reproduces the usual transverse mass of the $W$ in place of \texttt{mZ} in the 2-lepton case.
+
+The 0-lepton channel would appear to present some difficulty as two neutrinos in the final state introduce extra degrees of freedom, but both concepts may be extended by treating the invisibly decaying $Z$ as a single invisible particle and requiring the $Z$ to be on-shell.  Both of these requirements may be folded into the 1-lepton framework to produce similar sets of variables.  
+
+
+%Extension to other analysis channels is much more straightforward using the RestFrames approach than with the Lorentz Invariants.  In fact, calculating such variables for generic decay trees with multiple invisible objects and combinatoric ambiguities (allowing, for example, potential extensions to regions of phase space other than those with a strict 2 $b$-tag requirement) is the focus of much of \cite{rjr} and the functionality of the \texttt{RestFrames} package.  Schematically, for the 1-lepton channel, one of the visible leptons in Figure \ref{fig:rftree} is replaced with an invisible neutrino, and for the 0-lepton case, the $Z$ is treated as an invisible final state particle.  Solving for the boost between frames can actually be done generically and \texttt{RestFrames} 
+
+\emph{Maybe do the 0-lep calculation and some cute RF diagrams}%Insert discussion of recursive jigsaw reconstruction?  Maybe replicate}
 % For an example of a full page figure, see Fig.~\ref{fig:myFullPageFigure}.
