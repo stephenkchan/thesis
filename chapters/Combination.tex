@@ -5,8 +5,8 @@ If I have seen further, it is by standing on ye shoulders of giants.
 \end{savequote}
 
 \chapter{Measurement Combinations}
-
-\newthought{While the discussion} thus far has focused on improvements looking towards future in just the \ZH\, channel, any actual result for SM VHbb combines all channels and all available datasets.  Using additional channels at a given center of mass energy is straightforward since the fit model is designed with this combination in mind.  Combining dataset results (known as ``workspaces'') from different center of mass energies is not so simple an exercise since both the underlying physics (and its associated modeling) and the treatment of key experimental considerations, like flavor tagging, and their associated systematics change from dataset to dataset.  A combined fit model must take these considerations into account, and the formulation of the fit model combining the Run 1 ($\sqrt{s}=$7 \TeV with 4.7 fb$^{-1}$ of data, and $\sqrt{s}=$8 \TeV with 20.3 fb$^{-1}$ of data) and Run 2 ($\sqrt{s}=$13 \TeV with \lumi) SM VHbb results is the topic of Section \ref{sec:combmodel}.  Its results, as reported in \cite{paper}, are given in \ref{sec:combres}.
+\label{ch:comb}
+\newthought{While the discussion} thus far has focused on improvements looking towards future in just the \ZH\, channel, any actual result for SM \vhbb\, combines all channels and all available datasets.  Using additional channels at a given center of mass energy is straightforward since the fit model is designed with this combination in mind.  Combining dataset results (known as ``workspaces'') from different center of mass energies is not so simple an exercise since both the underlying physics (and its associated modeling) and the treatment of key experimental considerations, like flavor tagging, and their associated systematics change from dataset to dataset.  A combined fit model must take these considerations into account, and the formulation of the fit model combining the Run 1 ($\sqrt{s}=$7 \TeV with 4.7 fb$^{-1}$ of data, and $\sqrt{s}=$8 \TeV with 20.3 fb$^{-1}$ of data) and Run 2 ($\sqrt{s}=$13 \TeV with \lumi) SM \vhbb\, results is the topic of Section \ref{sec:combmodel}.  Its results, as reported in \cite{paper}, are given in \ref{sec:combres}.
 
 \section{The Combined Fit Model}
 \label{sec:combmodel}
@@ -304,7 +304,7 @@ It is clear from these results that correlating the leading effective Eigen NP a
 
 \subsection{Modeling Systematics}
 \label{sec:model}
-Another principal systematic category is modeling uncertainties.  The effect of correlating groups of systematics was estimated using the same strategy employed by the ATLAS/CMS SHVHbb combination for Run 1.  This extrapolation can be used to estimate the impact of correlations on the estimated signal strength, the total error on the signal strength, and the $\chi^2$ of the result.  The impact of such correlations is no more than a few percent effect, as the following tables demonstrate, beginning with the category with the greatest shift, W+jets modeling, in Table~\ref{tab:wjets_correlation}.
+Another principal systematic category is modeling uncertainties.  The effect of correlating groups of systematics was estimated using the same strategy employed by the ATLAS/CMS SM \vhbb\, combination for Run 1.  This extrapolation can be used to estimate the impact of correlations on the estimated signal strength, the total error on the signal strength, and the $\chi^2$ of the result.  The impact of such correlations is no more than a few percent effect, as the following tables demonstrate, beginning with the category with the greatest shift, W+jets modeling, in Table~\ref{tab:wjets_correlation}.
 
 \begin{table}[!htbp]
 \begin{center}\begin{tabular}{lcccc}
@@ -614,10 +614,25 @@ MC stat & +0.080 / -0.084 \\
 \end{center}
 \end{table}
 
-In addition to looking at the behaviors of nuisance parameters to gauge fit model performance and stability, fits are conducted using multiple parameters of interest.  Typical divisions are Run 1 vs. Run 2, lepton channels, and $WH$ vs $ZH$.  As mentioned in Chapter \ref{ch:fit}, the profile likelihood test statistic given in Equation \ref{eqn:teststat} is, in the limit of large sample statistics, a $\chi^2$ distribution with degrees of freedom equal to the number of nuisance parameters plus nuisance parameters.  Thus, changing the number of interest parameters and leaving the rest of the fit model unchanged means, approximately, the difference
+In addition to looking at the behaviors of nuisance parameters to gauge fit model performance and stability, fits are conducted using multiple parameters of interest.  Typical divisions are Run 1 vs. Run 2, lepton channels, and $WH$ vs $ZH$.  As mentioned in Chapter \ref{ch:fit}, the profile likelihood test statistic given in Equation \ref{eqn:teststat} is, in the limit of large sample statistics, a $\chi^2$ distribution with degrees of freedom equal to the number of nuisance parameters plus nuisance parameters.  Thus, changing the number of interest parameters and leaving the rest of the fit model unchanged means that the difference between the nominal fit and a fit with more parameters of interest ought to also be distributed as a $\chi^2$ distribution with degrees of freedom equivalent to the number of extra parameters of interest.  This difference can then be interpreted as a compatibility between the two results using the standard tables for this distribution, giving another gauge of fit performance.  These are shown in Table \ref{tab:compatability}.
 
-Figures ~\ref{fig:combmushat4}--~\ref{fig:combmushat6} show $\hat{\mu}$ summary plots for multiple parameter of interest fits.  A fit with two parameters of interest as the $\hat{\mu}$'s of Run 1 and Run 2 show has a 20.1\% compatability with the single parameter of interest fit, and a six parameter interest fit (one each for each lepton channel in Run 1 and Run 2) has a 7.10\% compatibility with the single parameter of interest fit, while a four parameter of interest fit has a 34.6\% compatibility.
+\begin{table}[!htbp]
+\begin{center}\begin{tabular}{|l|c|}
+\hline
+Fit & Compatability \\\hline
+Leptons (3 POI) & 1.49\% \\
+$WH/ZH$ (2 POI) & 34.2\% \\
+Run 1/Run 2 (2 POI) & 20.8\% \\
+Run 1/Run 2 $\times$ Leptons (6 POI) & 7.10\% \\
+Run 1/Run 2 $\times WH/ZH$  (4 POI) & 34.6\% \\
+\hline
+\end{tabular}
+\caption{Summary of multiple POI compatabilities.  The well-known Run 1 7 \tev\, 0-lepton deficit is responsible for the low compatability with the 6 and 3 POI fits.}
+\label{tab:compatability}
+\end{center}
+\end{table}
 
+The low compatabilities associated with treating the lepton channels as separate parameters of interest are a sympton of the low signal strenghts associated with the Run 1 0-lepton channel, in particular the 7 \tev\,result.  Given the relatively small amount of data associated with the 7 \tev\, result, this should not be a case for alarm.  Signal strength summary plots for the fits treating Run 1 and Run 2 separately are shown in Figures \ref{fig:combmushat4}-\ref{fig:combmushat6}, where the effect of the Run 1 parameters can be seen graphically.
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \begin{center}
@@ -646,7 +661,7 @@ Figures ~\ref{fig:combmushat4}--~\ref{fig:combmushat6} show $\hat{\mu}$ summary 
 \subsection{Final Results}
 The combined results yields an observed (expected) significance of 3.57 (4.00) and an observed (expected) limit of 1.37 ($0.510^{+0.200}_{-0.143}$), with a signal strength of $\hat{\mu}=0.898^{+0.278}_{-0.261}$.
 
-Two (34.2\% compatibility with single parameter of interest fit) and three (1.49\% compatibility with single parameter of interest fit) parameter of interest fits were also conducted, and summaries of $\hat{\mu}$ for these fits and for 7, 8, and 13 TeV may be found in Figures~\ref{fig:combmushat1}-\ref{fig:combmushat3}.  The main results for Run 1, Run 2, and the combination may be found in Table~\ref{tableCombresykts}.
+The two and three parameter of interest fit signal strength summary plots, as well as a summary of the historical values of the 7, 8, and 13 \TeV\,results may be found in Figures~\ref{fig:combmushat1}-\ref{fig:combmushat3}.  The main results for Run 1, Run 2, and the combination may be found in Table~\ref{tableCombresykts}.  These results were collectively noted as the first ever experiemental evidence for SM \vhbb\, in \cite{paper}.
 
 \begin{table}[!htbp]
 \begin{center}

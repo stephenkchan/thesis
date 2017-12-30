@@ -29,7 +29,8 @@
 \usepackage[font+=scriptsize]{subcaption}
 \usepackage{textpos}
 \usepackage{xcolor}
-
+\usepackage{lineno}
+\linenumbers
 % Line spacing: dsingle/ddouble
 %   Whether to use single- or doublespacing.
 \newtoggle{DissertateSingleSpace}
@@ -339,6 +340,7 @@
 \def\Vh{\ensuremath{Vh}}
 \def\Zh{\ensuremath{Zh}}
 \def\ZH{\ensuremath{ZH\to\ell\ell b\bar{b}}}
+\def\vhbb{\ensuremath{VH\left(b\bar{b}\right)}}
 \def\Wh{\ensuremath{Wh}}
 \def\mVh{\ensuremath{m_{\Vh}}}
 \newcommand{\ptx}[1]{\ensuremath{p_{\text{T}}^{\text{#1}}}\ }
