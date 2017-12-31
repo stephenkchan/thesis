@@ -21,6 +21,7 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{cancel}
+\usepackage{siunitx}
 \usepackage{pdflscape}
 \usepackage{multirow}
 \usepackage{verbatim}
@@ -352,7 +353,7 @@
 \def\to{\ensuremath{\rightarrow}}
 \def\drbb{\ensuremath{\Delta R\left(b_1,b_2\right)}}
 \def\vv{\ensuremath{VV}}
-\def\ephni{\ensuremath{\eta-\phi}}
+\def\ephi{\ensuremath{\eta-\phi}}
 \def\aeta{\ensuremath{\left|\eta\right|}}
 \def\mindphi{\ensuremath{|\text{min}\Delta\phi(\met,\text{jet})|}}
 \def\TeV{\ifmmode {\mathrm{\ Te\kern -0.1em V}}\else
