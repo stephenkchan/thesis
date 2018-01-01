@@ -18,6 +18,8 @@
 %
 \RequirePackage{etoolbox}
 
+\usepackage{xeCJK}
+\setCJKmainfont[BoldFont=STHeiti,ItalicFont=STKaiti]{STSong}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{cancel}
