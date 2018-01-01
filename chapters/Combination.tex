@@ -18,11 +18,9 @@ It is clear the signal strength parameter of interest should be fully correlated
 \item Test whether correlation has a sizeable impact on expected fit quantities
 \end{enumerate}
 
-The only two sizeable experimental NP categories are jet energy scale (JES) and flavor tagging systematics.  Correlation schemes of varying degrees of completeness exist for these categories, so explicit NP correlations can be tested for these two categories.  As these studies were conducted before unblinding, ``sizeable impact'' was judged by comparing fit results (sensitivities, pull comparisons, and breakdowns) on combined workspaces using the unblinded and public Run 1 $\mu=0.51$ result and Asimov data for the Run 2 result.  These are treated in Sections \ref{sec:jes} and \ref{sec:ft}.
+The only two sizeable experimental NP categories are jet energy scale (JES) and flavor tagging systematics.  Correlation schemes of varying degrees of completeness exist for these categories, so explicit NP correlations can be tested for these two categories.  As these studies were conducted before unblinding, ``sizeable impact'' was judged by comparing fit results (sensitivities, pull comparisons, and breakdowns) on combined workspaces using the unblinded and public $\mu=0.51$ result for Run 1 and Asimov data for the Run 2 result.  These are treated in Sections \ref{sec:jes} and \ref{sec:ft}.  Modeling systematics require a slightly different treatment, and are explored in \ref{sec:model}.
 
-Modeling systematics require a slightly different treatment, and are explored in \ref{sec:model}.
-
-As a general note when looking at pull comparison plots for combined workspaces, the error bars in these plots are calculated using a simultaneous HESSE matrix inversion, which can fail to give sensible values for high dimensional models (the combined workspaces have well over 500 NP's).  This is not true of the nuisance parameter ranking plots, which use a MINOS based approach to test the effect of each NP individually.  This is much slower but much more rigorous, which is why only ranking plots appear outside of supporting material and pull comparisons are considered ``diagnostic'' plots.
+As noted in Chapter \ref{ch:fit} when looking at pull comparison plots for combined workspaces, the error bars in these plots are calculated using a simultaneous \texttt{HESSE} matrix inversion, which can fail to give sensible values for high dimensional models (the combined workspaces have well over 500 NP's).  This is not true of the nuisance parameter ranking plots, which use a \texttt{MINOS} based approach to test the effect of each NP individually.  This is much slower but much more rigorous, which is why only ranking plots appear outside of supporting material and pull comparisons are considered ``diagnostic'' plots.
 
 \subsection{Jet Energy Scale Systematics}
 \label{sec:jes}
@@ -51,8 +49,8 @@ where \textit{eff} and \textit{unf} are for effective and unfolded NP's, respect
 \end{figure}
 
 
-Unfolding was found to have very little effect on both expected sensitivites and errors, as can be seen in Tables~\ref{tab:unfold_jes_sensitivities} and~\ref{tab:unfold_jes_breakdowns}.
-\begin{table}[!htbp]
+Unfolding was found to have very little effect on both expected sensitivites and errors, as can be seen in Tables~\ref{tab:unfold_jes_sensitivities}--~\ref{tab:unfold_jes_breakdowns3}.
+\begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}\begin{tabular}{lcccccc}
 \hline\hline
  & R1 Unfold & R1 Eff & R2 Unfold & R2 Eff & Comb Unfold & Comb Eff\\
@@ -65,11 +63,11 @@ Obs. Limit & 1.21 & 1.21 & 1.94 & 1.94 & 1.36 & 1.37\\
 \hline\hline
 \end{tabular}
 \caption{Expected and observed sensitivities for Run 1, Run 2, and combined workspaces with effective and unfolded JES NP's.}
-\end{center}
 \label{tab:unfold_jes_sensitivities}
+\end{center}
 \end{table}
 
-\begin{table}[!htbp]
+\begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}\begin{tabular}{lcc}
 \hline\hline
  & R1 Unfold & R1 Eff \\
@@ -93,10 +91,10 @@ BTag &  +0.094 / -0.079  &  +0.095 / -0.079  \\
 \end{table}
 
 
-\begin{table}[!htbp]
+\begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}\begin{tabular}{lcc}
 \hline\hline
- & R1 Unfold & R1 Eff & R2 Unfold & R2 Eff & Comb Unfold & Comb Eff\\
+ & R2 Unfold & R2 Eff\\
 \hline
 $\left|\Delta\hat{\mu}\right|$ &  \multicolumn{2}{c}{0.0}\\
 $\hat{\mu}$ & 1.2051 & 1.2052\\
@@ -116,7 +114,7 @@ BTag &  +0.119 / -0.106  &  +0.119 / -0.106\\
 \end{table}
 
 
-\begin{table}[!htbp]
+\begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}\begin{tabular}{lcc}
 \hline\hline
  & Comb Unfold & Comb Eff\\
@@ -140,7 +138,7 @@ BTag &  +0.076 / -0.076  &  +0.077 / -0.076 \\
 
 It was also found that fit sensitivities and breakdowns were similarly indifferent to the use of either the strong or weak JES correlation schemes, as shown in Tables~\ref{tab:sw_jes_sensitivities} and~\ref{tab:sw_jes_breakdowns}.
 
-\begin{table}[!htbp]
+\begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}\begin{tabular}{lcccc}
 \hline\hline
  & JES Weak Unfold & JES Weak Eff & JES Strong Unfold & JES Strong Eff\\
@@ -151,12 +149,11 @@ Exp. Limit & $0.493^{+0.193}_{-0.138}$ & $0.494^{+0.193}_{-0.138}$ & $0.493^{+0.
 \hline\hline
 \end{tabular}
 \caption{Expected sensitivities for both effective and unfolded combined workspaces using the strong and weak JES correlation schemes.}
-
 \label{tab:sw_jes_sensitivities}
 \end{center}
 \end{table}
 
-\begin{table}[!htbp]
+\begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}\begin{tabular}{lcccc}
 \hline
  & Comb Unfold & Comb Eff & Strong Unfold & Strong Eff\\
@@ -179,7 +176,7 @@ BTag &  $^{+ 0.0975}_{-0.0933}$ &  $^{+ 0.098}_{-0.0936}$ &  $^{+ 0.0979}_{-0.09
 \label{tab:sw_jes_breakdowns}\end{center}
 \end{table}
 
-Comparisons of top ranked nuisance parameters in Figures \ref{fig:Ranks:jesu1}--\ref{fig:Ranks:jesuc} and for the complete JES pull comparisons in Figures \ref{fig:PullComparisons:jesu---Jet}--\ref{fig:PullComparisons:jesu---JetUnfold}
+Comparisons of top ranked nuisance parameters in Figures \ref{fig:Ranks:jesu1}--\ref{fig:Ranks:jesuc} and for the complete JES pull comparisons in Figures \ref{fig:PullComparisons:jesu---Jet}--\ref{fig:PullComparisons:jesu---JetUnfold} also show very little difference with respect to correlation scheme (except obviously for the number of JES NP's).  Constrained pulls in pull comparisons should once again be taken as a shortcoming of \texttt{HESSE} and not the fit model.
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
 \begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/x_combData-jesu1_rank_job100of100_Run1Run2Comb_x_combData-jesu1_pulls_125}}\caption{R1 Unfold}\end{subfigure}
@@ -237,7 +234,7 @@ As a result of these studies, the weak JES correlation scheme with uncorrelated 
 \clearpage
 \subsection{Flavor Tagging}
 \label{sec:ft}
-Unfortunately, the ATLAS Flavor Tagging group did not provide any recommendations for correlating Run 1 and Run 2 NP's, though given the high ranking of these NP's in the Run 2, result, some studies at least were crucial.  Nevertheless, great improvements and changes to the treatment of flavor tagging between Run 1 and Run 2 does weaken the argument for any strong flavor tagging correlation scheme.
+Unfortunately, the ATLAS Flavor Tagging group did not provide any recommendations for correlating Run 1 and Run 2 NP's, though given the high ranking of these NP's in the Run 2, result, performing at least some studies was deemed crucial.  Nevertheless, great improvements and changes to the treatment of flavor tagging between Run 1 and Run 2 does weaken the argument for any strong flavor tagging correlation scheme.
 
 Given that $c$-tagging changed significantly between Run 1 and Run 2 and that light tagging NP's are very lowly ranked, these sets of NP's are left uncorrelated.  Moreover, the change in the physical meaning of the effective $b$-tagging NP's means a full correlation of such NP's (insomuch as they exist in each result) is one of limited utility.  Hence, it was decided to leave flavor tagging NP's uncorrelated.  However, since the meaning of the leading $b$-tagging NP's is approximately constant across years and since Run 2 $b$-tagging NP's are very highly ranked in both the Run 2 only and combined fits, tests correlating these NP's were conducted, the results of which can be seen below.  It should be noted that the leading B NP at 8 \TeV, \texttt{SysBTagB0Effic\_Y2012\_8TeV}, has an opposite effect on $t\bar{t}$ normalization than the 7 and 13 TeV NP's, and so must be flipped using a similar strategy as for JES unfolding.  Initial studies of flavor tagging correlations did not flip this NP, and so results for this scheme (labeled ``B0 8TeV Not Flipped'') have also been included for comparison.
 
@@ -258,7 +255,7 @@ Obs. Limit & 1.37 & 1.41 & 1.35\\
 \end{center}
 \end{table}
 
-\begin{table}[!htbp]
+\begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}\begin{tabular}{lccc}
 \hline\hline
  &Comb Eff &BTag B0 &B0 8TeV Not Flipped\\
@@ -300,13 +297,13 @@ BTag b &  +0.062 / -0.059  &  +0.055 / -0.049  &  +0.064 / -0.060 \\
     \label{fig:Ranks:btag-b}
 \end{figure}
 
-It is clear from these results that correlating the leading effective Eigen NP associated with $b$'s can have a noticeable effect on final fit results and that the 8 \TeV B0 NP is the most important component of a combined B0 NP.  It is also not so surprising that the 8 \tev\, result should drive the combined nuisance parameter since it is the only result to make use of both pseudocontinuous tagging-based and 1 $b$-tag regions into the final fit, implicitly yielding much more information about $b$'s.  The 13 \tev\, fit has neither of these regions.  What is less clear is whether there are sufficient grounds for doing so (i.e. does the correspondence of these NP's across years warrant a full correlation).  While there are no current plans to do so, this matter warrants careful scrutiny if Run 1 is to be included in future results.
+It is clear from these results that correlating the leading effective Eigen NP associated with $b$'s can have a noticeable effect on final fit results and that the 8 \TeV B0 NP is the most important component of a combined B0 NP.  It is also not so surprising that the 8 \tev\, result should drive the combined nuisance parameter since it is the only result to make use of both pseudocontinuous tagging-based and 1 $b$-tag regions into the final fit, implicitly yielding much more information about $b$'s.  The 13 \tev\, fit has neither of these regions.  What is less clear is whether there are sufficient grounds for implementing this correlation (i.e. does the correspondence of these NP's across years warrant a full correlation).  While there are no current plans to do so, this matter warrants careful scrutiny if Run 1 is to be combined with future results.
 
 \subsection{Modeling Systematics}
 \label{sec:model}
 Another principal systematic category is modeling uncertainties.  The effect of correlating groups of systematics was estimated using the same strategy employed by the ATLAS/CMS SM \vhbb\, combination for Run 1.  This extrapolation can be used to estimate the impact of correlations on the estimated signal strength, the total error on the signal strength, and the $\chi^2$ of the result.  The impact of such correlations is no more than a few percent effect, as the following tables demonstrate, beginning with the category with the greatest shift, W+jets modeling, in Table~\ref{tab:wjets_correlation}.
 
-\begin{table}[!htbp]
+\begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}\begin{tabular}{lcccc}
 \hline\hline
  & $\left|\Delta\mu\right|$ & $\sigma$ & $\left|\Delta\sigma\right|$ & $\chi^2$\\
@@ -321,8 +318,8 @@ $\rho$=1 & 0.0029 & 0.2664 & 0.0105 (4.11\%) & 1.1242\\
 \hline\hline
 \end{tabular}
 \caption{Run 1 + Run 2 W+jets modeling correlation projections}
-\end{center}
 \label{tab:wjets_correlation}
+\end{center}
 \end{table}
 
 \begin{comment}
@@ -546,9 +543,9 @@ $\rho$=1 & 0.0001 & 0.267 & 0.0052 (1.99\%) & 1.8894\\
 
 
 \subsection{Final Correlation Scheme}
-The final Run 1 + Run 2 correlation scheme is shown in Table~\ref{tableComb1}.  As detailed above, neither JES nor modeling systematics had any demonstrable effect on combined fit results.  Hence, only signal NP's and the $b$-jet energy scale are correlated.  While the effect of flavor tagging correlations is less clear, the result physical arguments for correlation are less strong; the size of effect was discovered rather late in the analysis process; and has no nuisance parameter unfolding maps exist for flavor tagging as they do for JES, so it was decided to leave these uncorrelated as well.
+The final Run 1 + Run 2 correlation scheme is shown in Table~\ref{tableComb1}.  As detailed above, neither JES nor modeling systematics had any demonstrable effect on combined fit results.  Hence, only signal NP's and the $b$-jet energy scale are correlated (the weak JES scheme without unfolding).  While the effect of flavor tagging correlations is less clear, the result physical arguments for correlation are less strong; the size of effect was discovered rather late in the analysis process; and  no nuisance parameter unfolding maps exist for flavor tagging as they do for JES, so it was decided to leave these uncorrelated as well.
 
-\begin{table}[!htbp]
+\begin{table}[!htbp]\captionsetup{justification=centering}
 \center\small
 \begin{tabular}{lll} \hline\hline
  \textbf{7 TeV NP} & \textbf{8 TeV NP} &  \textbf{13 TeV NP}\\ \hline
@@ -568,7 +565,7 @@ SysJetFlavB\_ 7TeV & SysJetFlavB\_ 8TeV & SysJET\_21NP\_JET\_BJES\_Response\\
 \section{Combined Fit Results}
 \label{sec:combres}
 \subsection{Combined Fit Model Validation}
-Before moving onto the final results, we present the rest of the validaitons for the Run 1 + Run 2 combined fits, beginning with impacts of ranked individual nuisance parameters in Figure \ref{fig:combranks} and for all nuisance parameter categories in Table \ref{tab:combreakdown}.  Both of these sets of results point to the most important nuisance parameters being signal systematics, $b$-tagging, and $V$+jets modeling systematics, with Run 2 NP's generally being higher ranked.    That some NP's are strongly pulled is not unusual as the fit model has so many NP's; $V$+jets modeling in particular has been historically difficult.
+Before moving onto the final results, we present the rest of the validaitons for the Run 1 + Run 2 combined fits, beginning with impacts of ranked individual nuisance parameters in Figure \ref{fig:combranks} and for all nuisance parameter categories in Table \ref{tab:combbreakdown}.  Both of these sets of results point to the most important nuisance parameters being signal systematics, $b$-tagging, and $V$+jets modeling systematics, with Run 2 NP's generally being higher ranked.    That some NP's are strongly pulled is not unusual as the fit model has so many NP's; $V$+jets modeling in particular has been historically difficult.
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
@@ -578,7 +575,7 @@ Before moving onto the final results, we present the rest of the validaitons for
 \end{figure}
 
 
-\begin{table}[!htbp]
+\begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}\begin{tabular}{|l|c|}
 \hline
 Total & +0.278 / -0.261 \\\hline
@@ -614,9 +611,9 @@ MC stat & +0.080 / -0.084 \\
 \end{center}
 \end{table}
 
-In addition to looking at the behaviors of nuisance parameters to gauge fit model performance and stability, fits are conducted using multiple parameters of interest.  Typical divisions are Run 1 vs. Run 2, lepton channels, and $WH$ vs $ZH$.  As mentioned in Chapter \ref{ch:fit}, the profile likelihood test statistic given in Equation \ref{eqn:teststat} is, in the limit of large sample statistics, a $\chi^2$ distribution with degrees of freedom equal to the number of nuisance parameters plus nuisance parameters.  Thus, changing the number of interest parameters and leaving the rest of the fit model unchanged means that the difference between the nominal fit and a fit with more parameters of interest ought to also be distributed as a $\chi^2$ distribution with degrees of freedom equivalent to the number of extra parameters of interest.  This difference can then be interpreted as a compatibility between the two results using the standard tables for this distribution, giving another gauge of fit performance.  These are shown in Table \ref{tab:compatability}.
+In addition to looking at the behaviors of nuisance parameters to gauge fit model performance and stability, fits are conducted using multiple parameters of interest.  Typical divisions are Run 1 vs. Run 2, lepton channels, and $WH$ vs $ZH$.  As mentioned in Chapter \ref{ch:fit}, the profile likelihood test statistic given in Equation \ref{eqn:teststat} is, in the limit of large sample statistics, a $\chi^2$ distribution with degrees of freedom equal to the number of parameters of interest plus number of nuisance parameters.  Thus, changing the number of interest parameters and leaving the rest of the fit model unchanged means that the difference between the nominal fit and a fit with more parameters of interest ought to also be distributed as a $\chi^2$ distribution with degrees of freedom equivalent to the number of extra parameters of interest.  This difference can then be interpreted as a compatibility between the two results using the standard tables for this distribution, giving another gauge of fit performance.  These are shown in Table \ref{tab:compatability}.
 
-\begin{table}[!htbp]
+\begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}\begin{tabular}{|l|c|}
 \hline
 Fit & Compatability \\\hline
@@ -632,7 +629,7 @@ Run 1/Run 2 $\times WH/ZH$  (4 POI) & 34.6\% \\
 \end{center}
 \end{table}
 
-The low compatabilities associated with treating the lepton channels as separate parameters of interest are a sympton of the low signal strenghts associated with the Run 1 0-lepton channel, in particular the 7 \tev\,result.  Given the relatively small amount of data associated with the 7 \tev\, result, this should not be a case for alarm.  Signal strength summary plots for the fits treating Run 1 and Run 2 separately are shown in Figures \ref{fig:combmushat4}-\ref{fig:combmushat6}, where the effect of the Run 1 parameters can be seen graphically.
+The low compatabilities associated with treating the lepton channels as separate parameters of interest are a sympton of the low signal strenghts associated with the Run 1 0-lepton channel, in particular the 7 \tev\,result.  Given the relatively small amount of data associated with the 7 \tev\, result, this should not be a cause for alarm.  Signal strength summary plots for the fits treating Run 1 and Run 2 separately are shown in Figures \ref{fig:combmushat4}-\ref{fig:combmushat6}, where the effect of the Run 1 parameters can be seen graphically.
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \begin{center}
@@ -663,7 +660,7 @@ The combined results yields an observed (expected) significance of 3.57 (4.00) a
 
 The two and three parameter of interest fit signal strength summary plots, as well as a summary of the historical values of the 7, 8, and 13 \TeV\,results may be found in Figures~\ref{fig:combmushat1}-\ref{fig:combmushat3}.  The main results for Run 1, Run 2, and the combination may be found in Table~\ref{tableCombresykts}.  These results were collectively noted as the first ever experiemental evidence for SM \vhbb\, in \cite{paper}.
 
-\begin{table}[!htbp]
+\begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}
 \begin{tabular}{lccc} \hline\hline
 Dataset & $\hat{\mu}$ & Total Error in $\hat{\mu}$ & Obs. (Exp.) Significance \\

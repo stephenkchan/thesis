@@ -75,7 +75,7 @@ The final important Higgs production process is $t\bar{t}H$ production, the box 
 
 Once the Higgs has been produced, it can decay in a number of ways, as shown in Figure \ref{fig:hbr}.  By far the most dominant decay mode of the Higgs is to $b\bar{b}$ at 58\% of all decays.  This $b$-quark pair then hadronizes into two $b$-jets (for a more thorough discussion of jets and $b$-jets in particular, see Section \ref{sec:jets}).  However, many processes at the LHC create pairs of $b$-jets with invariant masses consistent with the Higgs and have much higher production rates (\tt\,production at the LHC is in the neighborhood of hundreds of pb, compared to Higgs cross sections of a few pb), so a clear process signature is necessary to study $H\to b\bar{b}$ production at the LHC.  This is why the bulk of search efforts have focused on $VH$ production.  A summary of Higgs production cross sections and simple extrapolations to raw numbers of Higgs bosons produced for $VH$ for leptonically decaying $V$ is shown in Table \ref{tab:xsec}
 
-\begin{table}[!htbp]
+\begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}
 \begin{tabular}{lccccc}
 \hline\hline
@@ -117,6 +117,7 @@ Many of these novel schemes are designed to explicitly address the first issue o
 
 
 \section{Lorentz Invariants}
+\label{sec:li}
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
   \includegraphics[width=0.400000\linewidth]{figures/li2lep}
@@ -138,6 +139,7 @@ These variables do contain a lot of information similar to the usual set: there 
   There is also no prescription for any additional jets in the event beyond the two $b$-tagged jets.  They are simply ignored in these variable calculations since the fiducial analysis requirement of exactly two $b$-tagged jets eliminates any combinatoric ambiguity, and additional, untagged jets are assumed (not entirely rigorously) to be unrelated to the signal-like hard scatter.
 
 \section{RestFrames Variables}
+\label{sec:rf}
 The RestFrames variables \cite{rjr}, calculated using the software package of the same name, is based upon the idea that the most natural frame in which to analyze objects of the signal decay tree is in their individual production (rest) frames.  The signal decay tree for \ZH\, is show in Figure \ref{fig:rftree}.
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
@@ -159,6 +161,7 @@ denoted \texttt{Rpt}, \texttt{Rpz}, and \texttt{Rmet}.  These can be thought of 
 Unlike the LI variables, the physical interpretation of RF variables is very clear.  Everything has physical units, and these are variables one might have introduced in the usual process of developing an MVA with the traditional mindset.  The solution to the issue of additional jets in an event is not immediately clear.  In order to keep the two non-standard MVA's on as equal footing as possible, the approach of simply ignoring additional jets is taken in this thesis.  Nevertheless, it would be easy enough to redefine the $H$ intermediate frame to have, for example, the two $b$-tagged jets and the highest $p_T$ untagged jet for any subset of events.  This flexibility is not a feature of the Lorentz Invariants framework.  Of course, \texttt{RestFrames} cannot tell you what approach to take, but it is capable of handling more flexible topologies once optimization studies have been completed.
 
 \section{Extensions to the 1 and 0 Lepton Channels}
+\label{sec:rfli01lep}
 Both the LI and RF variable concepts are readily extendable to the 1-lepton channel.  In this topology, one of the leptons in the \ZH\, diagram is replaced by a neutrino, the lone invisible particle in this final state.  We can assume that the neutrino has zero mass and transverse momentum equal to the \met\, in the event, leaving one undetermined degree of freedom, the longitudinal momentum of the neutrino, $p_z^{\nu}$.  
 
 The LI concept was in fact initially formulated to improve sensitivity in the 1-lepton channel, with the same orthogonality of variables described in the 2-lepton case being the main draw.  The LI approach to estimating the neutrino longitudinal momentum is outlined in \cite{litalk}, which we reproduce here.  We first guess the neutrino energy in its rest frame and then boost to the lab frame:
@@ -175,7 +178,7 @@ The RF approach for the 1-lepton case amounts to replacing the $Z\to\ell\ell$ in
 
 The 0-lepton channel would appear to present some difficulty as two neutrinos in the final state introduce extra degrees of freedom, but both concepts may be extended by treating the invisibly decaying $Z$ as a single invisible particle and requiring the $Z$ to be on-shell.  Both of these requirements may be folded into the 1-lepton framework to produce similar sets of variables.  
 
-\begin{table}[!htbp]
+\begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}
 \begin{tabular}{c|cccc} \hline \hline
 Variable & Name & 0-lepton & 1-lepton & 2-lepton\\ \hline

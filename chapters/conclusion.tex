@@ -6,23 +6,24 @@ Vanitas vanitatum, omnis vanitas
 
 \chapter{Closing Thoughts}
 
-\newthought{With both the} LHC and ATLAS performing very well, it is only a matter of time before the evidence for SM \vhbb\,passes the 5 Gaussian standard deviation threshold necessary for discovery.  Depending the latter two years of ATLAS data from Run 2 of the LHC (2017 and 2018), this may come less than a year after reports of first evidence and may not even require a combination with Run 1 data.  
+\newthought{With both the} LHC and ATLAS performing very well, it is only a matter of time before the evidence for SM \vhbb\,passes the 5 Gaussian standard deviation threshold necessary for discovery.  Depending on the latter two years of ATLAS data from Run 2 of the LHC (2017 and 2018), this may come less than a year after reports of first evidence and may not even require a combination with the Run 1 result.  
 
 It is entirely natural to ask, then, how essential the techniques and results described in this thesis will prove to be moving forward.  Neither the LI/RF multivariate techniques nor combination with Run 1 datasets and their accompanying low signal strength values are necessary for discovery, and the latter may not even be essential to timely\footnote{i.e. before or coincident with CMS} discovery of SM \vhbb.  Nevertheless, both sets of results hold great potential as key parts of a concerted ensemble of efforts towards precision Higgs physics.
 
-With the final major center of mass energy increase at the energy frontier for the foreseeable future behind us, it is becoming increasingly likely that any new fundamental physics at colliders will require the use of results of systematics limited analyses.  This is the regime where the techniques described in this thesis will be most useful.
+With the perhaps final major center of mass energy increase at the energy frontier ever complete, analyses must rely on increased integrated luminosity.  Hence, it is becoming increasingly likely that any new fundamental physics at colliders will require the use of results of systematics limited analyses.  This is the regime where the techniques described in this thesis will be most useful.
 
-As the LHC and its experiments undergo successive stages of upgrades and operate in evermore extreme environments, the statistical fit models used to describe LHC data will continue to evolve in complexity and diverge from their predecessors.  The techniques described in Chapter \ref{ch:comb} will become increasingly more vital to producing the best physics results possible.  The improvement in precision from $1.20^{+0.24}_{-0.23}(\textrm{stat.})^{+0.34}_{-0.28}(\textrm{syst.})$ to $0.90^{+0.18}_{-0.18}(\textrm{stat.})^{+0.21}_{-0.19}(\textrm{syst.})$ is just the beginning.
+As the LHC and its experiments undergo successive stages of upgrades and operate in evermore extreme environments, the statistical fit models used to describe LHC data will continue to evolve in complexity and diverge from their predecessors.  The techniques described in Chapter \ref{ch:comb} will become increasingly more vital to producing the best physics results possible.  The improvement in precision from $\hat{\mu}_{VH}=1.20^{+0.24}_{-0.23}(\textrm{stat.})^{+0.34}_{-0.28}(\textrm{syst.})$ to $\hat{\mu}_{VH}=0.90^{+0.18}_{-0.18}(\textrm{stat.})^{+0.21}_{-0.19}(\textrm{syst.})$ is just the beginning.
 
 The best methods for reduction of systematic uncertainties will naturally depend in part on the state of the art for both fundamental physics process and detector modeling, but techniques that can reduce systematic uncertainties independent of fit model, dataset, and physics process provide a promising avenue forward.  The improvements in systematic uncertainties using the Lorentz Invariant and RestFrames variable techniques in the \ZH\,analysis, summarized in Table \ref{tab:kahuna2}, show that a smarter and more orthogonal decomposition of information in a collision event provides benefits independent of any clever treatment of \met\, (which both schemes also provide).  Both techniques are readily extendible to other analysis channels, with the RestFrames concept demonstrating stronger performance and greater flexibility to nearly completely generic final states.
 
-\begin{table}[!htbp]
+\begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}
 \begin{tabular}{lccc}
 \hline\hline
  & Standard &LI &RF\\
 \hline
-$\hat{\mu}$ & $1.75^{+0.24}_{-0.23}(\textrm{stat.})^{+0.34}_{-0.28}(\textrm{syst.})$ & $1.65^{+0.24}_{-0.23}(\textrm{stat.})^{+0.34}_{-0.28}(\textrm{syst.})$ & $1.50^{+0.24}_{-0.23}(\textrm{stat.})^{+0.34}_{-0.28}(\textrm{syst.})$\\
+%$\hat{\mu}$ & $1.75^{+0.24,0.34}_{-0.23,0.28}(\textrm{stat.})^{+0.34}_{-0.28}(\textrm{syst.})$ & $1.65^{+0.24}_{-0.23}(\textrm{stat.})^{+0.34}_{-0.28}(\textrm{syst.})$ & $1.50^{+0.24}_{-0.23}(\textrm{stat.})^{+0.34}_{-0.28}(\textrm{syst.})$\\
+$\hat{\mu}$ & $1.75^{+0.50,0.64}_{-0.48,0.45})$ & $1.65^{+0.51,0.59}_{-0.49,0.41}$ & $1.50^{+0.50,0.53}_{-0.48,0.36}$\\
 Asi. $\Delta err\left(\mu\right)$ &  --- & $<1$\%, +4.6\% & -6.5\%, -2.2\%\\
 Obs. $\Delta err\left(\hat{\mu}\right)$ &  --- & -7.5\%, -3.7\% & -16\%, -8.8\%\\
 \hline
@@ -33,7 +34,7 @@ Obs. (data) sig. & 2.87 & 2.79 (-2.8\%) & 2.62 (-8.6\%)\\
 \hline\hline
 \end{tabular}
 \end{center}
-\caption{Summary of performance figures for the standard, LI, and RF variable sets.  In the case of the latter two, \% differences are given where relevant.  Differences in errors on $\mu$ are on full systematics and total error, respectively.}
+\caption{Summary of performance figures for the standard, LI, and RF variable sets.  Uncertainties on $\hat{\mu}$ are quoted stat., syst.  In the case of the latter two, \% differences are given where relevant.  Differences in errors on $\mu$ are on full systematics and total error, respectively.}
 \label{tab:kahuna2}
 \end{table}
 
