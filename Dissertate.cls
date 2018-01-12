@@ -312,6 +312,7 @@
     \begin{appendices}
         \include{chapters/mmt}
         \include{chapters/teljet2}
+        \include{chapters/aec}
     \end{appendices}
     \input{endmatter/personalize}
     \clearpage

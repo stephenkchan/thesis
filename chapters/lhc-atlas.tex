@@ -22,6 +22,7 @@ The journey of protons from hydrogen canister to high energy collisions through 
 \section{The Large Hadron Collider}
 The LHC was designed to function primarily as a proton-proton collider with a center of mass energy $\sqrt{s}=14$ \TeV and an instantaneous luminosity of $1\times10^{34}\,\text{cm}^{-2}\cdot\text{s}^{-1}$, though it is also capable of producing heavy ion (Pb-Pb) collisions, which it does for approximately one month in a typical year of physics collisions.  Owing to an accident at the beginning of the LHC's initial run, the accelerator has operated at center of mass energies of 7, 8, and now 13 \TeV.
 
+%JEH: might make reference to the SSC with individual magnets, and that the LHC magnets are more challenging.  In this vein, mention the iron and magnetic circulation that allows for counter-rotating beams.
 The limited size of the LEP tunnel ($\sim 3.6$ m) means that it is impractical to have separate rings and magnet systems for each proton beam (proton-antiproton colliders like the Tevatron do not face this complication and can have both beams circulating in the same beam pipe), so the LHC magnets are coupled in a ``twin bore'' design.  The LHC magnets make use of superconducting NbTi cables and are cooled using superfluid helium to a temperature of 2 K, which allows for operational field strengths in excess of 8 T.  The layout of an LHC dipole magnet is shown in Figure \ref{fig:lhcdipole}.  These dipole magnets are responsible for bending the LHC's proton beams, and their strength is the principal limiting factor in the center of mass energy achievable at a circular collider.
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
@@ -31,10 +32,12 @@ The limited size of the LEP tunnel ($\sim 3.6$ m) means that it is impractical t
   \label{fig:lhcdipole}
 \end{figure}
 
+%JEH: might make mention of betatron oscillations creating a beam envelope – maybe too much detail, though
 In addition to the dipole magnets, there are quadrupole magnet assemblies in the short straight sections (for beam focusing), as well as quadrupole, octupole, and sextupole magnets interspersed throughout the length of the LHC ring for beam stabilization and other higher order corrections.  The interior of the LHC beam pipe operates at a nominal pressure of $\sim10^{-7}$ Pa, famously more rarefied than outer space.
 
   The LHC ring itself is between 45 m and 170 m below ground and has a 1.4\% incline towards Lac L\'eman with eight arcs and eight straight sections.  In the middle of each of the eight straight sections, there are potential interaction points (each colloquially referred to by its number as ``Point $N$''), with each point housing either accelerator infrastructure or an experiment.  A schematic of the contents of each component, as well as a more detailed view of the infrastructure in the LHC ring, can be found in Figure \ref{fig:lhcring}.
 
+%JEH: Too much detail in figure 1.3?  can’t read the fine print
 \begin{landscape}
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
@@ -49,7 +52,7 @@ Points 1, 2, 5, and 8 house the LHC's experiments, ATLAS (\emph{A} \emph{T}oroid
 
 \section{ATLAS at a Glance}
 \subsection{Coordinates and Distances in the ATLAS Detector}
-\emph{A} \emph{T}oroidal \emph{L}HC \emph{A}pparatu\emph{S} is one of the two general purpose, high luminosity detectors at the LHC, located at Interaction Point 1, as described above.  With a length of 44 m and a height of 25 m, it is the detector with largest physical dimensions at the LHC.\footnote{This is the only reason CMS can call itself ``compact.''}.  While primarily a high luminosity proton-proton collision detector, ATLAS does collect heavy ion collision data, typically for one month during a year of typical operation.  
+\emph{A} \emph{T}oroidal \emph{L}HC \emph{A}pparatu\emph{S} is one of the two (the other being CMS) general purpose, high luminosity detectors at the LHC, located at Interaction Point 1, as described above.  With a length of 44 m and a height of 25 m, it is the detector with largest physical dimensions at the LHC.\footnote{This is the only reason CMS can call itself ``compact.''}.  While primarily a high luminosity proton-proton collision detector, ATLAS does collect heavy ion collision data, typically for one month during a year of typical operation.  
 
 The ATLAS coordinate system is shown in Figure \ref{fig:acoord}.  It is a right-handed coordinate system centered at the nominal collision point, with the $x$ axis pointing towards the center of the LHC ring, the $z$ axis pointing up, and the $y$ axis completing the right-handed coordinate system.
 
@@ -62,6 +65,7 @@ The ATLAS coordinate system is shown in Figure \ref{fig:acoord}.  It is a right-
 
 While the Cartesian coordinates are useful for specifying the locations of things like detector components and activated calorimeter cells, cylindrical polar coordinates with the same origin, $z$ axis, and handedness are often more suitable, with a point in 3-space expressed as $\left(r,\phi,\eta\right)$.  $r$ is the perpendicular distance from the beam axis.  This differs from the usual spherical $\rho$, the distance of a point from the origin, because the ATLAS detector is cylindrical\footnote{``toroidal;'' the hole is the beam pipe}, and so detector components are more easily located using $r$ instead of $\rho$.  In some contexts, the latter is used, though this is (or should be) made clear.  $\phi$ is the usual (right-handed) azimuthal angle around the beam axis, with 0 at the $+x$ axis.
 
+% JEH:  also should say that pion production in min bias pp collisions are flat in pseudo rapidity.  I can explain, if you want. 
 In a lepton collider where total momentum is conserved, a useful coordinate is the relativistic rapidity of a particle:
 \begin{equation}
 y=\frac{1}{2}\ln\left[\frac{E+p_z}{E-p_z}\right]
@@ -122,13 +126,13 @@ Since the components of the ID do not provide an energy measurement, it is desir
 \subsection{The Pixel Detector}
 The innermost part of ATLAS is the Pixel Detector, which, as the name suggests, is comprised of four layers of silicon pixels in the barrel at 32, 51, 89, and 123 mm from the beam pipe, and three layers in the end caps at 495, 580, and 650 mm from the beam pipe, with over 80 million channels total.  The innermost layer of pixels, the insertable $B$ layer (IBL) was installed during the 2013--14 LHC shutdown.  The pixels are cooled to a temperature of $\sim-\ang{5}$C, with $N_2$ gas and operate at 150--600 V.  The pixels themselves come in two sizes $50\times400(600)\times250$ $\mu$m, with the larger pixels in the outer layers.  They provide nominal resolution of 10(115) $\mu$m resolution in $r-\phi$ ($z$) direction.
 
-In order to improve total coverage in the detector and prevent any gaps, pixels are not installed flush with each other.  Pixels in the barrel are tilted at about \ang{20}, with an overlap in $r-\phi$, as shown in Figure \ref{fig:idmb}.  The disks of the ID end caps are rotated with respect to each other by \ang{3.75}.
+In order to improve total coverage in the detector and prevent any gaps, pixels are not installed flush with each other.  Pixels in the barrel are tilted at about \ang{20}, with an overlap in $r-\phi$, as shown in Figure \ref{fig:pix}.  The disks of the ID end caps are rotated with respect to each other by \ang{3.75}.
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
   \includegraphics[width=0.850000\linewidth]{figures/atlas/ibl}
   \caption{Arrangement of pixels in the barrel. IC: \cite{ibltdr}}
-  \label{fig:idmb}
+  \label{fig:pix}
 \end{figure}
 
 \subsection{The Silicon Microstrip Detector (SCT)}
@@ -143,7 +147,7 @@ The final and outermost subsystem in the ID is the Transition Radiation Tracker 
   \centering
   \includegraphics[width=0.800000\linewidth]{figures/atlas/ehfcalp}
   \caption{The ATLAS calorimeters.}
-  \label{fig:indet}
+  \label{fig:atlascal}
 \end{figure}
 
 ATLAS has four main calorimeter systems: the liquid argon based Electromagnetic Calorimeter (ECAL), the Hadronic End Cap (HEC), the Forward Calorimeters (FCAL), and the scintillating tile based hadronic Tile Calorimeter in the barrel.  Their layout and material budget in interaction lengths can be seen in Figure \ref{fig:calbudget}.
