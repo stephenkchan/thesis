@@ -28,8 +28,9 @@
 \usepackage{multirow}
 \usepackage{verbatim}
 \usepackage{amssymb,amsmath,amsfonts,mathrsfs}
-\usepackage[font=tiny]{caption}
-\usepackage[font+=scriptsize]{subcaption}
+\usepackage{mathtools}
+%\usepackage[font=tiny]{caption}
+\usepackage{subcaption}
 \usepackage{textpos}
 \usepackage{xcolor}
 \usepackage{lineno}
@@ -355,7 +356,9 @@
 \def\sumpt{\ensuremath{S_\textrm{T}}}
 \def\to{\ensuremath{\rightarrow}}
 \def\drbb{\ensuremath{\Delta R\left(b_1,b_2\right)}}
+\def\dR{\ensuremath{\Delta R}}
 \def\vv{\ensuremath{VV}}
+\def\pT{\ensuremath{p_T}}
 \def\ephi{\ensuremath{\eta-\phi}}
 \def\aeta{\ensuremath{\left|\eta\right|}}
 \def\mindphi{\ensuremath{|\text{min}\Delta\phi(\met,\text{jet})|}}
@@ -384,3 +387,12 @@
 \let\POWHEG=\powheg
 \let\HERWIG=\herwig
 \let\SHERPA=\sherpa
+\let\lumi=\LUMI
+\let\pt=\pT
+\newcommand\Vhtobb{$V(H \to b\bar{b}$)\ }
+\newcommand\Zhtollbb{$ZH \to \ell^+\ell^- b\bar{b}$\ }
+\newcommand\Zhtovvbb{$ZH \to \nu\bar{\nu} b\bar{b}$\ }
+\newcommand\Whtolvbb{$WH \to \ell \nu b\bar{b}$\ }
+\newcommand\ZZtollbb{$ZZ \to \ell^+\ell^- b\bar{b}$\ }
+\newcommand\ZZtovvbb{$ZZ \to \nu\bar{\nu} b\bar{b}$\ }
+\newcommand\WZtolvbb{$WZ \to \ell \nu b\bar{b}$\ }

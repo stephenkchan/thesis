@@ -16,8 +16,8 @@ Before diving into the specifics of modeling and systematic uncertainties associ
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-  \begin{subfigure}[t]{0.420000\textwidth}\centering\includegraphics[width=\textwidth]{figures/zhllbb}}\caption{``Simple''}\end{subfigure}
-  \begin{subfigure}[t]{0.420000\textwidth}\centering\includegraphics[width=\textwidth]{figures/qcd_event}}\caption{Decidedly not}\end{subfigure}
+  \begin{subfigure}[t]{0.420000\textwidth}\centering\includegraphics[width=\textwidth]{figures/zhllbb}\caption{``Simple''}\end{subfigure}
+  \begin{subfigure}[t]{0.420000\textwidth}\centering\includegraphics[width=\textwidth]{figures/qcd_event}\caption{Decidedly not}\end{subfigure}
   \caption{The problem here is how to get from (a) to (b).}
   \label{fig:evgen}
 \end{figure}
@@ -75,7 +75,7 @@ In addition to normalization systematics expressed as single numbers attached to
 \begin{equation}
 \label{eqn:shapesys}
 w_{event} = A_{region}\times f_{region}\left(event\right)
-\end{equaiton}
+\end{equation}
 where $w_{event}$ is the simulated event's weight, $A_{region}$ is the overall normalization (in principle including any systematics), and $f_{region}\left(event\right)$ is some function of event-level variables, usually a single variable, like \ptv\, or \mbb.  The purpose of these systematics is to take into account (in the case of a systematic) or correct (in the case of a correction applied to the event weight) the non-trivial dependence of a normalization on one of these quantities.  Some of these are taken from histograms while others are parametric functions (in this analysis, usually linear ones).
 
 An example of the former case is the quantity $\delta_{EW}$, the difference between the nominal $qqVH$ cross section and the differential cross section as a function of \ptv\, at next to leading order (NLO).  As a correction, this term is simply used as a correction factor $k_{EW}^{NLO}=\left(1+\delta_{EW}\right)$.  
@@ -197,7 +197,7 @@ The remaining signal systematics are analysis channel specific and are summarize
 \begin{tabular}{ c ||| c | c || c | c || c | c  }
 \hline
 \hline
-		  & \multicolumn{2}{c ||}{0L: \Zhtovvbb}	& \multicolumn{2}{c ||}{1L: \Whtolvbb} 	& \multicolumn{2}{c }{2L: \Zhtollbb}  \\
+		  & \multicolumn{2}{c ||}{0L: $ZH\to\nu\nu b\bar{b}$}	& \multicolumn{2}{c ||}{1L: $WH\to\ell\nu b\bar{b}$} 	& \multicolumn{2}{c }{2L: \ZH}  \\
 NP name    & 2j		& 3j					   	& 2j		& 3j						&  2j		& $\geq$3j			\\		
 \hline
 \hline
@@ -310,7 +310,7 @@ The flavor composition ratio systematics are in Table \ref{tab:zhf}, also from \
 \end{center}
 \end{table}
 
-Finally, the \ptv\,and \mbb\,shape systematics are derived using control regions in data\footnote{These use the same selections as the signal regions except for $b$-tags (0, 1, and 2 tags are studied), with the added requirement in 2tag regions that \mbb\,not be in the range of 110--140\GeV.}.  The functional form for the \ptv\, systematic is $\pm 0.2 \log10 (p_T^V/50 {\text GeV})$, and that of the \mbb \,systematic is $\pm 0.0005 \times (m_{jj}-100~{\text GeV})$.
+Finally, the \ptv\,and \mbb\,shape systematics are derived using control regions in data.\footnote{These use the same selections as the signal regions except for $b$-tags (0, 1, and 2 tags are studied), with the added requirement in 2tag regions that \mbb\,not be in the range of 110--140\GeV.}  The functional form for the \ptv\, systematic is $\pm 0.2 \log10 (p_T^V/50 {\text GeV})$, and that of the \mbb \,systematic is $\pm 0.0005 \times (m_{jj}-100~{\text GeV})$.
 
 \subsection{Top-Pair Production}
 Nominal \tt\,samples are produced with \powheg\,at NLO for the ME calculation using the NNPDF3.0 PDF set interfaced with \pythia8.210 using the A14 tune and the NNPDF2.3 PDF set at LO.  The parameters \texttt{hdamp} (nominal value $1.5m_{top}$, a resummation damping factor for ME/PS matching that can heuristically thought of as tuning high $p_T$ radiation) in \powheg\,and \texttt{pThard} (nominal value 0) and \texttt{pTdef} (nominal value 2) in \pythia\, (both control merging with \powheg) are varied to evaluate certain systematics.  Alternative \tt\,samples use \powheg+\herwig7, \mg\_aMC@NLO\-+\pythia8.2, and the nominal setup with varied tunes and parameter values.  Uncertainties are taken to cover the largest difference between the nominal and any of these alternate configurations.
@@ -336,7 +336,7 @@ $\texttt{SysttbarNorm\_DWhfCR\_L1}$ 	&   --		&    --	&  25\%   	& -- 		&  25\% 	
 \hline 
 \hline 
 \end{tabular} 
-\caption{ \label{tab:ttbarSysSummary1} Effect of modelling systematics on \ttbar\ normalization in the 0 and 1-lepton analysis region.} 
+\caption{ \label{tab:ttbarSysSummary1} Effect of modelling systematics on \tt\ normalization in the 0 and 1-lepton analysis region.} 
 \end{center} 
 \end{table} 
 
@@ -356,7 +356,7 @@ $\texttt{SysTTbarPTV\_L2\_L2}$         &   \multicolumn{4}{ c }{effect on each r
 \hline 
 \hline 
 \end{tabular} 
-\caption{ \label{tab:ttbarSysSummary2} Effect of modelling systematics on \ttbar\ normalization in the 2lepton regions. The \texttt{SysTTbarPTV\_L2\_L2} systematic is implemented as a shape systematic over the full VpT>75\,GeV range, and as a result has different acceptance effects in the low and high VpT regions.} 
+\caption{ \label{tab:ttbarSysSummary2} Effect of modelling systematics on \tt\ normalization in the 2lepton regions. The \texttt{SysTTbarPTV\_L2\_L2} systematic is implemented as a shape systematic over the full VpT>75\,GeV range, and as a result has different acceptance effects in the low and high VpT regions.} 
 \end{center} 
 \end{table} 
 

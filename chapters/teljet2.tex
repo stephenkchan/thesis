@@ -137,12 +137,12 @@ where $\oplus$ denotes addition in quadrature, and $\Delta S (B)$ is the error o
 \section{Multiple Event Interpretations}
 Using multiple event interpretations changes the formulae used in with simple counting.  That is, $S$ is not necessarily merely $N_S$, the number of events passing some signal cuts, and similarly for $B$ and $N_B$.  Using an event weighting by some function of the cut-weight, $z$, denoted $t\left(z\right)$, $S=N_S\left<t\right>_{\rho_S}$ and $B=N_B\left<t^2\right>_{\rho_B}$. So
 \begin{equation}
-\mathscr{S}_{t,gaus}=\frac{N_S\left<t\right>_{\rho_S}}{\sqrt{N_B\left<t^2\right>_{\rho_B}}}}\to\mathscr{S}_{t,pois}=\frac{N_S\left<t\right>_{\rho_S}}{0.5+\sqrt{0.25+N_B\left<t^2\right>_{\rho_B}}}=\frac{N_S\int_0^1 dz\,t\left(z\right)\rho_S\left(z\right)}{0.5+\sqrt{0.25+N_B\int_0^1dz\,t^2\left(z\right)\rho_B\left(z\right)}}
+\mathscr{S}_{t,gaus}=\frac{N_S\left<t\right>_{\rho_S}}{\sqrt{N_B\left<t^2\right>_{\rho_B}}}\to\mathscr{S}_{t,pois}=\frac{N_S\left<t\right>_{\rho_S}}{0.5+\sqrt{0.25+N_B\left<t^2\right>_{\rho_B}}}=\frac{N_S\int_0^1 dz\,t\left(z\right)\rho_S\left(z\right)}{0.5+\sqrt{0.25+N_B\int_0^1dz\,t^2\left(z\right)\rho_B\left(z\right)}}
 \end{equation}
 
 For histograms, everything is done bin-wise.  The notation used below is as follows: $\rho_i$ is the value of $\rho\left(z\right)$ at bin $i$ (where the bins run from 0 to $n_{tel}$, where $n_{tel}$ is the total number of telescoping radii).  $t_i=t_i\left(\rho_{S,i},\rho_{B,i},i/n_{tel}\right)$ is the value of $t\left(z\right)$ at bin $i$, which can depend, in principle, on $\rho_{S,i}$, $\rho_{B,i}$, and $i/n_{tel}$ (the last of which is $z$ in bin $i$).  Explicitly,
 \begin{equation*}
-N=\sum_{i=0}^{n_{tel}} \rho_i,\;\int_0^1 dz\,t\left(z\right)\rho_S\left(z\right)&=&\sum_{i=0}^{n_{tel}}t_i\rho_{S,i},\;\int_0^1 dz\,t^2\left(z\right)\rho_B\left(z\right)&=&\sum_{i=0}^{n_{tel}}t^2_i\rho_{B,i}
+N=\sum_{i=0}^{n_{tel}} \rho_i,\;\int_0^1 dz\,t\left(z\right)\rho_S\left(z\right)=\sum_{i=0}^{n_{tel}}t_i\rho_{S,i},\;\int_0^1 dz\,t^2\left(z\right)\rho_B\left(z\right)=\sum_{i=0}^{n_{tel}}t^2_i\rho_{B,i}
 \end{equation*}
 
 For the calculations that follow, let $\xi=\sum_{i=0}^{n_{tel}}t_i\rho_{S,i}$, $\psi=0.5+\sqrt{0.25+N_B\sum_{i=0}^{n_{tel}}t^2_i\rho_{B,i}}$, $\partial_{S}=\frac{\partial}{\partial \rho_{S,i}}$ (and similarly for $B$), so $\mathscr{S}_t=N_S\xi/\psi$
@@ -192,7 +192,7 @@ simplifying somewhat the terms in the per bin error in Equation \ref{eqn:dsdb}.
 \end{equation}
 Of particular interest is the likelihood optimized $t\left(z\right)$,\footnote{Derived under the assumption of Gaussian statistics in Ref \cite{multint}} $t^*\left(z\right)=\rho_S\left(z\right)/\rho_B\left(z\right)$.  $m_{bb}$ windows are chosen separately for each scheme studied to maximize total significances and are summarized in Table \ref{tab:masswindow}. 
 \begin{equation}
-\left(\frac{S}{\delta B}\right)_z=\frac{N_S\epsilon_S}{0.5+\sqrt{0.25+N_B\left(\epsilon_B^2+\sigma_B^2}\right)}
+\left(\frac{S}{\delta B}\right)_z=\frac{N_S\epsilon_S}{0.5+\sqrt{0.25+N_B\left(\epsilon_B^2+\sigma_B^2\right)}}
 \label{eqn:timpz}
 \end{equation}
 \begin{equation}
@@ -225,9 +225,9 @@ Truth         & anti-$k_t$ $R=0.4$                                          & 10
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
 \begin{center}
-\begin{subfigure}[t]{18pc}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_ntel11_zh125_rho_ptall_lo120_hi135}\caption{}\end{subfigure}
-\begin{subfigure}[t]{18pc}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_ntel11_zjets_rho_ptall_lo120_hi135}\caption{}\end{subfigure}
-\begin{subfigure}[t]{18pc}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_ntel11_zjets_rhoSB_ptall_lo120_hi135}\caption{}\end{subfigure}
+\begin{subfigure}[t]{15pc}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_ntel11_zh125_rho_ptall_lo120_hi135}\caption{}\end{subfigure}
+\begin{subfigure}[t]{15pc}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_ntel11_zjets_rho_ptall_lo120_hi135}\caption{}\end{subfigure}
+\begin{subfigure}[t]{15pc}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_ntel11_zjets_rhoSB_ptall_lo120_hi135}\caption{}\end{subfigure}
 \caption{\label{fig:rhotru}Truth-level $\rho\left(z\right)$ distributions for the $m_{bb}$ window optimizing $\left(S/\delta B\right)_{t^*\left(z\right)}$.  $\rho_S\left(z\right)$ for the signal $ZH125$ sample is shown in (a), and $\rho_B\left(z\right)$ for the background $Z+$jets sample is shown in (b).  The distribution of $\rho_S\left(z\right)/\rho_B\left(z\right)$ for these samples is shown in (c).}
 \end{center}
 \end{figure}
@@ -272,9 +272,9 @@ Total significance gains at reconstructed level for the two dimensional $m_{bb}$
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
 \begin{center}
-\begin{subfigure}[t]{18pc}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_ntel11_zh125_rho_ptall_lo110_hi155}\caption{}\end{subfigure}
-\begin{subfigure}[t]{18pc}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_ntel11_zjets_rho_ptall_lo110_hi155}\caption{}\end{subfigure}
-\begin{subfigure}[t]{18pc}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_ntel11_zjets_rhoSB_ptall_lo110_hi155}\caption{}\end{subfigure}
+\begin{subfigure}[t]{15pc}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_ntel11_zh125_rho_ptall_lo110_hi155}\caption{}\end{subfigure}
+\begin{subfigure}[t]{15pc}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_ntel11_zjets_rho_ptall_lo110_hi155}\caption{}\end{subfigure}
+\begin{subfigure}[t]{15pc}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_ntel11_zjets_rhoSB_ptall_lo110_hi155}\caption{}\end{subfigure}
 \caption{\label{fig:rhorec}Reconstructed-level $\rho\left(z\right)$ distributions for the $m_{bb}$ window optimizing $\left(S/\delta B\right)_{t^*\left(z\right)}$.  $\rho_S\left(z\right)$ for the signal $ZH125$ sample is shown in (a), and $\rho_B\left(z\right)$ for the background $Z+$jets sample is shown in (b).  The distribution of $\rho_S\left(z\right)/\rho_B\left(z\right)$ for these samples is shown in (c).}
 \end{center}
 \end{figure}
