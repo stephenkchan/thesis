@@ -6,7 +6,112 @@ If I have seen further, it is by standing on ye shoulders of giants.
 
 \chapter{Measurement Combinations}
 \label{ch:comb}
-\newthought{While the discussion} thus far has focused on improvements looking towards future in just the \ZH\, channel, any actual result for SM \vhbb\, combines all channels and all available datasets.  Using additional channels at a given center of mass energy is straightforward since the fit model is designed with this combination in mind.  Combining dataset results (known as ``workspaces'') from different center of mass energies is not so simple an exercise since both the underlying physics (and its associated modeling) and the treatment of key experimental considerations, like flavor tagging, and their associated systematics change from dataset to dataset.  A combined fit model must take these considerations into account, and the formulation of the fit model combining the Run 1 ($\sqrt{s}=$7 \TeV with 4.7 fb$^{-1}$ of data, and $\sqrt{s}=$8 \TeV with 20.3 fb$^{-1}$ of data) and Run 2 ($\sqrt{s}=$13 \TeV with \lumi) SM \vhbb\, results is the topic of Section \ref{sec:combmodel}.  Its results, as reported in \cite{paper}, are given in \ref{sec:combres}.
+\newthought{While the discussion} thus far has focused on improvements looking towards future in just the \ZH\, channel, any actual result for SM \vhbb\, combines all channels and all available datasets.  Using additional channels at a given center of mass energy is straightforward since the fit model is designed with this combination in mind.  This will be described in the context of the \lumi\ 13 \tev\ result in Section \ref{sec:run2}.
+
+  Combining dataset results (known as ``workspaces'') from different center of mass energies is not so simple an exercise since both the underlying physics (and its associated modeling) and the treatment of key experimental considerations, like flavor tagging, and their associated systematics change from dataset to dataset.  A combined fit model must take these considerations into account, and the formulation of the fit model combining the Run 1 ($\sqrt{s}=$7 \TeV with 4.7 fb$^{-1}$ of data, and $\sqrt{s}=$8 \TeV with 20.3 fb$^{-1}$ of data) and Run 2 ($\sqrt{s}=$13 \TeV with \lumi) SM \vhbb\, results is the topic of Section \ref{sec:combmodel}.  Its results, as reported in \cite{paper}, are given in \ref{sec:combres}.
+
+\section{Lepton Channel Combinations}
+\label{sec:run2}
+Preparation of results for the 0- and 1-lepton channels is functionally very similar to above discussions in Chapters \ref{ch:modeling}, \ref{ch:object}, \ref{ch:mva}, and \ref{ch:fit}.  From a modeling standpoint, each channel comes in with different dominating background processes and dedicated simulation, described at length in \cite{modelingnote}, though there is a lot of overlap.  In particular, \tt, \vjets, and diboson production is important for all three channels.  The only important process not discussed here is contribution from multijet background, which is a small but important background in the 1-lepton case.
+
+With respect to object definitions, no new objects are defined in the 0- and 1-lepton analyses, though the treatment of \met\ is of greater concern in these channels, as \met\ is a part of the signal final states in these channels.  Triggers and event selection requirements are optimized by channel.  A full list of requirements is given in Table \ref{tbl:evselTable} from \cite{supportnote}.
+
+\begin{table}[!htbp]\captionsetup{justification=centering}
+\begin{center}
+\begin{tabular}{c|c} 
+\hline \hline
+\multicolumn{2}{c}{Common Selections}\\
+\hline 
+Jets & $\geq$  2 central jets  \\
+$b$-jets &  2 b-tagged signal jets \\
+Leading jet \pt\  & $>$ 45 \text{GeV} \\
+$|\Delta \text{R(jet1,jet2)}|$ (cut-based only ) & $\leq$ 1.8 (\ptx{V}\ < 200 GeV), $\leq$ 1.2 (\ptx{V}\ > 200 GeV) \\ 
+
+\hline \hline
+\multicolumn{2}{c}{0 Lepton} \\
+\hline 
+Trigger & \texttt{HLT\_xe70, xe90\_mht, and xe110\_mht} \\
+Leptons & 0 \VHloose\ lepton \\
+\met\ & $>$ 150~\text{GeV}  \\
+%\ptmiss\  & $>$ 30~\text{GeV} (1-tag only)  \\
+\sumpt\ & $>$ 120 (2 jets), $>$150 \text{GeV} (3 jets)  \\
+\mindphi\ & $> 20\ensuremath{^\circ}$ (2jet) , $> 30\ensuremath{^\circ}$(3jet) \\
+$|\Delta\phi(\met, h)|$ & $> 120\ensuremath{^\circ}$ \\
+$|\Delta\phi(\text{jet1,jet2})|$ & $< 140\ensuremath{^\circ}$ \\
+$|\Delta\phi(\met,\ptmiss)|$ & $< 90\ensuremath{^\circ}$ \\
+\ptx{V}\ regions (BDT) & $>$ 150 ~GeV  \\
+\ptx{V}\ regions (cut-based) & [150, 200]~GeV, [200, $\infty$]~GeV \\ 
+
+
+\hline\hline
+\multicolumn{2}{c}{1 Lepton} \\
+\hline 
+Trigger &  $e$ channel: un-prescaled single electron \\
+        & Tables 5 and 6 of Ref.~\cite{objectnote}\\
+	&  $\mu$ channel: see 0-lepton triggers \\
+Leptons & 1 \WHsignal\ lepton \\
+        &  $>1$~\VHloose\ lepton veto \\
+\met\   & $>$ 30~\text{GeV} ($e$ channel) \\
+$m_{top}$ &  $< 225$~GeV or $m_{bb} > 75$~GeV \\ 
+\mTW\ (cut-based only) & < 120 GeV \\
+\ptx{V}\ regions (BDT) & $>$ 150 ~GeV  \\ 
+\ptx{V}\ regions (cut-based) &  [150, 200]~GeV,  [200, $\infty$]~GeV  \\ 
+
+
+\hline\hline
+\multicolumn{2}{c}{2 Lepton}\\
+\hline 
+Trigger &  un-prescaled single lepton\\
+        & Tables 5 and 6 of Ref.~\cite{objectnote}\\
+Leptons & 2 \VHloose\ leptons \\
+        & ($\ge$ 1 \ZHsignal\ lepton) \\
+        &  Same flavor, opposite-charge for $\mu\mu$ \\
+\mll\   & 81 $<$ \mll\ < 101~\text{GeV} \\
+\met\ significance (cut-based)  & \met$/\sqrt{\text{HT}} < 3.5\sqrt{\text{GeV}}$ \\
+\ptx{V}\ regions (BDT) &  [75, 150], [150, $\infty$]~GeV  \\
+\ptx{V}\ regions (cut-based) & [75,150], [150, 200], [200, $\infty$]~GeV \\
+\hline\hline
+
+\end{tabular}
+\caption{Summary of the signal event selection in the 0-, 1- and 2-lepton analyses.}
+\label{tbl:evselTable}
+\end{center}
+\end{table}
+
+The mechanics of MVA training and implementation is very much the same across analysis channels, with the major difference being the selection of input variables to the BDT discriminants.  For a discussion of how the different final states affect variable selection see the discussion in Section \ref{sec:rfli01lep} and in particular Table \label{tbl:MVAinputs} for the input variables used in the final analysis.
+
+As previously mentioned, the fit model is flexible enough to seamlessly integrate combined results for the three separate lepton channels for a given dataset.  Most nuisance parameters are treated as common across all fit regions.  Some regions will have greater bearing on certain nuisance parameters---2-lepton regions, virtually free of $W+$jets events, will have virutally no effect on $W+$jets modeling systematics, for example.  One notable exception are NP's with \texttt{\_L[012]} suffixes, which are predominantly the double ratio systematics discussed in Section \ref{sec:doubleratio} and function similar to the 2 vs. greater than 3 jet event double ratio systematics.  
+
+Adding different channels has great potential to constrain certain systematic uncertainties.  Looking at the breakdown of systematic uncertainties in 2-lepton fits in Table \ref{tab:breakdownobs}, for example, multijet and $W+$jets NP's contribute virtually no uncertainty, while \met\ and $Z+$jets have very high impacts on the uncertainty on $\hat{\mu}$.  1-lepton events will bring up the multijet and $W+$jets uncertainties (and justify their inclusion in the combined fit model; their inclusion in the 2-lepton fit is for portability and a sanity check).  Since the 2-lepton final state is by construction \met\ free, it is not surprising that uncertainty due to \met\ is high.  Single channel standalone fits are never final results in this analysis, so the result relies on the other channels to better and more accurately constrain this uncertainty since these other final states do have \met\ in their final states and are the channels for which the \met\ treatment in the analysis has been optimized.  Furthermore, something like $Z+$hf modeling is difficult to do given how constrained the analysis signal region is.  Combining the information in the 0- and 2-lepton results (and introducing double ratio NP's to recognize that these channels do have important differences) also helps to constrain this difficult systematic uncertainty.
+
+Once the fit inputs in each channel have been prepared and validated, a combined workspace can be directly constructed using the combined fit model.  Significances are given in Table \ref{tab:nuis_sig}, and $\hat{\mu}$ summaries for 2 and 3 POI fits are given in Figure \ref{fig:r2muhat}.  This combined workspace with observed signal strength of $1.20^{+0.24}_{-0.23}(\textrm{stat.})^{+0.34}_{-0.28}(\textrm{syst.})$ is the Run 2 input for the Run 1 + Run 2 combination discusssed below.
+
+\begin{table}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \begin{tabular}{c|||c|c|c}
+     \hline\hline
+    Channel  & Exp. sig. (Asimov) & Exp. sig. (data) & Obs. sig. \\
+     \hline\hline
+    0-lepton (SR)          	& 1.99  & 1.73 & 0.53 \\
+    1-lepton (SR+CR)     	&  1.81 & 1.81 & 2.30 \\
+    2-lepton (SR+CR)         	& 1.95  & 1.86 & 3.55 \\ %%%%&  2.14 & 1.99\\
+    \hline\hline
+    0,1,2-lepton (SR+CR)    &  3.19 & 3.03 & 3.54 \\
+    \hline\hline
+  \end{tabular}
+  \caption{Observed significance from an unconditional fit to the data corresponding to \LUMI and expected significances from a fit to an Asimov dataset and from a fit to the data. Expected significances from individual regions are estimated separately. } 
+  \label{tab:nuis_sig}
+\end{table}
+
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/run2-muhat-whzh}\caption{2 POI}\end{subfigure}
+  \begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/run2-muhat-whzh}\caption{3 POI}\end{subfigure}
+    \caption{Run 2 signal strength summary plots for 2 (WH/ZH, (a)) and 3 (0, 1, and 2 lepton, (b)) POI fits.}
+    \label{fig:r2muhat}
+\end{figure}
+
+\clearpage
 
 \section{The Combined Fit Model}
 \label{sec:combmodel}
