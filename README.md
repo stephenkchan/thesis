@@ -10,3 +10,8 @@
 
 ### How do I make the text justified instead of ragged right?
 Remove or comment out the line `\RaggedRight` from the .cls file.
+
+## S. Chan Repository Comments
+1.  I took out references and figures from the repository to reduce bloat
+2.  Template directory structure has been maintained even if some directories are dead.
+3.  I have modified Dissertate.cls.  In addition to dropping in definitions from collaboration code, I have also changed the math font (Garamond does not play well with Greek super/subscripts) and made the references brackets instead of endnotes (following the convention in my field).
