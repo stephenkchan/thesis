@@ -80,11 +80,11 @@ Leptons & 2 \VHloose\ leptons \\
 
 The mechanics of MVA training and implementation is very much the same across analysis channels, with the major difference being the selection of input variables to the BDT discriminants.  For a discussion of how the different final states affect variable selection see the discussion in Section \ref{sec:rfli01lep} and in particular Table \label{tbl:MVAinputs} for the input variables used in the final analysis.
 
-As previously mentioned, the fit model is flexible enough to seamlessly integrate combined results for the three separate lepton channels for a given dataset.  Most nuisance parameters are treated as common across all fit regions.  Some regions will have greater bearing on certain nuisance parameters---2-lepton regions, virtually free of $W+$jets events, will have virutally no effect on $W+$jets modeling systematics, for example.  One notable exception are NP's with \texttt{\_L[012]} suffixes, which are predominantly the double ratio systematics discussed in Section \ref{sec:doubleratio} and function similar to the 2 vs. greater than 3 jet event double ratio systematics.  
+As previously mentioned, the fit model is flexible enough to seamlessly integrate combined results for the three separate lepton channels for a given dataset.  Most nuisance parameters are treated as common across all fit regions.  Some regions will have greater bearing on certain nuisance parameters---2-lepton regions, virtually free of $W+$jets events, will have virtually no effect on $W+$jets modeling systematics, for example.  One notable exception are NP's with \texttt{\_L[012]} suffixes, which are predominantly the double ratio systematics discussed in Section \ref{sec:doubleratio} and function similar to the 2 vs. greater than 3 jet event double ratio systematics.  
 
 Adding different channels has great potential to constrain certain systematic uncertainties.  Looking at the breakdown of systematic uncertainties in 2-lepton fits in Table \ref{tab:breakdownobs}, for example, multijet and $W+$jets NP's contribute virtually no uncertainty, while \met\ and $Z+$jets have very high impacts on the uncertainty on $\hat{\mu}$.  1-lepton events will bring up the multijet and $W+$jets uncertainties (and justify their inclusion in the combined fit model; their inclusion in the 2-lepton fit is for portability and a sanity check).  Since the 2-lepton final state is by construction \met\ free, it is not surprising that uncertainty due to \met\ is high.  Single channel standalone fits are never final results in this analysis, so the result relies on the other channels to better and more accurately constrain this uncertainty since these other final states do have \met\ in their final states and are the channels for which the \met\ treatment in the analysis has been optimized.  Furthermore, something like $Z+$hf modeling is difficult to do given how constrained the analysis signal region is.  Combining the information in the 0- and 2-lepton results (and introducing double ratio NP's to recognize that these channels do have important differences) also helps to constrain this difficult systematic uncertainty.
 
-Once the fit inputs in each channel have been prepared and validated, a combined workspace can be directly constructed using the combined fit model.  Significances are given in Table \ref{tab:nuis_sig}, and $\hat{\mu}$ summaries for 2 and 3 POI fits are given in Figure \ref{fig:r2muhat}.  This combined workspace with observed signal strength of $1.20^{+0.24}_{-0.23}(\textrm{stat.})^{+0.34}_{-0.28}(\textrm{syst.})$ is the Run 2 input for the Run 1 + Run 2 combination discusssed below.
+Once the fit inputs in each channel have been prepared and validated, a combined workspace can be directly constructed using the combined fit model.  Significances are given in Table \ref{tab:nuis_sig}, and $\hat{\mu}$ summaries for 2 and 3 POI fits are given in Figure \ref{fig:r2muhat}.  This combined workspace with observed signal strength of $1.20^{+0.24}_{-0.23}(\textrm{stat.})^{+0.34}_{-0.28}(\textrm{syst.})$ is the Run 2 input for the Run 1 + Run 2 combination discussed below.
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
   \centering
@@ -120,10 +120,10 @@ It is clear the signal strength parameter of interest should be fully correlated
 \begin{enumerate}
 \item Identify which NP categories have significant impacts on $\mu$
 \item Of these NP's, identify which have one-to-one correspondences or established correlation schemes among $\sqrt{s}$ values
-\item Test whether correlation has a sizeable impact on expected fit quantities
+\item Test whether correlation has a sizable impact on expected fit quantities
 \end{enumerate}
 
-The only two sizeable experimental NP categories are jet energy scale (JES) and flavor tagging systematics.  Correlation schemes of varying degrees of completeness exist for these categories, so explicit NP correlations can be tested for these two categories.  As these studies were conducted before unblinding, ``sizeable impact'' was judged by comparing fit results (sensitivities, pull comparisons, and breakdowns) on combined workspaces using the unblinded and public $\mu=0.51$ result for Run 1 and Asimov data for the Run 2 result.  These are treated in Sections \ref{sec:jes} and \ref{sec:ft}.  Modeling systematics require a slightly different treatment, and are explored in \ref{sec:model}.
+The only two sizable experimental NP categories are jet energy scale (JES) and flavor tagging systematics.  Correlation schemes of varying degrees of completeness exist for these categories, so explicit NP correlations can be tested for these two categories.  As these studies were conducted before unblinding, ``sizable impact'' was judged by comparing fit results (sensitivities, pull comparisons, and breakdowns) on combined workspaces using the unblinded and public $\mu=0.51$ result for Run 1 and Asimov data for the Run 2 result.  These are treated in Sections \ref{sec:jes} and \ref{sec:ft}.  Modeling systematics require a slightly different treatment, and are explored in \ref{sec:model}.
 
 As noted in Chapter \ref{ch:fit} when looking at pull comparison plots for combined workspaces, the error bars in these plots are calculated using a simultaneous \texttt{HESSE} matrix inversion, which can fail to give sensible values for high dimensional models (the combined workspaces have well over 500 NP's).  This is not true of the nuisance parameter ranking plots, which use a \texttt{MINOS} based approach to test the effect of each NP individually.  This is much slower but much more rigorous, which is why only ranking plots appear outside of supporting material and pull comparisons are considered ``diagnostic'' plots.
 
@@ -138,7 +138,7 @@ The linear combinations used to unfold the effective JES NP's were calculated as
 \begin{equation}
 NP_{i,eff} = \frac{\sum_j A_{ij} \left|NP_{j,unf}\right| NP_{j,unf}}{\sqrt{\sum_j A_{ij}^2 \left|NP_{j,unf}\right|^2 }}
 \end{equation}
-where \textit{eff} and \textit{unf} are for effective and unfolded NP's, respectively, the $A_{ij}$'s are scalar coeffecients taken from raw maps, and $\left|NP_{j,unf}\right|$ are the amplitudes of the unfolded NP's.  The raw $A_{ij}$ and scaled maps for Run 1 and Run 2 may be found in Figure~\ref{fig:comb_jes_maps}
+where \textit{eff} and \textit{unf} are for effective and unfolded NP's, respectively, the $A_{ij}$'s are scalar coefficients taken from raw maps, and $\left|NP_{j,unf}\right|$ are the amplitudes of the unfolded NP's.  The raw $A_{ij}$ and scaled maps for Run 1 and Run 2 may be found in Figure~\ref{fig:comb_jes_maps}
 
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
@@ -154,7 +154,7 @@ where \textit{eff} and \textit{unf} are for effective and unfolded NP's, respect
 \end{figure}
 
 
-Unfolding was found to have very little effect on both expected sensitivites and errors, as can be seen in Tables~\ref{tab:unfold_jes_sensitivities}--~\ref{tab:unfold_jes_breakdownsc}.
+Unfolding was found to have very little effect on both expected sensitivities and errors, as can be seen in Tables~\ref{tab:unfold_jes_sensitivities}--~\ref{tab:unfold_jes_breakdownsc}.
 \begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}\begin{tabular}{lcccccc}
 \hline\hline
@@ -669,7 +669,7 @@ SysJetFlavB\_ 7TeV & SysJetFlavB\_ 8TeV & SysJET\_21NP\_JET\_BJES\_Response\\
 \section{Combined Fit Results}
 \label{sec:combres}
 \subsection{Combined Fit Model Validation}
-Before moving onto the final results, we present the rest of the validaitons for the Run 1 + Run 2 combined fits, beginning with impacts of ranked individual nuisance parameters in Figure \ref{fig:combranks} and for all nuisance parameter categories in Table \ref{tab:combbreakdown}.  Both of these sets of results point to the most important nuisance parameters being signal systematics, $b$-tagging, and $V$+jets modeling systematics, with Run 2 NP's generally being higher ranked.    That some NP's are strongly pulled is not unusual as the fit model has so many NP's; $V$+jets modeling in particular has been historically difficult.
+Before moving onto the final results, we present the rest of the validations for the Run 1 + Run 2 combined fits, beginning with impacts of ranked individual nuisance parameters in Figure \ref{fig:combranks} and for all nuisance parameter categories in Table \ref{tab:combbreakdown}.  Both of these sets of results point to the most important nuisance parameters being signal systematics, $b$-tagging, and $V$+jets modeling systematics, with Run 2 NP's generally being higher ranked.    That some NP's are strongly pulled is not unusual as the fit model has so many NP's; $V$+jets modeling in particular has been historically difficult.
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
@@ -715,12 +715,12 @@ MC stat & +0.080 / -0.084 \\
 \end{center}
 \end{table}
 
-In addition to looking at the behaviors of nuisance parameters to gauge fit model performance and stability, fits are conducted using multiple parameters of interest.  Typical divisions are Run 1 vs. Run 2, lepton channels, and $WH$ vs $ZH$.  As mentioned in Chapter \ref{ch:fit}, the profile likelihood test statistic given in Equation \ref{eqn:teststat} is, in the limit of large sample statistics, a $\chi^2$ distribution with degrees of freedom equal to the number of parameters of interest plus number of nuisance parameters.  Thus, changing the number of interest parameters and leaving the rest of the fit model unchanged means that the difference between the nominal fit and a fit with more parameters of interest ought to also be distributed as a $\chi^2$ distribution with degrees of freedom equivalent to the number of extra parameters of interest.  This difference can then be interpreted as a compatibility between the two results using the standard tables for this distribution, giving another gauge of fit performance.  These are shown in Table \ref{tab:compatability}.
+In addition to looking at the behaviors of nuisance parameters to gauge fit model performance and stability, fits are conducted using multiple parameters of interest.  Typical divisions are Run 1 vs. Run 2, lepton channels, and $WH$ vs $ZH$.  As mentioned in Chapter \ref{ch:fit}, the profile likelihood test statistic given in Equation \ref{eqn:teststat} is, in the limit of large sample statistics, a $\chi^2$ distribution with degrees of freedom equal to the number of parameters of interest plus number of nuisance parameters.  Thus, changing the number of interest parameters and leaving the rest of the fit model unchanged means that the difference between the nominal fit and a fit with more parameters of interest ought to also be distributed as a $\chi^2$ distribution with degrees of freedom equivalent to the number of extra parameters of interest.  This difference can then be interpreted as a compatibility between the two results using the standard tables for this distribution, giving another gauge of fit performance.  These are shown in Table \ref{tab:compatibility}.
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}\begin{tabular}{|l|c|}
 \hline
-Fit & Compatability \\\hline
+Fit & Compatibility \\\hline
 Leptons (3 POI) & 1.49\% \\
 $WH/ZH$ (2 POI) & 34.2\% \\
 Run 1/Run 2 (2 POI) & 20.8\% \\
@@ -728,12 +728,12 @@ Run 1/Run 2 $\times$ Leptons (6 POI) & 7.10\% \\
 Run 1/Run 2 $\times WH/ZH$  (4 POI) & 34.6\% \\
 \hline
 \end{tabular}
-\caption{Summary of multiple POI compatabilities.  The well-known Run 1 7 \tev\, 0-lepton deficit is responsible for the low compatability with the 6 and 3 POI fits.}
-\label{tab:compatability}
+\caption{Summary of multiple POI compatibilities.  The well-known Run 1 7 \tev\, 0-lepton deficit is responsible for the low compatibility with the 6 and 3 POI fits.}
+\label{tab:compatibility}
 \end{center}
 \end{table}
 
-The low compatabilities associated with treating the lepton channels as separate parameters of interest are a sympton of the low signal strenghts associated with the Run 1 0-lepton channel, in particular the 7 \tev\,result.  Given the relatively small amount of data associated with the 7 \tev\, result, this should not be a cause for alarm.  Signal strength summary plots for the fits treating Run 1 and Run 2 separately are shown in Figures \ref{fig:combmushat4}-\ref{fig:combmushat6}, where the effect of the Run 1 parameters can be seen graphically.
+The low compatibilities associated with treating the lepton channels as separate parameters of interest are a symptom of the low signal strengths associated with the Run 1 0-lepton channel, in particular the 7 \tev\,result.  Given the relatively small amount of data associated with the 7 \tev\, result, this should not be a cause for alarm.  Signal strength summary plots for the fits treating Run 1 and Run 2 separately are shown in Figures \ref{fig:combmushat4}-\ref{fig:combmushat6}, where the effect of the Run 1 parameters can be seen graphically.
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \begin{center}
@@ -762,7 +762,7 @@ The low compatabilities associated with treating the lepton channels as separate
 \subsection{Final Results}
 The combined results yields an observed (expected) significance of 3.57 (4.00) and an observed (expected) limit of 1.37 ($0.510^{+0.200}_{-0.143}$), with a signal strength of $\hat{\mu}=0.898^{+0.278}_{-0.261}$.
 
-The two and three parameter of interest fit signal strength summary plots, as well as a summary of the historical values of the 7, 8, and 13 \TeV\,results may be found in Figures~\ref{fig:combmushat1}-\ref{fig:combmushat3}.  The main results for Run 1, Run 2, and the combination may be found in Table~\ref{tableCombresykts}.  These results were collectively noted as the first ever experiemental evidence for SM \vhbb\, in \cite{paper}.
+The two and three parameter of interest fit signal strength summary plots, as well as a summary of the historical values of the 7, 8, and 13 \TeV\,results may be found in Figures~\ref{fig:combmushat1}-\ref{fig:combmushat3}.  The main results for Run 1, Run 2, and the combination may be found in Table~\ref{tableCombresykts}.  These results were collectively noted as the first ever experimental evidence for SM \vhbb\, in \cite{paper}.
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}

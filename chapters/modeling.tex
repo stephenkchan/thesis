@@ -142,7 +142,7 @@ The above considerations are important for this analysis since phase space is se
 Brief descriptions of modeling systematics, including recapitulations of nominal sample generation, are given in the following sections.  The general approach here is to copy the relevant summary tables and describe any major deviations from the general procedures described in the previous section.  The dominant backgrounds for the 2-lepton channel are $Z+$hf and \tt, accounting for well over 90\% of all background events.  Diboson samples are the next-leading background and are an important validation sample; others are included for completeness.  A summary of all the modeling systematics in this analysis are given in Table \ref{tab:modelsyssum}.  
 \begin{table}[!htbp]\captionsetup{justification=centering}
   \begin{center}
-    \begin{tabular}{lp{5in}}
+    \begin{tabular}{lp{4in}}
       \hline\hline
       Process & Systematics\\
       \hline
@@ -159,7 +159,7 @@ Brief descriptions of modeling systematics, including recapitulations of nominal
 \end{table}
 
 \subsection{Signal Processes}
-Nominal signal $qqVH$ samples are generated using \textsc{Powheg} with the \texttt{MiNLO} (multiscale improved NLO) \cite{minlo} procedure applied interfaced with \textsc{Pythia8} using the AZNLO tune \cite{aznlo} and NNPDF3.0 PDF set \cite{nnpdf3}.  For the 2-lepton case, gluon fusion initiated Higgs production is also considered (accounting for $\sim$14\% of the total cross section in this channel), with samples generated with \powheg\,interfaced with \pythia8 using the AZNLO tune.  The NNPDF2.3 set \cite{nnpdf23} is used for both the ME and UE+PS.
+Nominal signal $qqVH$ samples are generated using \textsc{Powheg} with the \texttt{MiNLO} (multiscale improved NLO) \cite{minlo} procedure applied interfaced with \textsc{Pythia8} using the AZNLO tune \cite{aznlo} and NNPDF3.0 PDF set \cite{nnpdf3}.  For the 2-lepton case, gluon fusion initiated Higgs production is also considered (accounting for $\sim$14\% of the total cross section in this channel), with samples generated with \powheg\ interfaced with \pythia8 using the AZNLO tune.  The NNPDF2.3 set \cite{nnpdf23} is used for both the ME and UE\-+\-PS.
 
 Alternate samples $qqVH$ samples are generated using \mg\_aMC@NLO \cite{mg5amc} for the ME and \pythia8 for the UE+PS, hadronization and MPI.  The NNPDF2.3 5f FFN PDF sets and the A14 tune \cite{a14tune}; the latter has variations included.  \powheg+\texttt{MiNLO}+\herwig7 were samples were also used for systematics.
 
@@ -175,9 +175,9 @@ Table \ref{tab:vhSysTheorySummary}, reproduced from \cite{modelingnote}, summari
 \hline
 Sys Name  & source & Norm. effect & applied to \\
 \hline
-\texttt{ATLAS\_BR\_bb} 			&  $H\to bb$ dec. unc, (HO effects, $m_b$, $\alpha_S$)	&  1.7\% 	& all $VH$ processes 	\\
+\texttt{ATLAS\_BR\_bb} 			&  $H\to bb$ dec. unc, (HO effects, $m_b$, $\alpha_S$)	&  1.7\% 	& all $VH$ \\
 \hline	
-\texttt{ATLAS\_QCDscale\_VH}		& QCD scale uncertainty									&  0.7\%	& $qq\to VH$ processes	\\
+\texttt{ATLAS\_QCDscale\_VH}		& QCD scale uncertainty									&  0.7\%	& $qq\to VH$ \\
 \hline
 \texttt{ATLAS\_QCDscale\_ggZH}	& QCD scale uncertainty									&  27\%	  & $gg\to ZH$			\\
 \hline
@@ -192,7 +192,7 @@ Sys Name  & source & Norm. effect & applied to \\
 \label{tab:vhSysTheorySummary}
 \end{table}
 
-The remaining signal systematics are analysis channel specific and are summarized in Table \ref{tab:vhSysSummaryAna}.  The methodologies match those described in Section \ref{sec:modsysgen}.  The UE+PS systematics were derived using the alternate samples mentioned above; QCD scale uncertainties were derived by varying scales by 1/3 and 3; and PDF uncertainties were derived by comparing the nominal set with the PDF4LHC15\_30 PDF set \cite{pdf4lhc}.
+The remaining signal systematics are analysis channel specific and are summarized in Table \ref{tab:vhSysSummaryAna}.  The methodologies match those described in Section \ref{sec:modsysgen}.  The UE+PS systematics were derived using the alternate samples mentioned above; QCD scale uncertainties were derived by varying scales by 1/3 and 3; and PDF uncertainties were derived by comparing the nominal set with the PDF4\-LHC\-15\-\_30 PDF set \cite{pdf4lhc}.
 
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
@@ -201,7 +201,8 @@ The remaining signal systematics are analysis channel specific and are summarize
 \begin{tabular}{ c ||| c | c || c | c || c | c  }
 \hline
 \hline
-		  & \multicolumn{2}{c ||}{0L: $ZH\to\nu\nu b\bar{b}$}	& \multicolumn{2}{c ||}{1L: $WH\to\ell\nu b\bar{b}$} 	& \multicolumn{2}{c }{2L: \ZH}  \\
+%		  & \multicolumn{2}{c ||}{0L: $ZH\to\nu\nu b\bar{b}$}	& \multicolumn{2}{c ||}{1L: $WH\to\ell\nu b\bar{b}$} 	& \multicolumn{2}{c }{2L: \ZH}  \\
+		  & \multicolumn{2}{c ||}{0L}	& \multicolumn{2}{c ||}{1L} 	& \multicolumn{2}{c }{2L}  \\
 NP name    & 2j		& 3j					   	& 2j		& 3j						&  2j		& $\geq$3j			\\		
 \hline
 \hline
@@ -249,7 +250,7 @@ Nominal $V+$jets samples are generated using \sherpa\, 2.2.1@NLO\footnote{\sherp
 
 These in turn are related to the main flavor regions used in the analysis, based on the flavor of the two leading jets in an event (based on $p_T$).  These five flavors (with up, down, and strange collectively known as ``light'') yield six different flavor combinations: $bb$, $bc$, $bl$ (these first three collectively known as ``heavy flavor'' or $V+$hf), $cc$, $cl$, $ll$ (or just ``light'' or $l$).  Ratio systematics are often made with respect to the acceptance in the $bb$ region.
 
-$V+$jet systematics are derived in several steps.  The first is to use double ratios of acceptances between analysis regions and nominal versus alternative MC's (so (Region1-nominal/Region2-nominal)/(Region1-alternate/Region2-alternate)).  The main region comparisons are 2 jet versus 3 jet (3+ jet for 2-lepton) and then 0-lepton versus 2-lepton (1-lepton) for Z+hf (W+hf\footnote{The W+hf CR versus the SR is also considered for W+hf}).  The final uncertainty contains the sum in quadrature of four effects:
+$V+$jet systematics are derived in several steps.  The first is to use double ratios of acceptances between analysis regions and nominal versus alternative MC's (so (Region1-nominal/Region2-nominal) / (Region1-alternate/Region2-alternate)).  The main region comparisons are 2 jet versus 3 jet (3+ jet for 2-lepton) and then 0-lepton versus 2-lepton (1-lepton) for Z+hf (W+hf\footnote{The W+hf CR versus the SR is also considered for W+hf}).  The final uncertainty contains the sum in quadrature of four effects:
 \begin{enumerate}
 \item Variation of 0.5 and 2 of QCD scales in the \sherpa\, sample
 \item Sum in quadrature of half the variation from different resummation and CKKW merging scales \footnote{cf. \cite{modeling25}, Section 2 for a summary of the CKKW method for different parton multiplicities used in \sherpa}
@@ -259,7 +260,7 @@ $V+$jet systematics are derived in several steps.  The first is to use double ra
 
 Summaries of the $Z+$jets uncertainties are provided here; the reader is referred to \cite{modelingnote} for the $W+$jets systematics, as these events are virtually non-existent in the 2-lepton case with which this thesis is almost exclusively concerned.  In Table \ref{tab:zjetsnorm}, from \cite{modelingnote} are the normalization systematics.
 
-\begin{table}[!htpb] 
+\begin{table}[!htpb] \captionsetup{justification=centering}
 \begin{center} 
 \small 
 \begin{tabular}{ c || c || c | c | c || c | c | c   } 
@@ -267,7 +268,7 @@ Summaries of the $Z+$jets uncertainties are provided here; the reader is referre
 \hline 
  Process 	& Name  	& \multicolumn{6}{ c }{prior in region}                                                             \\
        	       	&            	&  \multicolumn{3}{ c ||}{2jet}   		&   \multicolumn{3}{ c }{($\geq$)3jets}    \\ 
-		&	  	& 2L: low Vpt  &  2L: high Vpt  & 0L 	&   2L: low Vpt  &  2L high Vpt  &    0L  \\ 
+		&	  	& 2L: lo  &  2L: hi  & 0L 	&   2L: lo  &  2L hi  &    0L  \\ 
 \hline 
 \hline
 $Z$+l     &  \texttt{SysZclNorm}            &  \multicolumn{6}{ c }{ 18\% } \\
@@ -281,8 +282,8 @@ $Z$+hf   & $\texttt{SysZbbPTV}$               &   \multicolumn{6}{ c }{effect on
 \hline 
 \hline 
 \end{tabular} 
-\caption{ \label{tab:zjetsnorm} Effect of modelling systematics on $Z$+jets normalization in the 2lepton regions. For systematic uncertainties implemented with a prior the effect of 1-$\sigma$ variation is reported. 
-The uncertainties labelled as $Zbb$ act on the entire $Z$+hf background.} 
+\caption{ \label{tab:zjetsnorm} Effect of modeling systematics on $Z$+jets normalization in the 2lepton regions. For systematic uncertainties implemented with a prior the effect of 1-$\sigma$ variation is reported. 
+The uncertainties labelled as $Zbb$ act on the entire $Z$+hf background.  Region labels ``lo'' and ``hi'' refer to event \ptv.} 
 \end{center} 
 \end{table} 
 
@@ -317,12 +318,12 @@ The flavor composition ratio systematics are in Table \ref{tab:zhf}, also from \
 Finally, the \ptv\,and \mbb\,shape systematics are derived using control regions in data.\footnote{These use the same selections as the signal regions except for $b$-tags (0, 1, and 2 tags are studied), with the added requirement in 2tag regions that \mbb\,not be in the range of 110--140\GeV.}  The functional form for the \ptv\, systematic is $\pm 0.2 \log10 (p_T^V/50 {\text GeV})$, and that of the \mbb \,systematic is $\pm 0.0005 \times (m_{jj}-100~{\text GeV})$.
 
 \subsection{Top-Pair Production}
-Nominal \tt\,samples are produced with \powheg\,at NLO for the ME calculation using the NNPDF3.0 PDF set interfaced with \pythia8.210 using the A14 tune and the NNPDF2.3 PDF set at LO.  The parameters \texttt{hdamp} (nominal value $1.5m_{top}$, a resummation damping factor for ME/PS matching that can heuristically thought of as tuning high $p_T$ radiation) in \powheg\,and \texttt{pThard} (nominal value 0) and \texttt{pTdef} (nominal value 2) in \pythia\, (both control merging with \powheg) are varied to evaluate certain systematics.  Alternative \tt\,samples use \powheg+\herwig7, \mg\_aMC@NLO\-+\pythia8.2, and the nominal setup with varied tunes and parameter values.  Uncertainties are taken to cover the largest difference between the nominal and any of these alternate configurations.
+Nominal \tt\,samples are produced with \powheg\,at NLO for the ME calculation using the NNPDF3.0 PDF set interfaced with \pythia8.210 using the A14 tune and the NNPDF2.3 PDF set at LO.  The parameters \texttt{hdamp} (nominal value $1.5m_{top}$, a resummation damping factor for ME/PS matching that can heuristically thought of as tuning high $p_T$ radiation) in \powheg\,and \texttt{pThard} (nominal value 0) and \texttt{pTdef} (nominal value 2) in \pythia\, (both control merging with \powheg) are varied to evaluate certain systematics.  Alternative \tt\,samples use \powheg+\herwig7, \mg\_aMC\-@NLO\-+\pythia8.2, and the nominal setup with varied tunes and parameter values.  Uncertainties are taken to cover the largest difference between the nominal and any of these alternate configurations.
 
 The overall \tt\,normalization is a floating normalization\footnote{The use of a top $e-\mu$ control region helps constrain this.}, and further systematics attached to the ratio of acceptances between regions (3-to-2 jet, SR-to-WhfCR, and 1-to-0 lepton) are defined using double ratios; these are summarized in Tables \ref{tab:ttbarSysSummary1} and \ref{tab:ttbarSysSummary2}, taken from \cite{modelingnote}.
 
 
-\begin{table}[!htpb] 
+\begin{table}[!htbp]\captionsetup{justification=centering} 
 \begin{center} 
 \small 
 \begin{tabular}{ c || c | c || c | c | c | c  } 
@@ -340,18 +341,18 @@ $\texttt{SysttbarNorm\_DWhfCR\_L1}$ 	&   --		&    --	&  25\%   	& -- 		&  25\% 	
 \hline 
 \hline 
 \end{tabular} 
-\caption{ \label{tab:ttbarSysSummary1} Effect of modelling systematics on \tt\ normalization in the 0 and 1-lepton analysis region.} 
+\caption{ \label{tab:ttbarSysSummary1} Effect of modeling systematics on \tt\ normalization in the 0 and 1-lepton analysis region.} 
 \end{center} 
 \end{table} 
 
-\begin{table}[!htpb] 
+\begin{table}[!htbp]\captionsetup{justification=centering} 
 \begin{center} 
 \small 
 \begin{tabular}{ c || c | c || c | c  } 
 \hline 
 \hline 
                    &  \multicolumn{2}{ c ||}{2jet}   			&   \multicolumn{2}{ c }{$\geq$3jets}    \\ 
-		  & low Vpt [SR/CR]  &  high Vpt [SR/CR]  &   low Vpt [SR/CR]  &  high Vpt [SR/CR]   \\ 
+		  & lo  &  hi  &   lo  &  hi   \\ 
 \hline 
 $\texttt{norm\_ttbar\_J2\_L2}$	&  \multicolumn{2}{ c ||}{floating normalization} & \multicolumn{2}{ c }{ -- }  \\    
 $\texttt{norm\_ttbar\_J3\_L2}$	&  \multicolumn{2}{ c ||}{ -- }  & \multicolumn{2}{ c }{floating normalization}  \\    
@@ -360,31 +361,27 @@ $\texttt{SysTTbarPTV\_L2\_L2}$         &   \multicolumn{4}{ c }{effect on each r
 \hline 
 \hline 
 \end{tabular} 
-\caption{ \label{tab:ttbarSysSummary2} Effect of modelling systematics on \tt\ normalization in the 2lepton regions. The \texttt{SysTTbarPTV\_L2\_L2} systematic is implemented as a shape systematic over the full VpT>75\,GeV range, and as a result has different acceptance effects in the low and high VpT regions.} 
+\caption{ \label{tab:ttbarSysSummary2} Effect of modeling systematics on \tt\ normalization in the 2lepton regions. The \texttt{SysTTbarPTV\_L2\_L2} systematic is implemented as a shape systematic over the full VpT>75\,GeV range, and as a result has different acceptance effects in the low and high VpT regions.  Systematics are treated the same in both signal and control regions, and ``lo'' and ``hi'' refer to the \ptv\ split in events.} 
 \end{center} 
 \end{table} 
 
 Shape systematics for \ptv\,and\mbb\, are linear and taken to cover the largest difference reasonably well, as described above in \ref{sec:shapesys}.  These are summarized in Table \ref{tab:ttbarSysShapeSummary}, again taken from \cite{modelingnote}.
 
-\begin{table}[!htb]
+\begin{table}[!htbp]\captionsetup{justification=centering} 
 \small
 \begin{center}
-\begin{tabular}{c|c|c|c|c}
+\begin{tabular}{c|c|c|p{1.5 in}|c}
         \hline
         \hline
-        Analysis region & Uncertainty & Value & Source & Nuisance Parameter \\
+        Analysis region & Uncertainty & Value & Source & NP \\
         \hline
-        0,1 lepton & $p_T^V$ shape & shape & fit through largest & \texttt{TTbarPTV} \\
-	              & & & deviation (aMC@NLO+\PYTHIA8)  & \\ 
+        0,1 lepton & $p_T^V$ shape & shape & fit through largest deviation (aMC@NLO + \PYTHIA8) & \texttt{TTbarPTV} \\
 	              \hline
-        2 lepton & $p_T^V$ shape & norm & fit through largest & \texttt{TTbarPTV\_L2} \\
-	              & & + shape & deviation (aMC@NLO+\PYTHIA8)  & \\
+        2 lepton & $p_T^V$ shape & norm & fit through largest + shape & deviation (aMC@NLO + \PYTHIA8)  & \texttt{TTbarPTV\_L2} \\
 	              \hline 
-	0,1 lepton & $m_{b\bar{b}}$ shape & shape & fit through largest & \texttt{TTbarMBB} \\
-	              & & only & deviation (aMC@NLO+\PYTHIA8)  & \\ 
+	0,1 lepton & $m_{b\bar{b}}$ shape & shape & fit through largest only & deviation (aMC@NLO + \PYTHIA8) & \texttt{TTbarMBB} \\
 	              \hline
-        2 lepton & $m_{b\bar{b}}$ shape & shape & fit through largest & \texttt{TTbarMBB\_L2} \\
-	              & & only & deviation (aMC@NLO+\PYTHIA8)  & \\ 
+        2 lepton & $m_{b\bar{b}}$ shape & shape & fit through largest only & deviation (aMC@NLO + \PYTHIA8) & \texttt{TTbarMBB\_L2} \\
         \hline
         \hline
 \end{tabular}
@@ -461,47 +458,29 @@ Single top sample are generated separately for the different production channels
 \begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{scriptsize}
 \begin{center}
-\begin{tabular}{|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|p{1.5 in}|p{1 in}|}
         \hline
         \hline
         Production & Uncertainty & Value & Source & Nuisance Parameter \\
         \hline
         \hline
-        $s$-channel & overall normalization & 4.6\% &  sum in quadrature of $\mu_R$, & \texttt{stopsNorm} \\
-                & & & $\mu_F$, $\alpha_{S}$ and PDF uncertainties & \\
+        $s$-channel & overall normalization & 4.6\% &  sum in quadrature of $\mu_R$, $\mu_F$, $\alpha_{S}$ and PDF uncertainties & \texttt{stopsNorm} \\
         \hline
-        $t$-channel & overall normalization & 4.4\% & sum in quadrature of $\mu_R$, & \texttt{stoptNorm} \\
-        & & & $\mu_F$, $\alpha_{S}$ and PDF uncertainties &  correlated with 2 jet and 3 jet case \\
-        	$t$-channel & 2 jet region acceptance & 17\% & sum in quadrature & \texttt{stoptAcc} \\
-	              & & & of deviations in alternative generators  &  correlated with overall and 3 jet case\\ 
-	$t$-channel & 3 jet region acceptance & 20\% & sum in quadrature & \texttt{stoptAcc} \\
-	              & & & of deviations in alternative generators  & correlated with overall and 2 jet case \\ 
+        $t$-channel & overall normalization & 4.4\% & sum in quadrature of $\mu_R$, $\mu_F$, $\alpha_{S}$ and PDF uncertainties  & \texttt{stoptNorm} correlated with 2 jet and 3 jet case \\
+        $t$-channel & 2 jet region acceptance of deviations in alternative generators & 17\% & sum in quadrature & \texttt{stoptAcc} correlated with overall and 3 jet case\\
+	$t$-channel & 3 jet region acceptance & 20\% & sum in quadrature of deviations in alternative generators & \texttt{stoptAcc} correlated with overall and 2 jet case \\
         \hline
-        $Wt$ channel & overall normalization & 6.2\% & sum in quadrature of $\mu_R$, & \texttt{stopWtNorm}\\
-                        & & & $\mu_F$, $\alpha_{S}$ and PDF uncertainties & correlated with 2 jet and 3 jet case  \\
-	$Wt$ channel & 2 jet region normalization & 35\% & sum in quadrature & \texttt{stopWtAcc} \\
-	              & & & of deviations in alternative generators  & correlated with overall and 3 jet case \\ 
-	  %            \hline
-	$Wt$ channel & 3 jet region normalization & 41\% & sum in quadrature & \texttt{stopWtAcc} \\
-	              & & & of deviations in alternative generators  & correlated with overall and 2 jet case\\ 
+        $Wt$ channel & overall normalization & 6.2\% & sum in quadrature of $\mu_R$, $\mu_F$, $\alpha_{S}$ and PDF uncertainties & \texttt{stopWtNorm} correlated with 2 jet and 3 jet case\\
+	$Wt$ channel & 2 jet region normalization & 35\% & sum in quadrature of deviations in alternative generators & \texttt{stopWtAcc} correlated with overall and 3 jet case \\
+	$Wt$ channel & 3 jet region normalization & 41\% & sum in quadrature of deviations in alternative generators & \texttt{stopWtAcc}  correlated with overall and 2 jet case\\
 	\hline
-        $t$-channel & $p_T^V$ shape & shape & fit through largest deviation  & \texttt{StoptPTV} \\
-	              & & & (\POWHEG+\HERWIG++)  & \\ 
-	              & & & $\pm 0.001\times p_T^V \mp 0.17 + 1$  & \\ 
+        $t$-channel & $p_T^V$ shape & shape & fit through largest deviation (\POWHEG + \HERWIG++) $\pm 0.001\times p_T^V \mp 0.17 + 1$  & \texttt{StoptPTV} \\
 	              \hline 
-        $t$-channel & $m_{b\bar{b}}$ shape & shape & fit through largest deviation& \texttt{StoptMBB} \\
-	              & & & (\POWHEG+\PYTHIA6 |radHi-radLo|)  & \\ 
-	              & & & $\pm 0.0008\times m_{b\bar{b}} \mp 0.12 + 1$  & \\ 
+        $t$-channel & $m_{b\bar{b}}$ shape & shape & fit through largest deviation (\POWHEG + \PYTHIA6 |radHi-radLo|) $\pm 0.0008\times m_{b\bar{b}} \mp 0.12 + 1$ & \texttt{StoptMBB} \\
 	              \hline
-        $Wt$ channel & $p_T^V$ shape & shape & fit through largest deviation & \texttt{StopWtPTV} \\
-	              & & & (\POWHEG+\PYTHIA6 with diagram subtraction)  & \\ 
-	              & & & $\pm 0.003\times p_T^V \mp 0.69 + 1$  & \\ 
+        $Wt$ channel & $p_T^V$ shape & shape & fit through largest deviation (\POWHEG + \PYTHIA6 with diagram subtraction) $\pm 0.003\times p_T^V \mp 0.69 + 1$ & \texttt{StopWtPTV} \\
 	              \hline 
-        $Wt$ channel & $m_{b\bar{b}}$ shape & shape & fit through largest  deviation & \texttt{StopWtMBB} \\
-	              & & & (\POWHEG+\PYTHIA6 with diagram subtraction)  & \\ 
-	              & & & $\pm 0.0036\times m_{b\bar{b}} \mp 0.52 + 1$ \; ($m_{b\bar{b}}<275$\,GeV)  & \\ 
-	              & & & $\mp 0.47 + 1$ \; ($m_{b\bar{b}}\geq 275$\,GeV)  & \\ 
-	              \hline
+        $Wt$ channel & $m_{b\bar{b}}$ shape & shape & fit through largest deviation (\POWHEG + \PYTHIA6 with diagram subtraction) $\pm 0.0036\times m_{b\bar{b}} \mp 0.52 + 1$ \; ($m_{b\bar{b}}<275$\,GeV) $\mp 0.47 + 1$ \; ($m_{b\bar{b}}\geq 275$\,GeV)  & \texttt{StopWtMBB} \\
         \hline
         \hline
 \end{tabular}

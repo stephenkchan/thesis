@@ -33,7 +33,7 @@ One can maximize\footnote{Maximization is mathematically identical to finding th
 \label{eqn:teststat}
 q_{\mu}=-2\left(\log\mathcal{L}\left(\mu,\hat{\hat{\theta}}_{\mu}\right)-\log\mathcal{L}\left(\hat{\mu},\hat{\theta}\right)\right)
 \end{equation}
-This statistic can be used to derive the usual significance ($p$ value), by setting $\mu=0$ to find the compatability with the background-only hypothesis \cite{asimov}.  If there is insufficient evidence for the signal hypothesis, the $CL_s$ method can be used to set limits \cite{cls_read}.
+This statistic can be used to derive the usual significance ($p$ value), by setting $\mu=0$ to find the compatibility with the background-only hypothesis \cite{asimov}.  If there is insufficient evidence for the signal hypothesis, the $CL_s$ method can be used to set limits \cite{cls_read}.
 
 In order to both validate the fit model and study the behavior of fits independent of a given dataset, a so-called ``Asimov''\footnote{A reference to the short story quoted at the beginning of this chapter in which a computer picks a single voter to stand in for the views of the entire American electorate.} dataset can be constructed for a given fit model; this dataset has each bin equal to its expectation value for assumed values of the NP's and a given $\mu$ value (in this case, $\mu=1$, the SM prediction).
 
@@ -41,7 +41,7 @@ In order to both validate the fit model and study the behavior of fits independe
 \label{ssec:inputs}
 Inputs to the binned likelihood are distributions of the BDT outputs described in Chapter \ref{ch:mva} for the signal regions and of $m_{bb}$ for the top $e-\mu$ control regions.  These regions split events according to their \ptv\, and number of jets.  All events are required to have two $b$-tagged jets, as well as pass the other event selection requirements summarized in Table \ref{tab:evsel}; the only difference between the signal and control region selections is that the same flavor requirement (i.e. leptons both be electrons or muons) is flipped so that events in the control region have exactly one electron and one muon.  The BDT outputs are binned using transformation D, while the $m_{bb}$ distributions have 50 \GeV\, bins, with the exception of the 2 jet, high \ptv\, region, where a single bin is used due to low statistics.
 
-Input distributions in MC are further divided according to their physics process.  The signal processes are divided based on both the identity of associated $V$ and the number of leptons in the final state; \ZH\, events are further separated into distributions for $qq$ and $gg$ initiated processes.  $V+$jets events are split according to $V$ identity and into the jet flavor bins described in Chapter \ref{ch:samples}.  Due to the effectiveness of the 2 $b$-tag requirement suppressing the presence of both $c$ and $l$ jets, truth-tagging is used to boost MC statistics in the $cc$, $cl$, and $l$ distributions.\footnote{Since $WW$ is not an important contriubtion to the already small total diboson background, no truth-tagging was applied here, in contrast to the fiducial analysis.}  For top backgrounds, single top production is split according to production mode ($s$, $t$, and $Wt$), with \tt\, as single category.  Diboson background distributions are also split according to the identity of the $V$'s ($ZZ$, $WZ$, and $WW$).  Fit input segmentation is summarized in Table \ref{tab:inputs}.
+Input distributions in MC are further divided according to their physics process.  The signal processes are divided based on both the identity of associated $V$ and the number of leptons in the final state; \ZH\, events are further separated into distributions for $qq$ and $gg$ initiated processes.  $V+$jets events are split according to $V$ identity and into the jet flavor bins described in Chapter \ref{ch:samples}.  Due to the effectiveness of the 2 $b$-tag requirement suppressing the presence of both $c$ and $l$ jets, truth-tagging is used to boost MC statistics in the $cc$, $cl$, and $l$ distributions.\footnote{Since $WW$ is not an important contribution to the already small total diboson background, no truth-tagging was applied here, in contrast to the fiducial analysis.}  For top backgrounds, single top production is split according to production mode ($s$, $t$, and $Wt$), with \tt\, as single category.  Diboson background distributions are also split according to the identity of the $V$'s ($ZZ$, $WZ$, and $WW$).  Fit input segmentation is summarized in Table \ref{tab:inputs}.
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
   \begin{center}\begin{tabular}{lp{4.5in}}
@@ -60,7 +60,7 @@ Input distributions in MC are further divided according to their physics process
 
 
 \section{Systematic Uncertainties Review}
-Tables \ref{tab:modelsys} and \ref{tab:expsys} summarize modeling (Chapter \ref{ch:modeling}) and experimental (Chapter \ref{ch:object}) systematic uncertainties considered in this analysis, respectively.  In addition to these, simulation statistics uncertainties (``MC stat errors'') are also included in the fit model.  There is one distribution per systematic (one each for up and down) per sample per region.  The $\pm1\sigma$ varaiation for a systematic is calculated as the difference in the integrals between the nominal and up/down varied distributions. %is this true?
+Tables \ref{tab:modelsys} and \ref{tab:expsys} summarize modeling (Chapter \ref{ch:modeling}) and experimental (Chapter \ref{ch:object}) systematic uncertainties considered in this analysis, respectively.  In addition to these, simulation statistics uncertainties (``MC stat errors'') are also included in the fit model.  There is one distribution per systematic (one each for up and down) per sample per region.  The $\pm1\sigma$ variation for a systematic is calculated as the difference in the integrals between the nominal and up/down varied distributions. %is this true?
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
   \begin{center}
@@ -89,7 +89,7 @@ Tables \ref{tab:modelsys} and \ref{tab:expsys} summarize modeling (Chapter \ref{
       Jets  & 21 NP scheme for JES, JER as single NP\\
       $E_T^{miss}$  & trigger efficiency, track-based soft terms, scale uncertainty due to jet tracks\\
       Flavor Tagging  & Eigen parameter scheme (CDI File: \texttt{2016-20\_7-13TeV-MC15-CDI-2017-06-07\_v2}) \\
-      Electrons & trigger eff, reco/ID eff, isolation eff, energy scale/resoltuion\\
+      Electrons & trigger eff, reco/ID eff, isolation eff, energy scale/resolution\\
       Muons  & trigger eff, reco/ID eff, isolation eff, track to vertex association, momentum resolution/scale\\
       Event & total luminosity, pileup reweighting\\
       \hline\hline
@@ -121,14 +121,14 @@ Systematics are subject ``pruning'' (individually in each  region/sample: there 
 
 \item Shape systematics pruned away if either:
  \begin{itemize}
-  \item Not one single bin has a deviation over 0.5\% after the overall normalisation is removed
+  \item Not one single bin has a deviation over 0.5\% after the overall normalization is removed
   \item If only the up or the down variation is non-zero % and passed the previous pruning steps.
  \end{itemize}
 
-\item Shape+Normalisation systematics are pruned away if the associated sample is less than 2\% of the total background and either: 
+\item Shape+Normalization systematics are pruned away if the associated sample is less than 2\% of the total background and either: 
  \begin{itemize}
-  \item If the predicted signal is $<2\%$ of the total background in all bins and the shape and normalisation error are each $<0.5\%$ of the total background
-  \item If instead at least one bin has a signal contribution $>2\%$ of the total background, and only in each of these bins, the shape and normalisation error are each $<2\%$ of the signal yield
+  \item If the predicted signal is $<2\%$ of the total background in all bins and the shape and normalization error are each $<0.5\%$ of the total background
+  \item If instead at least one bin has a signal contribution $>2\%$ of the total background, and only in each of these bins, the shape and normalization error are each $<2\%$ of the signal yield
  \end{itemize}
 \end{itemize}
 
@@ -153,7 +153,7 @@ Observed (data) & 3.17 & 1.80 & 2.09\\
 \hline
 \end{tabular}
 \end{center}
-\caption{Expected (for both data and Asimov) and observed $VZ\to\ell\ell b\bar{b}$ sensitivties for the standard, LI, and RF variable sets.}
+\caption{Expected (for both data and Asimov) and observed $VZ\to\ell\ell b\bar{b}$ sensitivities for the standard, LI, and RF variable sets.}
 \label{tab:Sensitivitiesvz}
 \end{table}
 
@@ -181,7 +181,7 @@ A natural question to ask is why this would be an issue for the $VZ$ but not the
   \label{fig:NJetBreakdownSummaryvz}
 \end{figure}
 
-If either the LI or RF schemes were to be used in a mainstream analysis, these validation fits suggest that the third jet ought to be included in variable schemes (e.g. by adding the third jet to the Higgs in the high \ptv\, case).  On the issue of whether or not $\ge4$ jet events should be included, the RF set shows very little sensitivity to thise change (a 2 jet and 3 jet only fit moves $\hat{\mu}$ to 0.64, while doing so for the LI set moves it to 0.40), so this, like the addition of the third jet into the variable sets, would have to be addressed individually.  Nevertheless, this optimization is beyond the scope of this thesis, which aims to preserve as much of the fiducial analysis as possible for as straightforward a comparison as possible.  
+If either the LI or RF schemes were to be used in a mainstream analysis, these validation fits suggest that the third jet ought to be included in variable schemes (e.g. by adding the third jet to the Higgs in the high \ptv\, case).  On the issue of whether or not $\ge4$ jet events should be included, the RF set shows very little sensitivity to this change (a 2 jet and 3 jet only fit moves $\hat{\mu}$ to 0.64, while doing so for the LI set moves it to 0.40), so this, like the addition of the third jet into the variable sets, would have to be addressed individually.  Nevertheless, this optimization is beyond the scope of this thesis, which aims to preserve as much of the fiducial analysis as possible for as straightforward a comparison as possible.  
 
   For completeness, we include the full set of fit validation results for the $VZ$ fit, explaining them in turn.  
 
@@ -253,7 +253,7 @@ Nuisance parameter correlation matrices (for correlations with magnitude at leas
 
 \clearpage
 \subsection{Nuisance Parameter Ranking Plots and Breakdowns}
-The next set of fit results that is used to diagnose the quality of a fit is the impact of different nuisance parameters on the total error on $\mu$, both individually and as categories.  Figure \ref{fig:nprankingvz} shows the top 25 nuisance parameters ranked by their postfit impact on $\hat{\mu}$; these plots use the aforementioned, more reliable \texttt{MINOS} approach.  This set of rankings is fairly similar, with $Z+$jets systematics being particularly prominent.  The advantage of seeing invididual nuisance parameter rankings, as opposed to impacts of categories in aggregate, is that particularly pathological NP's are easier to see; in particular, jet energy resolution and $Z+$jets \ptv\,systematic from the pull comparison plots show up with high rankings.  Yellow bands are pre-fit impact on $\mu$.
+The next set of fit results that is used to diagnose the quality of a fit is the impact of different nuisance parameters on the total error on $\mu$, both individually and as categories.  Figure \ref{fig:nprankingvz} shows the top 25 nuisance parameters ranked by their postfit impact on $\hat{\mu}$; these plots use the aforementioned, more reliable \texttt{MINOS} approach.  This set of rankings is fairly similar, with $Z+$jets systematics being particularly prominent.  The advantage of seeing individual nuisance parameter rankings, as opposed to impacts of categories in aggregate, is that particularly pathological NP's are easier to see; in particular, jet energy resolution and $Z+$jets \ptv\,systematic from the pull comparison plots show up with high rankings.  Yellow bands are pre-fit impact on $\mu$.
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
 \begin{subfigure}[t]{0.300000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04-v04-db_rank_RFLI_std-kf_v04-v04-db_pulls_125}\caption{Standard}\end{subfigure}
@@ -482,7 +482,7 @@ Nuisance parameter correlation matrices (for correlations with magnitude at leas
 
 \subsection{Full Breakdown of Errors}
 
-A postfit ranking of nuisance parameters according to their impact on $\hat{\mu}$ for the different variable sets may be found in Figure \ref{fig:npranking}, with rankings being fairly similar.  In particular, the signal UE+PS \ptv\,systematic is top-ranked for all three variable sets and also looks very similar, unlike in the pull comparison plot, reiterating the importance of evaluating individually the impact of highly ranked NP's.  The $Z+$jets \ptv\, is highly pulled in all three cases, though this is less severe for the non-standard set (it is off the scale for the standard variable ranking).  The RF discirminant mitigates the effect of poorly modeled jet energy resolution better than the other sets.
+A postfit ranking of nuisance parameters according to their impact on $\hat{\mu}$ for the different variable sets may be found in Figure \ref{fig:npranking}, with rankings being fairly similar.  In particular, the signal UE+PS \ptv\,systematic is top-ranked for all three variable sets and also looks very similar, unlike in the pull comparison plot, reiterating the importance of evaluating individually the impact of highly ranked NP's.  The $Z+$jets \ptv\, is highly pulled in all three cases, though this is less severe for the non-standard set (it is off the scale for the standard variable ranking).  The RF discriminant mitigates the effect of poorly modeled jet energy resolution better than the other sets.
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
 \begin{subfigure}[t]{0.300000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04-v04_rank_RFLI_std-kf_v04-v04_pulls_125}\caption{Standard}\end{subfigure}
@@ -639,7 +639,7 @@ Postfit distributions for the MVA discriminant ($m_{bb}$) distribution in the si
   \label{fig:RFPostfittopemu}
 \end{figure}
 
-One final type of plot presented as a result is the binned $\log_{10}\left(S/B\right)$ in signal regions distributions may be found in Figure \ref{fig:SoB}.  For these plots, one fills a histogram with the $\log_{10}\left(S/B\right)$ ratio in each postfit distribution bin weighted by the total number of events.  In this case, a log plot is helpful becuase the highest bins would be invisible on a linear plot.  These distributions are allegedly useful for seeing where most of one's sensitivity lies.  Practically, it is problematic if the pull (from the null hypothesis) is higher at lower $S/B$ values, which may indicate a poorly optimized discriminant.  
+One final type of plot presented as a result is the binned $\log_{10}\left(S/B\right)$ in signal regions distributions may be found in Figure \ref{fig:SoB}.  For these plots, one fills a histogram with the $\log_{10}\left(S/B\right)$ ratio in each postfit distribution bin weighted by the total number of events.  In this case, a log plot is helpful because the highest bins would be invisible on a linear plot.  These distributions are allegedly useful for seeing where most of one's sensitivity lies.  Practically, it is problematic if the pull (from the null hypothesis) is higher at lower $S/B$ values, which may indicate a poorly optimized discriminant.  
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
