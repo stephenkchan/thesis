@@ -254,7 +254,7 @@
 	\newpage
 	\thispagestyle{empty}
 	\vspace*{\fill}
-	\scshape \noindent \small \copyright \small 2017\hspace{3pt}-- \theauthor \\
+	\scshape \noindent \small \copyright \small 2018\hspace{3pt}-- \theauthor \\
 	\noindent all rights reserved.
 	\vspace*{\fill}
 	\newpage
@@ -321,7 +321,7 @@
     \begin{spacing}{\dcompressedspacing}
         \bibliography{references}
         \addcontentsline{toc}{chapter}{References}
-        \bibliographystyle{apalike2}
+        \bibliographystyle{unsrtnat}%apalike2}
         %\include{endmatter/colophon}
     \end{spacing}
 }

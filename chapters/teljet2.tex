@@ -32,15 +32,13 @@ The truth-level analysis has the same missing $E_T$, jet $p_T$, $m_{ll}$, and ad
 
 In the jet calibration validation, the reconstructed level analysis lepton and $m_{ll}$ requirements are imposed, but neither the missing $E_T$ nor the jet selection requirements are applied so as not to bias the validation.
 
-\begin{table}[htbp]
-\caption{A summary of basic event selection requirements.  Truth-level $b$-tagging is done with truth-level information.
-\label{tab:sumreq}}
+\begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}
 \begin{tabular}{|l|l|l|l|}
 \hline
 Requirement & Reconstructed & Truth & Validation\\
 \hline
-Leptons & 1 medium + 1 loose lepton & 2 produced by $Z$ boson & 1 medium + 1 loose lepton \\
+Leptons & 1 med. + 1 loose & 2 produced by $Z$ boson & 1 med. + 1 loose \\
 \hline
 $b$-jet & 2 $b$-tags & 2 $b$-jets & ---\\
 \hline
@@ -51,12 +49,12 @@ Missing $E_T$ & \multicolumn{2}{|c|}{$E_T^{\text{miss}}<60$ \GeV\ }& ---\\
 $Z$ boson & \multicolumn{3}{|c|}{$83<m_{ll}<99$ \GeV\ }\\
 \hline
 \end{tabular}
+\caption{A summary of basic event selection requirements.  Truth-level $b$-tagging is done with truth-level information.
+\label{tab:sumreq}}
 \end{center}
 \end{table}
 
-\begin{table}[htbp]
-\caption{Topological requirements of the event selection.
-\label{tab:dRreq}}
+\begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}
 \begin{tabular}{|l|l|}
 \hline
@@ -69,6 +67,8 @@ $p_T^Z$ [\GeV] & $\Delta R\left(b,\bar{b}\right)$\\
 $>200$ & $<1.4$ \\
 \hline
 \end{tabular}
+\caption{Topological requirements of the event selection.
+\label{tab:dRreq}}
 \end{center}
 \end{table}
 
@@ -83,7 +83,7 @@ Once anti-$k_t$ with $R=0.4$ reconstructed and truth jets are matched, response 
   \begin{center}
 \begin{subfigure}[t]{18pc}\centering\includegraphics[width=\textwidth]{figures/body/val_wztrim-r_ratio_eta0_12_zjets}\caption{}\end{subfigure}
 \begin{subfigure}[t]{18pc}\centering\includegraphics[width=\textwidth]{figures/body/val_wztrim-r_resol_eta0_12_zjets}\caption{}\end{subfigure}
-  \caption{\label{fig:valzjets}The mean and resolution of $p_T^{rec}/p_T^{tru}$  for the background $Z$+jets sample for $\left|\eta\right|<1.2$ and for $R=0.4$, 0.6, 1.0, and 1.5 in 20 \GeV\ bins of $p_T^{tru}$ for 20--200 \GeV, one bin for 200--300 \GeV, and one bin for 300-500 \GeV, with bins chosen for purposes of statistics.}
+  \caption{\label{fig:valzjets}The mean and resolution of $p_T^{rec}/p_T^{tru}$  for the background $Z$+jets sample for $\left|\eta\right|<1.2$ and for $R=0.4$, 0.6, 1.0, and 1.5 in 20 \GeV\ bins of $p_T^{tru}$ for 20-200 \GeV, one bin for 200-300 \GeV, and one bin for 300-500 \GeV, with bins chosen for purposes of statistics.}
   \end{center}
 \end{figure}
 \clearpage
@@ -137,7 +137,7 @@ where $\oplus$ denotes addition in quadrature, and $\Delta S (B)$ is the error o
 \section{Multiple Event Interpretations}
 Using multiple event interpretations changes the formulae used in with simple counting.  That is, $S$ is not necessarily merely $N_S$, the number of events passing some signal cuts, and similarly for $B$ and $N_B$.  Using an event weighting by some function of the cut-weight, $z$, denoted $t\left(z\right)$, $S=N_S\left<t\right>_{\rho_S}$ and $B=N_B\left<t^2\right>_{\rho_B}$. So
 \begin{equation}
-\mathscr{S}_{t,gaus}=\frac{N_S\left<t\right>_{\rho_S}}{\sqrt{N_B\left<t^2\right>_{\rho_B}}}\to\mathscr{S}_{t,pois}=\frac{N_S\left<t\right>_{\rho_S}}{0.5+\sqrt{0.25+N_B\left<t^2\right>_{\rho_B}}}=\frac{N_S\int_0^1 dz\,t\left(z\right)\rho_S\left(z\right)}{0.5+\sqrt{0.25+N_B\int_0^1dz\,t^2\left(z\right)\rho_B\left(z\right)}}
+\mathscr{S}_{t,gaus}=\frac{N_S\left<t\right>_{\rho_S}}{\sqrt{N_B\left<t^2\right>_{\rho_B}}}\to\mathscr{S}_{t,pois}=\frac{N_S\int_0^1 dz\,t\left(z\right)\rho_S\left(z\right)}{0.5+\sqrt{0.25+N_B\int_0^1dz\,t^2\left(z\right)\rho_B\left(z\right)}}
 \end{equation}
 
 For histograms, everything is done bin-wise.  The notation used below is as follows: $\rho_i$ is the value of $\rho\left(z\right)$ at bin $i$ (where the bins run from 0 to $n_{tel}$, where $n_{tel}$ is the total number of telescoping radii).  $t_i=t_i\left(\rho_{S,i},\rho_{B,i},i/n_{tel}\right)$ is the value of $t\left(z\right)$ at bin $i$, which can depend, in principle, on $\rho_{S,i}$, $\rho_{B,i}$, and $i/n_{tel}$ (the last of which is $z$ in bin $i$).  Explicitly,
@@ -201,11 +201,9 @@ Of particular interest is the likelihood optimized $t\left(z\right)$,\footnote{D
 \end{equation}
 where $\epsilon_{S,B}$ are the means of $\rho_{S,B}\left(z\right)$ and $\sigma_B^2$ is the variance of $\rho_B\left(z\right)$.  Further details can be found in Refs. \cite{teljet,multint} and Appendix \ref{sec:telerr}.
 
-\begin{table}[htbp]
-\caption{$m_{bb}$ windows studied.  These windows were chosen to optimize significances over all $p_T^Z$.
-\label{tab:masswindow}}
+\begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}
-\begin{tabular}{|l|l|l|}
+\begin{tabular}{|l|l|p{1.75in}|}
 \hline
 Analysis Type & $S/\delta B$ Type                                           & Optimal $m_{bb}$ Window\\
 \hline
@@ -220,6 +218,8 @@ Truth         & anti-$k_t$ $R=0.4$                                          & 10
               & anti-$k_t$ $R=0.4$, telescoping $R=0.9$                     & 100--130 \GeV\ ($R=0.4$), 100--155 \GeV\ ($R=0.9$)\\
 \hline
 \end{tabular}
+\caption{$m_{bb}$ windows studied.  These windows were chosen to optimize significances over all $p_T^Z$.
+\label{tab:masswindow}}
 \end{center}
 \end{table}
 
@@ -292,16 +292,14 @@ The optimal $m_{bb}$ window for the $t^*\left(z\right)$ case is also markedly wi
 \end{center}
 \end{figure}
 
-\begin{table}[htbp]
-\caption{A summary of significances for different weighting schemes and cuts and for reconstructed and truth jets for a luminosity of $20.3\text{ fb}^{-1}.$
-\label{tab:SdB}}
+\begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{center}
 \begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
-Type                       & 0--90 \GeV\ & 90--120 \GeV\ & 120--160 \GeV\ & 160--200 \GeV\ & $>200$ \GeV\ & total\\
+Type                       & 0--90 & 90--120 & 120--160 & 160--200 & $>200$ & total\\
 \hline
-anti-$k_t$, $R=0.4_{rec}$  &    0.47492  &    0.28214    &    0.28339     &    0.25748     &    0.37337   &    0.76887\\
-anti-$k_t$, $R=0.4_{tru}$  &    0.57414  &    0.30655    &    0.37309     &    0.35042     &    0.53569   &    0.98619\\
+akt4$_{rec}$  &    0.47492  &    0.28214    &    0.28339     &    0.25748     &    0.37337   &    0.76887\\
+akt4$_{tru}$  &    0.57414  &    0.30655    &    0.37309     &    0.35042     &    0.53569   &    0.98619\\
 \hline
 2 $m_{bb,rec}$             &    0.48903  &     0.2858    &    0.28812     &    0.25972     &    0.38297   &    0.78611\\
 2 $m_{bb,tru}$             &     0.5724  &     0.3191    &    0.38364     &    0.36655     &    0.56414   &     1.0145\\
@@ -313,6 +311,8 @@ $t^*\left(z\right)_{rec}$  &    0.55085 &    0.29931     &    0.33367     &    0
 $t^*\left(z\right)_{tru}$  &    0.64425 &    0.38008     &    0.50904     &     0.5214     &    0.91337   &     1.3873\\
 \hline
 \end{tabular}
+\caption{A summary of significances for different weighting schemes and cuts and for reconstructed and truth jets for a luminosity of $20.3\text{ fb}^{-1}.$  akt4 refers to the standard cut-based analysis using anti-$k_t$ with $R=0.4$ jets.  Column titles are $p_T^Z$ regions in \GeV.
+\label{tab:SdB}}
 \end{center}
 \end{table}
 
