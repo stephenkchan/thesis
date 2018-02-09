@@ -37,7 +37,7 @@ The standard set of variables taken as a baseline is the same as used in the fid
 \end{figure}
 The distributions in the figure are used as inputs for one of the two k-folded final discriminants, and the order of the distributions is the hyperparameter optimized order for feeding into the BDT; what precisely this means will be discussed in following sections.  While variables in the analysis regions are generally similar, there are some notable exceptions.  \ptv\,and the correlated \drbb\, have different shapes, by construction for the former and by correlation for the latter, at low and high \ptv.  \footnote{Recall that higher \ptv\, means, in a balanced final state like \ZH, the $b$-jet pair will have higher $p_T$ and hence be more collimated (lower \drbb); this is not necessarily the case for background events, as the distributions show.}  The $\ge3$ jet regions also have variables that are not applicable to the 2 jet regions; the inclusion of \texttt{mBBJ} (the invariant mass of the two $b$-jets and leading untagged jet) in particular is of note and suggests a potential avenue forward for refinements of the non-standard variables.
 
-Looking at the correlation matrices for the standard variables in Figure \ref{fig:std-kf-Correlations}, it is easy to see that there are large number of non-trivial correlations
+Looking at the correlation matrices for the standard variables in Figure \ref{fig:std-kf-Correlations}, it is easy to see that there are large number of non-trivial correlations (when looking at these correlation matrices, keep in mind that purple is perfect anti-correlation, red is perfect correlation (as with all variables with themselves---hence diagonals of red), and green is roughly zero correlation).
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
 \begin{subfigure}[t]{0.220000\textwidth}\centering\includegraphics[width=\textwidth]{figures/diag/std-kf-2tag2jet-75_150ptv_0of2/CorrelationMatrixS}\caption{2 jet, low \ptv (S)}\end{subfigure}
@@ -201,7 +201,19 @@ Rebinning occurs as follow:
 \item Continue until all bins have been iterated through; if $Z\le1$ for any remaining $n$ of the lowest-valued bins (as is often the case), simply rebin these as a single bin.
 \end{enumerate}
 
-Variable ranking is done iteratively (greedily) in each analysis region.  In each set, the validation significance of a BDT using an initial subset of variables is calculated (\texttt{dRBB} and \texttt{mBB} for the standard set; \texttt{j0\_j1} for the LI set; and \texttt{MH} for the RF set).  Each of the remaining unranked variables are then added separately, one at a time, to the BDT.  The variable yielding the highest validation significance is then added to the set list of ranked variables and removed from the list of unranked variables.  This process is repeated until no variables remain.  These rankings are shown in Figures \ref{fig:std-kf-Ranking}--\ref{fig:rf-sel-Ranking}.  Rankings tend to be fairly stable.
+Variable ranking is done iteratively (greedily) in each analysis region.  In each set, the validation significance of a BDT using an initial subset of variables is calculated (\texttt{dRBB} and \texttt{mBB} for the standard set; \texttt{j0\_j1} for the LI set; and \texttt{MH} for the RF set).  Each of the remaining unranked variables are then added separately, one at a time, to the BDT.  The variable yielding the highest validation significance is then added to the set list of ranked variables and removed from the list of unranked variables.  This process is repeated until no variables remain.  
+
+This training process is visualized using ``ranking plots.''  A prototypical example is given in Figure \ref{fig:rankeg}, the ranking for the  RF variable set in the 2 jet, high \ptv\ region.  Each step is shown in a distinct color.  In this example, the first step begins by training nine BDT's with the variable \texttt{MH} and one of the other variables in this region.  Graphically, we arrange the results ascending left to right based on their validation $S/\sqrt{S+B}$.  At this step, this yields \texttt{cosH}, \texttt{cosCM}, \texttt{Rpz}, \texttt{MZ}, \texttt{dphiCMH}, \texttt{Rmet}, \texttt{MCM}, \texttt{Rpt}, and the best performing \texttt{cosZ}.  Hence, this step is labeled ``2 vars (+\texttt{cosZ})'' to denote that the two variable \texttt{MH-cosZ} BDT is used as the basis for the three variable step.  Note that while each case is arranged left to right, each of these iteration is in practice computed in parallel.  When examining a plot of this type, even though there are no errors given, one can use the smoothness of overall curve as an indicator for ranking stability (sometimes low statistics for certain samples can make jittery rankings inevitable, particularly near the end of rankings).
+\begin{landscape}
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=\linewidth]{figures/diag//training-rf-sel-2tag2jet-150ptv_tD}
+  \caption{An example ranking, the RF variable set in the 2 jet, high \ptv\ region.}
+  \label{fig:rankeg}
+\end{figure}
+\end{landscape}
+
+These rankings are shown in Figures \ref{fig:std-kf-Ranking}--\ref{fig:rf-sel-Ranking}.  Rankings tend to be fairly stable.
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
@@ -238,6 +250,25 @@ Once variables have been ranked, the BDT may be used both to evaluate performanc
 \section{Statistics Only BDT Performance}
 \label{subsec:statonlyperf}
 As described above, cumulative significances can be extracted from pairs of signal and background BDT output distributions in a given region.  In order to evaluate performance of variable sets in the absence of systematic uncertainties, such pairs can be constructed by evaluating BDT score on the testing set of events using the optimal variable rankings in each region.  We show two versions of each testing distribution for each variable set in each signal region in Figures \ref{fig:std-kf-testing}--\ref{fig:rf-sel-testing}.  The training distribution is always shown as points.  The plots with block histograms with numbers of bins that match (do not match) the training distribution do not (do) have transformation D applied.  Transformation D histograms are included to show the distributions actually used for significance evaluation, while the untransformed histograms are included to illustrate that the level of overtraining is not too terrible\footnote{The raw distributions include a K-S test statistic for signal (background) distributions.}.  For better comparison of the distributions, all histograms have been scaled to have the same normalization.
+
+An example of training/(untransformed) testing distributions is given in \ref{fig:testeg}.  Visually, one expects the trainingand testing distributions to looks similar, but not too similar (an indication of overtraining).  This qualitative intuition can be quantified via the two sample Kolmogorov-Smirnov test, which uses the maximum difference in distribution CDF's to obtain an ``overtraining probability'' given by:
+
+\begin{equation}
+\label{eq:ks}
+D_{n,m}=\sup_{x}\left|F_{1,n}\left(x\right)-F_{2,m}\left(x\right)\right|=\sqrt{\frac{n+m}{nm}\times\left(-\frac{1}{2}\ln\left(\frac{\alpha}{2}\right)\right)}
+\end{equation}
+
+In the $n=m$ case, $\alpha= 2e^{-nD_n^2\right)$, which is the usual null hypothesis (same distribution) probability.  Generally, the background probabilities are higher because the background distributions rely on some relatively low statistics MC samples (e.g. $VV$, which has low yields with analysis event selection requirements).  The signal distribution, on the other hand, only relies on high statistics signal MC samples (with most events passing selection requirements and making it into the discriminants by design).
+
+\begin{landscape}
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=\linewidth]{figures/diag/bdt_dist-test-rf-sel-2tag2jet-150ptv_tD-all_no-tD}
+  \caption{Example output training (points) and testing (blocks) MVA discriminant distributions for the RF variable set in the 2 jet, high \ptv\ region.}
+  \label{fig:testeg}
+\end{figure}
+\end{landscape}
+
 
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}

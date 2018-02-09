@@ -15,7 +15,7 @@ To get a better sense of what this might look like, take a look at the example d
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
   \includegraphics[width=0.550000\linewidth]{figures/log_postfit_plot}
-  \caption{An example postfit distribution.  The reason this looks different from postfit distributions later in this chapter is that this is a log plot.}
+  \caption{An example postfit distribution.  The reason this looks different from postfit distributions later in this chapter is that this is a log plot.  It shows rare samples (Z+cl, Z+ll, W+jets), but obscures Data/MC agreement, which can only be seen via the ratio plot.}
   \label{fig:postfiteg}
 \end{figure}
 The only source of uncertainty would be due to data statistics, so for an infinitely large dataset with perfect understanding, $\mu$ could be fitted to arbitrary precision.  This, of course, is not the case since there is a finite amount of data and very many sources of systematic uncertainty, discussed in previous chapters.  This chapter will first describe how systematic uncertainties are integrated into the statistical fit of this analysis before describing two sets of cross checks on both a validation $VZ$ fit and on the fit for the $VH$ fit of interest.
@@ -188,6 +188,16 @@ If either the LI or RF schemes were to be used in a mainstream analysis, these v
 \section{Nuisance Parameter Pulls}
 The first set of plots statistical fit experts will want to look at are the ``pulls'' and ``pull comparisons.''  In these plots, the best fit (nominal) values and one standard deviation error bars are shown for observed (Asimov) pull plots, with the green and yellow bands corresponding to $\pm1,2\sigma$, respectively.  These plots are divided by NP category for readability.  \footnote{Over 100 non-MC stat NP's survive pruning in these 2-lepton only Run 2 fits; well over 500 survive in the Run 1+Run 2 combined fit.}  In pull comparisons, these pulls are overlayed and color-coded.  Pull comparisons here have the following color code: black is the standard variable set, red is the LI set, and blue is the RF set.  
 
+We give an example in Figure \ref{fig:pullcompeg}, which shows the $Z+$jets modeling systematics.  The green (yellow) band represents $\pm1\left(2\right)\sigma$.  NP's with \texttt{norm} are the freely floating parameters mentioned above initialized to $1\pm0$, while all other NP's are the Gaussian (or log-normal for non-freely floating normalizations) are initialized\footnote{with the usual mean subtraction/standard deviation division applied} in the fit to $0\pm1$.  Both types of NP's can be seen in the figure.  Generally, some deviation is expected in a fit, but several ``strongly pulled'' (i.e. the absolute value of an NP central value divided by the error bar size is greater than one) NP's is a sign of a ``bad'' fit.  Here, \texttt{ZPtV} is strongly pulled for all three fits, and \texttt{ZMbb} is strongly pulled for the LI fits; this is unsurprising since $Z+$jets modeling has traditionally been hard.  Such plots let the analyzer look for problems in fit models and compare different analyses and are the first fit diagnostic plot used in the fit workflow.
+
+\begin{landscape}
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+\centering\includegraphics[width=\linewidth]{./figures/pullcomp-obs-prod/NP_Zjets}
+  \caption{Pull comparison for signal process modeling NP's.}
+  \label{fig:pullcompeg}
+\end{figure}
+\end{landscape}
+
 A well-behaved fit has pulls close to nominal values (``closeness'' should be interpreted in the context of pull value divided by pull error).  As can be seen in Figures \ref{fig:PullComparisons-allExceptGammasvz}--\ref{fig:PullComparisons-Zjetsvz}, the fits for the three different variable sets are fairly similar from a NP pull perspective, though the $Z+$jets \mbb\,and \ptv\, NP's and the jet energy resolution NP are heavily pulled (a handful of poorly behaved pulls is not uncommon, though typically warrants further investigation).  As a general note, these pull plots calculate pulls using a simultaneous \texttt{HESSE} matrix inversion, which is fine for relatively small fits, but the more reliable \texttt{MINOS} result, which calculates the impact of each NP on its own, should be cross-checked for significant pulls\footnote{This becomes more of an issue for very large fits, like the full Run 1 + Run 2 combined fits in Chapter \ref{ch:comb}.}.  The ranking plots below do this.
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_allExceptGammas}\caption{Asimov}\end{subfigure}
@@ -222,11 +232,12 @@ A well-behaved fit has pulls close to nominal values (``closeness'' should be in
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_Diboson}\caption{Asimov}\end{subfigure}
 \begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-obs-prod/NP_Diboson}\caption{Observed}\end{subfigure}
-  \caption{Pull comparison for signal process modeling NP's.}
+  \caption{Pull comparison for diboson process modeling NP's.}
   \label{fig:PullComparisons-Dibosonvz}
 \end{figure}
 
-Nuisance parameter correlation matrices (for correlations with magnitude at least 0.25) for all three variable set fits can be found in Figures \ref{fig:corrstd-kfvz}--\ref{fig:corrrf-selvz}.  These are useful for seeing which NP's move together (if there is no physical argument for them to do so, this is a potential indicator that further investigation is warranted).
+Nuisance parameter correlation matrices (for correlations with magnitude at least 0.25) for all three variable set fits can be found in Figures \ref{fig:corrstd-kfvz}--\ref{fig:corrrf-selvz}.  These are useful for seeing which NP's move together (if there is no physical argument for them to do so, this is a potential indicator that further investigation is warranted).  These are similar to the correlation matrices in e.g. Figure \ref{fig:rf-sel-Correlations} except with ordering inverted (so the diagonal is oriented the other way).
+
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
 \begin{subfigure}[t]{0.49000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/RFLI_std-kf_v04.v04-db_fullRes_RFLI_std-kf_v04.v04-db/Asimov/corr_HighCorr}\caption{Asimov}\end{subfigure}
@@ -253,15 +264,17 @@ Nuisance parameter correlation matrices (for correlations with magnitude at leas
 
 \clearpage
 \subsection{Nuisance Parameter Ranking Plots and Breakdowns}
-The next set of fit results that is used to diagnose the quality of a fit is the impact of different nuisance parameters on the total error on $\mu$, both individually and as categories.  Figure \ref{fig:nprankingvz} shows the top 25 nuisance parameters ranked by their postfit impact on $\hat{\mu}$; these plots use the aforementioned, more reliable \texttt{MINOS} approach.  This set of rankings is fairly similar, with $Z+$jets systematics being particularly prominent.  The advantage of seeing individual nuisance parameter rankings, as opposed to impacts of categories in aggregate, is that particularly pathological NP's are easier to see; in particular, jet energy resolution and $Z+$jets \ptv\,systematic from the pull comparison plots show up with high rankings.  Yellow bands are pre-fit impact on $\mu$.
+The next set of fit results that is used to diagnose the quality of a fit is the impact of different nuisance parameters on the total error on $\mu$, both individually and as categories.  Figure \ref{fig:nprankingvz} shows the top 25 nuisance parameters ranked by their postfit impact on $\hat{\mu}$; these plots use the aforementioned, more reliable \texttt{MINOS} approach.  This set of rankings is fairly similar, with $Z+$jets systematics being particularly prominent.  The advantage of seeing individual nuisance parameter rankings, as opposed to impacts of categories in aggregate, is that particularly pathological NP's are easier to see; in particular, jet energy resolution and $Z+$jets \ptv\,systematic from the pull comparison plots show up with high rankings.  Blue (Yellow) bands are post-(pre-) fit impact on $\mu$, and the black (red) points with error bars are the same as for the standard (floating normalization) NP's in the pull comparison plots.
+\begin{landscape}
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-\begin{subfigure}[t]{0.300000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04-v04-db_rank_RFLI_std-kf_v04-v04-db_pulls_125}\caption{Standard}\end{subfigure}
-\begin{subfigure}[t]{0.300000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04-v04-db_rank_RFLI_li-met_v04-v04-db_pulls_125}\caption{LI}\end{subfigure}
-\begin{subfigure}[t]{0.300000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04-v04-db_rank_RFLI_rf-sel_v04-v04-db_pulls_125}\caption{RF}\end{subfigure}
+\begin{subfigure}[t]{0.3250000\linewidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04-v04-db_rank_RFLI_std-kf_v04-v04-db_pulls_125}\caption{Standard}\end{subfigure}
+\begin{subfigure}[t]{0.3250000\linewidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04-v04-db_rank_RFLI_li-met_v04-v04-db_pulls_125}\caption{LI}\end{subfigure}
+\begin{subfigure}[t]{0.3250000\linewidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04-v04-db_rank_RFLI_rf-sel_v04-v04-db_pulls_125}\caption{RF}\end{subfigure}
   \caption{Plots for the top 25 nuisance parameters according to their postfit impact on $\hat{\mu}$ for the standard (a), LI (b), and RF (c) variable sets.}
   \label{fig:nprankingvz}
 \end{figure}
+\end{landscape}
 
 This is consistent with the picture of NP's taken in aggregate categories in Tables \ref{tab:asibdvz} and \ref{tab:obsbdvz}, known as ``breakdowns,'' with $Z+$jets in particular featuring prominently.  Of particular interest is also the lower impact of MC stats in the observed fit.
 
@@ -483,14 +496,15 @@ Nuisance parameter correlation matrices (for correlations with magnitude at leas
 \subsection{Full Breakdown of Errors}
 
 A postfit ranking of nuisance parameters according to their impact on $\hat{\mu}$ for the different variable sets may be found in Figure \ref{fig:npranking}, with rankings being fairly similar.  In particular, the signal UE+PS \ptv\,systematic is top-ranked for all three variable sets and also looks very similar, unlike in the pull comparison plot, reiterating the importance of evaluating individually the impact of highly ranked NP's.  The $Z+$jets \ptv\, is highly pulled in all three cases, though this is less severe for the non-standard set (it is off the scale for the standard variable ranking).  The RF discriminant mitigates the effect of poorly modeled jet energy resolution better than the other sets.
-
+\begin{landscape}
 \begin{figure}[!htbp]\captionsetup{justification=centering}
-\begin{subfigure}[t]{0.300000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04-v04_rank_RFLI_std-kf_v04-v04_pulls_125}\caption{Standard}\end{subfigure}
-\begin{subfigure}[t]{0.300000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04-v04_rank_RFLI_li-met_v04-v04_pulls_125}\caption{LI}\end{subfigure}
-\begin{subfigure}[t]{0.300000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04-v04_rank_RFLI_rf-sel_v04-v04_pulls_125}\caption{RF}\end{subfigure}
+\begin{subfigure}[t]{0.300000\linewidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04-v04_rank_RFLI_std-kf_v04-v04_pulls_125}\caption{Standard}\end{subfigure}
+\begin{subfigure}[t]{0.300000\linewidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04-v04_rank_RFLI_li-met_v04-v04_pulls_125}\caption{LI}\end{subfigure}
+\begin{subfigure}[t]{0.300000\linewidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04-v04_rank_RFLI_rf-sel_v04-v04_pulls_125}\caption{RF}\end{subfigure}
   \caption{Plots for the top 25 nuisance parameters according to their postfit impact on $\hat{\mu}$ for the standard (a), LI (b), and RF (c) variable sets.}
   \label{fig:npranking}
 \end{figure}
+\end{landscape}
 
 The Asimov (Table \ref{tab:breakdownexp}) and observed (Table \ref{tab:breakdownobs}) breakdowns both consistently suggest that the LI variable set does a better job of constraining systematic uncertainties than the standard set and that the RF set does better still.  It is also not surprising that the gain is more substantial in the observed fit than in the Asimov fits, as in the latter there are the ``penalty'' terms from pulls in addition to the overall broadening in the likelihood.
 
