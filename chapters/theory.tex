@@ -54,7 +54,7 @@ Note that from $\mathcal{L}_{Yukawa}$, it is easy to see that the Higgs coupling
 The leading order Feynman diagrams for the four dominant modes of Higgs production at the LHC are shown in Figure \ref{fig:hprod}, each described briefly in turn.
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-  \includegraphics[width=0.65\linewidth]{figures/higgs_proudction}
+  \includegraphics[width=0.85\linewidth]{figures/higgs_proudction}
   \caption{Dominant Higgs production modes.}
   \label{fig:hprod}
 \end{figure}
@@ -76,6 +76,7 @@ The final important Higgs production process is $t\bar{t}H$ production, the box 
 Once the Higgs has been produced, it can decay in a number of ways, as shown in Figure \ref{fig:hbr}.  By far the most dominant decay mode of the Higgs is to $b\bar{b}$ with a branching fraction of 58\%.  This $b$-quark pair then hadronizes into two $b$-jets (for a more thorough discussion of jets and $b$-jets in particular, see Section \ref{sec:jets}).  However, many processes at the LHC create pairs of $b$-jets with invariant masses consistent with the Higgs and have much higher production rates (\tt\,production at the LHC is in the neighborhood of hundreds of pb, compared to Higgs cross sections of a few pb), so a clear process signature is necessary to study $H\to b\bar{b}$ production at the LHC.  This is why the bulk of search efforts have focused on $VH$ production.  A summary of Higgs production cross sections and simple extrapolations to raw numbers of Higgs bosons produced for $VH$ for leptonically decaying $V$ is shown in Table \ref{tab:xsec}
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{Cross sections (in pb) for processes important to the SM \vhbb\, analysis and the total Higgs cross section as a function of center of mass energy.  Also given are the total number of Higgs bosons produced for given luminosities through both $WH$ and $ZH$ processes.  Uncertainties are theoretical.}
 \begin{center}
 \begin{tabular}{lccccc}
 \hline\hline
@@ -89,7 +90,6 @@ $\sqrt{s}$ (\TeV) & ZH & WH & ggF & total $\sigma$ & $N_{V_{\to\ell|\nu} H}$ \\
 \hline
 \end{tabular}
 \end{center}
-\caption{Cross sections (in pb) for processes important to the SM \vhbb\, analysis and the total Higgs cross section as a function of center of mass energy.  Also given are the total number of Higgs bosons produced for given luminosities through both $WH$ and $ZH$ processes.  Uncertainties are theoretical.}
 \label{tab:xsec}
 \end{table}
 
@@ -98,8 +98,8 @@ Collision data in experiments like ATLAS is structured using what is known as th
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-  \begin{subfigure}[t]{0.420000\textwidth}\centering\includegraphics[width=\textwidth]{figures/atlas/atlas_3dzhllbb}\caption{This}\end{subfigure}
-  \begin{subfigure}[t]{0.420000\textwidth}\centering\includegraphics[width=\textwidth]{figures/zhllbb}\caption{Stands in for this}\end{subfigure}
+  \begin{subfigure}[t]{0.450000\textwidth}\centering\includegraphics[width=\textwidth]{figures/atlas/atlas_3dzhllbb}\caption{This}\end{subfigure}
+  \begin{subfigure}[t]{0.450000\textwidth}\centering\includegraphics[width=\textwidth]{figures/zhllbb}\caption{Stands in for this}\end{subfigure}
   \caption{Reconstruction in a nutshell}
   \label{fig:recon}
 \end{figure}
@@ -120,7 +120,7 @@ Many of these novel schemes are designed to explicitly address the first issue o
 \label{sec:li}
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-  \includegraphics[width=0.400000\linewidth]{figures/li2lep}
+  \includegraphics[width=0.450000\linewidth]{figures/li2lep}
   \caption{Summary of LI variables in the \ZH\, topology.}
   \label{fig:li}
 \end{figure}
@@ -143,7 +143,7 @@ These variables do contain a lot of information similar to the usual set: there 
 The RestFrames variables \cite{rjr}, calculated using the software package of the same name, is based upon the idea that the most natural frame in which to analyze objects of the signal decay tree is in their individual production (rest) frames.  The signal decay tree for \ZH\, is show in Figure \ref{fig:rftree}.
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-  \includegraphics[width=0.300000\linewidth]{figures/RF_tree}
+  \includegraphics[width=0.4500000\linewidth]{figures/RF_tree}
   \caption{The \ZH\, decay tree.}
   \label{fig:rftree}
 \end{figure}
@@ -179,12 +179,13 @@ The RF approach for the 1-lepton case amounts to replacing the $Z\to\ell\ell$ in
 The 0-lepton channel would appear to present some difficulty as two neutrinos in the final state introduce extra degrees of freedom, but both concepts may be extended by treating the invisibly decaying $Z$ as a single invisible particle and requiring the $Z$ to be on-shell, as shown schematically in Figure \ref{fig:rf0lep}.  Both of these requirements may be folded into the 1-lepton framework to produce similar sets of variables.  
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-  \includegraphics[width=0.300000\linewidth]{figures/RestFrames0lep-crop}
+  \includegraphics[width=0.450000\linewidth]{figures/RestFrames0lep-crop}
   \caption{The $ZH\to\nu\nu b\bar{b}$ decay tree.}
   \label{fig:rf0lep}
 \end{figure}
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{Variables used to train the multivariate discriminant. Starred variables ($b$-tag scores) are not included in current versions of the standard discriminants, but have traditionally been included and most likely will be reintroduced as soon as their accompanying systematics are available.
 \begin{center}
 \begin{tabular}{c|cccc} \hline \hline
 Variable & Name & 0-lepton & 1-lepton & 2-lepton\\ \hline
@@ -211,7 +212,6 @@ MV2c10(jet$_{3}$)$^*$ & MV2c10B3 & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
 $m_{jjj}$ & mBBJ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
 \hline\hline
 \end{tabular}
-\caption{Variables used to train the multivariate discriminant. Starred variables ($b$-tag scores) are not included in current versions of the standard discriminants, but have traditionally been included and most likely will be reintroduced as soon as their accompanying systematics are available.
 }
 \label{tbl:MVAinputs}
 \end{center}

@@ -12,7 +12,7 @@ Multivac picked you as most representative this year.  Not the smartest, or the 
 \newthought{The ultimate goal} of an analysis like the search for SM \vhbb\, decay is to say with as much justified precision as possible with the ATLAS collision data whether or not the SM-like Higgs observed in other decay modes also decays to $b$-quarks and, if so, whether this rate is consistent with the SM prediction.  In the limit of perfect modeling of both background processes and detector/reconstruction, the only free parameter is this production rate, referred to typically as a ``signal strength,'' denoted $\mu$, with $\mu=1$ corresponding to the SM prediction and $\mu=0$ corresponding to the SM with no Higgs.  
 
 To get a better sense of what this might look like, take a look at the example discriminant distribution in Figure \ref{fig:postfiteg}.  The black points are data (with statistical error bars), and the colored block histograms have size corresponding to the number of predicted events for each process in each bin of the final BDT.  In the limit of perfect understanding, a fit would correspond to a constant scale factor on the red, signal histogram, where one would choose a best fit $\mu$ value, denoted $\hat{\mu}$, that would minimize the sum in quadrature of differences between the number of observed data events and $\mu s_i+b_i$, where $s_i$ and $b_i$ are the predicted number of signal and background events in each bin.
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
   \centering
   \includegraphics[width=0.550000\linewidth]{figures/log_postfit_plot}
   \caption{An example postfit distribution.  The reason this looks different from postfit distributions later in this chapter is that this is a log plot.  It shows rare samples (Z+cl, Z+ll, W+jets), but obscures Data/MC agreement, which can only be seen via the ratio plot.}
@@ -43,7 +43,8 @@ Inputs to the binned likelihood are distributions of the BDT outputs described i
 
 Input distributions in MC are further divided according to their physics process.  The signal processes are divided based on both the identity of associated $V$ and the number of leptons in the final state; \ZH\, events are further separated into distributions for $qq$ and $gg$ initiated processes.  $V+$jets events are split according to $V$ identity and into the jet flavor bins described in Chapter \ref{ch:samples}.  Due to the effectiveness of the 2 $b$-tag requirement suppressing the presence of both $c$ and $l$ jets, truth-tagging is used to boost MC statistics in the $cc$, $cl$, and $l$ distributions.\footnote{Since $WW$ is not an important contribution to the already small total diboson background, no truth-tagging was applied here, in contrast to the fiducial analysis.}  For top backgrounds, single top production is split according to production mode ($s$, $t$, and $Wt$), with \tt\, as single category.  Diboson background distributions are also split according to the identity of the $V$'s ($ZZ$, $WZ$, and $WW$).  Fit input segmentation is summarized in Table \ref{tab:inputs}.
 
-\begin{table}[!htbp]\captionsetup{justification=centering}
+\begin{table}[!htb]\captionsetup{justification=centering}
+
   \begin{center}\begin{tabular}{lp{4.5in}}
       \hline\hline
       Category & Bins\\
@@ -62,7 +63,8 @@ Input distributions in MC are further divided according to their physics process
 \section{Systematic Uncertainties Review}
 Tables \ref{tab:modelsys} and \ref{tab:expsys} summarize modeling (Chapter \ref{ch:modeling}) and experimental (Chapter \ref{ch:object}) systematic uncertainties considered in this analysis, respectively.  In addition to these, simulation statistics uncertainties (``MC stat errors'') are also included in the fit model.  There is one distribution per systematic (one each for up and down) per sample per region.  The $\pm1\sigma$ variation for a systematic is calculated as the difference in the integrals between the nominal and up/down varied distributions. %is this true?
 
-\begin{table}[!htbp]\captionsetup{justification=centering}
+\begin{table}[!htb]\captionsetup{justification=centering}
+
   \begin{center}
     \begin{tabular}{lp{5in}}
       \hline\hline
@@ -80,7 +82,8 @@ Tables \ref{tab:modelsys} and \ref{tab:expsys} summarize modeling (Chapter \ref{
   \label{tab:modelsys}
 \end{table}
 
-\begin{table}[!htbp]\captionsetup{justification=centering}
+\begin{table}[!htb]\captionsetup{justification=centering}
+
   \begin{center}
     \begin{tabular}{lp{5in}}
       \hline\hline
@@ -138,7 +141,8 @@ One of the primary validation cross-checks for the fiducial analysis was a $VZ$ 
 
 The $VZ$ fit sensitivities for the standard, LI, and RF fits are summarized in Table \ref{tab:Sensitivitiesvz}.  The expected significances are all fairly comparable and about what was the case in the fiducial analysis.  The observed significance for the standard set matches fairly well with the expected value on data, but the LI and RF observed significances are quite a bit lower.
 
-\begin{table}[!htbp]\captionsetup{justification=centering}
+\begin{table}[!htb]\captionsetup{justification=centering}
+\caption{Expected (for both data and Asimov) and observed $VZ\to\ell\ell b\bar{b}$ sensitivities for the standard, LI, and RF variable sets.}
 \begin{center}
 \begin{tabular}{lccc}
 \hline\hline
@@ -153,13 +157,12 @@ Observed (data) & 3.17 & 1.80 & 2.09\\
 \hline
 \end{tabular}
 \end{center}
-\caption{Expected (for both data and Asimov) and observed $VZ\to\ell\ell b\bar{b}$ sensitivities for the standard, LI, and RF variable sets.}
 \label{tab:Sensitivitiesvz}
 \end{table}
 
 These values, however, are consistent with the observed signal strength values, which can be seen in Figure \ref{fig:MuhatSummaryvz} (b), with both the LI and RF fits showing a deficit of signal events with respect to the SM expectation, though not by much more than one standard deviation (a possible explanation is explored in the following section).  Just as in the $VH$ fits, errors arising systematic uncertainties are lower in the fits to the observed dataset.  That the effect is not noticeable in Asimov fits is not too surprising, since this analysis (and these variable configurations in particular), is not optimized for $VZ$.
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
   \centering
     \includegraphics[width=0.490000\linewidth]{figures/Plot_mu_rfli-prod-db-exp}
     \includegraphics[width=0.490000\linewidth]{figures/Plot_mu_rfli-prod-db-obs}
@@ -172,7 +175,7 @@ While the treatment of simply ignoring any additional jets in the event seems ad
 
 A natural question to ask is why this would be an issue for the $VZ$ but not the $VH$ case.  One potential answer is that the at high transverse boosts, there is a greater probability for final state radiation in the hadronically decaying $Z$, so there are more events where the third jet should be included in the calculation of variables like $m_{b\bar{b}}$ or for angles involving the $b\bar{b}$ system (e.g. \texttt{cosH} in the RF case).  While the absolute scale at which the low and high \ptv\, regions are separated remains the same does not change from the $VH$ to the $VZ$ analysis, 150 \GeV, the implicit cutoff on the transverse boost of the hadronically decaying boson does.  For the Higgs, with a mass of 125 \GeV, the \ptv\,cutoff corresponds to $\gamma\sim1.56-6.74$, but for the $Z$, with a mass of 91 \GeV, this is $\gamma\sim1.93-9.21$, about 23--37\% higher.
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
   \centering
 \begin{subfigure}[t]{0.49000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/Plot_mu_std-kf-nj}\caption{Std-KF}\end{subfigure}
 \begin{subfigure}[t]{0.49000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/Plot_mu_li-met-nj}\caption{LI+MET}\end{subfigure}
@@ -190,47 +193,45 @@ The first set of plots statistical fit experts will want to look at are the ``pu
 
 We give an example in Figure \ref{fig:pullcompeg}, which shows the $Z+$jets modeling systematics.  The green (yellow) band represents $\pm1\left(2\right)\sigma$.  NP's with \texttt{norm} are the freely floating parameters mentioned above initialized to $1\pm0$, while all other NP's are the Gaussian (or log-normal for non-freely floating normalizations) are initialized\footnote{with the usual mean subtraction/standard deviation division applied} in the fit to $0\pm1$.  Both types of NP's can be seen in the figure.  Generally, some deviation is expected in a fit, but several ``strongly pulled'' (i.e. the absolute value of an NP central value divided by the error bar size is greater than one) NP's is a sign of a ``bad'' fit.  Here, \texttt{ZPtV} is strongly pulled for all three fits, and \texttt{ZMbb} is strongly pulled for the LI fits; this is unsurprising since $Z+$jets modeling has traditionally been hard.  Such plots let the analyzer look for problems in fit models and compare different analyses and are the first fit diagnostic plot used in the fit workflow.
 
-\begin{landscape}
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
 \centering\includegraphics[width=\linewidth]{./figures/pullcomp-obs-prod/NP_Zjets}
   \caption{Pull comparison for signal process modeling NP's.}
   \label{fig:pullcompeg}
 \end{figure}
-\end{landscape}
 
 A well-behaved fit has pulls close to nominal values (``closeness'' should be interpreted in the context of pull value divided by pull error).  As can be seen in Figures \ref{fig:PullComparisons-allExceptGammasvz}--\ref{fig:PullComparisons-Zjetsvz}, the fits for the three different variable sets are fairly similar from a NP pull perspective, though the $Z+$jets \mbb\,and \ptv\, NP's and the jet energy resolution NP are heavily pulled (a handful of poorly behaved pulls is not uncommon, though typically warrants further investigation).  As a general note, these pull plots calculate pulls using a simultaneous \texttt{HESSE} matrix inversion, which is fine for relatively small fits, but the more reliable \texttt{MINOS} result, which calculates the impact of each NP on its own, should be cross-checked for significant pulls\footnote{This becomes more of an issue for very large fits, like the full Run 1 + Run 2 combined fits in Chapter \ref{ch:comb}.}.  The ranking plots below do this.
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_allExceptGammas}\caption{Asimov}\end{subfigure}
+\begin{figure}[!htb]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_allExceptGammas}\caption{Asimov}\end{subfigure}
 \begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-obs-prod/NP_allExceptGammas}\caption{Observed}\end{subfigure}
   \caption{Pull comparison for all NP's but MC stats.}
   \label{fig:PullComparisons-allExceptGammasvz}
 \end{figure}
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_Jet}\caption{Asimov}\end{subfigure}
+\begin{figure}[!htb]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_Jet}\caption{Asimov}\end{subfigure}
 \begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-obs-prod/NP_Jet}\caption{Observed}\end{subfigure}
   \caption{Pull comparison for jet NP's.}
   \label{fig:PullComparisons-Jetvz}
 \end{figure}
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_MET}\caption{Asimov}\end{subfigure}
+\begin{figure}[!htb]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_MET}\caption{Asimov}\end{subfigure}
 \begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-obs-prod/NP_MET}\caption{Observed}\end{subfigure}
   \caption{Pull comparison for MET NP's.}
   \label{fig:PullComparisons-METvz}
 \end{figure}
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_BTag}\caption{Asimov}\end{subfigure}
+\begin{figure}[!htb]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_BTag}\caption{Asimov}\end{subfigure}
 \begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-obs-prod/NP_BTag}\caption{Observed}\end{subfigure}
   \caption{Pull comparison for Flavour Tagging NP's.}
   \label{fig:PullComparisons-BTagvz}
 \end{figure}
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_Zjets}\caption{Asimov}\end{subfigure}
+\begin{figure}[!htb]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_Zjets}\caption{Asimov}\end{subfigure}
 \begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-obs-prod/NP_Zjets}\caption{Observed}\end{subfigure}
   \caption{Pull comparison for $Z+$jets NP's.}
   \label{fig:PullComparisons-Zjetsvz}
 \end{figure}
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_Diboson}\caption{Asimov}\end{subfigure}
+\begin{figure}[!htb]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_Diboson}\caption{Asimov}\end{subfigure}
 \begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-obs-prod/NP_Diboson}\caption{Observed}\end{subfigure}
   \caption{Pull comparison for diboson process modeling NP's.}
   \label{fig:PullComparisons-Dibosonvz}
@@ -239,7 +240,7 @@ A well-behaved fit has pulls close to nominal values (``closeness'' should be in
 Nuisance parameter correlation matrices (for correlations with magnitude at least 0.25) for all three variable set fits can be found in Figures \ref{fig:corrstd-kfvz}--\ref{fig:corrrf-selvz}.  These are useful for seeing which NP's move together (if there is no physical argument for them to do so, this is a potential indicator that further investigation is warranted).  These are similar to the correlation matrices in e.g. Figure \ref{fig:rf-sel-Correlations} except with ordering inverted (so the diagonal is oriented the other way).
 
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
 \begin{subfigure}[t]{0.49000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/RFLI_std-kf_v04.v04-db_fullRes_RFLI_std-kf_v04.v04-db/Asimov/corr_HighCorr}\caption{Asimov}\end{subfigure}
 \begin{subfigure}[t]{0.49000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/RFLI_std-kf_v04.v04-db_fullRes_RFLI_std-kf_v04.v04-db/Global/corr_HighCorr}\caption{Observed}\end{subfigure}
   \caption{NP correlations for standard variable fits.}
@@ -247,7 +248,7 @@ Nuisance parameter correlation matrices (for correlations with magnitude at leas
 \end{figure}
 
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
 \begin{subfigure}[t]{0.49000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/RFLI_li-met_v04.v04-db_fullRes_RFLI_li-met_v04.v04-db/Asimov/corr_HighCorr}\caption{Asimov}\end{subfigure}
 \begin{subfigure}[t]{0.49000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/RFLI_li-met_v04.v04-db_fullRes_RFLI_li-met_v04.v04-db/Global/corr_HighCorr}\caption{Observed}\end{subfigure}
   \caption{NP correlations for LI variable fits.}
@@ -255,7 +256,7 @@ Nuisance parameter correlation matrices (for correlations with magnitude at leas
 \end{figure}
 
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
 \begin{subfigure}[t]{0.49000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/RFLI_rf-sel_v04.v04-db_fullRes_RFLI_rf-sel_v04.v04-db/Asimov/corr_HighCorr}\caption{Asimov}\end{subfigure}
 \begin{subfigure}[t]{0.49000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/RFLI_rf-sel_v04.v04-db_fullRes_RFLI_rf-sel_v04.v04-db/Global/corr_HighCorr}\caption{Observed}\end{subfigure}
   \caption{NP correlations for RF variable fits.}
@@ -265,8 +266,8 @@ Nuisance parameter correlation matrices (for correlations with magnitude at leas
 \clearpage
 \subsection{Nuisance Parameter Ranking Plots and Breakdowns}
 The next set of fit results that is used to diagnose the quality of a fit is the impact of different nuisance parameters on the total error on $\mu$, both individually and as categories.  Figure \ref{fig:nprankingvz} shows the top 25 nuisance parameters ranked by their postfit impact on $\hat{\mu}$; these plots use the aforementioned, more reliable \texttt{MINOS} approach.  This set of rankings is fairly similar, with $Z+$jets systematics being particularly prominent.  The advantage of seeing individual nuisance parameter rankings, as opposed to impacts of categories in aggregate, is that particularly pathological NP's are easier to see; in particular, jet energy resolution and $Z+$jets \ptv\,systematic from the pull comparison plots show up with high rankings.  Blue (Yellow) bands are post-(pre-) fit impact on $\mu$, and the black (red) points with error bars are the same as for the standard (floating normalization) NP's in the pull comparison plots.
-\begin{landscape}
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+
+\begin{figure}[!htb]\captionsetup{justification=centering}
   \centering
 \begin{subfigure}[t]{0.3250000\linewidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04-v04-db_rank_RFLI_std-kf_v04-v04-db_pulls_125}\caption{Standard}\end{subfigure}
 \begin{subfigure}[t]{0.3250000\linewidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04-v04-db_rank_RFLI_li-met_v04-v04-db_pulls_125}\caption{LI}\end{subfigure}
@@ -274,11 +275,11 @@ The next set of fit results that is used to diagnose the quality of a fit is the
   \caption{Plots for the top 25 nuisance parameters according to their postfit impact on $\hat{\mu}$ for the standard (a), LI (b), and RF (c) variable sets.}
   \label{fig:nprankingvz}
 \end{figure}
-\end{landscape}
 
-This is consistent with the picture of NP's taken in aggregate categories in Tables \ref{tab:asibdvz} and \ref{tab:obsbdvz}, known as ``breakdowns,'' with $Z+$jets in particular featuring prominently.  Of particular interest is also the lower impact of MC stats in the observed fit.
+This is consistent with the picture of NP's taken in aggregate categories in Tables \ref{tab:asibdvz} and \ref{tab:obsbdvz}, known as ``breakdowns,'' with $Z+$jets in particular featuring prominently.  In all of these tables, there is a 10\% cutoff of full systematics impact (FullSyst) for displaying a given NP category.  Of particular interest is also the lower impact of MC stats in the observed fit.
 
-\begin{table}[!htbp]\captionsetup{justification=centering}
+\begin{table}[!htb]\captionsetup{justification=centering}
+\caption{Summary of impact of various nuisance parameter categories on the error on $\mu$ for Asimov fits for the standard, LI, and RF variable sets.}
 \begin{center}
 \begin{tabular}{lccc}
 \hline\hline
@@ -288,37 +289,37 @@ Total &  +0.305 / -0.277  &  +0.324 / -0.292  &  +0.319 / -0.288 \\
 \hline
 DataStat &  +0.183 / -0.179  &  +0.190 / -0.186  &  +0.188 / -0.184 \\
 FullSyst &  +0.244 / -0.212  &  +0.262 / -0.226  &  +0.258 / -0.221 \\
-Floating normalizations &  +0.092 / -0.084  &  +0.098 / -0.079  &  +0.094 / -0.076 \\
+%Floating normalizations &  +0.092 / -0.084  &  +0.098 / -0.079  &  +0.094 / -0.076 \\
 All normalizations &  +0.093 / -0.084  &  +0.098 / -0.079  &  +0.094 / -0.076 \\
-All but normalizations &  +0.214 / -0.179  &  +0.229 / -0.188  &  +0.224 / -0.182 \\
+%All but normalizations &  +0.214 / -0.179  &  +0.229 / -0.188  &  +0.224 / -0.182 \\
 \hline
-Jets, MET &  +0.052 / -0.043  &  +0.041 / -0.034  &  +0.047 / -0.037 \\
+%Jets, MET &  +0.052 / -0.043  &  +0.041 / -0.034  &  +0.047 / -0.037 \\
 Jets &  +0.034 / -0.029  &  +0.033 / -0.028  &  +0.032 / -0.026 \\
 MET &  +0.035 / -0.027  &  +0.015 / -0.012  &  +0.020 / -0.016 \\
 BTag &  +0.064 / -0.051  &  +0.063 / -0.031  &  +0.059 / -0.032 \\
 BTag b &  +0.053 / -0.041  &  +0.061 / -0.028  &  +0.055 / -0.025 \\
-BTag c &  +0.011 / -0.010  &  +0.006 / -0.005  &  +0.007 / -0.006 \\
+%BTag c &  +0.011 / -0.010  &  +0.006 / -0.005  &  +0.007 / -0.006 \\
 BTag light &  +0.030 / -0.027  &  +0.016 / -0.013  &  +0.022 / -0.019 \\
-Leptons &  +0.021 / -0.012  &  +0.022 / -0.014  &  +0.023 / -0.014 \\
+%Leptons &  +0.021 / -0.012  &  +0.022 / -0.014  &  +0.023 / -0.014 \\
 Luminosity &  +0.039 / -0.022  &  +0.039 / -0.022  &  +0.040 / -0.022 \\
 Diboson &  +0.049 / -0.028  &  +0.047 / -0.026  &  +0.047 / -0.026 \\
 Model Zjets &  +0.106 / -0.105  &  +0.113 / -0.110  &  +0.102 / -0.099 \\
 Zjets flt. norm. &  +0.039 / -0.053  &  +0.024 / -0.029  &  +0.021 / -0.031 \\
-Model Wjets &  +0.000 / -0.000  &  +0.000 / -0.000  &  +0.000 / -0.000 \\
-Wjets flt. norm. &  +0.000 / -0.000  &  +0.000 / -0.000  &  +0.000 / -0.000 \\
+%Model Wjets &  +0.000 / -0.000  &  +0.000 / -0.000  &  +0.000 / -0.000 \\
+%Wjets flt. norm. &  +0.000 / -0.000  &  +0.000 / -0.000  &  +0.000 / -0.000 \\
 Model ttbar &  +0.015 / -0.013  &  +0.032 / -0.017  &  +0.030 / -0.016 \\
-Model Single Top &  +0.004 / -0.003  &  +0.009 / -0.008  &  +0.005 / -0.004 \\
-Model Multi Jet &  +0.000 / -0.000  &  +0.000 / -0.000  &  +0.000 / -0.000 \\
-Signal Systematics &  +0.003 / -0.003  &  +0.003 / -0.003  &  +0.003 / -0.003 \\
+%Model Single Top &  +0.004 / -0.003  &  +0.009 / -0.008  &  +0.005 / -0.004 \\
+%Model Multi Jet &  +0.000 / -0.000  &  +0.000 / -0.000  &  +0.000 / -0.000 \\
+%Signal Systematics &  +0.003 / -0.003  &  +0.003 / -0.003  &  +0.003 / -0.003 \\
 MC stat &  +0.097 / -0.094  &  +0.108 / -0.103  &  +0.107 / -0.104 \\
 \hline\hline
 \end{tabular}
 \end{center}
-\caption{Summary of impact of various nuisance parameter categories on the error on $\mu$ for Asimov fits for the standard, LI, and RF variable sets.}
 \label{tab:asibdvz}
 \end{table}
 
-\begin{table}[!htbp]\captionsetup{justification=centering}
+\begin{table}[!htb]\captionsetup{justification=centering}
+\caption{Summary of impact of various nuisance parameter categories on the error on $\hat{\mu}$ for observed fits for the standard, LI, and RF variable sets.}
 \begin{center}
 \begin{tabular}{lccc}
 \hline\hline
@@ -330,33 +331,32 @@ Total &  +0.381 / -0.360  &  +0.339 / -0.316  &  +0.322 / -0.299 \\
 \hline
 DataStat &  +0.214 / -0.211  &  +0.210 / -0.205  &  +0.201 / -0.197 \\
 FullSyst &  +0.315 / -0.292  &  +0.267 / -0.241  &  +0.252 / -0.225 \\
-Floating normalizations &  +0.120 / -0.122  &  +0.095 / -0.089  &  +0.082 / -0.079 \\
+%Floating normalizations &  +0.120 / -0.122  &  +0.095 / -0.089  &  +0.082 / -0.079 \\
 All normalizations &  +0.121 / -0.123  &  +0.095 / -0.090  &  +0.082 / -0.079 \\
-All but normalizations &  +0.279 / -0.254  &  +0.228 / -0.200  &  +0.213 / -0.184 \\
+%All but normalizations &  +0.279 / -0.254  &  +0.228 / -0.200  &  +0.213 / -0.184 \\
 \hline
-Jets, MET &  +0.076 / -0.065  &  +0.045 / -0.043  &  +0.038 / -0.033 \\
+%Jets, MET &  +0.076 / -0.065  &  +0.045 / -0.043  &  +0.038 / -0.033 \\
 Jets &  +0.047 / -0.040  &  +0.044 / -0.041  &  +0.027 / -0.024 \\
 MET &  +0.055 / -0.046  &  +0.015 / -0.015  &  +0.012 / -0.010 \\
 BTag &  +0.083 / -0.079  &  +0.041 / -0.031  &  +0.041 / -0.035 \\
 BTag b &  +0.063 / -0.059  &  +0.032 / -0.022  &  +0.031 / -0.026 \\
-BTag c &  +0.018 / -0.017  &  +0.008 / -0.007  &  +0.010 / -0.009 \\
+%BTag c &  +0.018 / -0.017  &  +0.008 / -0.007  &  +0.010 / -0.009 \\
 BTag light &  +0.051 / -0.046  &  +0.024 / -0.021  &  +0.025 / -0.022 \\
-Leptons &  +0.022 / -0.011  &  +0.015 / -0.008  &  +0.019 / -0.008 \\
+%Leptons &  +0.022 / -0.011  &  +0.015 / -0.008  &  +0.019 / -0.008 \\
 Luminosity &  +0.044 / -0.022  &  +0.026 / -0.006  &  +0.027 / -0.008 \\
 Diboson &  +0.049 / -0.026  &  +0.025 / -0.013  &  +0.027 / -0.017 \\
 Model Zjets &  +0.156 / -0.162  &  +0.133 / -0.133  &  +0.115 / -0.117 \\
 Zjets flt. norm. &  +0.061 / -0.089  &  +0.041 / -0.064  &  +0.028 / -0.056 \\
-Model Wjets &  +0.000 / -0.001  &  +0.000 / -0.001  &  +0.000 / -0.001 \\
-Wjets flt. norm. &  +0.000 / -0.001  &  +0.000 / -0.001  &  +0.000 / -0.001 \\
+%Model Wjets &  +0.000 / -0.001  &  +0.000 / -0.001  &  +0.000 / -0.001 \\
+%Wjets flt. norm. &  +0.000 / -0.001  &  +0.000 / -0.001  &  +0.000 / -0.001 \\
 Model ttbar &  +0.015 / -0.024  &  +0.018 / -0.005  &  +0.017 / -0.009 \\
-Model Single Top &  +0.005 / -0.003  &  +0.010 / -0.008  &  +0.007 / -0.004 \\
-Model Multi Jet &  +0.000 / -0.001  &  +0.000 / -0.001  &  +0.000 / -0.001 \\
-Signal Systematics &  +0.005 / -0.004  &  +0.009 / -0.006  &  +0.005 / -0.006 \\
+%Model Single Top &  +0.005 / -0.003  &  +0.010 / -0.008  &  +0.007 / -0.004 \\
+%Model Multi Jet &  +0.000 / -0.001  &  +0.000 / -0.001  &  +0.000 / -0.001 \\
+%Signal Systematics &  +0.005 / -0.004  &  +0.009 / -0.006  &  +0.005 / -0.006 \\
 MC stat &  +0.140 / -0.143  &  +0.132 / -0.131  &  +0.128 / -0.129 \\
 \hline\hline
 \end{tabular}
 \end{center}
-\caption{Summary of impact of various nuisance parameter categories on the error on $\hat{\mu}$ for observed fits for the standard, LI, and RF variable sets.}
 \label{tab:obsbdvz}
 \end{table}
 
@@ -364,104 +364,140 @@ MC stat &  +0.140 / -0.143  &  +0.132 / -0.131  &  +0.128 / -0.129 \\
 \section{Postfit Distributions}
 Finally, postfit distributions for the MVA discriminant ($m_{bb}$) distribution in the signal (top $e-\mu$ control) region for the standard, Lorentz Invariant, and RestFrames variable sets are shown.  It is generally considered good practice to check the actual postfit distributions of discriminating quantities used to make sure there is good agreement.  \footnote{Sometimes distributions of input variables (MC histograms scaled by their postfit normalizations) are also used.}  It should be noted that agreement is not always great when ``eyeballing'' a distribution, as fits are messy and $V+$hf modeling is notoriously hard.  This is particularly true in the $VZ$ fit since normalizations for $Z+$hf in particular are derived using $VH$ optimized sidebands.  This is also why a lot of these plots are presented as log plots (which hide disagreement better; the general argument goes that one has the ratio plots on the bottom and log plots allow one to see rare backgrounds in plots).
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+
+\begin{figure}[!htb]\captionsetup{justification=centering}
     \centering
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04-db_fullRes_RFLI_std-kf_v04.v04-db/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{2 jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04-db_fullRes_RFLI_std-kf_v04.v04-db/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{3+ jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04-db_fullRes_RFLI_std-kf_v04.v04-db/Region_BMin150_J2_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{2 jet, high pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04-db_fullRes_RFLI_std-kf_v04.v04-db/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{3+ jet, high pTV}\end{subfigure}
-  \caption{Postfit $BDT_{VZ}$ plots in the signal region for the standard variable set.}
-  \label{fig:stdPostfitmvavz}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04-db_fullRes_RFLI_rf-sel_v04.v04-db/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04-db_fullRes_RFLI_rf-sel_v04.v04-db/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VZ$ plots in the 3+ jet, low pTV region for the RF variable set.}
+  \label{fig:rf-selBMax150_BMin75_incJet1_J3Postfitmva-db}
 \end{figure}
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
     \centering
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04-db_fullRes_RFLI_std-kf_v04.v04-db/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{3+ jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04-db_fullRes_RFLI_std-kf_v04.v04-db/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{2 jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04-db_fullRes_RFLI_std-kf_v04.v04-db/Region_BMin150_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{2 jet, high pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04-db_fullRes_RFLI_std-kf_v04.v04-db/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{3+ jet, high pTV}\end{subfigure}
-  \caption{Postfit $m_{bb}$ plots in the top $e-\mu$ CR for the standard variable set.}
-  \label{fig:stdPostfittopemuvz}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04-db_fullRes_RFLI_rf-sel_v04.v04-db/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04-db_fullRes_RFLI_rf-sel_v04.v04-db/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VZ$ plots in the 2 jet, low pTV region for the RF variable set.}
+  \label{fig:rf-selBMax150_BMin75_J2Postfitmva-db}
 \end{figure}
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
-  \centering
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04-db_fullRes_RFLI_li-met_v04.v04-db/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{2 jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04-db_fullRes_RFLI_li-met_v04.v04-db/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{3+ jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04-db_fullRes_RFLI_li-met_v04.v04-db/Region_BMin150_J2_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{2 jet, high pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04-db_fullRes_RFLI_li-met_v04.v04-db/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{3+ jet, high pTV}\end{subfigure}
-  \caption{Postfit $BDT_{VZ}$ plots in the signal region for the LI variable set.}
-  \label{fig:LIPostfitmvavz}
-\end{figure}
-
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
     \centering
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04-db_fullRes_RFLI_li-met_v04.v04-db/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{3+ jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04-db_fullRes_RFLI_li-met_v04.v04-db/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{2 jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04-db_fullRes_RFLI_li-met_v04.v04-db/Region_BMin150_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{2 jet, high pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04-db_fullRes_RFLI_li-met_v04.v04-db/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{3+ jet, high pTV}\end{subfigure}
-  \caption{Postfit $m_{bb}$ plots in the top $e-\mu$ CR for the LI variable set.}
-  \label{fig:LIPostfittopemuvz}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04-db_fullRes_RFLI_rf-sel_v04.v04-db/Region_BMin150_J2_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04-db_fullRes_RFLI_rf-sel_v04.v04-db/Region_BMin150_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VZ$ plots in the 2 jet, high pTV region for the RF variable set.}
+  \label{fig:rf-selBMin150_J2Postfitmva-db}
 \end{figure}
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
     \centering
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04-db_fullRes_RFLI_rf-sel_v04.v04-db/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{2 jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04-db_fullRes_RFLI_rf-sel_v04.v04-db/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{3+ jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04-db_fullRes_RFLI_rf-sel_v04.v04-db/Region_BMin150_J2_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{2 jet, high pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04-db_fullRes_RFLI_rf-sel_v04.v04-db/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{3+ jet, high pTV}\end{subfigure}
-  \caption{Postfit $BDT_{VZ}$ plots in the signal region for the RF variable set.}
-  \label{fig:RFPostfitmvavz}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04-db_fullRes_RFLI_rf-sel_v04.v04-db/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04-db_fullRes_RFLI_rf-sel_v04.v04-db/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VZ$ plots in the 3+ jet, high pTV region for the RF variable set.}
+  \label{fig:rf-selBMin150_incJet1_J3Postfitmva-db}
 \end{figure}
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
     \centering
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04-db_fullRes_RFLI_rf-sel_v04.v04-db/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{3+ jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04-db_fullRes_RFLI_rf-sel_v04.v04-db/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{2 jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04-db_fullRes_RFLI_rf-sel_v04.v04-db/Region_BMin150_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{2 jet, high pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04-db_fullRes_RFLI_rf-sel_v04.v04-db/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{3+ jet, high pTV}\end{subfigure}
-  \caption{Postfit $m_{bb}$ plots in the top $e-\mu$ CR for the RF variable set.}
-  \label{fig:RFPostfittopemuvz}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04-db_fullRes_RFLI_li-met_v04.v04-db/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04-db_fullRes_RFLI_li-met_v04.v04-db/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VZ$ plots in the 3+ jet, low pTV region for the LI variable set.}
+  \label{fig:li-metBMax150_BMin75_incJet1_J3Postfitmva-db}
 \end{figure}
 
-\clearpage
+\begin{figure}[!htb]\captionsetup{justification=centering}
+    \centering
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04-db_fullRes_RFLI_li-met_v04.v04-db/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04-db_fullRes_RFLI_li-met_v04.v04-db/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VZ$ plots in the 2 jet, low pTV region for the LI variable set.}
+  \label{fig:li-metBMax150_BMin75_J2Postfitmva-db}
+\end{figure}
+
+\begin{figure}[!htb]\captionsetup{justification=centering}
+    \centering
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04-db_fullRes_RFLI_li-met_v04.v04-db/Region_BMin150_J2_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04-db_fullRes_RFLI_li-met_v04.v04-db/Region_BMin150_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VZ$ plots in the 2 jet, high pTV region for the LI variable set.}
+  \label{fig:li-metBMin150_J2Postfitmva-db}
+\end{figure}
+
+\begin{figure}[!htb]\captionsetup{justification=centering}
+    \centering
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04-db_fullRes_RFLI_li-met_v04.v04-db/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04-db_fullRes_RFLI_li-met_v04.v04-db/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VZ$ plots in the 3+ jet, high pTV region for the LI variable set.}
+  \label{fig:li-metBMin150_incJet1_J3Postfitmva-db}
+\end{figure}
+
+\begin{figure}[!htb]\captionsetup{justification=centering}
+    \centering
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04-db_fullRes_RFLI_std-kf_v04.v04-db/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04-db_fullRes_RFLI_std-kf_v04.v04-db/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VZ$ plots in the 3+ jet, low pTV region for the standard variable set.}
+  \label{fig:std-kfBMax150_BMin75_incJet1_J3Postfitmva-db}
+\end{figure}
+
+\begin{figure}[!htb]\captionsetup{justification=centering}
+    \centering
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04-db_fullRes_RFLI_std-kf_v04.v04-db/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04-db_fullRes_RFLI_std-kf_v04.v04-db/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VZ$ plots in the 2 jet, low pTV region for the standard variable set.}
+  \label{fig:std-kfBMax150_BMin75_J2Postfitmva-db}
+\end{figure}
+
+\begin{figure}[!htb]\captionsetup{justification=centering}
+    \centering
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04-db_fullRes_RFLI_std-kf_v04.v04-db/Region_BMin150_J2_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04-db_fullRes_RFLI_std-kf_v04.v04-db/Region_BMin150_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VZ$ plots in the 2 jet, high pTV region for the standard variable set.}
+  \label{fig:std-kfBMin150_J2Postfitmva-db}
+\end{figure}
+
+\begin{figure}[!htb]\captionsetup{justification=centering}
+    \centering
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04-db_fullRes_RFLI_std-kf_v04.v04-db/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmvadiboson_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04-db_fullRes_RFLI_std-kf_v04.v04-db/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VZ$ plots in the 3+ jet, high pTV region for the standard variable set.}
+  \label{fig:std-kfBMin150_incJet1_J3Postfitmva-db}
+\end{figure}
+
 
 \section{VH Fit Model Validation}
 We now move onto the fit validation distributions and numbers for the $VH$ fit of interest.
 \subsection{Nuisance Parameter Pulls}
 As can be seen in Figures \ref{fig:PullComparisons-allExceptGammas}--\ref{fig:PullComparisons-Zjets}, the fits for the three different variable sets are fairly similar from a NP pull perspective.  Again, black is the standard variable set, red is the LI set, and blue is the RF set.  The possible exception is the signal UE+PS \ptv\,systematic, which looks very different for all three cases (underconstrained for the standard, but overconstrained for the novel variable cases), though this difference goes away in the ranking plot, meaning this is almost certainly an unphysical artifice of the faster \texttt{HESSE} inversion used to produce the pull comparison plots.
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_allExceptGammas}\caption{Asimov}\end{subfigure}
+\begin{figure}[!htb]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_allExceptGammas}\caption{Asimov}\end{subfigure}
 \begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-obs-prod/NP_allExceptGammas}\caption{Observed}\end{subfigure}
   \caption{Pull comparison for all NP's but MC stats.}
   \label{fig:PullComparisons-allExceptGammas}
 \end{figure}
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_Jet}\caption{Asimov}\end{subfigure}
+\begin{figure}[!htb]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_Jet}\caption{Asimov}\end{subfigure}
 \begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-obs-prod/NP_Jet}\caption{Observed}\end{subfigure}
   \caption{Pull comparison for jet NP's.}
   \label{fig:PullComparisons-Jet}
 \end{figure}
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_MET}\caption{Asimov}\end{subfigure}
+\begin{figure}[!htb]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_MET}\caption{Asimov}\end{subfigure}
 \begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-obs-prod/NP_MET}\caption{Observed}\end{subfigure}
   \caption{Pull comparison for MET NP's.}
   \label{fig:PullComparisons-MET}
 \end{figure}
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_BTag}\caption{Asimov}\end{subfigure}
+\begin{figure}[!htb]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_BTag}\caption{Asimov}\end{subfigure}
 \begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-obs-prod/NP_BTag}\caption{Observed}\end{subfigure}
   \caption{Pull comparison for Flavour Tagging NP's.}
   \label{fig:PullComparisons-BTag}
 \end{figure}
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_Zjets}\caption{Asimov}\end{subfigure}
+\begin{figure}[!htb]\captionsetup{justification=centering}\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_Zjets}\caption{Asimov}\end{subfigure}
 \begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-obs-prod/NP_Zjets}\caption{Observed}\end{subfigure}
   \caption{Pull comparison for $Z+$jets NP's.}
   \label{fig:PullComparisons-Zjets}
 \end{figure}
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
 \begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-asi-prod/NP_Signal}\caption{Asimov}\end{subfigure}
 \begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/pullcomp-obs-prod/NP_Signal}\caption{Observed}\end{subfigure}
   \caption{Pull comparison for signal process modeling NP's.}
@@ -470,7 +506,7 @@ As can be seen in Figures \ref{fig:PullComparisons-allExceptGammas}--\ref{fig:Pu
 
 Nuisance parameter correlation matrices (for correlations with magnitude at least 0.25) for all three variable set fits can be found in Figures \ref{fig:corrstd-kf}--\ref{fig:corrrf-sel}.
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
 \begin{subfigure}[t]{0.49000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/RFLI_std-kf_v04.v04_fullRes_RFLI_std-kf_v04.v04/Asimov/corr_HighCorr}\caption{Asimov}\end{subfigure}
 \begin{subfigure}[t]{0.49000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/RFLI_std-kf_v04.v04_fullRes_RFLI_std-kf_v04.v04/Global/corr_HighCorr}\caption{Observed}\end{subfigure}
   \caption{NP correlations for standard variable fits.}
@@ -478,7 +514,7 @@ Nuisance parameter correlation matrices (for correlations with magnitude at leas
 \end{figure}
 
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
 \begin{subfigure}[t]{0.49000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/RFLI_li-met_v04.v04_fullRes_RFLI_li-met_v04.v04/Asimov/corr_HighCorr}\caption{Asimov}\end{subfigure}
 \begin{subfigure}[t]{0.49000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/RFLI_li-met_v04.v04_fullRes_RFLI_li-met_v04.v04/Global/corr_HighCorr}\caption{Observed}\end{subfigure}
   \caption{NP correlations for LI variable fits.}
@@ -486,7 +522,7 @@ Nuisance parameter correlation matrices (for correlations with magnitude at leas
 \end{figure}
 
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
 \begin{subfigure}[t]{0.49000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/RFLI_rf-sel_v04.v04_fullRes_RFLI_rf-sel_v04.v04/Asimov/corr_HighCorr}\caption{Asimov}\end{subfigure}
 \begin{subfigure}[t]{0.49000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/RFLI_rf-sel_v04.v04_fullRes_RFLI_rf-sel_v04.v04/Global/corr_HighCorr}\caption{Observed}\end{subfigure}
   \caption{NP correlations for RF variable fits.}
@@ -496,19 +532,20 @@ Nuisance parameter correlation matrices (for correlations with magnitude at leas
 \subsection{Full Breakdown of Errors}
 
 A postfit ranking of nuisance parameters according to their impact on $\hat{\mu}$ for the different variable sets may be found in Figure \ref{fig:npranking}, with rankings being fairly similar.  In particular, the signal UE+PS \ptv\,systematic is top-ranked for all three variable sets and also looks very similar, unlike in the pull comparison plot, reiterating the importance of evaluating individually the impact of highly ranked NP's.  The $Z+$jets \ptv\, is highly pulled in all three cases, though this is less severe for the non-standard set (it is off the scale for the standard variable ranking).  The RF discriminant mitigates the effect of poorly modeled jet energy resolution better than the other sets.
-\begin{landscape}
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+
+\begin{figure}[!htb]\captionsetup{justification=centering}
 \begin{subfigure}[t]{0.300000\linewidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04-v04_rank_RFLI_std-kf_v04-v04_pulls_125}\caption{Standard}\end{subfigure}
 \begin{subfigure}[t]{0.300000\linewidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04-v04_rank_RFLI_li-met_v04-v04_pulls_125}\caption{LI}\end{subfigure}
 \begin{subfigure}[t]{0.300000\linewidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04-v04_rank_RFLI_rf-sel_v04-v04_pulls_125}\caption{RF}\end{subfigure}
   \caption{Plots for the top 25 nuisance parameters according to their postfit impact on $\hat{\mu}$ for the standard (a), LI (b), and RF (c) variable sets.}
   \label{fig:npranking}
 \end{figure}
-\end{landscape}
+
 
 The Asimov (Table \ref{tab:breakdownexp}) and observed (Table \ref{tab:breakdownobs}) breakdowns both consistently suggest that the LI variable set does a better job of constraining systematic uncertainties than the standard set and that the RF set does better still.  It is also not surprising that the gain is more substantial in the observed fit than in the Asimov fits, as in the latter there are the ``penalty'' terms from pulls in addition to the overall broadening in the likelihood.
 
-\begin{table}[!htbp]\captionsetup{justification=centering}
+\begin{table}[!htb]\captionsetup{justification=centering}
+\caption{Expected error breakdowns for the standard, LI, and RF variable sets}
 \begin{center}
 \begin{tabular}{lccc}
 \hline\hline
@@ -517,37 +554,37 @@ The Asimov (Table \ref{tab:breakdownexp}) and observed (Table \ref{tab:breakdown
 Total &  +0.608 / -0.511  &  +0.632 / -0.539  &  +0.600 / -0.494 \\
 DataStat &  +0.420 / -0.401  &  +0.453 / -0.434  &  +0.424 / -0.404 \\
 FullSyst &  +0.440 / -0.318  &  +0.441 / -0.319  &  +0.425 / -0.284 \\
-Floating normalizations &  +0.122 / -0.125  &  +0.110 / -0.111  &  +0.093 / -0.089 \\
+%Floating normalizations &  +0.122 / -0.125  &  +0.110 / -0.111  &  +0.093 / -0.089 \\
 All normalizations &  +0.128 / -0.129  &  +0.112 / -0.112  &  +0.099 / -0.092 \\
-All but normalizations &  +0.403 / -0.274  &  +0.387 / -0.250  &  +0.382 / -0.227 \\
+%All but normalizations &  +0.403 / -0.274  &  +0.387 / -0.250  &  +0.382 / -0.227 \\
 \hline
-Jets, MET &  +0.180 / -0.097  &  +0.146 / -0.079  &  +0.122 / -0.083 \\
+%Jets, MET &  +0.180 / -0.097  &  +0.146 / -0.079  &  +0.122 / -0.083 \\
 Jets &  +0.051 / -0.030  &  +0.044 / -0.035  &  +0.025 / -0.042 \\
 MET &  +0.173 / -0.091  &  +0.140 / -0.074  &  +0.117 / -0.063 \\
 BTag &  +0.138 / -0.136  &  +0.069 / -0.071  &  +0.076 / -0.078 \\
 BTag b &  +0.125 / -0.125  &  +0.067 / -0.070  &  +0.073 / -0.075 \\
-BTag c &  +0.018 / -0.016  &  +0.004 / -0.004  &  +0.005 / -0.005 \\
+%BTag c &  +0.018 / -0.016  &  +0.004 / -0.004  &  +0.005 / -0.005 \\
 BTag light &  +0.057 / -0.051  &  +0.020 / -0.014  &  +0.009 / -0.018 \\
-Leptons &  +0.013 / -0.012  &  +0.029 / -0.026  &  +0.012 / -0.023 \\
+%Leptons &  +0.013 / -0.012  &  +0.029 / -0.026  &  +0.012 / -0.023 \\
 Luminosity &  +0.052 / -0.020  &  +0.050 / -0.016  &  +0.050 / -0.019 \\
 Diboson &  +0.043 / -0.039  &  +0.035 / -0.031  &  +0.038 / -0.029 \\
 Model Zjets &  +0.119 / -0.117  &  +0.124 / -0.127  &  +0.095 / -0.086 \\
 Zjets flt. norm. &  +0.080 / -0.106  &  +0.052 / -0.092  &  +0.026 / -0.072 \\
-Model Wjets &  +0.001 / -0.001  &  +0.001 / -0.001  &  +0.000 / -0.001 \\
-Wjets flt. norm. &  +0.000 / -0.000  &  +0.000 / -0.000  &  +0.000 / -0.000 \\
+%Model Wjets &  +0.001 / -0.001  &  +0.001 / -0.001  &  +0.000 / -0.001 \\
+%Wjets flt. norm. &  +0.000 / -0.000  &  +0.000 / -0.000  &  +0.000 / -0.000 \\
 Model ttbar &  +0.076 / -0.080  &  +0.025 / -0.035  &  +0.025 / -0.040 \\
-Model Single Top &  +0.015 / -0.015  &  +0.002 / -0.004  &  +0.021 / -0.007 \\
-Model Multi Jet &  +0.000 / -0.000  &  +0.000 / -0.000  &  +0.000 / -0.000 \\
+%Model Single Top &  +0.015 / -0.015  &  +0.002 / -0.004  &  +0.021 / -0.007 \\
+%Model Multi Jet &  +0.000 / -0.000  &  +0.000 / -0.000  &  +0.000 / -0.000 \\
 Signal Systematics &  +0.262 / -0.087  &  +0.272 / -0.082  &  +0.290 / -0.088 \\
 MC stat &  +0.149 / -0.136  &  +0.168 / -0.154  &  +0.153 / -0.136 \\
 \hline\hline
 \end{tabular}
 \end{center}
-\caption{Expected error breakdowns for the standard, LI, and RF variable sets}
 \label{tab:breakdownexp}
 \end{table}
 
-\begin{table}[!htbp]\captionsetup{justification=centering}
+\begin{table}[!htb]\captionsetup{justification=centering}
+\caption{Observed signal strengths, and error breakdowns for the standard, LI, and RF variable sets}
 \begin{center}
 \begin{tabular}{lccc}
 \hline\hline
@@ -559,107 +596,126 @@ Total &  +0.811 / -0.662  &  +0.778 / -0.641  &  +0.731 / -0.612 \\
 \hline
 DataStat &  +0.502 / -0.484  &  +0.507 / -0.489  &  +0.500 / -0.481 \\
 FullSyst &  +0.637 / -0.451  &  +0.591 / -0.415  &  +0.533 / -0.378 \\
-Floating normalizations &  +0.153 / -0.143  &  +0.128 / -0.118  &  +0.110 / -0.109 \\
+%Floating normalizations &  +0.153 / -0.143  &  +0.128 / -0.118  &  +0.110 / -0.109 \\
 All normalizations &  +0.158 / -0.147  &  +0.130 / -0.119  &  +0.112 / -0.110 \\
-All but normalizations &  +0.599 / -0.402  &  +0.544 / -0.354  &  +0.486 / -0.318 \\
+%All but normalizations &  +0.599 / -0.402  &  +0.544 / -0.354  &  +0.486 / -0.318 \\
 \hline
-Jets, MET &  +0.218 / -0.145  &  +0.198 / -0.113  &  +0.167 / -0.106 \\
+%Jets, MET &  +0.218 / -0.145  &  +0.198 / -0.113  &  +0.167 / -0.106 \\
 Jets &  +0.071 / -0.059  &  +0.065 / -0.047  &  +0.036 / -0.051 \\
 MET &  +0.209 / -0.130  &  +0.190 / -0.102  &  +0.152 / -0.077 \\
 BTag &  +0.162 / -0.166  &  +0.093 / -0.070  &  +0.115 / -0.099 \\
 BTag b &  +0.142 / -0.147  &  +0.090 / -0.066  &  +0.110 / -0.094 \\
-BTag c &  +0.022 / -0.021  &  +0.006 / -0.006  &  +0.007 / -0.007 \\
+%BTag c &  +0.022 / -0.021  &  +0.006 / -0.006  &  +0.007 / -0.007 \\
 BTag light &  +0.074 / -0.072  &  +0.025 / -0.022  &  +0.031 / -0.029 \\
-Leptons &  +0.039 / -0.029  &  +0.035 / -0.031  &  +0.034 / -0.030 \\
+%Leptons &  +0.039 / -0.029  &  +0.035 / -0.031  &  +0.034 / -0.030 \\
 Luminosity &  +0.079 / -0.039  &  +0.073 / -0.034  &  +0.069 / -0.032 \\
-Diboson &  +0.047 / -0.043  &  +0.031 / -0.028  &  +0.029 / -0.028 \\
+%Diboson &  +0.047 / -0.043  &  +0.031 / -0.028  &  +0.029 / -0.028 \\
 Model Zjets &  +0.164 / -0.152  &  +0.141 / -0.143  &  +0.101 / -0.105 \\
 Zjets flt. norm. &  +0.070 / -0.109  &  +0.041 / -0.086  &  +0.033 / -0.083 \\
-Model Wjets &  +0.001 / -0.001  &  +0.001 / -0.000  &  +0.001 / -0.001 \\
-Wjets flt. norm. &  +0.000 / -0.000  &  +0.000 / -0.000  &  +0.000 / -0.000 \\
+%Model Wjets &  +0.001 / -0.001  &  +0.001 / -0.000  &  +0.001 / -0.001 \\
+%Wjets flt. norm. &  +0.000 / -0.000  &  +0.000 / -0.000  &  +0.000 / -0.000 \\
 Model ttbar &  +0.067 / -0.102  &  +0.029 / -0.040  &  +0.040 / -0.048 \\
-Model Single Top &  +0.015 / -0.020  &  +0.001 / -0.005  &  +0.004 / -0.006 \\
-Model Multi Jet &  +0.000 / -0.000  &  +0.000 / -0.000  &  +0.000 / -0.000 \\
+%Model Single Top &  +0.015 / -0.020  &  +0.001 / -0.005  &  +0.004 / -0.006 \\
+%Model Multi Jet &  +0.000 / -0.000  &  +0.000 / -0.000  &  +0.000 / -0.000 \\
 Signal Systematics &  +0.434 / -0.183  &  +0.418 / -0.190  &  +0.364 / -0.152 \\
 MC stat &  +0.226 / -0.201  &  +0.221 / -0.200  &  +0.212 / -0.189 \\
 \hline\hline
 \end{tabular}
 \end{center}
-\caption{Observed signal strengths, and error breakdowns for the standard, LI, and RF variable sets}
 \label{tab:breakdownobs}
 \end{table}
-\clearpage
+
 
 \subsection{Postfit Distributions and S/B Plots}
 Postfit distributions for the MVA discriminant ($m_{bb}$) distribution in the signal (top $e-\mu$ control) region for the standard, Lorentz Invariant, and RestFrames variable sets are found in Figures \ref{fig:stdPostfitmva}--\ref{fig:RFPostfittopemu}.  Here, as in the $VZ$ fit, agreement is reasonable.  In a combined fit with all three channels, $Z+$hf normalizations in particular would be correlated across the 0- and 2-lepton channels, which might help to better constrain this mismodeling (and perhaps as a result some of the $Z+$jets systematics as well).
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
     \centering
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04_fullRes_RFLI_std-kf_v04.v04/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{2 jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04_fullRes_RFLI_std-kf_v04.v04/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{3+ jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04_fullRes_RFLI_std-kf_v04.v04/Region_BMin150_J2_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{2 jet, high pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04_fullRes_RFLI_std-kf_v04.v04/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{3+ jet, high pTV}\end{subfigure}
-  \caption{Postfit $BDT_{VH}$ plots in the signal region for the standard variable set.}
-  \label{fig:stdPostfitmva}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04_fullRes_RFLI_rf-sel_v04.v04/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04_fullRes_RFLI_rf-sel_v04.v04/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VH$ plots in the 3+ jet, low pTV region for the RF variable set.}
+  \label{fig:rf-selBMax150_BMin75_incJet1_J3Postfitmva}
 \end{figure}
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
     \centering
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04_fullRes_RFLI_std-kf_v04.v04/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{3+ jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04_fullRes_RFLI_std-kf_v04.v04/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{2 jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04_fullRes_RFLI_std-kf_v04.v04/Region_BMin150_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{2 jet, high pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04_fullRes_RFLI_std-kf_v04.v04/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{3+ jet, high pTV}\end{subfigure}
-  \caption{Postfit $m_{bb}$ plots in the top $e-\mu$ CR for the standard variable set.}
-  \label{fig:stdPostfittopemu}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04_fullRes_RFLI_rf-sel_v04.v04/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04_fullRes_RFLI_rf-sel_v04.v04/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VH$ plots in the 2 jet, low pTV region for the RF variable set.}
+  \label{fig:rf-selBMax150_BMin75_J2Postfitmva}
 \end{figure}
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
-  \centering
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04_fullRes_RFLI_li-met_v04.v04/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{2 jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04_fullRes_RFLI_li-met_v04.v04/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{3+ jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04_fullRes_RFLI_li-met_v04.v04/Region_BMin150_J2_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{2 jet, high pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04_fullRes_RFLI_li-met_v04.v04/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{3+ jet, high pTV}\end{subfigure}
-  \caption{Postfit $BDT_{VH}$ plots in the signal region for the LI variable set.}
-  \label{fig:LIPostfitmva}
+\begin{figure}[!htb]\captionsetup{justification=centering}
+    \centering
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04_fullRes_RFLI_rf-sel_v04.v04/Region_BMin150_J2_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04_fullRes_RFLI_rf-sel_v04.v04/Region_BMin150_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VH$ plots in the 2 jet, high pTV region for the RF variable set.}
+  \label{fig:rf-selBMin150_J2Postfitmva}
 \end{figure}
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
     \centering
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04_fullRes_RFLI_li-met_v04.v04/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{3+ jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04_fullRes_RFLI_li-met_v04.v04/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{2 jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04_fullRes_RFLI_li-met_v04.v04/Region_BMin150_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{2 jet, high pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04_fullRes_RFLI_li-met_v04.v04/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{3+ jet, high pTV}\end{subfigure}
-  \caption{Postfit $m_{bb}$ plots in the top $e-\mu$ CR for the LI variable set.}
-  \label{fig:LIPostfittopemu}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04_fullRes_RFLI_rf-sel_v04.v04/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04_fullRes_RFLI_rf-sel_v04.v04/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VH$ plots in the 3+ jet, high pTV region for the RF variable set.}
+  \label{fig:rf-selBMin150_incJet1_J3Postfitmva}
 \end{figure}
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
     \centering
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04_fullRes_RFLI_rf-sel_v04.v04/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{2 jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04_fullRes_RFLI_rf-sel_v04.v04/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{3+ jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04_fullRes_RFLI_rf-sel_v04.v04/Region_BMin150_J2_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{2 jet, high pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04_fullRes_RFLI_rf-sel_v04.v04/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{3+ jet, high pTV}\end{subfigure}
-  \caption{Postfit $BDT_{VH}$ plots in the signal region for the RF variable set.}
-  \label{fig:RFPostfitmva}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04_fullRes_RFLI_li-met_v04.v04/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04_fullRes_RFLI_li-met_v04.v04/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VH$ plots in the 3+ jet, low pTV region for the LI variable set.}
+  \label{fig:li-metBMax150_BMin75_incJet1_J3Postfitmva}
 \end{figure}
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
     \centering
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04_fullRes_RFLI_rf-sel_v04.v04/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{3+ jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04_fullRes_RFLI_rf-sel_v04.v04/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{2 jet, low pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04_fullRes_RFLI_rf-sel_v04.v04/Region_BMin150_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{2 jet, high pTV}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04_fullRes_RFLI_rf-sel_v04.v04/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{3+ jet, high pTV}\end{subfigure}
-  \caption{Postfit $m_{bb}$ plots in the top $e-\mu$ CR for the RF variable set.}
-  \label{fig:RFPostfittopemu}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04_fullRes_RFLI_li-met_v04.v04/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04_fullRes_RFLI_li-met_v04.v04/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VH$ plots in the 2 jet, low pTV region for the LI variable set.}
+  \label{fig:li-metBMax150_BMin75_J2Postfitmva}
+\end{figure}
+
+\begin{figure}[!htb]\captionsetup{justification=centering}
+    \centering
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04_fullRes_RFLI_li-met_v04.v04/Region_BMin150_J2_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04_fullRes_RFLI_li-met_v04.v04/Region_BMin150_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VH$ plots in the 2 jet, high pTV region for the LI variable set.}
+  \label{fig:li-metBMin150_J2Postfitmva}
+\end{figure}
+
+\begin{figure}[!htb]\captionsetup{justification=centering}
+    \centering
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04_fullRes_RFLI_li-met_v04.v04/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04_fullRes_RFLI_li-met_v04.v04/Region_BMin150_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VH$ plots in the 3+ jet, high pTV region for the LI variable set.}
+  \label{fig:li-metBMin150_incJet1_J3Postfitmva}
+\end{figure}
+
+\begin{figure}[!htb]\captionsetup{justification=centering}
+    \centering
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04_fullRes_RFLI_std-kf_v04.v04/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04_fullRes_RFLI_std-kf_v04.v04/Region_BMax150_BMin75_incJet1_J3_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VH$ plots in the 3+ jet, low pTV region for the standard variable set.}
+  \label{fig:std-kfBMax150_BMin75_incJet1_J3Postfitmva}
+\end{figure}
+
+\begin{figure}[!htb]\captionsetup{justification=centering}
+    \centering
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04_fullRes_RFLI_std-kf_v04.v04/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmva_DSR_GlobalFit_unconditionnal_mu1}\caption{SR}\end{subfigure}
+\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04_fullRes_RFLI_std-kf_v04.v04/Region_BMax150_BMin75_J2_T2_L2_Y2015_distmBBMVA_Dtopemucr_GlobalFit_unconditionnal_mu1}\caption{$e-\mu$ CR}\end{subfigure}
+  \caption{Postfit $VH$ plots in the 2 jet, low pTV region for the standard variable set.}
+  \label{fig:std-kfBMax150_BMin75_J2Postfitmva}
 \end{figure}
 
 One final type of plot presented as a result is the binned $\log_{10}\left(S/B\right)$ in signal regions distributions may be found in Figure \ref{fig:SoB}.  For these plots, one fills a histogram with the $\log_{10}\left(S/B\right)$ ratio in each postfit distribution bin weighted by the total number of events.  In this case, a log plot is helpful because the highest bins would be invisible on a linear plot.  These distributions are allegedly useful for seeing where most of one's sensitivity lies.  Practically, it is problematic if the pull (from the null hypothesis) is higher at lower $S/B$ values, which may indicate a poorly optimized discriminant.  
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
+\begin{figure}[!htb]\captionsetup{justification=centering}
   \centering
-\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04_fullRes_RFLI_std-kf_v04.v04/Global_SoverB_2015_details_pulls}\caption{Standard}\end{subfigure}
-\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04_fullRes_RFLI_li-met_v04.v04/Global_SoverB_2015_details_pulls}\caption{LI}\end{subfigure}
-\begin{subfigure}[t]{0.490000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04_fullRes_RFLI_rf-sel_v04.v04/Global_SoverB_2015_details_pulls}\caption{RF}\end{subfigure}
+\begin{subfigure}[t]{0.320000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_std-kf_v04.v04_fullRes_RFLI_std-kf_v04.v04/Global_SoverB_2015_details_pulls}\caption{Standard}\end{subfigure}
+\begin{subfigure}[t]{0.320000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_li-met_v04.v04_fullRes_RFLI_li-met_v04.v04/Global_SoverB_2015_details_pulls}\caption{LI}\end{subfigure}
+\begin{subfigure}[t]{0.320000\textwidth}\centering\includegraphics[width=\textwidth]{figures/RFLI_rf-sel_v04.v04_fullRes_RFLI_rf-sel_v04.v04/Global_SoverB_2015_details_pulls}\caption{RF}\end{subfigure}
     \caption{Binned S/B plots for the standard (a), LI (b), and RF (c) variable sets.  Signal is weighted to $\mu=1$ for comparison to the SM prediction.}
     \label{fig:SoB}
 \end{figure}

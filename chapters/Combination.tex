@@ -14,9 +14,10 @@ If I have seen further, it is by standing on ye shoulders of giants.
 \label{sec:run2}
 Preparation of results for the 0- and 1-lepton channels is functionally very similar to above discussions in Chapters \ref{ch:modeling}, \ref{ch:object}, \ref{ch:mva}, and \ref{ch:fit}.  From a modeling standpoint, each channel comes in with different dominating background processes and dedicated simulation, described at length in \cite{modelingnote}, though there is a lot of overlap.  In particular, \tt, \vjets, and diboson production is important for all three channels.  The only important process not discussed here is contribution from multijet background, which is a small but important background in the 1-lepton case.
 
-With respect to object definitions, no new objects are defined in the 0- and 1-lepton analyses, though the treatment of \met\ is of greater concern in these channels, as \met\ is a part of the signal final states in these channels.  Triggers and event selection requirements are optimized by channel.  A full list of requirements is given in Table \ref{tbl:evselTable} from \cite{supportnote}.
+With respect to object definitions, no new objects are defined in the 0- and 1-lepton analyses, though the treatment of \met\ is of greater concern in these channels, as \met\ is a part of the signal final states in these channels.  Triggers and event selection requirements are optimized by channel.  A full list of requirements is given in Tables \ref{tbl:evselTable}--\ref{tbl:evselTable1} from \cite{supportnote}.
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{Summary of common signal event selections and the 2-lepton analysis.}
 \begin{center}
 \begin{tabular}{c|c} 
 \hline \hline
@@ -26,37 +27,6 @@ Jets & $\geq$  2 central jets  \\
 $b$-jets &  2 b-tagged signal jets \\
 Leading jet \pt\  & $>$ 45 \text{GeV} \\
 $|\Delta \text{R(jet1,jet2)}|$ (cut-based only ) & $\leq$ 1.8 (\ptx{V}\ < 200 GeV), $\leq$ 1.2 (\ptx{V}\ > 200 GeV) \\ 
-
-\hline \hline
-\multicolumn{2}{c}{0 Lepton} \\
-\hline 
-Trigger & \texttt{HLT\_xe70, xe90\_mht, and xe110\_mht} \\
-Leptons & 0 \VHloose\ lepton \\
-\met\ & $>$ 150~\text{GeV}  \\
-%\ptmiss\  & $>$ 30~\text{GeV} (1-tag only)  \\
-\sumpt\ & $>$ 120 (2 jets), $>$150 \text{GeV} (3 jets)  \\
-\mindphi\ & $> 20\ensuremath{^\circ}$ (2jet) , $> 30\ensuremath{^\circ}$(3jet) \\
-$|\Delta\phi(\met, h)|$ & $> 120\ensuremath{^\circ}$ \\
-$|\Delta\phi(\text{jet1,jet2})|$ & $< 140\ensuremath{^\circ}$ \\
-$|\Delta\phi(\met,\ptmiss)|$ & $< 90\ensuremath{^\circ}$ \\
-\ptx{V}\ regions (BDT) & $>$ 150 ~GeV  \\
-\ptx{V}\ regions (cut-based) & [150, 200]~GeV, [200, $\infty$]~GeV \\ 
-
-
-\hline\hline
-\multicolumn{2}{c}{1 Lepton} \\
-\hline 
-Trigger &  $e$ channel: un-prescaled single electron \\
-        & Tables 5 and 6 of Ref.~\cite{objectnote}\\
-	&  $\mu$ channel: see 0-lepton triggers \\
-Leptons & 1 \WHsignal\ lepton \\
-        &  $>1$~\VHloose\ lepton veto \\
-\met\   & $>$ 30~\text{GeV} ($e$ channel) \\
-$m_{top}$ &  $< 225$~GeV or $m_{bb} > 75$~GeV \\ 
-\mTW\ (cut-based only) & < 120 GeV \\
-\ptx{V}\ regions (BDT) & $>$ 150 ~GeV  \\ 
-\ptx{V}\ regions (cut-based) &  [150, 200]~GeV,  [200, $\infty$]~GeV  \\ 
-
 
 \hline\hline
 \multicolumn{2}{c}{2 Lepton}\\
@@ -73,8 +43,61 @@ Leptons & 2 \VHloose\ leptons \\
 \hline\hline
 
 \end{tabular}
-\caption{Summary of the signal event selection in the 0-, 1- and 2-lepton analyses.}
 \label{tbl:evselTable}
+\end{center}
+\end{table}
+
+
+\begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{Summary of event selections in the 0-lepton analyses.}
+\begin{center}
+\begin{tabular}{c|c} 
+\hline \hline
+\multicolumn{2}{c}{0 Lepton} \\
+\hline 
+Trigger & \texttt{HLT\_xe70, xe90\_mht, and xe110\_mht} \\
+Leptons & 0 \VHloose\ lepton \\
+\met\ & $>$ 150~\text{GeV}  \\
+%\ptmiss\  & $>$ 30~\text{GeV} (1-tag only)  \\
+\sumpt\ & $>$ 120 (2 jets), $>$150 \text{GeV} (3 jets)  \\
+\mindphi\ & $> 20\ensuremath{^\circ}$ (2jet) , $> 30\ensuremath{^\circ}$(3jet) \\
+$|\Delta\phi(\met, h)|$ & $> 120\ensuremath{^\circ}$ \\
+$|\Delta\phi(\text{jet1,jet2})|$ & $< 140\ensuremath{^\circ}$ \\
+$|\Delta\phi(\met,\ptmiss)|$ & $< 90\ensuremath{^\circ}$ \\
+\ptx{V}\ regions (BDT) & $>$ 150 ~GeV  \\
+\ptx{V}\ regions (cut-based) & [150, 200]~GeV, [200, $\infty$]~GeV \\ 
+
+\hline\hline
+
+\end{tabular}
+\label{tbl:evselTable0}
+\end{center}
+\end{table}
+
+
+\begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{Summary of event selections in the 1-lepton analyses.}
+\begin{center}
+\begin{tabular}{c|c} 
+\hline\hline
+\multicolumn{2}{c}{1 Lepton} \\
+\hline 
+Trigger &  $e$ channel: un-prescaled single electron \\
+        & Tables 5 and 6 of Ref.~\cite{objectnote}\\
+	&  $\mu$ channel: see 0-lepton triggers \\
+Leptons & 1 \WHsignal\ lepton \\
+        &  $>1$~\VHloose\ lepton veto \\
+\met\   & $>$ 30~\text{GeV} ($e$ channel) \\
+$m_{top}$ &  $< 225$~GeV or $m_{bb} > 75$~GeV \\ 
+\mTW\ (cut-based only) & < 120 GeV \\
+\ptx{V}\ regions (BDT) & $>$ 150 ~GeV  \\ 
+\ptx{V}\ regions (cut-based) &  [150, 200]~GeV,  [200, $\infty$]~GeV  \\ 
+
+
+\hline\hline
+
+\end{tabular}
+\label{tbl:evselTable1}
 \end{center}
 \end{table}
 
@@ -87,6 +110,7 @@ Adding different channels has great potential to constrain certain systematic un
 Once the fit inputs in each channel have been prepared and validated, a combined workspace can be directly constructed using the combined fit model.  Significances are given in Table \ref{tab:nuis_sig}, and $\hat{\mu}$ summaries for 2 and 3 POI fits are given in Figure \ref{fig:r2muhat}.  This combined workspace with observed signal strength of $1.20^{+0.24}_{-0.23}(\textrm{stat.})^{+0.34}_{-0.28}(\textrm{syst.})$ is the Run 2 input for the Run 1 + Run 2 combination discussed below.
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
+
   \centering
   \begin{tabular}{c|||c|c|c}
      \hline\hline
@@ -156,6 +180,7 @@ where \textit{eff} and \textit{unf} are for effective and unfolded NP's, respect
 
 Unfolding was found to have very little effect on both expected sensitivities and errors, as can be seen in Tables~\ref{tab:unfold_jes_sensitivities}--~\ref{tab:unfold_jes_breakdownsc}.
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{Expected and observed sensitivities for Run 1, Run 2, and combined workspaces with effective and unfolded JES NP's.}
 \begin{center}\begin{tabular}{lcccccc}
 \hline\hline
  & R1 Unf & R1 Eff & R2 Unf & R2 Eff & Comb Unf & Comb Eff\\
@@ -168,12 +193,12 @@ Exp. Limit &  $0.76^{+0.30}_{-0.21}$ & $0.76^{+0.30}_{-0.21}$ & $0.73^{+0.29}_{-
 Obs. Limit & 1.21 & 1.21 & 1.94 & 1.94 & 1.36 & 1.37\\
 \hline\hline
 \end{tabular}
-\caption{Expected and observed sensitivities for Run 1, Run 2, and combined workspaces with effective and unfolded JES NP's.}
 \label{tab:unfold_jes_sensitivities}
 \end{center}
 \end{table}
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{Error on signal strength breakdowns for  Run 1 workspaces with effective and unfolded JES NP's.}
 \begin{center}\begin{tabular}{lcc}
 \hline\hline
  & R1 Unfold & R1 Eff \\
@@ -190,13 +215,13 @@ BTag &  +0.094 / -0.079  &  +0.095 / -0.079  \\
 \hline
 \hline
 \end{tabular}
-\caption{Error on signal strength breakdowns for  Run 1 workspaces with effective and unfolded JES NP's.}
 \label{tab:unfold_jes_breakdowns1}
 \end{center}
 \end{table}
 
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{Error on signal strength breakdowns for Run 2 workspaces with effective and unfolded JES NP's.}
 \begin{center}\begin{tabular}{lcc}
 \hline\hline
  & R2 Unfold & R2 Eff\\
@@ -213,13 +238,13 @@ BTag &  +0.119 / -0.106  &  +0.119 / -0.106\\
 \hline
 \hline
 \end{tabular}
-\caption{Error on signal strength breakdowns for Run 2 workspaces with effective and unfolded JES NP's.}
 \label{tab:unfold_jes_breakdowns2}
 \end{center}
 \end{table}
 
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{Error on signal strength breakdowns for combined workspaces with effective and unfolded JES NP's.}
 \begin{center}\begin{tabular}{lcc}
 \hline\hline
  & Comb Unfold & Comb Eff\\
@@ -236,7 +261,6 @@ BTag &  +0.076 / -0.076  &  +0.077 / -0.076 \\
 \hline
 \hline
 \end{tabular}
-\caption{Error on signal strength breakdowns for combined workspaces with effective and unfolded JES NP's.}
 \label{tab:unfold_jes_breakdownsc}
 \end{center}
 \end{table}
@@ -244,6 +268,7 @@ BTag &  +0.076 / -0.076  &  +0.077 / -0.076 \\
 It was also found that fit sensitivities and breakdowns were similarly indifferent to the use of either the strong or weak JES correlation schemes, as shown in Tables~\ref{tab:sw_jes_sensitivities} and~\ref{tab:sw_jes_breakdowns}.
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{Expected sensitivities for both effective and unfolded combined workspaces using the strong and weak JES correlation schemes.}
 \begin{center}\begin{tabular}{lcccc}
 \hline\hline
  & JES Weak Unfold & JES Weak Eff & JES Strong Unfold & JES Strong Eff\\
@@ -253,12 +278,12 @@ Exp. Sig. & 3.57 & 3.57 & 3.59 & 3.59\\
 Exp. Limit & $0.493^{+0.193}_{-0.138}$ & $0.494^{+0.193}_{-0.138}$ & $0.493^{+0.193}_{-0.138}$ & $0.493^{+0.193}_{-0.138}$\\
 \hline\hline
 \end{tabular}
-\caption{Expected sensitivities for both effective and unfolded combined workspaces using the strong and weak JES correlation schemes.}
 \label{tab:sw_jes_sensitivities}
 \end{center}
 \end{table}
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{Error on signal strength breakdowns for both effective and unfolded combined workspaces using the strong and weak JES correlation schemes.}
 \begin{center}\begin{tabular}{lcccc}
 \hline
  & Comb Unfold & Comb Eff & Strong Unfold & Strong Eff\\
@@ -276,7 +301,6 @@ Jets &  $^{+ 0.0387}_{-0.032}$ &  $^{+ 0.041}_{-0.0337}$ &  $^{+ 0.0425}_{-0.032
 BTag &  $^{+ 0.0975}_{-0.0933}$ &  $^{+ 0.098}_{-0.0936}$ &  $^{+ 0.0979}_{-0.0935}$ &  $^{+ 0.098}_{-0.0936}$\\
 \hline\hline
 \end{tabular}
-\caption{Error on signal strength breakdowns for both effective and unfolded combined workspaces using the strong and weak JES correlation schemes.}
 
 \label{tab:sw_jes_breakdowns}\end{center}
 \end{table}
@@ -284,24 +308,24 @@ BTag &  $^{+ 0.0975}_{-0.0933}$ &  $^{+ 0.098}_{-0.0936}$ &  $^{+ 0.0979}_{-0.09
 Comparisons of top ranked nuisance parameters in Figures \ref{fig:Ranks:jesu1}--\ref{fig:Ranks:jesuc} and for the complete JES pull comparisons in Figures \ref{fig:PullComparisons:jesu---Jet}--\ref{fig:PullComparisons:jesu---JetUnfold} also show very little difference with respect to correlation scheme (except obviously for the number of JES NP's).  Constrained pulls in pull comparisons should once again be taken as a shortcoming of \texttt{HESSE} and not the fit model.
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/x_combData-jesu1_rank_job100of100_Run1Run2Comb_x_combData-jesu1_pulls_125}\caption{R1 Unfold}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r1_combData-613r1_rank_job100of100_Run1Run2Comb_r1_combData-613r1_pulls_125}\caption{R1 Eff}\end{subfigure}
+\begin{subfigure}[t]{0.35000\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/x_combData-jesu1_rank_job100of100_Run1Run2Comb_x_combData-jesu1_pulls_125}\caption{R1 Unfold}\end{subfigure}
+\begin{subfigure}[t]{0.35000\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r1_combData-613r1_rank_job100of100_Run1Run2Comb_r1_combData-613r1_pulls_125}\caption{R1 Eff}\end{subfigure}
   \caption{Ranks for the effective and unfolded JES NP Run1 combined workspaces.}
     \label{fig:Ranks:jesu1}
 \end{figure}
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/test_obsData-jesu2_rank_Run1Run2Comb_test_obsData-jesu2_pulls_125}\caption{R2 Unfold}\end{subfigure}
-\begin{subfigure}[t]{0.45000\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r2_obsData-907r2_rank_Run1Run2Comb_r2_obsData-907r2_pulls_125}\caption{R2 Eff}\end{subfigure}
+\begin{subfigure}[t]{0.35000\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/test_obsData-jesu2_rank_Run1Run2Comb_test_obsData-jesu2_pulls_125}\caption{R2 Unfold}\end{subfigure}
+\begin{subfigure}[t]{0.35000\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r2_obsData-907r2_rank_Run1Run2Comb_r2_obsData-907r2_pulls_125}\caption{R2 Eff}\end{subfigure}
   \caption{Ranks for the effective and unfolded JES NP Run2 combined workspaces.}
     \label{fig:Ranks:jesu2}
 \end{figure}
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-\begin{subfigure}[t]{0.45\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r1_combData-r2_obsData-jesu_partial-eps02_rank_job100of100_Run1Run2Comb_r1_combData-r2_obsData-jesu_partial-eps02_pulls_125}\caption{Comb Unfolded}\end{subfigure}
-\begin{subfigure}[t]{0.45\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r1_combData-r2_obsData-jes_partial-eps02_rank_job100of100_Run1Run2Comb_r1_combData-r2_obsData-jes_partial-eps02_pulls_125}\caption{Comb Effective}\end{subfigure}
+\begin{subfigure}[t]{0.35\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r1_combData-r2_obsData-jesu_partial-eps02_rank_job100of100_Run1Run2Comb_r1_combData-r2_obsData-jesu_partial-eps02_pulls_125}\caption{Comb Unfolded}\end{subfigure}
+\begin{subfigure}[t]{0.35\textwidth}\centering\includegraphics[width=\textwidth]{figures/comb/r1_combData-r2_obsData-jes_partial-eps02_rank_job100of100_Run1Run2Comb_r1_combData-r2_obsData-jes_partial-eps02_pulls_125}\caption{Comb Effective}\end{subfigure}
   \caption{Ranks for the effective and unfolded JES NP Run1+Run2 combined workspaces.}
     \label{fig:Ranks:jesuc}
 \end{figure}
@@ -336,7 +360,7 @@ Comparisons of top ranked nuisance parameters in Figures \ref{fig:Ranks:jesu1}--
 
 As a result of these studies, the weak JES correlation scheme with uncorrelated effective JES NP's (i.e. just the $b$-jet energy scale NP) has been chosen as the treatment of JES in the Run 1 + Run 2 combined fit.
 
-\clearpage
+
 \subsection{Flavor Tagging}
 \label{sec:ft}
 Unfortunately, the ATLAS Flavor Tagging group did not provide any recommendations for correlating Run 1 and Run 2 NP's, though given the high ranking of these NP's in the Run 2, result, performing at least some studies was deemed crucial.  Nevertheless, great improvements and changes to the treatment of flavor tagging between Run 1 and Run 2 does weaken the argument for any strong flavor tagging correlation scheme.
@@ -344,6 +368,7 @@ Unfortunately, the ATLAS Flavor Tagging group did not provide any recommendation
 Given that $c$-tagging changed significantly between Run 1 and Run 2 and that light tagging NP's are very lowly ranked, these sets of NP's are left uncorrelated.  Moreover, the change in the physical meaning of the effective $b$-tagging NP's means a full correlation of such NP's (insomuch as they exist in each result) is one of limited utility.  Hence, it was decided to leave flavor tagging NP's uncorrelated.  However, since the meaning of the leading $b$-tagging NP's is approximately constant across years and since Run 2 $b$-tagging NP's are very highly ranked in both the Run 2 only and combined fits, tests correlating these NP's were conducted, the results of which can be seen below.  It should be noted that the leading B NP at 8 \TeV, \texttt{SysBTagB0Effic\_Y2012\_8TeV}, has an opposite effect on $t\bar{t}$ normalization than the 7 and 13 TeV NP's, and so must be flipped using a similar strategy as for JES unfolding.  Initial studies of flavor tagging correlations did not flip this NP, and so results for this scheme (labeled ``B0 8TeV Not Flipped'') have also been included for comparison.
 
 \begin{table}[htbp]
+\caption{Expected and observed sensitivities for a combination featuring the weak JES scheme, combination with the weak JES scheme + leading $b$ NP's correlated, and the $b$ correlation with the 8 TeV NP with sign unflipped.}
 \begin{center}\begin{tabular}{lccc}
 \hline\hline
  & Comb Eff & BTag B0 & B0 8TeV Not Flipped\\
@@ -355,12 +380,12 @@ Exp. Limit & $0.51^{+0.2}_{-0.143}$ & $0.5^{+0.196}_{-0.14}$ & $0.517^{+0.202}_{
 Obs. Limit & 1.37 & 1.41 & 1.35\\
 \hline
 \end{tabular}
-\caption{Expected and observed sensitivities for a combination featuring the weak JES scheme, combination with the weak JES scheme + leading $b$ NP's correlated, and the $b$ correlation with the 8 TeV NP with sign unflipped.}
 \label{tab:ExpectedSensitivities:btag-b}
 \end{center}
 \end{table}
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{Run 1 + Run 2 W+jets modeling correlation projections}
 \begin{center}\begin{tabular}{lccc}
 \hline\hline
  &Comb Eff &BTag B0 &B0 8TeV Not Flipped\\
@@ -376,7 +401,6 @@ BTag b &  +0.062 / -0.059  &  +0.055 / -0.049  &  +0.064 / -0.060 \\
 \hline
 \hline
 \end{tabular}
-\caption{Breakdowns of the impact of different NP sets on total error on $\hat{mu}$ for a combination featuring the weak JES scheme and a combination with the weak JES scheme + leading $b$ NP's correlated.}
 \label{tab:Breakdowns:btag-b}
 \end{center}\end{table}
 
@@ -422,7 +446,6 @@ $\rho$=0.6 & 0.0017 & 0.2622 & 0.00636 (2.49\%) & 1.0844\\
 $\rho$=1 & 0.0029 & 0.2664 & 0.0105 (4.11\%) & 1.1242\\
 \hline\hline
 \end{tabular}
-\caption{Run 1 + Run 2 W+jets modeling correlation projections}
 \label{tab:wjets_correlation}
 \end{center}
 \end{table}
@@ -454,6 +477,7 @@ $\rho$=1 & 0.0 & 0.262 & 0.000142 (0.0542\%) & 1.8155\\
 \end{center}\end{table}
 
 \begin{table}[htbp]
+\caption{A summary of correlated nuisance parameters among the 7, 8, and 13 TeV datasets.}
 \begin{center}
 \label{tab:run1+run2ModelZjetsCorrelationProjections}
 \begin{tabular}{lcccc}
@@ -663,7 +687,6 @@ The final Run 1 + Run 2 correlation scheme is shown in Table~\ref{tableComb1}.  
 SysJetFlavB\_ 7TeV & SysJetFlavB\_ 8TeV & SysJET\_21NP\_JET\_BJES\_Response\\
  \hline\hline
 \end{tabular}
-\caption{A summary of correlated nuisance parameters among the 7, 8, and 13 TeV datasets.}
 \label{tableComb1}
 \end{table}
 
@@ -674,51 +697,53 @@ Before moving onto the final results, we present the rest of the validations for
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-  \includegraphics[width=0.55\linewidth]{figures/comb/r1_combData-r2_obsData-jes_partial-eps02_rank_job100of100_Run1Run2Comb_r1_combData-r2_obsData-jes_partial-eps02_pulls_125}
+  \includegraphics[width=0.45\linewidth]{figures/comb/r1_combData-r2_obsData-jes_partial-eps02_rank_job100of100_Run1Run2Comb_r1_combData-r2_obsData-jes_partial-eps02_pulls_125}
   \caption{Ranked nuisance parameters for the Run1+Run2 combination.}
   \label{fig:combranks}
 \end{figure}
 
 
+
+In addition to looking at the behaviors of nuisance parameters to gauge fit model performance and stability, fits are conducted using multiple parameters of interest.  Typical divisions are Run 1 vs. Run 2, lepton channels, and $WH$ vs $ZH$.  As mentioned in Chapter \ref{ch:fit}, the profile likelihood test statistic given in Equation \ref{eqn:teststat} is, in the limit of large sample statistics, a $\chi^2$ distribution with degrees of freedom equal to the number of parameters of interest plus number of nuisance parameters.  Thus, changing the number of interest parameters and leaving the rest of the fit model unchanged means that the difference between the nominal fit and a fit with more parameters of interest ought to also be distributed as a $\chi^2$ distribution with degrees of freedom equivalent to the number of extra parameters of interest.  This difference can then be interpreted as a compatibility between the two results using the standard tables for this distribution, giving another gauge of fit performance.  These are shown in Table \ref{tab:compatibility}.
+
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{Summary of the impact of different nuisance parameter categories on the total error on $\hat{\mu}$ for the combined Run1+Run2 fit.}
 \begin{center}\begin{tabular}{|l|c|}
 \hline
 Total & +0.278 / -0.261 \\\hline
 DataStat & +0.185 / -0.181 \\
 FullSyst & +0.208 / -0.188 \\\hline
-Floating normalizations & +0.055 / -0.056 \\
+%Floating normalizations & +0.055 / -0.056 \\
 All normalizations & +0.068 / -0.069 \\
-All but normalizations & +0.192 / -0.172 \\
+%All but normalizations & +0.192 / -0.172 \\
 Jets, MET & +0.046 / -0.040 \\
-Jets & +0.041 / -0.036 \\
-MET & +0.023 / -0.018 \\
+%Jets & +0.041 / -0.036 \\
+%MET & +0.023 / -0.018 \\
 BTag & +0.077 / -0.076 \\
-BTag b & +0.062 / -0.059 \\
-BTag c & +0.033 / -0.032 \\
-BTag light & +0.028 / -0.028 \\
-Leptons & +0.008 / -0.008 \\
+%BTag b & +0.062 / -0.059 \\
+%BTag c & +0.033 / -0.032 \\
+%BTag light & +0.028 / -0.028 \\
+%Leptons & +0.008 / -0.008 \\
 Luminosity & +0.026 / -0.014 \\
 Diboson &  +0.030 / -0.027 \\
 Model Zjets & +0.049 / -0.050 \\
-Zjets flt. norm. & +0.032 / -0.040 \\
+%Zjets flt. norm. & +0.032 / -0.040 \\
 Model Wjets & +0.082 / -0.083 \\
-Wjets flt. norm. & +0.031 / -0.027 \\
+%Wjets flt. norm. & +0.031 / -0.027 \\
 Model ttbar & +0.047 / -0.046 \\
-ttbar flt. norm. & +0.025 / -0.026 \\
+%ttbar flt. norm. & +0.025 / -0.026 \\
 Model Single Top & +0.047 / -0.045 \\
 Model Multi Jet & +0.027 / -0.038 \\
 Signal Systematics & +0.098 / -0.052 \\
 MC stat & +0.080 / -0.084 \\
 \hline
 \end{tabular}
-\caption{Summary of the impact of different nuisance parameter categories on the total error on $\hat{\mu}$ for the combined Run1+Run2 fit.}
 \label{tab:combbreakdown}
 \end{center}
 \end{table}
 
-In addition to looking at the behaviors of nuisance parameters to gauge fit model performance and stability, fits are conducted using multiple parameters of interest.  Typical divisions are Run 1 vs. Run 2, lepton channels, and $WH$ vs $ZH$.  As mentioned in Chapter \ref{ch:fit}, the profile likelihood test statistic given in Equation \ref{eqn:teststat} is, in the limit of large sample statistics, a $\chi^2$ distribution with degrees of freedom equal to the number of parameters of interest plus number of nuisance parameters.  Thus, changing the number of interest parameters and leaving the rest of the fit model unchanged means that the difference between the nominal fit and a fit with more parameters of interest ought to also be distributed as a $\chi^2$ distribution with degrees of freedom equivalent to the number of extra parameters of interest.  This difference can then be interpreted as a compatibility between the two results using the standard tables for this distribution, giving another gauge of fit performance.  These are shown in Table \ref{tab:compatibility}.
-
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{Summary of multiple POI compatibilities.  The well-known Run 1 7 \tev\, 0-lepton deficit is responsible for the low compatibility with the 6 and 3 POI fits.}
 \begin{center}\begin{tabular}{|l|c|}
 \hline
 Fit & Compatibility \\\hline
@@ -729,7 +754,6 @@ Run 1/Run 2 $\times$ Leptons (6 POI) & 7.10\% \\
 Run 1/Run 2 $\times WH/ZH$  (4 POI) & 34.6\% \\
 \hline
 \end{tabular}
-\caption{Summary of multiple POI compatibilities.  The well-known Run 1 7 \tev\, 0-lepton deficit is responsible for the low compatibility with the 6 and 3 POI fits.}
 \label{tab:compatibility}
 \end{center}
 \end{table}
@@ -766,6 +790,7 @@ The combined results yields an observed (expected) significance of 3.57 (4.00) a
 The two and three parameter of interest fit signal strength summary plots, as well as a summary of the historical values of the 7, 8, and 13 \TeV\,results may be found in Figures~\ref{fig:combmushat1}-\ref{fig:combmushat3}.  The main results for Run 1, Run 2, and the combination may be found in Table~\ref{tableCombresykts}.  These results were collectively noted as the first ever experimental evidence for SM \vhbb\, in \cite{paper}.
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{A summary of main results for the Run 1, Run 2, and combined fits.}
 \begin{center}
 \begin{tabular}{lccc} \hline\hline
 Dataset & $\hat{\mu}$ & Total Error in $\hat{\mu}$ & Obs. (Exp.) Significance \\
@@ -775,7 +800,6 @@ Run 2 & 1.20 & +0.42 / -0.36 & 3.54 (3.03)\\
 Combined & 0.90 & +0.28 / -0.26 & 3.57 (4.00)\\
 \hline\hline
 \end{tabular}
-\caption{A summary of main results for the Run 1, Run 2, and combined fits.}
 \label{tableCombresykts}
 \end{center}
 \end{table}

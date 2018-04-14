@@ -33,6 +33,7 @@ The truth-level analysis has the same missing $E_T$, jet $p_T$, $m_{ll}$, and ad
 In the jet calibration validation, the reconstructed level analysis lepton and $m_{ll}$ requirements are imposed, but neither the missing $E_T$ nor the jet selection requirements are applied so as not to bias the validation.
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{A summary of basic event selection requirements.  Truth-level $b$-tagging is done with truth-level information.\label{tab:sumreq}}
 \begin{center}
 \begin{tabular}{|l|l|l|l|}
 \hline
@@ -49,12 +50,11 @@ Missing $E_T$ & \multicolumn{2}{|c|}{$E_T^{\text{miss}}<60$ \GeV\ }& ---\\
 $Z$ boson & \multicolumn{3}{|c|}{$83<m_{ll}<99$ \GeV\ }\\
 \hline
 \end{tabular}
-\caption{A summary of basic event selection requirements.  Truth-level $b$-tagging is done with truth-level information.
-\label{tab:sumreq}}
 \end{center}
 \end{table}
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{Topological requirements of the event selection.\label{tab:dRreq}}
 \begin{center}
 \begin{tabular}{|l|l|}
 \hline
@@ -67,8 +67,6 @@ $p_T^Z$ [\GeV] & $\Delta R\left(b,\bar{b}\right)$\\
 $>200$ & $<1.4$ \\
 \hline
 \end{tabular}
-\caption{Topological requirements of the event selection.
-\label{tab:dRreq}}
 \end{center}
 \end{table}
 
@@ -81,8 +79,8 @@ Once anti-$k_t$ with $R=0.4$ reconstructed and truth jets are matched, response 
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \begin{center}
-\begin{subfigure}[t]{18pc}\centering\includegraphics[width=\textwidth]{figures/body/val_wztrim-r_ratio_eta0_12_zjets}\caption{}\end{subfigure}
-\begin{subfigure}[t]{18pc}\centering\includegraphics[width=\textwidth]{figures/body/val_wztrim-r_resol_eta0_12_zjets}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/val_wztrim-r_ratio_eta0_12_zjets}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/val_wztrim-r_resol_eta0_12_zjets}\caption{}\end{subfigure}
   \caption{\label{fig:valzjets}The mean and resolution of $p_T^{rec}/p_T^{tru}$  for the background $Z$+jets sample for $\left|\eta\right|<1.2$ and for $R=0.4$, 0.6, 1.0, and 1.5 in 20 \GeV\ bins of $p_T^{tru}$ for 20-200 \GeV, one bin for 200-300 \GeV, and one bin for 300-500 \GeV, with bins chosen for purposes of statistics.}
   \end{center}
 \end{figure}
@@ -95,8 +93,8 @@ To understand the limits and sources of any potential improvements, a truth-leve
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
 \begin{center}
-\begin{subfigure}[t]{18pc}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_mbbmain_zh125}\caption{}\end{subfigure}
-\begin{subfigure}[t]{18pc}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_mbbmain_zjets}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_mbbmain_zh125}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_mbbmain_zjets}\caption{}\end{subfigure}
 \caption{\label{fig:multradtru}The $m_{bb}$ distribution for the telescoping jets with $R=0.5$, 1.0, and 1.5 truth-level jets is shown for the signal and background samples in (a) and (b), respectively.}
 \end{center}
 \end{figure}
@@ -105,8 +103,8 @@ One way to take advantage of this information is to make a cut on $m_{bb}$ for t
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
 \begin{center}
-\begin{subfigure}[t]{18pc}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_zh125_mbbRv4_ptall_r9}\caption{}\end{subfigure}
-\begin{subfigure}[t]{18pc}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_zjets_mbbRv4_ptall_r9}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_zh125_mbbRv4_ptall_r9}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_zjets_mbbRv4_ptall_r9}\caption{}\end{subfigure}
 \caption{\label{fig:2mwtru}The 2D distribution of $m_{bb,R=0.9}$ vs. $m_{bb,R=0.4}$ is shown for signal and background truth-level samples in (a) and (b), respectively.  The region chosen for the double $m_{bb}$ cut is outlined in orange.}
 \end{center}
 \end{figure}
@@ -202,6 +200,7 @@ Of particular interest is the likelihood optimized $t\left(z\right)$,\footnote{D
 where $\epsilon_{S,B}$ are the means of $\rho_{S,B}\left(z\right)$ and $\sigma_B^2$ is the variance of $\rho_B\left(z\right)$.  Further details can be found in Refs. \cite{teljet,multint} and Appendix \ref{sec:telerr}.
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{$m_{bb}$ windows studied.  These windows were chosen to optimize significances over all $p_T^Z$.\label{tab:masswindow}}
 \begin{center}
 \begin{tabular}{|l|l|p{1.75in}|}
 \hline
@@ -218,16 +217,14 @@ Truth         & anti-$k_t$ $R=0.4$                                          & 10
               & anti-$k_t$ $R=0.4$, telescoping $R=0.9$                     & 100--130 \GeV\ ($R=0.4$), 100--155 \GeV\ ($R=0.9$)\\
 \hline
 \end{tabular}
-\caption{$m_{bb}$ windows studied.  These windows were chosen to optimize significances over all $p_T^Z$.
-\label{tab:masswindow}}
 \end{center}
 \end{table}
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
 \begin{center}
-\begin{subfigure}[t]{15pc}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_ntel11_zh125_rho_ptall_lo120_hi135}\caption{}\end{subfigure}
-\begin{subfigure}[t]{15pc}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_ntel11_zjets_rho_ptall_lo120_hi135}\caption{}\end{subfigure}
-\begin{subfigure}[t]{15pc}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_ntel11_zjets_rhoSB_ptall_lo120_hi135}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_ntel11_zh125_rho_ptall_lo120_hi135}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_ntel11_zjets_rho_ptall_lo120_hi135}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_ntel11_zjets_rhoSB_ptall_lo120_hi135}\caption{}\end{subfigure}
 \caption{\label{fig:rhotru}Truth-level $\rho\left(z\right)$ distributions for the $m_{bb}$ window optimizing $\left(S/\delta B\right)_{t^*\left(z\right)}$.  $\rho_S\left(z\right)$ for the signal $ZH125$ sample is shown in (a), and $\rho_B\left(z\right)$ for the background $Z+$jets sample is shown in (b).  The distribution of $\rho_S\left(z\right)/\rho_B\left(z\right)$ for these samples is shown in (c).}
 \end{center}
 \end{figure}
@@ -237,10 +234,10 @@ The truth-level distributions $\rho_S\left(z\right)$, $\rho_B\left(z\right)$, an
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
 \begin{center}
-\begin{subfigure}[t]{16pc}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_ntel11_pois_sdb_r4_lo100_hi130_r9_lo100_hi155_zjets}\caption{}\end{subfigure}
-\begin{subfigure}[t]{16pc}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_ntel11_pois_sdb_z_lo115_hi140_zjets}\caption{}\end{subfigure}
-\begin{subfigure}[t]{16pc}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_ntel11_pois_sdb_rho_lo120_hi135_zjets}\caption{}\end{subfigure}
-\begin{subfigure}[t]{16pc}\centering\includegraphics[width=\textwidth]{figures/zht_comp/zht_comp_pois_sdb_tru_ov_subel_wz_imp_rho}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.24\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_ntel11_pois_sdb_r4_lo100_hi130_r9_lo100_hi155_zjets}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.24\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_ntel11_pois_sdb_z_lo115_hi140_zjets}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.24\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/tru_ov_subel_wz_ntel11_pois_sdb_rho_lo120_hi135_zjets}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.24\textwidth}\centering\includegraphics[width=\textwidth]{figures/zht_comp/zht_comp_pois_sdb_tru_ov_subel_wz_imp_rho}\caption{}\end{subfigure}
 \caption{\label{fig:sigsumtru}A summary of the improvements for different truth-level telescoping jet cuts and weights is shown in bins of $p_T^Z$.  %These bins are the same as for the topological cuts: 0--90 \GeV, 90--120 \GeV, 120--160 \GeV, 160--200 \GeV, and $>200$ \GeV.
   The final bin is the total improvement over all $p_T^Z$.  Shown are improvements for the 2D $m_{bb}$ cut (a), $t\left(z\right)=z$ (b), $t\left(z\right)=t^*\left(z\right)$ with 12 radii (c), and $t\left(z\right)=t^*\left(z\right)$ for various radii (d).}
 \end{center}
@@ -254,8 +251,8 @@ At reconstructed level, the same overall effect of introducing a high tail in $m
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
 \begin{center}
-\begin{subfigure}[t]{18pc}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_mbbmain_zh125}\caption{}\end{subfigure}
-\begin{subfigure}[t]{18pc}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_mbbmain_zjets}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_mbbmain_zh125}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_mbbmain_zjets}\caption{}\end{subfigure}
 \caption{\label{fig:multradrec}The $m_{bb}$ distribution for the telescoping jets with $R=0.5$, $R=1.0$, and $R=1.5$ reconstructed-level jets is shown for the signal and background samples in (a) and (b), respectively.}
 \end{center}
 \end{figure}
@@ -264,17 +261,17 @@ Total significance gains at reconstructed level for the two dimensional $m_{bb}$
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
 \begin{center}
-\begin{subfigure}[t]{18pc}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_zh125_mbbRv4_ptall_r6}\caption{}\end{subfigure}
-\begin{subfigure}[t]{18pc}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_zjets_mbbRv4_ptall_r6}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_zh125_mbbRv4_ptall_r6}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.49\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_zjets_mbbRv4_ptall_r6}\caption{}\end{subfigure}
 \caption{\label{fig:2mwrec}The 2D distribution of $m_{bb,R=0.8}$ vs. $m_{bb,R=0.4}$ is shown for signal and background reconstructed-level samples in (a) and (b), respectively.  The region chosen for the double $m_{bb}$ cut is outlined in orange.}
 \end{center}
 \end{figure}
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
 \begin{center}
-\begin{subfigure}[t]{15pc}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_ntel11_zh125_rho_ptall_lo110_hi155}\caption{}\end{subfigure}
-\begin{subfigure}[t]{15pc}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_ntel11_zjets_rho_ptall_lo110_hi155}\caption{}\end{subfigure}
-\begin{subfigure}[t]{15pc}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_ntel11_zjets_rhoSB_ptall_lo110_hi155}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_ntel11_zh125_rho_ptall_lo110_hi155}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_ntel11_zjets_rho_ptall_lo110_hi155}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_ntel11_zjets_rhoSB_ptall_lo110_hi155}\caption{}\end{subfigure}
 \caption{\label{fig:rhorec}Reconstructed-level $\rho\left(z\right)$ distributions for the $m_{bb}$ window optimizing $\left(S/\delta B\right)_{t^*\left(z\right)}$.  $\rho_S\left(z\right)$ for the signal $ZH125$ sample is shown in (a), and $\rho_B\left(z\right)$ for the background $Z+$jets sample is shown in (b).  The distribution of $\rho_S\left(z\right)/\rho_B\left(z\right)$ for these samples is shown in (c).}
 \end{center}
 \end{figure}
@@ -283,16 +280,17 @@ The optimal $m_{bb}$ window for the $t^*\left(z\right)$ case is also markedly wi
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
 \begin{center}
-\begin{subfigure}[t]{16pc}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_ntel11_pois_sdb_r4_lo95_hi140_r6_lo105_hi160_zjets}\caption{}\end{subfigure}
-\begin{subfigure}[t]{16pc}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_ntel11_pois_sdb_z_lo110_hi155_zjets}\caption{}\end{subfigure}
-\begin{subfigure}[t]{16pc}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_ntel11_pois_sdb_rho_lo110_hi155_zjets}\caption{}\end{subfigure}
-\begin{subfigure}[t]{16pc}\centering\includegraphics[width=\textwidth]{figures/zht_comp/zht_comp_pois_sdb_rec_ov_subel_trim_imp_rho}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.24\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_ntel11_pois_sdb_r4_lo95_hi140_r6_lo105_hi160_zjets}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.24\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_ntel11_pois_sdb_z_lo110_hi155_zjets}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.24\textwidth}\centering\includegraphics[width=\textwidth]{figures/body/rec_ov_subel_trim_ntel11_pois_sdb_rho_lo110_hi155_zjets}\caption{}\end{subfigure}
+\begin{subfigure}[t]{0.24\textwidth}\centering\includegraphics[width=\textwidth]{figures/zht_comp/zht_comp_pois_sdb_rec_ov_subel_trim_imp_rho}\caption{}\end{subfigure}
 \caption{\label{fig:sigsumrec}A summary of the improvements for different reconstructed-level telescoping jet cuts and weights is shown in bins of $p_T^Z$.%  These bins are the same as for the topological cuts: 0--90 \GeV, 90--120 \GeV, 120--160 \GeV, 160--200 \GeV, and $>200$ \GeV.
   The final bin is the total improvement over all $p_T^Z$.  Shown are improvements for the 2D $m_{bb}$ cut (a), $t\left(z\right)=z$ (b), $t\left(z\right)=t^*\left(z\right)$ with 12 radii (c), and $t\left(z\right)=t^*\left(z\right)$ for various radii (d).}
 \end{center}
 \end{figure}
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{A summary of significances for different weighting schemes and cuts and for reconstructed and truth jets for a luminosity of $20.3\text{ fb}^{-1}.$  akt4 refers to the standard cut-based analysis using anti-$k_t$ with $R=0.4$ jets.  Column titles are $p_T^Z$ regions in \GeV.\label{tab:SdB}}
 \begin{center}
 \begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
@@ -311,8 +309,6 @@ $t^*\left(z\right)_{rec}$  &    0.55085 &    0.29931     &    0.33367     &    0
 $t^*\left(z\right)_{tru}$  &    0.64425 &    0.38008     &    0.50904     &     0.5214     &    0.91337   &     1.3873\\
 \hline
 \end{tabular}
-\caption{A summary of significances for different weighting schemes and cuts and for reconstructed and truth jets for a luminosity of $20.3\text{ fb}^{-1}.$  akt4 refers to the standard cut-based analysis using anti-$k_t$ with $R=0.4$ jets.  Column titles are $p_T^Z$ regions in \GeV.
-\label{tab:SdB}}
 \end{center}
 \end{table}
 
@@ -593,8 +589,7 @@ $m_{bb}$ distributions at all telescoping radii are given for signal $ZH125$ and
 
 \section{Different Truth-Level Options}
 \begin{table}[htbp]
-\caption{$m_{bb}$ windows studied.  These windows were chosen to optimize significances over all $p_T^Z$.
-\label{tab:masswindow}}
+\caption{$m_{bb}$ windows studied.  These windows were chosen to optimize significances over all $p_T^Z$.\label{tab:masswindow}}
 \begin{center}
 \begin{tabular}{|c|c|c|p{4cm}|p{4cm}|c|}
 \hline
@@ -783,8 +778,7 @@ $m_{bb}$ distributions at all telescoping radii are given for signal $ZH125$ and
 \section{Plots at Reconstructed-Level with Overlap Removal}
 \section{Removal Over Electrons and Muons}
 \begin{table}[htbp]
-\caption{$m_{bb}$ windows studied.  These windows were chosen to optimize significances over all $p_T^Z$.
-\label{tab:masswindow}}
+\caption{$m_{bb}$ windows studied.  These windows were chosen to optimize significances over all $p_T^Z$.\label{tab:masswindow}}
 \begin{center}
 \begin{tabular}{|c|p{5cm}|p{5cm}|c|}
 \hline
@@ -836,8 +830,7 @@ $m_{bb}$ distributions at all telescoping radii are given for signal $ZH125$ and
 
 \section{Removal Over Electrons Only}
 \begin{table}[htbp]
-\caption{$m_{bb}$ windows studied.  These windows were chosen to optimize significances over all $p_T^Z$.
-\label{tab:masswindow}}
+\caption{$m_{bb}$ windows studied.  These windows were chosen to optimize significances over all $p_T^Z$.\label{tab:masswindow}}
 \begin{center}
 \begin{tabular}{|c|p{5cm}|p{5cm}|c|}
 \hline
@@ -890,8 +883,7 @@ $m_{bb}$ distributions at all telescoping radii are given for signal $ZH125$ and
 \section{Plots at Truth-Level with Overlap Removal}
 \section{Removal Over Electrons and Muons}
 \begin{table}[htbp]
-\caption{$m_{bb}$ windows studied.  These windows were chosen to optimize significances over all $p_T^Z$.
-\label{tab:masswindow}}
+\caption{$m_{bb}$ windows studied.  These windows were chosen to optimize significances over all $p_T^Z$.\label{tab:masswindow}}
 \begin{center}
 \begin{tabular}{|c|c|p{5cm}|p{5cm}|c|}
 \hline
@@ -1062,8 +1054,7 @@ incl. $\mu,\nu$, trim& ---    &                                                 
 
 \section{Removal Over Electrons Only}
 \begin{table}[htbp]
-\caption{$m_{bb}$ windows studied.  These windows were chosen to optimize significances over all $p_T^Z$.
-\label{tab:masswindow}}
+\caption{$m_{bb}$ windows studied.  These windows were chosen to optimize significances over all $p_T^Z$.\label{tab:masswindow}}
 \begin{center}
 \begin{tabular}{|c|c|p{5cm}|p{5cm}|c|}
 \hhline{|=|=|=|=|=|}

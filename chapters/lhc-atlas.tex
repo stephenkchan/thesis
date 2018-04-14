@@ -13,7 +13,7 @@ The journey of protons from hydrogen canister to high energy collisions through 
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-  \includegraphics[width=\linewidth]{figures/atlas/CERN-accelerator-complex2013}
+  \includegraphics[width=0.75\linewidth]{figures/atlas/CERN-accelerator-complex2013}
   \caption{The CERN Accelerator Complex \cite{rings}}
   \label{fig:cern}
 \end{figure}
@@ -36,21 +36,18 @@ The ideal version of a proton beam in the LHC consists of infinitely small bunch
   The LHC ring itself is between 45 m and 170 m below ground and has a 1.4\% incline towards Lac L\'eman with eight arcs and eight straight sections.  In the middle of each of the eight straight sections, there are potential interaction points (each colloquially referred to by its number as ``Point $N$''), with each point housing either accelerator infrastructure or an experiment.  A schematic of the contents of each component, as well as a more detailed view of the infrastructure in the LHC ring, can be found in Figure \ref{fig:lhcring}.
 
 %JEH: Too much detail in figure 1.3?  can’t read the fine print
-\begin{figure}[!htbp]\captionsetup{justification=centering}
-  \centering
-  \begin{subfigure}[t]{0.4950000\linewidth}\centering\includegraphics[width=\textwidth]{figures/atlas/lhcschematic}\caption{}\end{subfigure}
-  \caption{Schematic and detailed views of the LHC ring. IC: \cite{lhccartoon}, \cite{lhcdetail}}
-  \label{fig:lhccartoon}
-\end{figure}
 
-\begin{landscape}
-\begin{figure}[!htbp]\captionsetup{justification=centering}
-  \centering
-  \begin{subfigure}[t]{\linewidth}\centering\includegraphics[width=\linewidth]{figures/atlas/fig_LHC_area_overview}\caption{}\end{subfigure}
+\begin{figure}[!bh]\captionsetup{justification=centering}
   \caption{Schematic and detailed views of the LHC ring. IC: \cite{lhccartoon}, \cite{lhcdetail}}
   \label{fig:lhcring}
 \end{figure}
-\end{landscape}
+\addtocounter{figure}{-1}
+\begin{landscape}
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=\linewidth]{figures/atlas/fig_LHC_area_overview}
+\end{figure}
+\end{landscape}\clearpage
 
 Points 1, 2, 5, and 8 house the LHC's experiments, ATLAS (\emph{A} \emph{T}oroidal \emph{L}HC \emph{A}pparatu\emph{S}, one of the two general purpose detectors, discussed in detail below), ALICE (A Large Ion Collider Experiment, a dedicated heavy ion experiment), CMS (Compact Muon Solenoid, the other general purpose detector), and LHCb (LHC beauty, a $B$ physics experiment), respectively.  Point 3 houses a series of collimators that scatter and absorb particles in the beam with a large momentum deviation (which will have different orbital radii) from other particles in the beam (``momentum cleaning''), while Point 7 has a similar setup to remove particles with large betatron amplitudes (``betatron cleaning'').  Both of these dedicated cleaning assembiles are in addition to the magnetic focusing assemblies discussed above and address the same issues.  Point 4 contains the LHC's RF (radio frequency; 400 MHz) acceleration system, responsible for taking protons from their injection energy of 450 \GeV\,to their collision energy of 3.5, 4, 6.5, or 7 \TeV.  Point 6 is where the energetic ionizing radiation of circulating beams can be safely taken out of the collider into a block of absorbing material, either at the end of a data-taking run or in the event of an emergency (in the event of irregular behavior, it is essential to do this as quickly as possible to minimize damage to the accelerator and to experiments); this is known as a ``beam dump.''
 
@@ -131,12 +128,17 @@ The innermost part of ATLAS is the Pixel Detector, which, as the name suggests, 
 
 In order to improve total coverage in the detector and prevent any gaps, pixels are not installed flush with each other.  Pixels in the barrel are tilted at about \ang{20}, with an overlap in $r-\phi$, as shown in Figure \ref{fig:pix}.  The disks of the ID end caps are rotated with respect to each other by \ang{3.75}.
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
-  \centering
-  \includegraphics[width=0.850000\linewidth]{figures/atlas/ibl}
+\begin{figure}[!bh]\captionsetup{justification=centering}
   \caption{Arrangement of pixels in the barrel. IC: \cite{ibltdr}}
   \label{fig:pix}
 \end{figure}
+\addtocounter{figure}{-1}
+\begin{landscape}
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=\linewidth]{figures/atlas/ibl}
+\end{figure}
+\end{landscape}\clearpage
 
 \subsection{The Silicon Microstrip Detector (SCT)}
 The layout of the SCT is similar to that of the Pixel detector, except that, for cost considerations, the SCT uses silicon strips.  These strips are also cooled to $\sim-\ang{5}$C with N$_2$ gas and operate from 150--350 V.  Strip dimensions are $80\times 6 000\times285$ $\mu$m, and provide nominal  17(580) $\mu$m resolution in $r-\phi$ ($z$).  Barrel strips feature an \ang{11} tilt and come in four layers at 299, 371, 443, and 514 mm.  There are nine  end cap disks on each side at $z$ values varying from 934--2720 mm.
@@ -172,16 +174,22 @@ $S$ is the photoelectron statistics or stochastic term and represents the coeffi
 A typical stochastic term scales as $S\sim \text{few}\%\sqrt{d_{active}\left[\text{mm}\right]/f_{samp}}$, where $f_{samp}$ is the sampling fraction or the ratio of a calorimeter by mass is composed of an active material (i.e. one that registers energy deposits).  The tile calorimeter, for example, has a sampling fraction of about 1/36.  There are several reasons that this fraction is so low.  First, many active volumes have insufficient stopping power; one wants to capture as much energy as possible from electromagnetic and hadronic showers inside the calorimeter, and this simply is not possible for most active media (one notable exception to this is the CMS crystal-based calorimeter; ATLAS is a more conservative design), so well-behaved absorbers like lead or iron are necessary to ensure all the energy is contained within a calorimeter.  Another factor is cost; things like liquid argon are expensive.  Finally, most active media are unsuitable for structural support, so sturdy absorbing materials help relieve engineering constraints.
 
 %Calorimeter energy resolution is noted in Eqn. \ref{eqn:eres}. 89 K, liquid nitrogen, similar readouts.
+\clearpage
 \subsection{The Electromagnetic Calorimeter (ECAL)}
 The ECAL has liquid argon (LAr) as an active material and lead as an absorber.  The ECAL barrel extends to \aeta\, of 1.475, with three layers at 1150, 1250, and 2050 mm, and its end cap, comprised of two wheels, covers $1.375<\left|\eta\right|<2.5,\left(3.2\right)$  for the inner (outer) wheel, with 3 (2) layers out to 3100 mm.  There is a 1.1 (0.5) cm thick layer of LAr pre-sampler up to \aeta\, of 1.8 in the barrel (end cap) of the ECAL, which is designed to aid in correcting for electron and photon energy loss in the ID.
 
 The LAr and lead absorber are arranged in alternating, beveled, sawtooth layers in what is known as an ``accordion'' geometry, shown in Figure \ref{fig:accordion}, which shows the layout of a barrel module in the ECAL.  The absorber thickness is 1.53 (1.13) mm for \aeta\, less (more) than 0.8 to ensure a constant sampling fraction.  This arrangement helps provide greater coverage in $\phi$.
-\begin{figure}[!htbp]\captionsetup{justification=centering}
-  \centering
-  \includegraphics[width=0.750000\linewidth]{figures/atlas/accordion}
+\begin{figure}[!bh]\captionsetup{justification=centering}
   \caption{The accordion geometry of the LAr electromagnetic calorimeters is prominently shown in this illustration of an ECAL barrel module.  IC: \cite{jinstpaper}}
   \label{fig:accordion}
 \end{figure}
+\addtocounter{figure}{-1}
+\begin{landscape}
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=0.750000\linewidth]{figures/atlas/accordion}
+\end{figure}
+\end{landscape}\clearpage
 
 The ECAL overall typically covers 2--4 interaction lengths or about 20--40 radiation lengths.  Its performance corresponds to resolution coefficients $S=0.1$ GeV$^{-1/2}$ and $C=0.002$ with a 450 ns drift time.  In order to optimize the material budget and overall detector construction, the ECAL barrel infrastructure is integrated with that of the ID's solenoid.  The granularity of the ECAL barrel middle layer, $\Delta\eta\times\Delta\phi$ cells of size $0.025\times0.025$, are used to define the granularity of calorimeter cluster reconstruction in ATLAS.
 
@@ -204,7 +212,7 @@ The FCAL covers an \aeta\, range from 3.1 to 4.9, again using LAr as the active 
   \caption{The material layout for a typical section of the FCAL in the transverse plane.  IC: \cite{jinstpaper}}
   \label{fig:fcal}
 \end{figure}
-
+\clearpage
 \subsection{The Hadronic Tile Calorimeter}
 The tile calorimeter, covering an \aeta\,of up to 1.7 is made up of 64 modules in the barrel (each covering $\Delta\phi$ of 360/64 = \ang{5.625}), each with a layout as in Figure \ref{fig:tile}.  
 \begin{figure}[!htbp]\captionsetup{justification=centering}
@@ -223,13 +231,18 @@ Since the energy of muons is not captured within the calorimeters, the stations 
 \end{equation}
 The $c_0$ term represents a degradation in resolution due to multiple scattering, and is typically 0.5--2\%\cite{tully}.  The $c_1$ term describes the phenomenon of, holding magnetic field constant, higher momentum muons curving less.  This term has typical values of $10^{-3}-10^{-4}$ GeV$^{-1}$.  At very high $p_T$ values, this is of particular concern since a very small curvature can result in charge misidentification.
 
-A cross-sectional view (in $r-z$) of the muon spectrometer with station names, detector types, and layouts is shown in Figure \ref{fig:ms}.  There are three layers of muon detectors in both the barrel (at 5 000, 7 500, and 10 000 mm) and end cap (at 7 000 (11 000), 13 500, and 21 000 mm), with the innermost end cap layer split in two due to the end cap toroid.  This corresponds to an \aeta\,range up to 2.4 for both precision and trigger coverage, and up to 2.7 for precision detection only.\footnote{This will change with the New Small Wheel Phase I Upgrade.  cf. Appendix \ref{ch:mmt}}
-\begin{figure}[!htbp]\captionsetup{justification=centering}
-  \centering
-  \includegraphics[width=\linewidth]{figures/atlas/msdetail}
+\begin{figure}[!bh]\captionsetup{justification=centering}
   \caption{The ATLAS muon spectrometer.  Naming of the MDT stations obeys the following convention [BE] (barrel or end cap) [IEM0] (inner, inner extended (end cap only), middle, or outer layer) [1-6] (increasing in $z$ ($r$) for the barrel (end cap)), so EI1 is the station in the inner most end cap layer closest to the beam pipe.  IC: \cite{jinstpaper}}
   \label{fig:ms}
 \end{figure}
+\addtocounter{figure}{-1}
+\begin{landscape}
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=\linewidth]{figures/atlas/msdetail}
+\end{figure}
+\end{landscape}\clearpage
+A cross-sectional view (in $r-z$) of the muon spectrometer with station names, detector types, and layouts is shown in Figure \ref{fig:ms}.  There are three layers of muon detectors in both the barrel (at 5 000, 7 500, and 10 000 mm) and end cap (at 7 000 (11 000), 13 500, and 21 000 mm), with the innermost end cap layer split in two due to the end cap toroid.  This corresponds to an \aeta\,range up to 2.4 for both precision and trigger coverage, and up to 2.7 for precision detection only.\footnote{This will change with the New Small Wheel Phase I Upgrade.  cf. Appendix \ref{ch:mmt}}
 
 The MS can reconstruct muons with transverse momenta from 5 GeV up to 3 TeV (with 10\% resolution at 1 TeV (3\% at 100 GeV)).  Detectors in the MS fall into two broad headings, precision detectors and trigger detectors, both described below.  Nominal performance of the current detector types in the MS is summarized in Figure \ref{fig:mutab}, a table taken from \cite{jinstpaper}.  It should be noted that \aeta\, ranges quoted below, where applicable, do not include the range 0-0.1, where this a gap in the MS to allow for cabling and other services to the ATLAS detector; for a discussion of compensatory measures in muon reconstruction, see Chapter \ref{ch:object}.
 
@@ -245,15 +258,21 @@ The ATLAS MS has two types of precision detectors: Monitored Drift Tubes (MDT's)
 
 In this region, the precision detectors are the CSC's, which have a much lower dead time of $\sim40$ ns.  These are multiwire proportional chambers with cathode planes that have orthogonal sets of strips, allowing for a measurement in both principal directions.  CSC detector sizes also vary by station, coming in both small and large chambers.  The CSC strip pitch is 5.31 (5.56) mm for the large (small) chambers, with position determined from the induced charge distribution in the strips.  This corresponds to a nominal resolution of 60 (5 000) $\mu$m per plane in the bending (non-bending) direction.  These are slated be replaced Micromegas detectors in the NSW.
 
+\clearpage
 \subsection{Trigger Detectors}
 Trigger detectors have a fundamentally different role than the precision detectors, instead needing to deliver ``good enough'' approximate values of muon track positions and $p_T$ values.  The MS has two types of trigger detectors: Resistive Plate Chambers (RPC's) in the barrel and Thin Gap Chambers (TGC's) in the end caps.  They collectively cover an \aeta\, range to 2.4, and their arrangement is shown in Figure \ref{fig:mstrig}.
 
-\begin{figure}[!htbp]\captionsetup{justification=centering}
-  \centering
-  \includegraphics[width=\linewidth]{figures/atlas/mstrigger}
+\begin{figure}[!bh]\captionsetup{justification=centering}
   \caption{ATLAS MS trigger detector arrangement.  IC: \cite{jinstpaper}}
   \label{fig:mstrig}
 \end{figure}
+\addtocounter{figure}{-1}
+\begin{landscape}
+\begin{figure}[!htbp]\captionsetup{justification=centering}
+  \centering
+  \includegraphics[width=\linewidth]{figures/atlas/mstrigger}
+\end{figure}
+\end{landscape}\clearpage
 
 The RPC's are parallel plate detectors with a dead time of 5 ns and a thickness of 2 mm, kept at a potential of 9 800 V; they are deployed in three layers.  RPC's, too, feature strips with orthogonal arrangements on the top and bottom planes, with a strip pitch of 23--35 mm.  
 

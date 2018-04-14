@@ -34,7 +34,7 @@
 \usepackage{textpos}
 \usepackage{xcolor}
 \usepackage{lineno}
-\linenumbers
+%\linenumbers
 % Line spacing: dsingle/ddouble
 %   Whether to use single- or doublespacing.
 \newtoggle{DissertateSingleSpace}

@@ -141,6 +141,7 @@ The above considerations are important for this analysis since phase space is se
 \section{Process Specific Systematic Summaries}
 Brief descriptions of modeling systematics, including recapitulations of nominal sample generation, are given in the following sections.  The general approach here is to copy the relevant summary tables and describe any major deviations from the general procedures described in the previous section.  The dominant backgrounds for the 2-lepton channel are $Z+$hf and \tt, accounting for well over 90\% of all background events.  Diboson samples are the next-leading background and are an important validation sample; others are included for completeness.  A summary of all the modeling systematics in this analysis are given in Table \ref{tab:modelsyssum}.  
 \begin{table}[!htbp]\captionsetup{justification=centering}
+
   \begin{center}
     \begin{tabular}{lp{4in}}
       \hline\hline
@@ -168,6 +169,7 @@ The signal systematics categories are $H\to bb$ decay cross section, QCD scale, 
 Table \ref{tab:vhSysTheorySummary}, reproduced from \cite{modelingnote}, summarizes the signal cross section systematics, which are applied uniformly across the analysis channels (as applicable).
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{Summary of all systematic uncertainties on the $VH$ cross section including their value, source and the corresponding nuisance parameter name.}
 \footnotesize
 \centering
 \begin{tabular}{ c || c | c | c  }
@@ -188,7 +190,6 @@ Sys Name  & source & Norm. effect & applied to \\
 \hline
 \hline
 \end{tabular}
-\caption{Summary of all systematic uncertainties on the $VH$ cross section including their value, source and the corresponding nuisance parameter name.}
 \label{tab:vhSysTheorySummary}
 \end{table}
 
@@ -196,6 +197,7 @@ The remaining signal systematics are analysis channel specific and are summarize
 
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{Summary of all systematic uncertainties on the $VH$ acceptance and shapes originating from altering the PDF and $\alpha_S$ uncertainties, including their corresponding nuisance parameter name.}
 \small
 \centering
 \begin{tabular}{ c ||| c | c || c | c || c | c  }
@@ -232,7 +234,6 @@ NP name    & 2j		& 3j					   	& 2j		& 3j						&  2j		& $\geq$3j			\\
 \hline
 \hline
 \end{tabular}
-\caption{Summary of all systematic uncertainties on the $VH$ acceptance and shapes originating from altering the PDF and $\alpha_S$ uncertainties, including their corresponding nuisance parameter name.}
 \label{tab:vhSysSummaryAna}
 \end{table}
 
@@ -261,6 +262,7 @@ $V+$jet systematics are derived in several steps.  The first is to use double ra
 Summaries of the $Z+$jets uncertainties are provided here; the reader is referred to \cite{modelingnote} for the $W+$jets systematics, as these events are virtually non-existent in the 2-lepton case with which this thesis is almost exclusively concerned.  In Table \ref{tab:zjetsnorm}, from \cite{modelingnote} are the normalization systematics.
 
 \begin{table}[!htpb] \captionsetup{justification=centering}
+\caption{ \label{tab:zjetsnorm} Effect of modeling systematics on $Z$+jets normalization in the 2lepton regions. For systematic uncertainties implemented with a prior the effect of 1-$\sigma$ variation is reported. 
 \begin{center} 
 \small 
 \begin{tabular}{ c || c || c | c | c || c | c | c   } 
@@ -282,7 +284,6 @@ $Z$+hf   & $\texttt{SysZbbPTV}$               &   \multicolumn{6}{ c }{effect on
 \hline 
 \hline 
 \end{tabular} 
-\caption{ \label{tab:zjetsnorm} Effect of modeling systematics on $Z$+jets normalization in the 2lepton regions. For systematic uncertainties implemented with a prior the effect of 1-$\sigma$ variation is reported. 
 The uncertainties labelled as $Zbb$ act on the entire $Z$+hf background.  Region labels ``lo'' and ``hi'' refer to event \ptv.} 
 \end{center} 
 \end{table} 
@@ -290,6 +291,7 @@ The uncertainties labelled as $Zbb$ act on the entire $Z$+hf background.  Region
 The flavor composition ratio systematics are in Table \ref{tab:zhf}, also from \cite{modelingnote}.
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{The priors on the relative acceptance variations for $Z$+hf. The first column details the flavor components across which the acceptance variation is being considered, the second column lists the names of the corresponding nuisance parameter in the Profile Likelihood Fit, the third contains the value of the prior and the fourth column the processes and categories to which this nuisance parameter is applied.}
 \begin{center}
 \begin{tabular}{c|c|c|c}
         \hline
@@ -310,7 +312,6 @@ The flavor composition ratio systematics are in Table \ref{tab:zhf}, also from \
         \hline
         \hline
 \end{tabular}
-\caption{The priors on the relative acceptance variations for $Z$+hf. The first column details the flavor components across which the acceptance variation is being considered, the second column lists the names of the corresponding nuisance parameter in the Profile Likelihood Fit, the third contains the value of the prior and the fourth column the processes and categories to which this nuisance parameter is applied.}
 \label{tab:zhf}
 \end{center}
 \end{table}
@@ -324,6 +325,7 @@ The overall \tt\,normalization is a floating normalization\footnote{The use of a
 
 
 \begin{table}[!htbp]\captionsetup{justification=centering} 
+\caption{ \label{tab:ttbarSysSummary1} Effect of modeling systematics on \tt\ normalization in the 0 and 1-lepton analysis region.} 
 \begin{center} 
 \small 
 \begin{tabular}{ c || c | c || c | c | c | c  } 
@@ -341,11 +343,11 @@ $\texttt{SysttbarNorm\_DWhfCR\_L1}$ 	&   --		&    --	&  25\%   	& -- 		&  25\% 	
 \hline 
 \hline 
 \end{tabular} 
-\caption{ \label{tab:ttbarSysSummary1} Effect of modeling systematics on \tt\ normalization in the 0 and 1-lepton analysis region.} 
 \end{center} 
 \end{table} 
 
 \begin{table}[!htbp]\captionsetup{justification=centering} 
+\caption{ \label{tab:ttbarSysSummary2} Effect of modeling systematics on \tt\ normalization in the 2lepton regions. The \texttt{SysTTbarPTV\_L2\_L2} systematic is implemented as a shape systematic over the full VpT>75\,GeV range, and as a result has different acceptance effects in the low and high VpT regions.  Systematics are treated the same in both signal and control regions, and ``lo'' and ``hi'' refer to the \ptv\ split in events.} 
 \begin{center} 
 \small 
 \begin{tabular}{ c || c | c || c | c  } 
@@ -361,13 +363,13 @@ $\texttt{SysTTbarPTV\_L2\_L2}$         &   \multicolumn{4}{ c }{effect on each r
 \hline 
 \hline 
 \end{tabular} 
-\caption{ \label{tab:ttbarSysSummary2} Effect of modeling systematics on \tt\ normalization in the 2lepton regions. The \texttt{SysTTbarPTV\_L2\_L2} systematic is implemented as a shape systematic over the full VpT>75\,GeV range, and as a result has different acceptance effects in the low and high VpT regions.  Systematics are treated the same in both signal and control regions, and ``lo'' and ``hi'' refer to the \ptv\ split in events.} 
 \end{center} 
 \end{table} 
 
 Shape systematics for \ptv\,and\mbb\, are linear and taken to cover the largest difference reasonably well, as described above in \ref{sec:shapesys}.  These are summarized in Table \ref{tab:ttbarSysShapeSummary}, again taken from \cite{modelingnote}.
 
 \begin{table}[!htbp]\captionsetup{justification=centering} 
+\caption{Summary of all shape uncertainties for the $t\bar{t}$ process with short descriptions and the name of the corresponding nuisance parameters. }
 \small
 \begin{center}
 \begin{tabular}{c|c|c|p{1.5 in}|c}
@@ -377,15 +379,14 @@ Shape systematics for \ptv\,and\mbb\, are linear and taken to cover the largest 
         \hline
         0,1 lepton & $p_T^V$ shape & shape & fit through largest deviation (aMC@NLO + \PYTHIA8) & \texttt{TTbarPTV} \\
 	              \hline
-        2 lepton & $p_T^V$ shape & norm & fit through largest + shape & deviation (aMC@NLO + \PYTHIA8)  & \texttt{TTbarPTV\_L2} \\
+        2 lepton & $p_T^V$ shape & norm & fit through largest + shape \& deviation (aMC@NLO + \PYTHIA8)  & \texttt{TTbarPTV\_L2} \\
 	              \hline 
-	0,1 lepton & $m_{b\bar{b}}$ shape & shape & fit through largest only & deviation (aMC@NLO + \PYTHIA8) & \texttt{TTbarMBB} \\
+	0,1 lepton & $m_{b\bar{b}}$ shape & shape & fit through largest only \& deviation (aMC@NLO + \PYTHIA8) & \texttt{TTbarMBB} \\
 	              \hline
-        2 lepton & $m_{b\bar{b}}$ shape & shape & fit through largest only & deviation (aMC@NLO + \PYTHIA8) & \texttt{TTbarMBB\_L2} \\
+        2 lepton & $m_{b\bar{b}}$ shape & shape & fit through largest only \& deviation (aMC@NLO + \PYTHIA8) & \texttt{TTbarMBB\_L2} \\
         \hline
         \hline
 \end{tabular}
-\caption{Summary of all shape uncertainties for the $t\bar{t}$ process with short descriptions and the name of the corresponding nuisance parameters. }
 \label{tab:ttbarSysShapeSummary}
 \end{center}
 \end{table}
@@ -394,6 +395,7 @@ Shape systematics for \ptv\,and\mbb\, are linear and taken to cover the largest 
 Three diboson production processes (collectively denoted \vv) are important for these analyses: $ZZ$, $WZ$, and $WW$.  Nominal samples are created using \sherpa\, 2.2.1 using the NNPDF3.0 PDF set.  Alternative samples use \powheg+\pythia8 and \powheg+\herwig++.  The methodology here is similar to that of the \tt\,systematics, with both overall acceptance and lepton channel specific uncertainties, with the exception that UE+PS and QCD scale are treated separately (PDF+$\alpha_S$ was found to be neglibible).  \ptv\, shape systematics are described using linear fits, while \mbb\, shape systematics are described using hyperbolic tangents (thrid degree polynomials) in the 2 jet (3 jet) regions. Once again, summary tables from \cite{modelingnote} are reproduced here.
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{Summary of all systematic uncertainties on the diboson cross section including their value, source and the corresponding nuisance parameter name. } 
 \small
 \centering
 \begin{tabular}{ c || c | c | c  }
@@ -409,14 +411,20 @@ Sys Name  & source & Norm. effect & applied to \\
 \hline
 \hline
 \end{tabular}
-\caption{Summary of all systematic uncertainties on the diboson cross section including their value, source and the corresponding nuisance parameter name. } 
 %%(These uncertainties from ICHEP continue to be used in the current analysis). }
 %\textcolor{red}{THOSE ARE THE ICHEP NUMBERS ... THEY COULD STAY SINCE WE ARE NOT SO SENSITIVE TO THEM ... BUT WE NEED TO JUSTIFY THEM.} }
 \label{tab:DibOverall}
 \end{table}
 
 
-\begin{table}[ht!b]
+
+\begin{table}[!bh]\captionsetup{justification=centering}
+\caption{Summary of the systematic uncertainties on the VH acceptance in each analysis region and on the $p_{T}^{V}$ and $m_{b\bar{b}}$ shapes originating from altering the QCD scale, including their nuisance parameter name.}
+\label{tab:dibosonSysSummaryAna}
+\end{table}
+\addtocounter{table}{-1}
+\begin{table}[!bh]
+{
 \small
 \centering
 \begin{tabular}{ c ||| c | c || c | c || c | c  }
@@ -446,15 +454,18 @@ NP name    & 2j		& 3j					   	& 2j		& 3j						&  2j		& $\geq$3j			\\
 \hline
 \hline
 \end{tabular}
-\caption{Summary of the systematic uncertainties on the VH acceptance in each analysis region and on the $p_{T}^{V}$ and $m_{b\bar{b}}$ shapes originating from altering the QCD scale, including their nuisance parameter name. %%%%%\textcolor{red}{Need to decide whether to decorrelate $WZ$ and $ZZ$ or not.} 
 }
-\label{tab:dibosonSysSummaryAna}
 \end{table}
-
+\clearpage
 \subsection{Single Top Production}
-Single top sample are generated separately for the different production channels ($s$, $t$, and $Wt$) using \powheg\,with the CT10 NLO PDF's interfaced with \pythia6 using the PERUGIA2012 PS tune and the corresponding CTEQ6l1 LO PDF's and PHOTOS (TAUOLA) for QED final state ($\tau$) decays.%\footnote{No references were given in the note, and this background really isn't that important.}  Just as with \tt\,samples, \powheg\,and \pythia\, settings are varied for certain systematics.  Alternative samples use \powheg+\pythia6 with $Wt$ disagram subtraction (DS) (instead of ``diagram removal'' for the ME calculation) and \mg5\_aMC@NLO+\herwig++.  Systematics are derived separately in each channel, and are well described in the sumamry Table \ref{tab:stopSysSummary} taken from \cite{modelingnote}.
+Single top sample are generated separately for the different production channels ($s$, $t$, and $Wt$) using \powheg\,with the CT10 NLO PDF's interfaced with \pythia6 using the PERUGIA2012 PS tune and the corresponding CTEQ6l1 LO PDF's and PHOTOS (TAUOLA) for QED final state ($\tau$) decays.%\footnote{No references were given in the note, and this background really isn't that important.}  
+  Just as with \tt\,samples, \powheg\,and \pythia\, settings are varied for certain systematics.  Alternative samples use \powheg+\pythia6 with $Wt$ disagram subtraction (DS) (instead of ``diagram removal'' for the ME calculation) and \mg5\_aMC@NLO+\herwig++.  Systematics are derived separately in each channel, and are well described in the sumamry Table \ref{tab:stopSysSummary} taken from \cite{modelingnote}.
 
-
+\begin{table}[!bh]\captionsetup{justification=centering}
+\caption{Summary of all uncertainties for the single top process with short descriptions and the name of the corresponding nuisance parameters, updated for the winter baseline analysis.}
+\label{tab:stopSysSummary}
+\end{table}
+\addtocounter{table}{-1}
 \begin{table}[!htbp]\captionsetup{justification=centering}
 \begin{scriptsize}
 \begin{center}
@@ -484,8 +495,6 @@ Single top sample are generated separately for the different production channels
         \hline
         \hline
 \end{tabular}
-\caption{Summary of all uncertainties for the single top process with short descriptions and the name of the corresponding nuisance parameters, updated for the winter baseline analysis.}
-\label{tab:stopSysSummary}
 \end{center}
 \end{scriptsize}
 \end{table}
@@ -564,6 +573,7 @@ dP\left(p_{\perp}^2,y\right) = \alpha_S(p_{\perp}^2 )D_{ij}\left(p_{\perp}^2,y\r
 % For an example of a full page figure, see Fig.~\ref{fig:myFullPageFigure}.
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
+\caption{Summary of inclusive cross sections for signal processes.}
 \label{higgsxsec}
 \begin{center}
 \small
@@ -580,7 +590,6 @@ $gg\to ZH$ & 0.12\\
 $qq\to ZH$ & 0.76\\
 \hline\hline
 \end{tabular}
-\caption{Summary of inclusive cross sections for signal processes.}
 \end{center}
 \end{table}
 
