@@ -44,8 +44,10 @@ Inputs to the binned likelihood are distributions of the BDT outputs described i
 Input distributions in MC are further divided according to their physics process.  The signal processes are divided based on both the identity of associated $V$ and the number of leptons in the final state; \ZH\, events are further separated into distributions for $qq$ and $gg$ initiated processes.  $V+$jets events are split according to $V$ identity and into the jet flavor bins described in Chapter \ref{ch:samples}.  Due to the effectiveness of the 2 $b$-tag requirement suppressing the presence of both $c$ and $l$ jets, truth-tagging is used to boost MC statistics in the $cc$, $cl$, and $l$ distributions.\footnote{Since $WW$ is not an important contribution to the already small total diboson background, no truth-tagging was applied here, in contrast to the fiducial analysis.}  For top backgrounds, single top production is split according to production mode ($s$, $t$, and $Wt$), with \tt\, as single category.  Diboson background distributions are also split according to the identity of the $V$'s ($ZZ$, $WZ$, and $WW$).  Fit input segmentation is summarized in Table \ref{tab:inputs}.
 
 \begin{table}[!htb]\captionsetup{justification=centering}
-
-  \begin{center}\begin{tabular}{lp{4.5in}}
+  \begin{center}
+    \caption{Fit input segmentation.}
+    \label{tab:inputs}
+    \begin{tabular}{lp{4.5in}}
       \hline\hline
       Category & Bins\\
       \hline
@@ -54,8 +56,6 @@ Input distributions in MC are further divided according to their physics process
       Sample & data, signal [$\left(W,qqZ,ggZ\right)\times n_{lep}$], $V+$jets [$\left(W,Z\right)\times\left(bb,bc,bl,cc,cl,l\right)$], \tt, diboson $\left(ZZ,WW,WZ\right)$, single top $\left(s,t,Wt\right)$\\
       \hline\hline
     \end{tabular}
-    \caption{Fit input segmentation.}
-    \label{tab:inputs}
   \end{center}
 \end{table}
 
@@ -64,8 +64,9 @@ Input distributions in MC are further divided according to their physics process
 Tables \ref{tab:modelsys} and \ref{tab:expsys} summarize modeling (Chapter \ref{ch:modeling}) and experimental (Chapter \ref{ch:object}) systematic uncertainties considered in this analysis, respectively.  In addition to these, simulation statistics uncertainties (``MC stat errors'') are also included in the fit model.  There is one distribution per systematic (one each for up and down) per sample per region.  The $\pm1\sigma$ variation for a systematic is calculated as the difference in the integrals between the nominal and up/down varied distributions. %is this true?
 
 \begin{table}[!htb]\captionsetup{justification=centering}
-
   \begin{center}
+  \caption{Summary of modeling systematic uncertainties.}
+  \label{tab:modelsys}
     \begin{tabular}{lp{5in}}
       \hline\hline
       Process & Systematics\\
@@ -78,12 +79,11 @@ Tables \ref{tab:modelsys} and \ref{tab:expsys} summarize modeling (Chapter \ref{
       \hline\hline
     \end{tabular}
   \end{center}
-  \caption{Summary of modeling systematic uncertainties.}
-  \label{tab:modelsys}
 \end{table}
 
 \begin{table}[!htb]\captionsetup{justification=centering}
-
+  \caption{Summary of experimental systematic uncertainties.}
+  \label{tab:expsys}
   \begin{center}
     \begin{tabular}{lp{5in}}
       \hline\hline
@@ -98,8 +98,6 @@ Tables \ref{tab:modelsys} and \ref{tab:expsys} summarize modeling (Chapter \ref{
       \hline\hline
     \end{tabular}
   \end{center}
-  \caption{Summary of experimental systematic uncertainties.}
-  \label{tab:expsys}
 \end{table}
 
 The systematics distributions undergo processes known as ``smoothing'' and ``pruning'' before being combined into the final likelihood used in minimization.
@@ -317,9 +315,13 @@ MC stat &  +0.097 / -0.094  &  +0.108 / -0.103  &  +0.107 / -0.104 \\
 \end{center}
 \label{tab:asibdvz}
 \end{table}
+\begin{table}[!bh]\captionsetup{justification=centering}
+\caption{Summary of impact of various nuisance parameter categories on the error on $\hat{\mu}$ for observed fits for the standard, LI, and RF variable sets.}
+\label{tab:obsbdvz}
+\end{table}
+\addtocounter{figure}{-1}
 
 \begin{table}[!htb]\captionsetup{justification=centering}
-\caption{Summary of impact of various nuisance parameter categories on the error on $\hat{\mu}$ for observed fits for the standard, LI, and RF variable sets.}
 \begin{center}
 \begin{tabular}{lccc}
 \hline\hline
@@ -357,7 +359,6 @@ MC stat &  +0.140 / -0.143  &  +0.132 / -0.131  &  +0.128 / -0.129 \\
 \hline\hline
 \end{tabular}
 \end{center}
-\label{tab:obsbdvz}
 \end{table}
 
 \clearpage

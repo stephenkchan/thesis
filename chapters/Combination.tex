@@ -110,8 +110,9 @@ Adding different channels has great potential to constrain certain systematic un
 Once the fit inputs in each channel have been prepared and validated, a combined workspace can be directly constructed using the combined fit model.  Significances are given in Table \ref{tab:nuis_sig}, and $\hat{\mu}$ summaries for 2 and 3 POI fits are given in Figure \ref{fig:r2muhat}.  This combined workspace with observed signal strength of $1.20^{+0.24}_{-0.23}(\textrm{stat.})^{+0.34}_{-0.28}(\textrm{syst.})$ is the Run 2 input for the Run 1 + Run 2 combination discussed below.
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
-
   \centering
+  \caption{Observed significance from an unconditional fit to the data corresponding to \LUMI and expected significances from a fit to an Asimov dataset and from a fit to the data. Expected significances from individual regions are estimated separately. } 
+  \label{tab:nuis_sig}
   \begin{tabular}{c|||c|c|c}
      \hline\hline
     Channel  & Exp. sig. (Asimov) & Exp. sig. (data) & Obs. sig. \\
@@ -123,8 +124,6 @@ Once the fit inputs in each channel have been prepared and validated, a combined
     0,1,2-lepton (SR+CR)    &  3.19 & 3.03 & 3.54 \\
     \hline\hline
   \end{tabular}
-  \caption{Observed significance from an unconditional fit to the data corresponding to \LUMI and expected significances from a fit to an Asimov dataset and from a fit to the data. Expected significances from individual regions are estimated separately. } 
-  \label{tab:nuis_sig}
 \end{table}
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
@@ -386,6 +385,7 @@ Obs. Limit & 1.37 & 1.41 & 1.35\\
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
 \caption{Run 1 + Run 2 W+jets modeling correlation projections}
+\label{tab:Breakdowns:btag-b}
 \begin{center}\begin{tabular}{lccc}
 \hline\hline
  &Comb Eff &BTag B0 &B0 8TeV Not Flipped\\
@@ -401,7 +401,6 @@ BTag b &  +0.062 / -0.059  &  +0.055 / -0.049  &  +0.064 / -0.060 \\
 \hline
 \hline
 \end{tabular}
-\label{tab:Breakdowns:btag-b}
 \end{center}\end{table}
 
 
@@ -430,10 +429,13 @@ It is clear from these results that correlating the leading effective Eigen NP a
 
 \subsection{Modeling Systematics}
 \label{sec:model}
-Another principal systematic category is modeling uncertainties.  The effect of correlating groups of systematics was estimated using the same strategy employed by the ATLAS/CMS SM \vhbb\, combination for Run 1.  This extrapolation can be used to estimate the impact of correlations on the estimated signal strength, the total error on the signal strength, and the $\chi^2$ of the result.  The impact of such correlations is no more than a few percent effect, as the following tables demonstrate, beginning with the category with the greatest shift, W+jets modeling, in Table~\ref{tab:wjets_correlation}.
+Another principal systematic category is modeling uncertainties.  The effect of correlating groups of systematics was estimated using the same strategy employed by the ATLAS/CMS SM \vhbb\, combination for Run 1.  This extrapolation can be used to estimate the impact of correlations on the estimated signal strength, the total error on the signal strength, and the $\chi^2$ of the result.  The impact of such correlations is no more than a few percent effect, as the following tables demonstrate, beginning with the category with the greatest shift, W+jets modeling, in Table \ref{tab:wjets_correlation}.
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
-\begin{center}\begin{tabular}{lcccc}
+\begin{center}
+\caption{$\chi^2$ extrapolation correlation tests for W+jets modeling and various levels of assumed correlation between Run 1 and Run 2.}
+\label{tab:wjets_correlation}
+\begin{tabular}{lcccc}
 \hline\hline
  & $\left|\Delta\mu\right|$ & $\sigma$ & $\left|\Delta\sigma\right|$ & $\chi^2$\\
 \hline
@@ -446,7 +448,6 @@ $\rho$=0.6 & 0.0017 & 0.2622 & 0.00636 (2.49\%) & 1.0844\\
 $\rho$=1 & 0.0029 & 0.2664 & 0.0105 (4.11\%) & 1.1242\\
 \hline\hline
 \end{tabular}
-\label{tab:wjets_correlation}
 \end{center}
 \end{table}
 
@@ -672,10 +673,13 @@ $\rho$=1 & 0.0001 & 0.267 & 0.0052 (1.99\%) & 1.8894\\
 
 
 \subsection{Final Correlation Scheme}
-The final Run 1 + Run 2 correlation scheme is shown in Table~\ref{tableComb1}.  As detailed above, neither JES nor modeling systematics had any demonstrable effect on combined fit results.  Hence, only signal NP's and the $b$-jet energy scale are correlated (the weak JES scheme without unfolding).  While the effect of flavor tagging correlations is less clear, the result physical arguments for correlation are less strong; the size of effect was discovered rather late in the analysis process; and  no nuisance parameter unfolding maps exist for flavor tagging as they do for JES, so it was decided to leave these uncorrelated as well.
+The final Run 1 + Run 2 correlation scheme is shown in Table \ref{tableComb1}.  As detailed above, neither JES nor modeling systematics had any demonstrable effect on combined fit results.  Hence, only signal NP's and the $b$-jet energy scale are correlated (the weak JES scheme without unfolding).  While the effect of flavor tagging correlations is less clear, the result physical arguments for correlation are less strong; the size of effect was discovered rather late in the analysis process; and  no nuisance parameter unfolding maps exist for flavor tagging as they do for JES, so it was decided to leave these uncorrelated as well.
 
 \begin{table}[!htbp]\captionsetup{justification=centering}
-\center\small
+\centering
+\caption{The final Run 1+Run 2 NP correlation scheme.}
+\label{tableComb1}
+\small
 \begin{tabular}{lll} \hline\hline
  \textbf{7 TeV NP} & \textbf{8 TeV NP} &  \textbf{13 TeV NP}\\ \hline
 \multicolumn{2}{c}{ATLAS\_BR\_bb} & SysTheoryBRbb\\
@@ -687,7 +691,6 @@ The final Run 1 + Run 2 correlation scheme is shown in Table~\ref{tableComb1}.  
 SysJetFlavB\_ 7TeV & SysJetFlavB\_ 8TeV & SysJET\_21NP\_JET\_BJES\_Response\\
  \hline\hline
 \end{tabular}
-\label{tableComb1}
 \end{table}
 
 \section{Combined Fit Results}

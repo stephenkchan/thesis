@@ -157,7 +157,7 @@ In order to better understand efficiency behavior with coincidence threshold, th
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
   \includegraphics[width=0.5\textwidth]{./figures/nominal/mmt_h00009_ctx2_ctuv1_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_NOM_Pt100GeVdigintuple_20151111_nev_rec_xuv_xy_etaall}
-  \caption{\label{fig:ctrecodist} The distribution of highest slope-road coinicidence thresholds in events; the 0,0 bin is the number of events passing selection requirements that fail to form the minimum 2X+1UV coincidence threshold necessary for a fit.}
+  \caption{\label{fig:ctrecodist} The distribution of highest slope-road coinicidence thresholds in events; the 0,0 bin is the number of events passing selection requirements that fail to form the minimum 2X + 1UV coincidence threshold necessary for a fit.}
 \end{figure}
 
 %  Overall, however, both $\varepsilon_{alg}$ and $\varepsilon_{tot}$ behave similarly.  The secondary scattering effects that affect higher energy muons account for the drop in efficiency at higher $p_T$ and $\eta$ values.  The initial increase of efficiency with number of hits in coincidence threshold is due to the fact that tracks with more hits are of generally higher quality and more likely to fit (moving to higher coincidence thresholds cuts out lower quality tracks), while the dip at the highest coincidence threshold is due to the fact that the tolerance in slope-roads on horizontal hits is fairly stringent (the presence of hits in four X planes does not guarantee that all four will also register in the same slope-road, a prerequisite for a fit to take place).
@@ -287,7 +287,7 @@ The performance of the trigger algorithm under misalignment has been studied for
 
 \begin{figure}[!htbp]\captionsetup{justification=centering}
   \centering
-  \includegraphics[width=0.6\textwidth]{./figures/mmt_cheat}
+  \includegraphics[width=0.9\textwidth]{./figures/mmt_cheat}
   \caption{\label{fig:misalscheme}The different misalignment cases as defined in the AMDB manual.}
 \end{figure}
 
@@ -296,9 +296,9 @@ Chamber misalignments manifest themselves as altered strips in algorithm input. 
 To understand how this is displacement is calculated, some notation first needs to be described.
 
 \begin{table}[htbp]\captionsetup{justification=centering}
-\caption{A summary of notation used in this section: note that non-AMDB notation is used in this section.
+\caption{A summary of notation used in this section: note that non-AMDB notation is used in this section.\label{tab:misnotation}}
 \begin{center}
-\begin{tabular}{|l|p{13 cm}|}
+\begin{tabular}{|l|p{12 cm}|}
 \hline
 Symbol & Definition\\
 \hline
@@ -312,10 +312,9 @@ $\mathscr{O}_{base}^{g,l}$ & Position of the plane base in ATLAS global ($g$) or
 \hline
 $\vec{\zeta}$ & $\vec{s}-\vec{\mathscr{O}}_{base}$\\
 \hline
-primed quant. & quantities after misalignment\\
+$\left(quant\right)'$ & quantities after misalignment\\
 \hline
 \end{tabular}
-\label{tab:misnotation}}
 \end{center}
 \end{table}
 
@@ -468,7 +467,7 @@ While corrections are typically done on a case-by-base basis, they fall under tw
 \begin{subfigure}[t]{0.3\textwidth}\centering\includegraphics[width=\textwidth]{figures/nominal/mmt_h00009_ctx3_ctuv3_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_3CR_Pt100GeVdigintuple_20151111_res_theta_etaall}\caption{$\theta$, sim corr}\end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}\centering\includegraphics[width=\textwidth]{figures/nominal/mmt_h00009_ctx3_ctuv3_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_3CR_Pt100GeVdigintuple_20151111_res_phi_etaall}\caption{$\phi$, sim corr}\end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}\centering\includegraphics[width=\textwidth]{figures/nominal/mmt_h00009_ctx3_ctuv3_uverr00035_setxxuvuvxx_ql1_qdlm1_qbg0_qt1_NOM_3CR_Pt100GeVdigintuple_20151111_res_dtheta_etaall}\caption{$\Delta\theta$, sim corr}\end{subfigure}
-  \caption{\label{fig:simperfc}Nominal residual plots for the simulation corrected cases; $\theta$, $\phi$, $\Delta\theta$ for $p_T=100$ \GeV muons}
+  \caption{\label{fig:simperfc}Nominal residual plots for the simulation corrected cases; $\theta$, $\phi$, $\Delta\theta$ for $p_T=100$ \GeV\ muons}
   \end{center}
 \end{figure}
 
@@ -549,7 +548,8 @@ Corrections are less simple in this case.  In principle, corrections of the same
 \begin{subfigure}[t]{0.320000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/misal/mean_res_theta_tfit_misal_drs_stk-qcor_pt100GeV_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\caption{$\theta$ mean}\end{subfigure}
 \begin{subfigure}[t]{0.320000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/misal/mean_res_dtheta_tfit_misal_drs_stk-qcor_pt100GeV_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_abs_20151111}\caption{$\Delta\theta$ mean}\end{subfigure}
 \begin{subfigure}[t]{0.320000\textwidth}\centering\includegraphics[width=\textwidth]{./figures/misal/sigma_res_dtheta_tfit_misal_drs_stk-qcor_pt100GeV_etaall_qt1_bg0_ctx3_ctuv3_setxxuvuvxx_ql1_qdlm1_rel_20151111}\caption{$\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}/\sigma_{nominal}$}\end{subfigure}
-  \caption{\label{fig:drs} The noticeable effects of rotations in the $s$ axis and the behavior of these quantities ($\theta$ and $\Delta\theta$ bias shifts and $\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}/\sigma_{nominal}$) with and without misalignment correction.}
+  \caption{The noticeable effects of rotations in the $s$ axis and the behavior of these quantities ($\theta$ and $\Delta\theta$ bias shifts and $\sigma_{\Delta\theta_{fit}-\Delta\theta_{tru}}/\sigma_{nominal}$) with and without misalignment correction.}
+\label{fig:drs} 
 \end{figure}
 
 
